@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: crss
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+    prefix: classpath:/static/
+    suffix: .html
+  liquibase:
+    change-log: classpath:liquibase/master.xml
+    contexts: "develop"
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/crss?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+    driver-class-name: com.mysql.jdbc.Driver
+    username: crss
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database: mysql
