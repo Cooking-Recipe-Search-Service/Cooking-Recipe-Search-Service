@@ -45,5 +45,5 @@ jobs:
 
       - name: npm ci and npm run build
         run: |
-          npm ci -config client/package.json
-          npm run build:ci -config client/package.json
+          npm --prefix client/ ci
+          npm --prefix client/ run build:ci
