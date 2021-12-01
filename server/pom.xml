@@ -17,7 +17,7 @@
         <java.version>1.17</java.version>
 
         <frontend-maven-plugin.version>1.6</frontend-maven-plugin.version>
-        <nodeJs.version>v10.15.3</nodeJs.version>
+        <nodeJs.version>v16.3.0</nodeJs.version>
         <yarn.version>v1.10.1</yarn.version>
         <jgitflow.version>1.0-m5.1</jgitflow.version>
         <mysql-connector-java.version>5.1.47</mysql-connector-java.version>
@@ -211,7 +211,7 @@
                                     <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
                                     <resources>
                                         <resource>
-                                            <directory>${frontend-src-dir}/dist</directory>
+                                            <directory>${frontend-src-dir}/dist/client</directory>
                                             <filtering>false</filtering>
                                         </resource>
                                     </resources>
