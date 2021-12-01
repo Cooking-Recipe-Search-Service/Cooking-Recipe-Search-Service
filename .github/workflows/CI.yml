@@ -46,4 +46,4 @@ jobs:
       - name: npm ci and npm run build
         run: |
           npm --prefix client/ ci
-          npm --prefix client/ run build:ci
+          npm --prefix client/ run build
