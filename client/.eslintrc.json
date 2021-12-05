@@ -1,0 +1,123 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint",
+        "unicorn",
+        "@angular-eslint",
+        "decorator-position"
+    ],
+    "env": {
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:decorator-position/ember",
+        "prettier"
+    ],
+    "overrides": [
+        {
+            "files": ["*.component.html"],
+            "extends": ["plugin:@angular-eslint/template/recommended"],
+            "rules": {
+                "max-len": "off",
+                "@angular-eslint/template/accessibility-alt-text": "error",
+                "@angular-eslint/template/accessibility-elements-content": "error",
+                "@angular-eslint/template/accessibility-label-for": "error",
+                "@angular-eslint/template/accessibility-label-has-associated-control": "error",
+                "@angular-eslint/template/accessibility-table-scope": "error",
+                "@angular-eslint/template/accessibility-valid-aria": "error",
+                "@angular-eslint/template/banana-in-box": "error",
+                "@angular-eslint/template/click-events-have-key-events": "off",
+                "@angular-eslint/template/conditional-complexity": "off",
+                "@angular-eslint/template/cyclomatic-complexity": "off",
+                "@angular-eslint/template/eqeqeq": "error",
+                "@angular-eslint/template/i18n": "off",
+                "@angular-eslint/template/mouse-events-have-key-events": "error",
+                "@angular-eslint/template/no-any": "off",
+                "@angular-eslint/template/no-autofocus": "error",
+                "@angular-eslint/template/no-call-expression": "error",
+                "@angular-eslint/template/no-distracting-elements": "error",
+                "@angular-eslint/template/no-duplicate-attributes": "error",
+                "@angular-eslint/template/no-negated-async": "error",
+                "@angular-eslint/template/no-positive-tabindex": "error",
+                "@angular-eslint/template/use-track-by-function": "off"
+            }
+        },
+        {
+            "files": ["*.component.ts"],
+            "extends": [
+                "plugin:@angular-eslint/template/process-inline-templates"
+            ]
+        }
+    ],
+    "rules": {
+        "no-console": ["error", { "allow": ["warn", "error"] }],
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "_"
+            }
+        ],
+        "@typescript-eslint/member-ordering": [
+            "error",
+            {
+                "default": [
+                    "signature",
+
+                    "public-static-field",
+                    "protected-static-field",
+                    "private-static-field",
+
+                    "public-decorated-field",
+                    "protected-decorated-field",
+                    "private-decorated-field",
+
+                    "private-instance-field",
+                    "protected-instance-field",
+                    "public-instance-field",
+
+                    "private-abstract-field",
+                    "protected-abstract-field",
+                    "public-abstract-field",
+
+                    "public-constructor",
+                    "protected-constructor",
+                    "private-constructor",
+
+                    "public-static-method",
+                    "protected-static-method",
+                    "private-static-method",
+
+                    "public-instance-method",
+                    "protected-instance-method",
+                    "private-instance-method",
+
+                    "public-abstract-method",
+                    "protected-abstract-method",
+                    "private-abstract-method"
+                ]
+            }
+        ],
+        "@typescript-eslint/array-type": "error",
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/lines-between-class-members": ["error", "always"],
+        "unicorn/filename-case": [
+            "error",
+            {
+                "case": "kebabCase"
+            }
+        ],
+        "decorator-position/decorator-position": [
+            "error",
+            {
+                "printWidth": 120,
+                "properties": "prefer-inline",
+                "methods": "above"
+            }
+        ],
+        "radix": "error",
+        "semi": ["warn", "always"]
+    }
+}
