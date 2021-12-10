@@ -63,7 +63,7 @@ create table energy_value_per_portion
 );
 create table recipe_ingredient
 (
-    value         varchar(255) null,
+    value         int not null,
     ingredient_id bigint not null,
     recipe_id     bigint not null,
     primary key (ingredient_id, recipe_id),

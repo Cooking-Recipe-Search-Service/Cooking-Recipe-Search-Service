@@ -48,7 +48,7 @@ public class RecipeEntity {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-    private List<RecipeIngredient> tags = new ArrayList<>();
+    private List<RecipeIngredient> ingredients = new ArrayList<>();
 
 
 }

@@ -40,7 +40,7 @@ public class IngredientEntity {
     private String measurementValue;
     @ToString.Exclude
     @OneToMany(mappedBy = "ingredient", fetch = FetchType.LAZY)
-    private List<RecipeIngredient> environmentSets = new ArrayList<>();
+    private List<RecipeIngredient> recipes = new ArrayList<>();
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "ingredient",
         orphanRemoval = true, fetch = FetchType.LAZY, optional = false)
     private EnergyValuePerIngredientEntity energyValuePerIngredient;
