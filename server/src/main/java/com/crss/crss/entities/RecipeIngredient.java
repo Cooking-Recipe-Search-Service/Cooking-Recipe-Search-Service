@@ -26,7 +26,7 @@ public class RecipeIngredient {
     @MapsId("ingredientId")
     private IngredientEntity ingredient;
 
-    private String value;
+    private Integer value;
 
     public RecipeIngredient(RecipeEntity recipe, IngredientEntity ingredient) {
         this.recipe = recipe;
