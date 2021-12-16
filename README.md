@@ -4,3 +4,5 @@ Cooking Recipe Search Service
 mvn clean spring-boot:run -Dclient
 ## To run without a client
 mvn clean spring-boot:run
+## Swagger
+http://localhost:8080/swagger-ui.html
