@@ -1,9 +1,12 @@
 package com.crss.crss.mapper;
 
+import com.crss.crss.dto.CountryDto;
 import com.crss.crss.dto.IngredientForRecipeDto;
 import com.crss.crss.dto.RecipeSlimDto;
+import com.crss.crss.entities.CountryEntity;
 import com.crss.crss.entities.RecipeEntity;
-import com.crss.crss.services.RecipeImageService;
+import com.crss.crss.services.CountryService;
+import com.crss.crss.services.RecipeService;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +21,8 @@ import org.springframework.stereotype.Component;
 public class DtoConverter {
 
     private final ModelMapper modelMapper;
-    private final RecipeImageService recipeImageService;
+    private final RecipeService recipeService;
+    private final CountryService countryService;
 
     public <T> T simpleConvert(Object obj, Class<T> clazz) {
         return modelMapper.map(obj, clazz);
@@ -35,7 +39,7 @@ public class DtoConverter {
     public RecipeSlimDto getRecipeSlimDto(RecipeEntity recipe) {
         RecipeSlimDto recipeSlimDto = simpleConvert(recipe, RecipeSlimDto.class);
         recipeSlimDto.setIngredientsInfo(getIngredientForRecipeDtoByRecipe(recipe));
-        recipeSlimDto.setImage(recipeImageService.getRecipeImageBase64ById(recipe.getId()));
+        recipeSlimDto.setImage(recipeService.getRecipeImageBase64ById(recipe.getId()));
         return recipeSlimDto;
     }
 
@@ -44,5 +48,13 @@ public class DtoConverter {
             recipeIngredient -> new IngredientForRecipeDto(recipeIngredient.getIngredient().getId(),
                 recipeIngredient.getIngredient().getName(), recipeIngredient.getIngredient().getMeasurementValue(),
                 recipeIngredient.getValue())).collect(Collectors.toList());
+    }
+
+    public List<CountryDto> getCountryDtoList(List<CountryEntity> countryEntities) {
+        List<CountryDto> countryDtoList = simpleConvert(countryEntities, CountryDto.class);
+        for (CountryDto countryDto : countryDtoList) {
+            countryDto.setImage(countryService.getCountryImageBase64ById(countryDto.getId()));
+        }
+        return countryDtoList;
     }
 }
