@@ -12,3 +12,10 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     database: mysql
+file-system:
+  storage:
+    images:
+      recipe:
+        ./server/src/main/resources/images/recipe/
+      country:
+        ./server/src/main/resources/images/country/
