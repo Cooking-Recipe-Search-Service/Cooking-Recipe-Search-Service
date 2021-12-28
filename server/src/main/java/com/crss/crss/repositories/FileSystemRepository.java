@@ -3,11 +3,13 @@ package com.crss.crss.repositories;
 import com.crss.crss.exceptions.CrssException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Slf4j
 public class FileSystemRepository {
 
     @Value("${file-system.storage.images.recipe}")
@@ -19,23 +21,24 @@ public class FileSystemRepository {
     private final String IMAGE_FORMAT = ".jpeg";
 
 
-    public byte[] findRecipeImageInFileSystem(Long id) {
-        return getImageBytes(id, RESOURCES_DIR_RECIPE);
+    public byte[] findRecipeImageInFileSystem(String name) {
+        return getImageBytes(name, RESOURCES_DIR_RECIPE);
     }
 
-    public byte[] findCountryImageInFileSystem(Long id) {
-        return getImageBytes(id, RESOURCES_DIR_COUNTRY);
+    public byte[] findCountryImageInFileSystem(String name) {
+        return getImageBytes(name, RESOURCES_DIR_COUNTRY);
     }
 
-    private byte[] getImageBytes(Long id, String resourcesDir) {
-        String imagePath = resourcesDir + id + IMAGE_FORMAT;
+    private byte[] getImageBytes(String name, String resourcesDir) {
+        String imagePath = resourcesDir + name + IMAGE_FORMAT;
         if (!Files.exists(Paths.get(imagePath))) {
-            throw new CrssException(HttpStatus.NOT_FOUND, "Can't find image with id=" + id + " and path=" + imagePath);
+            log.warn("Can't find image with name=" + name + " and path=" + imagePath);
+            return new byte[0];
         }
         try {
             return Files.readAllBytes(Paths.get(imagePath));
         } catch (Exception e) {
-            throw new CrssException(HttpStatus.INTERNAL_SERVER_ERROR, "Can't read image with id=" + id + " and path=" + imagePath);
+            throw new CrssException(HttpStatus.INTERNAL_SERVER_ERROR, "Can't read image with name=" + name + " and path=" + imagePath);
         }
     }
 }

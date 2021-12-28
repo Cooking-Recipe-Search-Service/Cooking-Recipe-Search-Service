@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.GenerationType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "recipe")
@@ -25,7 +26,7 @@ public class RecipeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     @Column(nullable = false)
     private Integer cookingTime;
@@ -36,12 +37,6 @@ public class RecipeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private CategoryEntity category;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "recipe",
-        orphanRemoval = true, fetch = FetchType.LAZY, optional = false)
-    private RecipeDescriptionEntity recipeDescription;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "recipe",
-        orphanRemoval = true, fetch = FetchType.LAZY, optional = false)
-    private EnergyValuePerPortionEntity energyValuePerPortion;
 
     @OneToMany(
         mappedBy = "recipe",

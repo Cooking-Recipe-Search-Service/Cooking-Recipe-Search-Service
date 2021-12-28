@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RecipeSlimDto {
+public class RecipeDto {
 
     private long id;
     private String name;
@@ -17,4 +17,6 @@ public class RecipeSlimDto {
     private String countryName;
     private String categoryName;
     private List<IngredientForRecipeDto> ingredientsInfo;
+    private String image;
+
 }

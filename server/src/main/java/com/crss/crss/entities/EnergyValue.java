@@ -13,9 +13,9 @@ public abstract class EnergyValue {
     @Column(nullable = false)
     private Integer calories;
     @Column(nullable = false)
-    private Integer proteins;
-    @Column(nullable = false)
     private Integer fats;
     @Column(nullable = false)
     private Integer carbs;
+    @Column(nullable = false)
+    private Integer proteins;
 }

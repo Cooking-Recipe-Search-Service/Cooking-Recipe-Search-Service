@@ -2,7 +2,6 @@ package com.crss.crss.entities;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,11 +35,24 @@ public class IngredientEntity {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    private String measurementValue;
+    private MeasurementValueType measurementValueType;
     @ToString.Exclude
     @OneToMany(mappedBy = "ingredient", fetch = FetchType.LAZY)
     private List<RecipeIngredient> recipes = new ArrayList<>();
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "ingredient",
-        orphanRemoval = true, fetch = FetchType.LAZY, optional = false)
-    private EnergyValuePerIngredientEntity energyValuePerIngredient;
+
+    public enum MeasurementValueType {
+        GRAM("г"),
+        MILLILITER("мл"),
+        PIECE("шт");
+
+        private final String string;
+
+        MeasurementValueType(String string) {
+            this.string = string;
+        }
+
+        public String getString() {
+            return string;
+        }
+    }
 }
