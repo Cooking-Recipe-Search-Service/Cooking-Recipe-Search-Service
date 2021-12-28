@@ -27,9 +27,9 @@ public class RecipeService {
     }
 
 
-    public String getRecipeImageBase64ById(Long id) {
+    public String getRecipeImageBase64ById(String name) {
         return Base64.getEncoder().encodeToString(fileSystemRepository
-            .findRecipeImageInFileSystem(id));
+            .findRecipeImageInFileSystem(name));
     }
 
 }

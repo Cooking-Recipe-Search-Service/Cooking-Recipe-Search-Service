@@ -1,5 +1,6 @@
 package com.crss.crss.api;
 
+import com.crss.crss.dto.RecipeDto;
 import com.crss.crss.dto.RecipeSlimDto;
 import com.crss.crss.mapper.DtoConverter;
 import com.crss.crss.services.RecipeService;
@@ -25,8 +26,8 @@ public class RecipeController {
     }
 
     @GetMapping("/{id}")
-    public RecipeSlimDto getRecipe(@PathVariable Long id) {
-        return dtoConverter.getRecipeSlimDto(recipeService.getRecipeById(id));
+    public RecipeDto getRecipe(@PathVariable Long id) {
+        return dtoConverter.getRecipeDto(recipeService.getRecipeById(id));
     }
 
 }

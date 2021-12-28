@@ -20,9 +20,9 @@ public class CountryService {
         return countryRepository.findAll();
     }
 
-    public String getCountryImageBase64ById(Long id) {
+    public String getCountryImageBase64ById(String name) {
         return Base64.getEncoder().encodeToString(fileSystemRepository
-            .findCountryImageInFileSystem(id));
+            .findCountryImageInFileSystem(name));
     }
 
 }

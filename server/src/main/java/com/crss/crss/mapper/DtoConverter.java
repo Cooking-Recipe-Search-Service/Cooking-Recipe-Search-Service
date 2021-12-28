@@ -2,6 +2,7 @@ package com.crss.crss.mapper;
 
 import com.crss.crss.dto.CountryDto;
 import com.crss.crss.dto.IngredientForRecipeDto;
+import com.crss.crss.dto.RecipeDto;
 import com.crss.crss.dto.RecipeSlimDto;
 import com.crss.crss.entities.CountryEntity;
 import com.crss.crss.entities.RecipeEntity;
@@ -39,21 +40,27 @@ public class DtoConverter {
     public RecipeSlimDto getRecipeSlimDto(RecipeEntity recipe) {
         RecipeSlimDto recipeSlimDto = simpleConvert(recipe, RecipeSlimDto.class);
         recipeSlimDto.setIngredientsInfo(getIngredientForRecipeDtoByRecipe(recipe));
-        recipeSlimDto.setImage(recipeService.getRecipeImageBase64ById(recipe.getId()));
         return recipeSlimDto;
+    }
+
+    public RecipeDto getRecipeDto(RecipeEntity recipe) {
+        RecipeDto recipeDto = simpleConvert(recipe, RecipeDto.class);
+        recipeDto.setIngredientsInfo(getIngredientForRecipeDtoByRecipe(recipe));
+        recipeDto.setImage(recipeService.getRecipeImageBase64ById(recipe.getName()));
+        return recipeDto;
     }
 
     public List<IngredientForRecipeDto> getIngredientForRecipeDtoByRecipe(RecipeEntity recipe) {
         return recipe.getIngredients().stream().map(
             recipeIngredient -> new IngredientForRecipeDto(recipeIngredient.getIngredient().getId(),
-                recipeIngredient.getIngredient().getName(), recipeIngredient.getIngredient().getMeasurementValue(),
+                recipeIngredient.getIngredient().getName(), recipeIngredient.getIngredient().getMeasurementValueType().getString(),
                 recipeIngredient.getValue())).collect(Collectors.toList());
     }
 
     public List<CountryDto> getCountryDtoList(List<CountryEntity> countryEntities) {
         List<CountryDto> countryDtoList = simpleConvert(countryEntities, CountryDto.class);
         for (CountryDto countryDto : countryDtoList) {
-            countryDto.setImage(countryService.getCountryImageBase64ById(countryDto.getId()));
+            countryDto.setImage(countryService.getCountryImageBase64ById(countryDto.getName()));
         }
         return countryDtoList;
     }
