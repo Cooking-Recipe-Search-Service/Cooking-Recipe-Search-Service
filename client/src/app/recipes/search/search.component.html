@@ -1,2 +1,64 @@
-<tui-svg src="tuiIconTimeLarge"></tui-svg>
- 
+<div class="search">
+    <form [formGroup]="searchForm" (ngSubmit)="searchRecipe()">
+        <div class="search__main-search">
+            <tui-input
+                tuiTextfieldSize="l"
+                tuiTextfieldExampleText="Салат цезарь"
+                formControlName="recipeSearch"
+                class="search__main-search-input"
+                [tuiTextfieldLabelOutside]="true"
+                [tuiTextfieldCleaner]="true"
+            >
+                Введите название рецепта
+            </tui-input>
+
+            <button tuiButton size="m" (click)="searchRecipe()">Поиск</button>
+        </div>
+        <tui-hosted-dropdown tuiDropdownLimitWidth="fixed" [open]="open">
+            <button
+                tuiButton
+                appearance="flat"
+                [iconRight]="arrow"
+                (click)="showFilters()"
+            >
+                {{btnText}}
+            </button>
+        </tui-hosted-dropdown>
+
+        <div class="search__extra-options">
+            <tui-select
+                [editable]="false"
+                [valueContent]="content"
+                [tuiTextfieldLabelOutside]="true"
+                [(ngModel)]="value"
+            >
+                Выберите хабы
+
+                <cdk-virtual-scroll-viewport
+                    *tuiDataList
+                    tuiScrollable
+                    class="scroll"
+                    [itemSize]="44"
+                >
+                    <tui-primitive-textfield
+                        #input
+                        iconContent="tuiIconSearchLarge"
+                        iconAlign="left"
+                        class="tui-space_all-2"
+                        [(value)]="searched"
+                    ></tui-primitive-textfield>
+                    <tui-data-list tuiMultiSelectGroup>
+                        <button
+                            *cdkVirtualFor="let item of filtered"
+                            tuiOption
+                            [value]="item"
+                            (click)="addTab()"
+                        >
+                            {{item}}
+                        </button>
+                    </tui-data-list>
+                </cdk-virtual-scroll-viewport>
+            </tui-select>
+        </div>
+    </form>
+</div>

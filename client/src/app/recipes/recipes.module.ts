@@ -5,7 +5,6 @@ import { SearchModule } from './search/search.module';
 
 @NgModule({
     declarations: [RecipesComponent],
-    imports: [CommonModule,SearchModule],
-    
+    imports: [CommonModule, SearchModule],
 })
 export class RecipesModule {}

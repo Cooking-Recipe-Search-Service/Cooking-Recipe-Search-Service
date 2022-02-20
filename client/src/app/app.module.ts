@@ -15,14 +15,15 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-
         RecipesModule,
         TuiRootModule,
     ],
-    providers:[{
-        provide: TUI_SANITIZER,
-        useClass: NgDompurifySanitizer,
-    }],
+    providers: [
+        {
+            provide: TUI_SANITIZER,
+            useClass: NgDompurifySanitizer,
+        },
+    ],
 
     bootstrap: [AppComponent],
 })
