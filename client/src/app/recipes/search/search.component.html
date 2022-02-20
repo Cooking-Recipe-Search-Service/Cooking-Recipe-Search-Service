@@ -25,40 +25,11 @@
             </button>
         </tui-hosted-dropdown>
 
-        <div class="search__extra-options">
-            <tui-select
-                [editable]="false"
-                [valueContent]="content"
-                [tuiTextfieldLabelOutside]="true"
-                [(ngModel)]="value"
-            >
-                Выберите хабы
-
-                <cdk-virtual-scroll-viewport
-                    *tuiDataList
-                    tuiScrollable
-                    class="scroll"
-                    [itemSize]="44"
-                >
-                    <tui-primitive-textfield
-                        #input
-                        iconContent="tuiIconSearchLarge"
-                        iconAlign="left"
-                        class="tui-space_all-2"
-                        [(value)]="searched"
-                    ></tui-primitive-textfield>
-                    <tui-data-list tuiMultiSelectGroup>
-                        <button
-                            *cdkVirtualFor="let item of filtered"
-                            tuiOption
-                            [value]="item"
-                            (click)="addTab()"
-                        >
-                            {{item}}
-                        </button>
-                    </tui-data-list>
-                </cdk-virtual-scroll-viewport>
-            </tui-select>
+        <div
+            *ngIf="categories$ | async as categories"
+            class="search__extra-options"
+        >
+            <app-select-with-search [values]='categories'></app-select-with-search>
         </div>
     </form>
 </div>

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TUI_ARROW } from '@taiga-ui/kit';
+import { RecipesApiService } from 'src/app/recipes/shared/services/recipes-api-service.service';
 import { HIDE_FILTERS, SHOW_FILTERS } from 'src/libs/consts';
 
 @Component({
@@ -24,6 +25,10 @@ export class SearchComponent {
     open = false;
 
     readonly arrow = TUI_ARROW;
+
+    readonly categories$ = this.recipesService.getCategories();
+
+    constructor(private readonly recipesService: RecipesApiService) {}
 
     showFilters() {
         this.open = !this.open;

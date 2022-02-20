@@ -8,6 +8,9 @@ import { AppComponent } from './app.component';
 import { RecipesModule } from './recipes/recipes.module';
 import { TuiRootModule, TUI_SANITIZER } from '@taiga-ui/core';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
+import { environment } from 'src/environments/environment';
+import { HOST_API } from 'src/libs/consts';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [AppComponent],
@@ -17,8 +20,10 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
         BrowserAnimationsModule,
         RecipesModule,
         TuiRootModule,
+        HttpClientModule,
     ],
     providers: [
+        { provide: HOST_API, useValue: environment.hostApi },
         {
             provide: TUI_SANITIZER,
             useClass: NgDompurifySanitizer,
