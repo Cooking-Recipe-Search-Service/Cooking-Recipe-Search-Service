@@ -1,7 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { TUI_DEFAULT_MATCHER } from '@taiga-ui/cdk';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Input,
+} from '@angular/core';
+import { AbstractControl, FormControl } from '@angular/forms';
 
-
+export interface AbstractTypedControl<T> extends AbstractControl {
+    getValue(): T;
+}
 @Component({
     selector: 'app-select-with-search',
     templateUrl: './select-with-search.component.html',
@@ -9,19 +15,9 @@ import { TUI_DEFAULT_MATCHER } from '@taiga-ui/cdk';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectWithSearchComponent {
+    @Input() control!: FormControl;
+
     @Input() values: readonly string[] = [];
 
-    @Output() newValue: EventEmitter<string> = new EventEmitter<string>()
-
-    searched = '';
-
-    value = '';
-
-    readonly filter = TUI_DEFAULT_MATCHER;
-
-    setValue(value: string){
-      this.newValue.emit(value)
-    }
-
-
+    @Input() label = '';
 }

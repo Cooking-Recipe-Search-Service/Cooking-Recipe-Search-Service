@@ -12,7 +12,15 @@ export class RecipesApiService {
         private readonly http: HttpClient,
     ) {}
 
+    getKitchen(): Observable<readonly string[]> {
+        return this.http.get<readonly string[]>(`${this.baseUrl}/kitchen`);
+    }
+
     getCategories(): Observable<readonly string[]> {
         return this.http.get<readonly string[]>(`${this.baseUrl}/categories`);
+    }
+
+    getTime(): Observable<readonly string[]> {
+        return this.http.get<readonly string[]>(`${this.baseUrl}/time`);
     }
 }

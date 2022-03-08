@@ -26,10 +26,26 @@
         </tui-hosted-dropdown>
 
         <div
-            *ngIf="categories$ | async as categories"
+            *ngIf="defaultSearchValues$ | async as defaultSearchValue"
             class="search__extra-options"
         >
-            <app-select-with-search [values]='categories'></app-select-with-search>
+            <div *ngFor="let control of controls"></div>
+            <app-select-with-search
+                label="Категория"
+                [values]="defaultSearchValue.categories"
+                [control]="category"
+            ></app-select-with-search>
+            <app-select-with-search
+                label="Кухня"
+                [values]="defaultSearchValue.kitchen"
+                [control]="kitchen"
+            ></app-select-with-search>
+            <app-select-with-search
+                label="Время приготовления"
+                [values]="defaultSearchValue.time"
+                [control]="preparationTime"
+            ></app-select-with-search>
+            <button (click)="test()"></button>
         </div>
     </form>
 </div>

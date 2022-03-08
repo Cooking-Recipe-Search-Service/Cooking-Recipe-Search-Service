@@ -1,33 +1,16 @@
-<tui-select [(ngModel)]="value">
-    
-
-    <cdk-virtual-scroll-viewport
+<!-- <tui-combo-box
+    class="tui-form__multi-field"
+    [formControl]="control"
+    [items]="values"
+    [strict]="false"
+>
+    {{label}}
+</tui-combo-box> -->
+<tui-combo-box class="b-form" [formControl]="control">
+    {{label}}
+    <input tuiTextfield placeholder="Type a name" />
+    <tui-data-list-wrapper
         *tuiDataList
-        tuiScrollable
-        class="scroll"
-        [itemSize]="44"
-    >
-        <tui-primitive-textfield
-            #input
-            iconContent="tuiIconSearchLarge"
-            iconAlign="left"
-            class="tui-space_all-2"
-            [(value)]="searched"
-        ></tui-primitive-textfield>
-        <tui-data-list tuiMultiSelectGroup>
-            <ng-container
-                *tuiLet="
-                values | tuiFilter: filter:searched as filtered"
-            >
-                <button
-                    *cdkVirtualFor="let item of filtered"
-                    tuiOption
-                    [value]="item"
-                    (сlick)='setValue(item)'
-                >
-                    {{item}}
-                </button>
-            </ng-container>
-        </tui-data-list>
-    </cdk-virtual-scroll-viewport>
-</tui-select>
+        [items]="values | tuiFilterByInput"
+    ></tui-data-list-wrapper>
+</tui-combo-box>
