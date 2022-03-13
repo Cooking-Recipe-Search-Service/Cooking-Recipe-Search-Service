@@ -1,1 +1,18 @@
-<p>navbar works!</p>
+<nav class="nav">
+    <div class="nav__logo">
+        <img
+            height="60px"
+            loading="lazy"
+            alt="IT's TINKOFF"
+            src="assets/images/logo.png"
+        />
+    </div>
+    <tui-tabs [(activeItemIndex)]="activeItemIndex">
+        <ng-container *ngFor="let tab of tabs">
+            <button tuiTab [routerLink]="tab.routerLink">
+                <tui-svg class="tui-space_right-2" [src]="tab.icon"></tui-svg>
+                {{tab.label}}
+            </button>
+        </ng-container>
+    </tui-tabs>
+</nav>

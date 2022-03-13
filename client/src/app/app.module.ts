@@ -11,6 +11,7 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { environment } from 'src/environments/environment';
 import { HOST_API } from 'src/libs/consts';
 import { HttpClientModule } from '@angular/common/http';
+import { NavbarModule } from './navbar/navbar.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
         RecipesModule,
         TuiRootModule,
         HttpClientModule,
+        NavbarModule,
     ],
     providers: [
         { provide: HOST_API, useValue: environment.hostApi },

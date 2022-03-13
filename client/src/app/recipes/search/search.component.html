@@ -11,14 +11,7 @@
                 Введите название рецепта
             </tui-input>
 
-            <button
-                tuiButton
-                size="m"
-                class="search__main-search-btn"
-                (click)="searchRecipe()"
-            >
-                Поиск
-            </button>
+            <button tuiButton size="l" (click)="searchRecipe()">Поиск</button>
         </div>
         <tui-hosted-dropdown tuiDropdownLimitWidth="fixed" [open]="open">
             <button

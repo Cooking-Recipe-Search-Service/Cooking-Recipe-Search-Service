@@ -64,16 +64,16 @@ export class SearchComponent {
         return this.searchForm.controls.includeIngredients as FormControl;
     }
 
-    // test() {
-    //     console.log(this.searchForm);
-    // }
+    test() {
+        console.log(this.searchForm);
+    }
 
     showFilters(): void {
         this.open = !this.open;
         this.btnText = this.open ? SHOW_FILTERS : HIDE_FILTERS;
     }
 
-    searchRecipe():void {
+    searchRecipe(): void {
         // const recipe = this.searchForm.controls.recipeSearch.value;
     }
 }

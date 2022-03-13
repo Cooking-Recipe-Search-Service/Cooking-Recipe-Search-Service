@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NAVBAR_TABS } from 'src/libs/consts';
 
 @Component({
     selector: 'app-navbar',
@@ -6,4 +7,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrls: ['./navbar.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+    tabs = NAVBAR_TABS;
+    activeItemIndex = 0;
+
+    onClick() {}
+}
