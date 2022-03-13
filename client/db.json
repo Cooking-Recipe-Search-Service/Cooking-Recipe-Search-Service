@@ -35,5 +35,15 @@
         "от 30 до 1 часа",
         "от 1 часа до 2-х часов",
         "более 2 часов"
+    ],
+    "ingredients": [
+        {
+            "category": "fruits",
+            "ingredients": ["Orange", "Apple", "Banana"]
+        },
+        {
+            "category": "vegetables",
+            "ingredients": ["Potato", "Onion", "Carot"]
+        }
     ]
 }

@@ -1,1 +1,8 @@
-<p>ingredients-search works!</p>
+<tui-multi-select
+    class="control"
+    [tuiTextfieldLabelOutside]="true"
+    [formControl]="control"
+>
+    {{label}}
+    <app-custom-list *tuiDataList [items]="ingredients"></app-custom-list>
+</tui-multi-select>

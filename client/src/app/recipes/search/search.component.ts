@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ViewEncapsulation,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TUI_ARROW } from '@taiga-ui/kit';
 import { forkJoin } from 'rxjs';
@@ -9,6 +13,7 @@ import { HIDE_FILTERS, SHOW_FILTERS } from 'src/libs/consts';
     selector: 'app-search',
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.less'],
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent {
@@ -17,6 +22,8 @@ export class SearchComponent {
         category: new FormControl('Любая'),
         kitchen: new FormControl('Любая'),
         preparationTime: new FormControl('Любое'),
+        excludeIngredients: new FormControl([]),
+        includeIngredients: new FormControl([]),
     });
 
     btnText = SHOW_FILTERS;
@@ -33,6 +40,8 @@ export class SearchComponent {
         time: this.recipesService.getTime(),
     });
 
+    readonly ingredients$ = this.recipesService.getIngredients();
+
     constructor(private readonly recipesService: RecipesApiService) {}
 
     get category(): FormControl {
@@ -47,6 +56,14 @@ export class SearchComponent {
         return this.searchForm.controls.preparationTime as FormControl;
     }
 
+    get excludeIngredients(): FormControl {
+        return this.searchForm.controls.excludeIngredients as FormControl;
+    }
+
+    get includeIngredients(): FormControl {
+        return this.searchForm.controls.includeIngredients as FormControl;
+    }
+
     // test() {
     //     console.log(this.searchForm);
     // }
@@ -56,7 +73,7 @@ export class SearchComponent {
         this.btnText = this.open ? SHOW_FILTERS : HIDE_FILTERS;
     }
 
-    // searchRecipe() {
-    //     const recipe = this.searchForm.controls.recipeSearch.value;
-    // }
+    searchRecipe():void {
+        // const recipe = this.searchForm.controls.recipeSearch.value;
+    }
 }

@@ -1,8 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    Input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 
 export interface AbstractTypedControl<T> extends AbstractControl {

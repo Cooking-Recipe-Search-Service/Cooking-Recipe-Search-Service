@@ -5,19 +5,25 @@
                 tuiTextfieldSize="l"
                 tuiTextfieldExampleText="Салат цезарь"
                 formControlName="recipeSearch"
-                class="search__main-search-input"
                 [tuiTextfieldLabelOutside]="true"
                 [tuiTextfieldCleaner]="true"
             >
                 Введите название рецепта
             </tui-input>
 
-            <button tuiButton size="m" (click)="searchRecipe()">Поиск</button>
+            <button
+                tuiButton
+                size="m"
+                class="search__main-search-btn"
+                (click)="searchRecipe()"
+            >
+                Поиск
+            </button>
         </div>
         <tui-hosted-dropdown tuiDropdownLimitWidth="fixed" [open]="open">
             <button
                 tuiButton
-                appearance="flat"
+                appearance="custom"
                 [iconRight]="arrow"
                 (click)="showFilters()"
             >
@@ -29,22 +35,43 @@
             *ngIf="defaultSearchValues$ | async as defaultSearchValue"
             class="search__extra-options"
         >
-            <div *ngFor="let control of controls"></div>
-            <app-select-with-search
-                label="Категория"
-                [values]="defaultSearchValue.categories"
-                [control]="category"
-            ></app-select-with-search>
-            <app-select-with-search
-                label="Кухня"
-                [values]="defaultSearchValue.kitchen"
-                [control]="kitchen"
-            ></app-select-with-search>
-            <app-select-with-search
-                label="Время приготовления"
-                [values]="defaultSearchValue.time"
-                [control]="preparationTime"
-            ></app-select-with-search>
+            <div class="search__default">
+                <app-select-with-search
+                    label="Категория"
+                    class="search__default-width"
+                    [values]="defaultSearchValue.categories"
+                    [control]="category"
+                ></app-select-with-search>
+                <app-select-with-search
+                    label="Кухня"
+                    class="search__default-width tui-space_horizontal-5"
+                    [values]="defaultSearchValue.kitchen"
+                    [control]="kitchen"
+                ></app-select-with-search>
+                <app-select-with-search
+                    label="Время приготовления"
+                    class="search__default-width"
+                    [values]="defaultSearchValue.time"
+                    [control]="preparationTime"
+                ></app-select-with-search>
+            </div>
+            <div class="search__ingredients tui-space_top-5">
+                <app-ingredients-search
+                    *ngIf="ingredients$ | async as ingredients"
+                    label="+ Добавить ингредиенты"
+                    class="search__ingredients-width tui-space_right-2"
+                    [ingredients]="ingredients"
+                    [control]="includeIngredients"
+                ></app-ingredients-search>
+                <app-ingredients-search
+                    *ngIf="ingredients$ | async as ingredients"
+                    label="- Исключить ингредиенты"
+                    class="search__ingredients-width tui-space_left-3"
+                    [ingredients]="ingredients"
+                    [control]="excludeIngredients"
+                ></app-ingredients-search>
+            </div>
+
             <button (click)="test()"></button>
         </div>
     </form>

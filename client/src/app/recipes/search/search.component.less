@@ -1,13 +1,33 @@
 .search {
     &__main-search {
-        display: flex;
-        &-input {
-            width: 80%;
+        display: grid;
+        grid-template-columns: 0.75fr 0.25fr;
+        column-gap: 20px;
+        &-btn {
+            height: 100%;
+            width: 100%;
         }
     }
-    &__extra-options {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        column-gap: 20px;
+
+    &__default,
+    &__ingredients {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &-width {
+            width: 100%;
+        }
+    }
+}
+
+tui-wrapper[data-appearance='custom'] {
+    background: none;
+    color: var(--tui-primary);
+
+    &[data-state='hovered'] {
+        color: var(--tui-link-hover);
+    }
+    &[data-size='l'].wrapper {
+        padding: 50px;
     }
 }
