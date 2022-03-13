@@ -65,7 +65,7 @@ export class SearchComponent {
     }
 
     test() {
-        console.log(this.searchForm);
+        // console.log(this.searchForm);
     }
 
     showFilters(): void {
