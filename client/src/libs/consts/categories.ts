@@ -1,4 +1,4 @@
-export const categories = [
+export const CATEGORIES = [
     'Завтраки',
     'Бульоны',
     'Закуски',
@@ -11,6 +11,6 @@ export const categories = [
     'Супы',
     'Сэндвичи',
     'Выпечка',
-    'Дисерты',
+    'Десерты',
     'Заготовки',
 ];

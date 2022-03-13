@@ -1,0 +1,15 @@
+<div class="default">
+    <div *ngIf="categories$ | async as categories " class="default__categories">
+        <tui-island
+            *ngFor="let category of categories| slice:0:6"
+            class="default__category"
+        >
+            <img
+                loading="lazy"
+                class="default__category-img tui-space_right-2"
+                [src]="category.icon"
+            />
+            {{category.label}}
+        </tui-island>
+    </div>
+</div>

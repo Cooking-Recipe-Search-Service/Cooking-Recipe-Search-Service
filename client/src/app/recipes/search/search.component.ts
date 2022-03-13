@@ -19,9 +19,9 @@ import { HIDE_FILTERS, SHOW_FILTERS } from 'src/libs/consts';
 export class SearchComponent {
     readonly searchForm = new FormGroup({
         recipeSearch: new FormControl('', [Validators.minLength(3)]),
-        category: new FormControl('Любая'),
-        kitchen: new FormControl('Любая'),
-        preparationTime: new FormControl('Любое'),
+        category: new FormControl(null),
+        kitchen: new FormControl(null),
+        preparationTime: new FormControl(null),
         excludeIngredients: new FormControl([]),
         includeIngredients: new FormControl([]),
     });

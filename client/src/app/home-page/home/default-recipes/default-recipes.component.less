@@ -1,0 +1,18 @@
+.default {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    &__categories {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 20px;
+        row-gap: 20px;
+    }
+    &__category {
+        display: flex;
+        align-items: center;
+        &-img {
+            width: 40px;
+        }
+    }
+}
