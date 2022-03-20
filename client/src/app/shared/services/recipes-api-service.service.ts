@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HOST_API } from 'src/libs/consts';
 import { Observable } from 'rxjs';
 import { Ingredients } from 'src/libs/interfaces';
+import { Recipe } from 'src/libs/interfaces/shared/recipe';
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +14,13 @@ export class RecipesApiService {
         private readonly http: HttpClient,
     ) {}
 
-    getIngredients() {
+    getRecipeByCategory(category: string) {
+        return this.http.get<readonly Recipe[]>(
+            `${this.baseUrl}/recipes?category=${category}`,
+        );
+    }
+
+    getIngredients(): Observable<readonly Ingredients[]> {
         return this.http.get<readonly Ingredients[]>(
             `${this.baseUrl}/ingredients`,
         );

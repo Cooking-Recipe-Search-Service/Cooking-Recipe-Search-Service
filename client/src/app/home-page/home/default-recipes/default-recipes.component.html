@@ -1,15 +1,41 @@
-<div class="default">
-    <div *ngIf="categories$ | async as categories " class="default__categories">
-        <tui-island
-            *ngFor="let category of categories| slice:0:6"
+<div *ngIf="categories$ | async as categories ">
+    <div class="default__categories">
+        <button
+            *ngFor="let category of categories | slice:0:categoriesCount;let index = index"
+            tuiButton
             class="default__category"
+            [appearance]="isActive(index)"
+            (click)="loadCategory(index, category.label )"
         >
             <img
                 loading="lazy"
                 class="default__category-img tui-space_right-2"
+                [alt]="category.label"
                 [src]="category.icon"
             />
             {{category.label}}
-        </tui-island>
+        </button>
+    </div>
+    <h6
+        *ngIf="categoryRecipes$ | async as categoryRecipes "
+        class="tui-text_h6"
+    >
+        {{categoryRecipes[0].category}}
+    </h6>
+    <div *ngIf="categoryRecipes$ | async as categoryRecipes ">
+        <tui-carousel
+            class="carousel__wrapper"
+            [itemsCount]="4"
+            [duration]="3000"
+            [(index)]="index"
+        >
+            <ng-container *ngFor="let recipe of categoryRecipes">
+                <app-img-with-subtitle
+                    *tuiItem
+                    [img]="recipe.img"
+                    [title]="recipe.name"
+                ></app-img-with-subtitle>
+            </ng-container>
+        </tui-carousel>
     </div>
 </div>

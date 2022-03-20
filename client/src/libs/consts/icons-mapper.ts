@@ -1,11 +1,15 @@
 export const ICONS_MAPPER: Record<string, string> = {
     Завтраки: 'assets/images/breakfast.png',
-    Сэндвичи: 'assets/images/sandwiches.png',
+    Сэндвичи: 'assets/images/sandwich.png',
     Салаты: 'assets/images/salad.png',
-    Выпечка: 'assets/images/cakes.png',
+    Выпечка: 'assets/images/bake.png',
     'Основные блюда': 'assets/images/meal.png',
     'Паста и пицца': 'assets/images/pizza.png',
     Закуски: 'assets/images/snack.png',
     Напитки: 'assets/images/drink.png',
-    Бульоны: 'assets/images/soup.png',
+    Бульоны: 'assets/images/broth.png',
+    Супы: 'assets/images/soup.png',
+    Десерты: 'assets/images/cake.png',
+    'Соусы и маринады': 'assets/images/sauce.png',
+    Заготовки: 'assets/images/jam.png',
 };

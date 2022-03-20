@@ -6,7 +6,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TUI_ARROW } from '@taiga-ui/kit';
 import { forkJoin } from 'rxjs';
-import { RecipesApiService } from 'src/app/recipes/shared/services/recipes-api-service.service';
+import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
 import { HIDE_FILTERS, SHOW_FILTERS } from 'src/libs/consts';
 
 @Component({
