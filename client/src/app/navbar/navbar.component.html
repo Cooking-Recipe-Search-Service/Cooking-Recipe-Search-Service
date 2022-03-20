@@ -1,11 +1,14 @@
 <nav class="nav">
     <div class="nav__logo">
-        <img
+        <!-- <img
             height="60px"
             loading="lazy"
             alt="IT's TINKOFF"
             src="assets/images/logo.png"
-        />
+        /> -->
+        <a href="" routerLink="/home">
+            <div class="nav__logo-template"></div>
+        </a>
     </div>
     <tui-tabs [(activeItemIndex)]="activeItemIndex">
         <ng-container *ngFor="let tab of tabs">

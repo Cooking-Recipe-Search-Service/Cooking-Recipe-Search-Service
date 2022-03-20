@@ -52,13 +52,11 @@ export class DefaultRecipesComponent {
         return this.activeBtnArray[index] ? 'custom' : 'whiteblock';
     }
 
-    loadCategory(index: number, category: string):void {
+    loadCategory(index: number, category: string): void {
         this.activeBtnArray = Array(this.categoriesCount).fill(false);
         this.activeBtnArray[index] = true;
         this.categoryRecipes$ = this.categoryRecipes$.pipe(
-            switchMap((_) =>
-                this.recipesService.getRecipeByCategory(category),
-            ),
+            switchMap((_) => this.recipesService.getRecipeByCategory(category)),
             shareReplay(1),
         );
     }

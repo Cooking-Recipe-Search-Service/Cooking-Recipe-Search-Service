@@ -14,58 +14,55 @@
             <button tuiButton size="l" (click)="searchRecipe()">Поиск</button>
         </div>
         <tui-hosted-dropdown tuiDropdownLimitWidth="fixed" [open]="open">
-            <button
-                tuiButton
-                appearance="custom"
-                [iconRight]="arrow"
-                (click)="showFilters()"
-            >
+            <button class="outline" (click)="showFilters()">
                 {{btnText}}
+                <tui-svg [src]="arrow"></tui-svg>
             </button>
         </tui-hosted-dropdown>
+        <ng-container *ngIf="open">
+            <div
+                *ngIf="defaultSearchValues$ | async as defaultSearchValue"
+                class="search__extra-options"
+            >
+                <div class="search__default">
+                    <app-select-with-search
+                        label="Категория"
+                        class="search__default-width"
+                        [values]="defaultSearchValue.categories"
+                        [control]="category"
+                    ></app-select-with-search>
+                    <app-select-with-search
+                        label="Кухня"
+                        class="search__default-width tui-space_horizontal-5"
+                        [values]="defaultSearchValue.kitchen"
+                        [control]="kitchen"
+                    ></app-select-with-search>
+                    <app-select-with-search
+                        label="Время приготовления"
+                        class="search__default-width"
+                        [values]="defaultSearchValue.time"
+                        [control]="preparationTime"
+                    ></app-select-with-search>
+                </div>
+                <div class="search__ingredients tui-space_top-5">
+                    <app-ingredients-search
+                        *ngIf="ingredients$ | async as ingredients"
+                        label="+ Добавить ингредиенты"
+                        class="search__ingredients-width tui-space_right-2"
+                        [ingredients]="ingredients"
+                        [control]="includeIngredients"
+                    ></app-ingredients-search>
+                    <app-ingredients-search
+                        *ngIf="ingredients$ | async as ingredients"
+                        label="- Исключить ингредиенты"
+                        class="search__ingredients-width tui-space_left-3"
+                        [ingredients]="ingredients"
+                        [control]="excludeIngredients"
+                    ></app-ingredients-search>
+                </div>
 
-        <div
-            *ngIf="defaultSearchValues$ | async as defaultSearchValue"
-            class="search__extra-options"
-        >
-            <div class="search__default">
-                <app-select-with-search
-                    label="Категория"
-                    class="search__default-width"
-                    [values]="defaultSearchValue.categories"
-                    [control]="category"
-                ></app-select-with-search>
-                <app-select-with-search
-                    label="Кухня"
-                    class="search__default-width tui-space_horizontal-5"
-                    [values]="defaultSearchValue.kitchen"
-                    [control]="kitchen"
-                ></app-select-with-search>
-                <app-select-with-search
-                    label="Время приготовления"
-                    class="search__default-width"
-                    [values]="defaultSearchValue.time"
-                    [control]="preparationTime"
-                ></app-select-with-search>
+                <button (click)="test()"></button>
             </div>
-            <div class="search__ingredients tui-space_top-5">
-                <app-ingredients-search
-                    *ngIf="ingredients$ | async as ingredients"
-                    label="+ Добавить ингредиенты"
-                    class="search__ingredients-width tui-space_right-2"
-                    [ingredients]="ingredients"
-                    [control]="includeIngredients"
-                ></app-ingredients-search>
-                <app-ingredients-search
-                    *ngIf="ingredients$ | async as ingredients"
-                    label="- Исключить ингредиенты"
-                    class="search__ingredients-width tui-space_left-3"
-                    [ingredients]="ingredients"
-                    [control]="excludeIngredients"
-                ></app-ingredients-search>
-            </div>
-
-            <button (click)="test()"></button>
-        </div>
+        </ng-container>
     </form>
 </div>

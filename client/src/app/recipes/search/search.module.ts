@@ -4,6 +4,7 @@ import { SearchComponent } from './search.component';
 import {
     TuiButtonModule,
     TuiHostedDropdownModule,
+    TuiSvgModule,
     TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,6 +24,7 @@ import { IngredientsSearchModule } from '../../shared/components/ingredients-sea
         TuiHostedDropdownModule,
         SelectWithSearchModule,
         IngredientsSearchModule,
+        TuiSvgModule,
     ],
     exports: [SearchComponent],
 })
