@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
+import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
 
 @Component({
     selector: 'app-full-recipe',
@@ -6,4 +9,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrls: ['./full-recipe.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FullRecipeComponent {}
+export class FullRecipeComponent {
+    recipe$ = this.route.params.pipe(
+        map((response) => response.id),
+        switchMap((recipeId) => this.recipesService.getRecipeById(recipeId)),
+    );
+
+    constructor(
+        private readonly recipesService: RecipesApiService,
+        private readonly route: ActivatedRoute,
+    ) {}
+}

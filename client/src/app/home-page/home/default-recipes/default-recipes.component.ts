@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
-import { ICONS_MAPPER } from 'src/libs/consts';
+import { CATEGORIES_MAPPER } from 'src/libs/consts';
 import { Observable } from 'rxjs';
 import { Recipe } from 'src/libs/interfaces/shared/recipe';
 
@@ -40,7 +40,7 @@ export class DefaultRecipesComponent {
             return categories.map((category) => {
                 return {
                     label: category,
-                    icon: ICONS_MAPPER[category],
+                    icon: CATEGORIES_MAPPER[category],
                 };
             });
         }),

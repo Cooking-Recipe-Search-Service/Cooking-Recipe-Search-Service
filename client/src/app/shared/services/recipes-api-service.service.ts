@@ -14,7 +14,11 @@ export class RecipesApiService {
         private readonly http: HttpClient,
     ) {}
 
-    getRecipeByCategory(category: string) {
+    getRecipeById(id: number): Observable<Recipe> {
+        return this.http.get<Recipe>(`${this.baseUrl}/recipes/${id}`);
+    }
+
+    getRecipeByCategory(category: string): Observable<readonly Recipe[]> {
         return this.http.get<readonly Recipe[]>(
             `${this.baseUrl}/recipes?category=${category}`,
         );

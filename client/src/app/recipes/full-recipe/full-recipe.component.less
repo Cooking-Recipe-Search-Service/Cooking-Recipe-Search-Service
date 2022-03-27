@@ -1,0 +1,53 @@
+.recipe {
+    max-width: 880px;
+    margin: 0 auto;
+    &__main-title{
+        display: flex;
+        justify-content: space-between;
+        &-badges{
+            margin-top: 3rem;
+            svg{
+                color: white;
+            width: 16px;
+            height: 16px;
+            }
+        }
+        &-badge{
+            
+        }
+    }
+    &__name{
+        width: 70%;
+    }
+    &__main-photo {
+        position: relative;
+        &-img {
+            border-style: none;
+            width: 880px;
+            height: 343px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+        &-title {
+            position: absolute;
+            color: white;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 5px;
+            margin: 0 10px 10px 10px;
+            bottom: 0px;
+        }
+    }
+}
+.color-1{
+    background-color: var(--tui-support-01) ;
+   
+}
+.color-2{
+    background-color: var(--tui-support-02) ;
+   
+}

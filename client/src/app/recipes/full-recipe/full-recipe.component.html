@@ -1,1 +1,36 @@
-<p>full-recipe works!</p>
+<div *ngIf="recipe$ | async as recipe" class="recipe">
+    <div class="recipe__main-title">
+        <h6 class="tui-text_h6 recipe__name">{{recipe.name }}</h6>
+        <div class="recipe__main-title-badges">
+            <ng-container
+                *ngFor="let tag of recipe | recipeTags;let index = index"
+            >
+                <tui-badge
+                    status="custom"
+                    class="tui-space_right-4 recipe__main-title-badge"
+                    [value]="tag.label"
+                    [style.background]="index | colorize"
+                >
+                    <tui-svg [src]="tag.icon"></tui-svg>
+                </tui-badge>
+            </ng-container>
+            <!-- <tui-badge  status="custom" [value]="recipe.cooking_time" class="color-2 tui-space_right-4">
+                <tui-svg src="tuiIconTime"></tui-svg>
+            </tui-badge>
+            <tui-badge  status="custom" [value]="recipe.category" class="color-1 tui-space_right-4">
+                <tui-svg src="tuiIconTooltip"></tui-svg>
+            </tui-badge> -->
+        </div>
+    </div>
+
+    <div class="recipe__main-photo">
+        <img
+            class="recipe__main-photo-img"
+            [src]="recipe.img"
+            [alt]="recipe.name"
+        />
+        <div class="recipe__main-photo-title"></div>
+    </div>
+    <div class="tui-text_body-l">Описание</div>
+    <div class="">{{recipe.recipe_description}}</div>
+</div>

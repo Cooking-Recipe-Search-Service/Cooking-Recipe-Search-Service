@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Recipe } from 'src/libs/interfaces/shared/recipe';
 
 @Component({
     selector: 'app-img-with-subtitle',
@@ -7,7 +8,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImgWithSubtitleComponent {
-    @Input() img = '';
-
-    @Input() title = '';
+    @Input() recipe!: Recipe;
 }

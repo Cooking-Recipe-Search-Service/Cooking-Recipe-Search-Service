@@ -1,4 +1,4 @@
-export const ICONS_MAPPER: Record<string, string> = {
+export const CATEGORIES_MAPPER: Record<string, string> = {
     Завтраки: 'assets/images/breakfast.png',
     Сэндвичи: 'assets/images/sandwich.png',
     Салаты: 'assets/images/salad.png',
@@ -13,3 +13,14 @@ export const ICONS_MAPPER: Record<string, string> = {
     'Соусы и маринады': 'assets/images/sauce.png',
     Заготовки: 'assets/images/jam.png',
 };
+
+export const TAGS_MAPPER: Record<string, string> = {
+    category: 'assets/icons/category.svg',
+    cooking_time: 'tuiIconTime',
+};
+
+export const COLORS_MAPPER: readonly string[] = [
+    'var(--tui-support-02)',
+    'var(--tui-support-10)',
+    'var(--tui-primary)',
+];

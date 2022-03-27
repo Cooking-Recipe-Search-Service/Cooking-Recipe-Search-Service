@@ -32,8 +32,7 @@
             <ng-container *ngFor="let recipe of categoryRecipes">
                 <app-img-with-subtitle
                     *tuiItem
-                    [img]="recipe.img"
-                    [title]="recipe.name"
+                    [recipe]="recipe"
                 ></app-img-with-subtitle>
             </ng-container>
         </tui-carousel>
