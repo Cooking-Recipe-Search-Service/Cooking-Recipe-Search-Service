@@ -7,19 +7,13 @@
             >
                 <tui-badge
                     status="custom"
-                    class="tui-space_right-4 recipe__main-title-badge"
+                    class="tui-space_right-4"
                     [value]="tag.label"
                     [style.background]="index | colorize"
                 >
                     <tui-svg [src]="tag.icon"></tui-svg>
                 </tui-badge>
             </ng-container>
-            <!-- <tui-badge  status="custom" [value]="recipe.cooking_time" class="color-2 tui-space_right-4">
-                <tui-svg src="tuiIconTime"></tui-svg>
-            </tui-badge>
-            <tui-badge  status="custom" [value]="recipe.category" class="color-1 tui-space_right-4">
-                <tui-svg src="tuiIconTooltip"></tui-svg>
-            </tui-badge> -->
         </div>
     </div>
 
@@ -29,8 +23,41 @@
             [src]="recipe.img"
             [alt]="recipe.name"
         />
-        <div class="recipe__main-photo-title"></div>
+        <div class="recipe__main-photo-title">
+            <ng-container
+                *ngFor="let value of recipe.energy_value_per_portion | energy"
+            >
+                <div class="recipe__energy_value tui-space_right-4">
+                    <p class="tui-text_body-m recipe__energy_value-bold">
+                        {{value.label}}
+                    </p>
+                    <p>{{value.value}}</p>
+                </div>
+            </ng-container>
+        </div>
     </div>
-    <div class="tui-text_body-l">Описание</div>
-    <div class="">{{recipe.recipe_description}}</div>
+    <div class="recipe__container-extra-info">
+        <p class="tui-text_h6">Описание</p>
+
+        <tui-line-clamp
+            [content]="content"
+            [lineHeight]="20"
+            [linesLimit]="5"
+        ></tui-line-clamp>
+
+        <ng-template #content>
+            <div class="tui-text_body-s">{{recipe.recipe_description}}</div>
+        </ng-template>
+
+        <p class="tui-text_h6">Ингредиенты</p>
+        <app-ingredients
+            [value]="value"
+            [ingredients]="recipe.indredients"
+        ></app-ingredients>
+        <p class="tui-text_h6">Пошаговый рецепт</p>
+        <div *ngFor="let step of recipe.steps;let index = index" class="tui-space_top-4">
+            <div class="recipe__step-badge">{{ index+ 1}}</div>
+            <div class="recipe__step-title tui-text_body-m">{{step}}</div>
+        </div>
+    </div>
 </div>

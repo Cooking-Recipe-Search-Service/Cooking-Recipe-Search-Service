@@ -1,26 +1,24 @@
 .recipe {
     max-width: 880px;
     margin: 0 auto;
-    &__main-title{
+    &__main-title {
         display: flex;
         justify-content: space-between;
-        &-badges{
+        &-badges {
             margin-top: 3rem;
-            svg{
+            svg {
                 color: white;
-            width: 16px;
-            height: 16px;
+                width: 16px;
+                height: 16px;
             }
         }
-        &-badge{
-            
-        }
     }
-    &__name{
+    &__name {
         width: 70%;
     }
     &__main-photo {
         position: relative;
+
         &-img {
             border-style: none;
             width: 880px;
@@ -31,23 +29,45 @@
         &-title {
             position: absolute;
             color: white;
-            background: rgba(255, 255, 255, 0.25);
+            background: var(--tui-neutral-bg-hover);
+            // background: rgba(255, 255, 255, 0.25);
             box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.18);
             padding: 5px;
-            margin: 0 10px 10px 10px;
+            margin: 0 10px 15px 10px;
             bottom: 0px;
+            display: flex;
         }
     }
-}
-.color-1{
-    background-color: var(--tui-support-01) ;
-   
-}
-.color-2{
-    background-color: var(--tui-support-02) ;
-   
+    &__energy_value {
+        &-bold {
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+    }
+    &__container-extra-info {
+        max-width: 520px;
+        padding: 60px 0;
+    }
+    &__step{
+        &-badge{
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: var(--tui-primary);
+            color:white;
+            text-align: center;
+            border-radius: 100%;
+            font-weight: bold;
+    line-height: 1.8rem;
+        }
+        &-title{
+            margin-left: 40px;
+        }
+
+
+    }
 }
