@@ -63,10 +63,6 @@ export class SearchComponent {
         return this.searchForm.controls.includeIngredients as FormControl;
     }
 
-    test() {
-        // console.log(this.searchForm);
-    }
-
     showFilters(): void {
         this.btnText = this.open ? SHOW_FILTERS : HIDE_FILTERS;
         this.arrow = this.open ? ARROW_DOWN : ARROW_UP;

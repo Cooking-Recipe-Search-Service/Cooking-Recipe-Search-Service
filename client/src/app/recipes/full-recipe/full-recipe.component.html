@@ -55,7 +55,10 @@
             [ingredients]="recipe.indredients"
         ></app-ingredients>
         <p class="tui-text_h6">Пошаговый рецепт</p>
-        <div *ngFor="let step of recipe.steps;let index = index" class="tui-space_top-4">
+        <div
+            *ngFor="let step of recipe.steps;let index = index"
+            class="tui-space_top-4"
+        >
             <div class="recipe__step-badge">{{ index+ 1}}</div>
             <div class="recipe__step-title tui-text_body-m">{{step}}</div>
         </div>

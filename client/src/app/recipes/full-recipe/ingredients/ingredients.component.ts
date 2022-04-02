@@ -16,7 +16,7 @@ export class IngredientsComponent {
 
     computedIngredients: readonly Ingredient[] = [];
 
-    decrement() {
+    decrement(): void {
         this.value -= 1;
         this.computedIngredients = [
             ...this.computedIngredients.map((ingredient) => {
@@ -28,15 +28,15 @@ export class IngredientsComponent {
         ];
     }
 
-    increment() {
+    increment(): void {
         this.value += 1;
         this.computedIngredients = [
-          ...this.computedIngredients.map((ingredient) => {
-              return {
-                  ...ingredient,
-                  value: (ingredient.value / (this.value - 1)) * this.value,
-              };
-          }),
-      ];
+            ...this.computedIngredients.map((ingredient) => {
+                return {
+                    ...ingredient,
+                    value: (ingredient.value / (this.value - 1)) * this.value,
+                };
+            }),
+        ];
     }
 }

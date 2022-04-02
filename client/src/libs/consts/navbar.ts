@@ -9,4 +9,9 @@ export const NAVBAR_TABS = [
         routerLink: '',
         icon: 'tuiIconAlertCircleLarge',
     },
+    {
+        label: 'map',
+        routerLink: '/map',
+        icon: 'tuiIconFlagLarge',
+    },
 ];

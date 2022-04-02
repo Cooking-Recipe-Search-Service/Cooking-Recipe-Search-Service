@@ -1,0 +1,30 @@
+<div class="map">
+    <div class="map__container">
+        <app-world></app-world>
+        <div class="map__title">
+            <h2 class="tui-text_h2">Лучшие рецепты со всего мира</h2>
+            <p class="tui-text_body-m">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque
+                dolores quam doloremque. Unde, quod ipsa deserunt qui quaerat
+                mollitia quis!
+            </p>
+
+            <div class="map__search">
+                <tui-input
+                    tuiTextfieldSize="m"
+                    tuiTextfieldExampleText="Салат цезарь"
+                    class="tui-space_right-4 map__search-input"
+                    [formControl]="recipe"
+                    [tuiTextfieldLabelOutside]="true"
+                    [tuiTextfieldCleaner]="true"
+                >
+                    Введите название рецепта
+                </tui-input>
+
+                <button tuiButton size="m" (click)="searchRecipe()">
+                    Поиск
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

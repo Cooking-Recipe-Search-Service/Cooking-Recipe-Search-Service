@@ -5,6 +5,7 @@ import { DefaultRecipesModule } from './default-recipes/default-recipes.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/kit';
+import { MainHomeScreenModule } from './main-home-screen/main-home-screen.module';
 
 @NgModule({
     declarations: [HomeComponent],
@@ -16,6 +17,7 @@ import { TuiInputModule } from '@taiga-ui/kit';
         ReactiveFormsModule,
         TuiButtonModule,
         TuiInputModule,
+        MainHomeScreenModule,
     ],
     exports: [HomeComponent],
 })

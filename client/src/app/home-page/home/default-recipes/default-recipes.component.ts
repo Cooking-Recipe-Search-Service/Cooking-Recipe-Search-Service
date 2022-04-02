@@ -1,7 +1,6 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ViewEncapsulation,
 } from '@angular/core';
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
@@ -14,7 +13,6 @@ const CATEGORIES_COUNT = 12;
     selector: 'app-default-recipes',
     templateUrl: './default-recipes.component.html',
     styleUrls: ['./default-recipes.component.less'],
-    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DefaultRecipesComponent {
@@ -49,7 +47,7 @@ export class DefaultRecipesComponent {
     constructor(private readonly recipesService: RecipesApiService) {}
 
     isActive(index: number): string {
-        return this.activeBtnArray[index] ? 'custom' : 'whiteblock';
+        return this.activeBtnArray[index] ? 'primary' : 'whiteblock';
     }
 
     loadCategory(index: number, category: string): void {
@@ -59,5 +57,6 @@ export class DefaultRecipesComponent {
             switchMap((_) => this.recipesService.getRecipeByCategory(category)),
             shareReplay(1),
         );
+        index = 0;
     }
 }
