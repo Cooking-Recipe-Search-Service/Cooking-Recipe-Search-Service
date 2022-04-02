@@ -8,6 +8,7 @@ import {
 } from '@taiga-ui/kit';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TuiTextfieldControllerModule } from '@taiga-ui/core';
 
 @NgModule({
     declarations: [SelectWithSearchComponent],
@@ -18,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         ReactiveFormsModule,
         TuiDataListWrapperModule,
         TuiFilterByInputPipeModule,
+        TuiTextfieldControllerModule,
     ],
     exports: [SelectWithSearchComponent],
 })

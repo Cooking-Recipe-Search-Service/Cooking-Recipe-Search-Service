@@ -34,11 +34,11 @@
     ],
     "ingredients": [
         {
-            "category": "fruits",
+            "category": "Фрукты",
             "ingredients": ["Orange", "Apple", "Banana"]
         },
         {
-            "category": "vegetables",
+            "category": "Овощи",
             "ingredients": ["Potato", "Onion", "Carot"]
         }
     ],

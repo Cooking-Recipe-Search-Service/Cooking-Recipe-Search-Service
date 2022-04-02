@@ -10,5 +10,5 @@ import { NAVBAR_TABS } from 'src/libs/consts';
 export class NavbarComponent {
     tabs = NAVBAR_TABS;
 
-    activeItemIndex = 0;
+    activeItemIndex = -1;
 }

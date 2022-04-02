@@ -9,8 +9,8 @@ import {
 } from '@taiga-ui/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiInputModule } from '@taiga-ui/kit';
-import { SelectWithSearchModule } from '../../shared/components/select-with-search/select-with-search.module';
-import { IngredientsSearchModule } from '../../shared/components/ingredients-search/ingredients-search.module';
+import { SelectWithSearchModule } from '../../../shared/components/select-with-search/select-with-search.module';
+import { IngredientsSearchModule } from '../../../shared/components/ingredients-search/ingredients-search.module';
 
 @NgModule({
     declarations: [SearchComponent],

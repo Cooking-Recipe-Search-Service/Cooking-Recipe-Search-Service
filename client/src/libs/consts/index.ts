@@ -1,4 +1,4 @@
-export * from './buttons-texts';
+export * from './buttons';
 export * from './categories';
 export * from './api';
 export * from './navbar';

@@ -26,6 +26,7 @@ import { TuiMultiSelectModule, TuiSelectModule } from '@taiga-ui/kit';
         TuiMultiSelectModule,
         TuiTextfieldControllerModule,
         TuiPrimitiveTextfieldModule,
+        
     ],
     exports: [IngredientsSearchComponent],
 })

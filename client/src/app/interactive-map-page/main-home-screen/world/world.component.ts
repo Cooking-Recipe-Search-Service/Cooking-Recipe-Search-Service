@@ -25,7 +25,7 @@ export class WorldComponent implements AfterViewInit {
 
     private root!: am5.Root;
 
-    private countryCords = COUNTRY_CORDS
+    private countryCords = COUNTRY_CORDS;
 
     constructor(
         @Inject(PLATFORM_ID) private platformId: any,
@@ -125,7 +125,6 @@ export class WorldComponent implements AfterViewInit {
                 loops: Infinity,
             });
 
-      
             this.chart.appear(1000, 100);
         });
     }
@@ -138,14 +137,15 @@ export class WorldComponent implements AfterViewInit {
         });
     }
 
-    private markCountries(pointSeries: any): void{
-        this.countryCords.forEach(country => 
+    private markCountries(pointSeries: any): void {
+        this.countryCords.forEach((country) =>
             pointSeries.data.push({
                 geometry: {
                     type: 'Point',
                     coordinates: [country.longitude, country.latitude],
                 },
                 title: country.title,
-    }))
+            }),
+        );
     }
 }

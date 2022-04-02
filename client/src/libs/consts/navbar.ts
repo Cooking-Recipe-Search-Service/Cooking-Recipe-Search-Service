@@ -1,17 +1,12 @@
 export const NAVBAR_TABS = [
     {
-        label: 'Расширенный поиск',
-        routerLink: '/recipes/search',
+        label: 'Рецепты',
+        routerLink: '/recipes',
         icon: 'tuiIconSearchLarge',
     },
     {
         label: 'О нас',
         routerLink: '',
         icon: 'tuiIconAlertCircleLarge',
-    },
-    {
-        label: 'map',
-        routerLink: '/map',
-        icon: 'tuiIconFlagLarge',
     },
 ];

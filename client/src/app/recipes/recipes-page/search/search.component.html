@@ -2,7 +2,7 @@
     <form [formGroup]="searchForm" (ngSubmit)="searchRecipe()">
         <div class="search__main-search">
             <tui-input
-                tuiTextfieldSize="l"
+                [tuiTextfieldSize]="size"
                 tuiTextfieldExampleText="Салат цезарь"
                 formControlName="recipeSearch"
                 [tuiTextfieldLabelOutside]="true"
@@ -11,10 +11,10 @@
                 Введите название рецепта
             </tui-input>
 
-            <button tuiButton size="l" (click)="searchRecipe()">Поиск</button>
+            <button tuiButton [size]="size" (click)="searchRecipe()">Поиск</button>
         </div>
         <tui-hosted-dropdown tuiDropdownLimitWidth="fixed" [open]="open">
-            <button class="outline" (click)="showFilters()">
+            <button class="outline"  (click)="showFilters()">
                 {{btnText}}
                 <tui-svg [src]="arrow"></tui-svg>
             </button>
@@ -60,8 +60,6 @@
                         [control]="excludeIngredients"
                     ></app-ingredients-search>
                 </div>
-
-                
             </div>
         </ng-container>
     </form>

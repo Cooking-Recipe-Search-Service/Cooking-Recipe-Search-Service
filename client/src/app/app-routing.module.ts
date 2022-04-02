@@ -4,9 +4,19 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: '/home',
-        pathMatch: 'full',
+        loadChildren: () =>
+            import('./interactive-map-page/interactive-map-page.module').then(
+                (m) => m.InteractiveMapPageModule,
+            ),
     },
+    // {
+    //     path: '/',
+    //     loadChildren: () =>
+    //         import('./interactive-map-page/interactive-map-page.module').then(
+    //             (m) => m.InteractiveMapPageModule,
+    //         ),
+    // },
+
     {
         path: 'home',
         loadChildren: () =>

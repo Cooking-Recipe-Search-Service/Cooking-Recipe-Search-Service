@@ -21,7 +21,7 @@
             [label]="item.category"
         >
             <tui-opt-group *ngIf="filtered.length" tuiMultiSelectGroup>
-                <button *ngFor="let item of filtered" tuiOption [value]="item">
+                <button [size]="size" *ngFor="let item of filtered" tuiOption [value]="item">
                     {{ item }}
                 </button>
             </tui-opt-group>

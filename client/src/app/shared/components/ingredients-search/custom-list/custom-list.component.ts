@@ -5,6 +5,7 @@ import {
     TUI_DEFAULT_MATCHER,
 } from '@taiga-ui/cdk';
 import { isEditingKey, TuiDataListComponent } from '@taiga-ui/core';
+import { SIZE } from 'src/libs/consts';
 import { Ingredients } from 'src/libs/interfaces';
 
 @Component({
@@ -17,6 +18,8 @@ export class CustomListComponent {
     @Input() items: readonly Ingredients[] = [];
 
     value = '';
+
+    size: SIZE = 's'
 
     readonly all = EMPTY_ARRAY;
 

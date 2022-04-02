@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { SIZE } from 'src/libs/consts';
 import { Ingredient } from 'src/libs/interfaces/shared/ingredient';
 
 @Component({
@@ -15,6 +16,8 @@ export class IngredientsComponent {
     }
 
     computedIngredients: readonly Ingredient[] = [];
+
+    size: SIZE ='m'
 
     decrement(): void {
         this.value -= 1;

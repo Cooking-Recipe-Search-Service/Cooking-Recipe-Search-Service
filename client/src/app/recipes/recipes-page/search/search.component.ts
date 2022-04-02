@@ -7,6 +7,7 @@ import {
     ARROW_UP,
     HIDE_FILTERS,
     SHOW_FILTERS,
+    SIZE,
 } from 'src/libs/consts';
 
 @Component({
@@ -24,6 +25,8 @@ export class SearchComponent {
         excludeIngredients: new FormControl([]),
         includeIngredients: new FormControl([]),
     });
+
+    size: SIZE = 'm'
 
     btnText = SHOW_FILTERS;
 
