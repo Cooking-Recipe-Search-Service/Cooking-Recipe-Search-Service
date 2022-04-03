@@ -31,7 +31,8 @@
                     appearance="whiteblock"
                     class="tui-group__auto-width-item"
                 >
-                    {{recipe.ingredients.length}} ингредиенты
+                    {{recipe.ingredients.length}} {{ 'ингредиентов' |
+                    declensions: (recipe.ingredients.length) }}
                 </button>
                 <button
                     tuiIconButton

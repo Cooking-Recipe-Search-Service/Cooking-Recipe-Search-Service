@@ -12,6 +12,7 @@ import {
     TuiSvgModule,
 } from '@taiga-ui/core';
 import { IngredientModule } from 'src/app/shared/components/ingredient/ingredient.module';
+import { DeclensionsPipeModule } from 'src/app/shared/modules/declensions-pipe/declensions-pipe.module';
 
 @NgModule({
     declarations: [RecipePreviewComponent],
@@ -27,6 +28,7 @@ import { IngredientModule } from 'src/app/shared/components/ingredient/ingredien
         TuiButtonModule,
         IngredientModule,
         TuiGroupModule,
+        DeclensionsPipeModule,
     ],
     exports: [RecipePreviewComponent],
 })

@@ -15,8 +15,14 @@ export class RecipeTagsPipe implements PipeTransform {
             },
             {
                 icon: TAGS_MAPPER.cooking_time,
-                label: String(recipe.cooking_time),
+                label: this.convertTime(recipe.cooking_time),
             },
         ];
+    }
+
+    convertTime(time: number): string {
+        const h = (time / 60) ^ 0;
+        const m = time % 60;
+        return h === 0 ? `${m} мин` : `${h} ч ${m} мин`;
     }
 }
