@@ -10,7 +10,7 @@ import { SIZE } from 'src/libs/consts';
 export class MainHomeScreenComponent {
     recipe = new FormControl();
 
-    size: SIZE ='m'
+    size: SIZE = 'm';
 
     searchRecipe() {
         //

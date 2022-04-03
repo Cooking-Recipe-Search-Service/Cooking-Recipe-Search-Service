@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
 import {
@@ -17,16 +17,9 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent {
-    readonly searchForm = new FormGroup({
-        recipeSearch: new FormControl('', [Validators.minLength(3)]),
-        category: new FormControl(null),
-        kitchen: new FormControl(null),
-        preparationTime: new FormControl(null),
-        excludeIngredients: new FormControl([]),
-        includeIngredients: new FormControl([]),
-    });
+    @Input() form!: FormGroup;
 
-    size: SIZE = 'm'
+    size: SIZE = 'm';
 
     btnText = SHOW_FILTERS;
 
@@ -47,23 +40,23 @@ export class SearchComponent {
     constructor(private readonly recipesService: RecipesApiService) {}
 
     get category(): FormControl {
-        return this.searchForm.controls.category as FormControl;
+        return this.form.controls.category as FormControl;
     }
 
     get kitchen(): FormControl {
-        return this.searchForm.controls.kitchen as FormControl;
+        return this.form.controls.kitchen as FormControl;
     }
 
     get preparationTime(): FormControl {
-        return this.searchForm.controls.preparationTime as FormControl;
+        return this.form.controls.preparationTime as FormControl;
     }
 
     get excludeIngredients(): FormControl {
-        return this.searchForm.controls.excludeIngredients as FormControl;
+        return this.form.controls.excludeIngredients as FormControl;
     }
 
     get includeIngredients(): FormControl {
-        return this.searchForm.controls.includeIngredients as FormControl;
+        return this.form.controls.includeIngredients as FormControl;
     }
 
     showFilters(): void {

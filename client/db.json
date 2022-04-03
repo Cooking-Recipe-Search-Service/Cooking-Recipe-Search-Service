@@ -42,6 +42,138 @@
             "ingredients": ["Potato", "Onion", "Carot"]
         }
     ],
+    "recipes_default": [
+        {
+            "img": "https://www.vkusnyblog.ru/wp-content/uploads/2021/06/bananovye-brauni.jpg",
+            "name": "Брауни",
+            "category": "Выпечка",
+            "id": "1",
+            "cooking_time": 40,
+            "portion_quantity": 6,
+            "ingredients": [
+                {
+                    "name": "Темный шоколад",
+                    "value": 100,
+                    "measurment_value": "гр"
+                },
+                {
+                    "name": "Сливочное масло",
+                    "value": 180,
+                    "measurment_value": "гр"
+                },
+                {
+                    "name": "Коричневый сахар",
+                    "value": 250,
+                    "measurment_value": "гр"
+                },
+                {
+                    "name": "Куриное яйцо",
+                    "value": 4,
+                    "measurment_value": "шт"
+                },
+                {
+                    "name": "Пшеничная мука",
+                    "value": 100,
+                    "measurment_value": "гр"
+                },
+                {
+                    "name": "Грецкие орехи",
+                    "value": 100,
+                    "measurment_value": "гр"
+                }
+            ]
+        },
+        {
+            "img": "https://www.gastronom.ru/binfiles/images/00000190/00114884.jpg",
+            "name": "Сырники из творога",
+            "id": "2",
+            "category": "Завтраки",
+            "cooking_time": 30,
+            "portion_quantity": 2,
+            "ingredients": [
+                {
+                    "name": "Творог",
+                    "value": 500,
+                    "measurment_value": "гр"
+                },
+                {
+                    "name": "Сливочное масло",
+                    "value": 50,
+                    "measurment_value": "гр"
+                },
+                {
+                    "name": "Cахар",
+                    "value": 50,
+                    "measurment_value": "гр"
+                },
+                {
+                    "name": "Куриное яйцо",
+                    "value": 2,
+                    "measurment_value": "шт"
+                },
+                {
+                    "name": "Пшеничная мука",
+                    "value": 100,
+                    "measurment_value": "гр"
+                }
+            ]
+        },
+        {
+            "img": "https://eda.ru/img/eda/c620x415/s1.eda.ru/StaticContent/Photos/121108155046/140302213751/p_O.jpg",
+            "name": "Спагетти карбонара с красным луком",
+            "id": "2",
+            "category": "Паста и пицца",
+            "cooking_time": 20,
+            "portion_quantity": 2,
+            "ingredients": [
+                {
+                    "name": "Спагетти",
+                    "value": 250,
+                    "measurment_value": "гр"
+                },
+                {
+                    "name": "Сливочное масло",
+                    "value": 20,
+                    "measurment_value": "гр"
+                },
+                {
+                    "name": "Чеснок",
+                    "value": 10,
+                    "measurment_value": "гр"
+                },
+                {
+                    "name": "Красный лук",
+                    "value": 1,
+                    "measurment_value": "шт"
+                },
+                {
+                    "name": "Бекон",
+                    "value": 50,
+                    "measurment_value": "гр"
+                },
+                {
+                    "name": "Сливки 20%-ные",
+                    "value": 200,
+                    "measurment_value": "мл"
+                },
+                {
+                    "name": "Бекон",
+                    "value": 50,
+                    "measurment_value": "гр"
+                },
+                {
+                    "name": "Тертый сыр пармезан",
+                    "value": 50,
+                    "measurment_value": "гр"
+                },
+                {
+                    "name": "Куриное яйцо",
+                    "value": 4,
+                    "measurment_value": "шт"
+                }
+            ]
+        }
+    ],
     "recipes": [
         {
             "id": "1",
@@ -58,7 +190,7 @@
                 "Готовую фасоль смешать с мелко нарубленным красным луком, зеленью, например, рукколы (которую для удобства поедания нужно предварительно изорвать руками), давленым чесноком, оливковым маслом, лимонным соком и творожным сыром.",
                 "Посолить, поперчить, дать продуктам две минуты притереться друг к другу и подавать к столу вместе с бокалом Nobile di Montepulciano, если вино осталось с вечера."
             ],
-            "indredients": [
+            "ingredients": [
                 {
                     "name": "Молотый черный перец",
                     "value": 2,

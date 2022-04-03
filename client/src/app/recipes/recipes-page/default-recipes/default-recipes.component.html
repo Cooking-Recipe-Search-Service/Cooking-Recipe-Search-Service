@@ -1,8 +1,8 @@
 <div *ngIf="categories$ | async as categories ">
     <div class="default__categories">
         <button
-        size="l"
             *ngFor="let category of categories | slice:0:categoriesCount;let index = index"
+            size="l"
             tuiButton
             class="default__category"
             [appearance]="isActive(index)"

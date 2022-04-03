@@ -21,7 +21,7 @@ export class DefaultRecipesComponent {
 
     index = 0;
 
-    size: SIZE ='m'
+    size: SIZE = 'm';
 
     categories$ = this.recipesService.getCategories().pipe(
         map((categories) =>

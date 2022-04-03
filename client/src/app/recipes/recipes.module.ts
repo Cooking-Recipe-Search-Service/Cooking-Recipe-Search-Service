@@ -4,10 +4,6 @@ import { RecipeRoutingModule } from './recipe-routing.module';
 import { RecipesPageModule } from './recipes-page/recipes-page.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RecipeRoutingModule,
-        RecipesPageModule
-    ],
+    imports: [CommonModule, RecipeRoutingModule, RecipesPageModule],
 })
 export class RecipesModule {}

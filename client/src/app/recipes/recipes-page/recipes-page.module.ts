@@ -4,19 +4,20 @@ import { RecipesPageComponent } from './recipes-page.component';
 import { SearchModule } from './search/search.module';
 import { DefaultRecipesModule } from './default-recipes/default-recipes.module';
 import { FullRecipeModule } from './full-recipe/full-recipe.module';
-
-
+import { RecipePreviewModule } from './recipe-preview/recipe-preview.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    RecipesPageComponent
-  ],
-  imports: [
-    CommonModule,
-    SearchModule,
-    DefaultRecipesModule,
-    FullRecipeModule
-  ],
-  exports:[RecipesPageComponent]
+    declarations: [RecipesPageComponent],
+    imports: [
+        CommonModule,
+        SearchModule,
+        DefaultRecipesModule,
+        FullRecipeModule,
+        RecipePreviewModule,
+        FormsModule,
+        ReactiveFormsModule,
+    ],
+    exports: [RecipesPageComponent],
 })
-export class RecipesPageModule { }
+export class RecipesPageModule {}

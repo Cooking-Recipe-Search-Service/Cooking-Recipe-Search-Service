@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IngredientComponent } from './ingredients/ingredient.component';
 import { TuiInputModule, TuiIslandModule } from '@taiga-ui/kit';
 import { TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { IngredientsComponent } from './ingredients.component';
-
+import { IngredientModule } from '../../../../shared/components/ingredient/ingredient.module';
 @NgModule({
-    declarations: [IngredientsComponent, IngredientComponent],
+    declarations: [IngredientsComponent],
     imports: [
         CommonModule,
         TuiInputModule,
         TuiIslandModule,
         TuiButtonModule,
         TuiTextfieldControllerModule,
+        IngredientModule,
     ],
     exports: [IngredientsComponent],
 })

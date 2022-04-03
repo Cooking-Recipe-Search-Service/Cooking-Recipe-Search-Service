@@ -1,0 +1,36 @@
+.recipe-preview {
+    display: flex;
+    &__img {
+        height: 180px;
+        width: 180px;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+    &__data-list {
+        width: 250px;
+    }
+    &__tags {
+        color: var(--tui-primary);
+        display: flex;
+        align-items: center;
+    }
+    &__tag {
+        margin: 0;
+        &:hover {
+            color: var(--tui-link-hover);
+            cursor: pointer;
+        }
+    }
+    &__divider {
+        height: 5px;
+        width: 5px;
+        background-color: var(--tui-primary);
+        border-radius: 100%;
+        &:last-child {
+            display: none;
+        }
+    }
+    &__ingredient {
+        width: 100%;
+    }
+}

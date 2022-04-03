@@ -19,7 +19,7 @@ export class CustomListComponent {
 
     value = '';
 
-    size: SIZE = 's'
+    size: SIZE = 's';
 
     readonly all = EMPTY_ARRAY;
 

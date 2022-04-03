@@ -2,19 +2,19 @@
     <p class="tui-space_right-3">порция</p>
     <div class="ingredients-counter-btns">
         <button
-            [size]="size"
             tuiIconButton
             icon="tuiIconMinus"
             class="tui-space_right-3"
+            [size]="size"
             (click)="decrement()"
-        > </button>
+        ></button>
         <tui-island class="tui-space_right-3">{{value}}</tui-island>
         <button
-            [size]="size"
             tuiIconButton
             icon="tuiIconPlus"
+            [size]="size"
             (click)="increment()"
-        > </button>
+        ></button>
     </div>
 </div>
 <div class="ingredients">

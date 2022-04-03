@@ -6,5 +6,4 @@ export const ARROW_UP = 'tuiIconArrowUp';
 
 export const ARROW_DOWN = 'tuiIconArrowDown';
 
-export type SIZE = "s" | "m" | "l" ;
-
+export type SIZE = 's' | 'm' | 'l';

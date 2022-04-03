@@ -9,7 +9,7 @@ import { MainHomeScreenModule } from './main-home-screen/main-home-screen.module
         CommonModule,
         MainHomeScreenModule,
         InteractiveMapPageRoutingModule,
-        MainHomeScreenModule
+        MainHomeScreenModule,
     ],
 })
 export class InteractiveMapPageModule {}

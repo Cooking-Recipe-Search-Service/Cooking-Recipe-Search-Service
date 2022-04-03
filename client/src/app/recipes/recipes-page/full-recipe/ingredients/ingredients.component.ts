@@ -17,7 +17,7 @@ export class IngredientsComponent {
 
     computedIngredients: readonly Ingredient[] = [];
 
-    size: SIZE ='m'
+    size: SIZE = 'm';
 
     decrement(): void {
         this.value -= 1;
