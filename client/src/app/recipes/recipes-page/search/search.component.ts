@@ -1,14 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
-import {
-    ARROW_DOWN,
-    ARROW_UP,
-    HIDE_FILTERS,
-    SHOW_FILTERS,
-    SIZE,
-} from 'src/libs/consts';
 
 @Component({
     selector: 'app-search',
@@ -19,15 +12,16 @@ import {
 export class SearchComponent {
     @Input() form!: FormGroup;
 
-    size: SIZE = 'm';
-
-    btnText = SHOW_FILTERS;
-
     searched = '';
 
-    open = false;
-
-    arrow = ARROW_DOWN;
+    readonly searchForm = new FormGroup({
+        recipeSearch: new FormControl('', [Validators.minLength(3)]),
+        category: new FormControl(null),
+        kitchen: new FormControl(null),
+        preparationTime: new FormControl(null),
+        excludeIngredients: new FormControl([]),
+        includeIngredients: new FormControl([]),
+    });
 
     readonly defaultSearchValues$ = forkJoin({
         categories: this.recipesService.getCategories(),
@@ -40,29 +34,23 @@ export class SearchComponent {
     constructor(private readonly recipesService: RecipesApiService) {}
 
     get category(): FormControl {
-        return this.form.controls.category as FormControl;
+        return this.searchForm.controls.category as FormControl;
     }
 
     get kitchen(): FormControl {
-        return this.form.controls.kitchen as FormControl;
+        return this.searchForm.controls.kitchen as FormControl;
     }
 
     get preparationTime(): FormControl {
-        return this.form.controls.preparationTime as FormControl;
+        return this.searchForm.controls.preparationTime as FormControl;
     }
 
     get excludeIngredients(): FormControl {
-        return this.form.controls.excludeIngredients as FormControl;
+        return this.searchForm.controls.excludeIngredients as FormControl;
     }
 
     get includeIngredients(): FormControl {
-        return this.form.controls.includeIngredients as FormControl;
-    }
-
-    showFilters(): void {
-        this.btnText = this.open ? SHOW_FILTERS : HIDE_FILTERS;
-        this.arrow = this.open ? ARROW_DOWN : ARROW_UP;
-        this.open = !this.open;
+        return this.searchForm.controls.includeIngredients as FormControl;
     }
 
     searchRecipe(): void {

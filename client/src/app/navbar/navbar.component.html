@@ -10,12 +10,70 @@
             <div class="nav__logo-template"></div>
         </a>
     </div>
-    <tui-tabs [(activeItemIndex)]="activeItemIndex">
+    <!-- <tui-tabs [(activeItemIndex)]="activeItemIndex">
         <ng-container *ngFor="let tab of tabs">
             <button tuiTab [routerLink]="tab.routerLink">
                 <tui-svg class="tui-space_right-2" [src]="tab.icon"></tui-svg>
                 {{tab.label}}
             </button>
         </ng-container>
+    </tui-tabs> -->
+
+    <tui-tabs class="tui-space_left-6" [(activeItemIndex)]="activeTab">
+        <ng-container *ngFor="let tab of tabs">
+            <ng-container *ngIf="isTab(tab); else submenu">
+                <button
+                    tuiTab
+                    [routerLink]="tab.routerLink"
+                    (click)="onClick()"
+                >
+                    <tui-svg
+                        *ngIf="tab.icon"
+                        class="tui-space_right-2"
+                        [src]="tab.icon"
+                    ></tui-svg>
+                    {{tab.label}}
+                </button>
+            </ng-container>
+        </ng-container>
+
+        <ng-template #submenu>
+            <tui-hosted-dropdown
+                class="nav__link"
+                [content]="dropdown"
+                [(open)]="opened"
+            >
+                <button
+                    tuiTab
+                    class="tui-space_right-2"
+                    [routerLink]="['/recipes']"
+                    (tui-tab-activate)="stop($event)"
+                >
+                    <tui-svg
+                        src="tuiIconSearchLarge"
+                        class="tui-space_right-2"
+                    ></tui-svg>
+                    Рецепты
+                    <tui-svg
+                        src="tuiIconChevronDown"
+                        class="icon"
+                        [class.icon_rotated]="opened"
+                    ></tui-svg>
+                </button>
+            </tui-hosted-dropdown>
+        </ng-template>
     </tui-tabs>
+
+    <ng-template #dropdown>
+        <tui-data-list *ngFor="let item of recipes">
+            <button
+                tuiOption
+                class="nav__link submenu-link"
+                [routerLink]="item.routerLink"
+                (click)="onClick()"
+            >
+                {{item.label}}
+            </button>
+        </tui-data-list>
+    </ng-template>
 </nav>

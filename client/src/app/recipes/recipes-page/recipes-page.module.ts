@@ -6,6 +6,7 @@ import { DefaultRecipesModule } from './default-recipes/default-recipes.module';
 import { FullRecipeModule } from './full-recipe/full-recipe.module';
 import { RecipePreviewModule } from './recipe-preview/recipe-preview.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CategoryRecipesModule } from './category-recipes/category-recipes.module';
 
 @NgModule({
     declarations: [RecipesPageComponent],
@@ -17,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         RecipePreviewModule,
         FormsModule,
         ReactiveFormsModule,
+        CategoryRecipesModule
     ],
     exports: [RecipesPageComponent],
 })

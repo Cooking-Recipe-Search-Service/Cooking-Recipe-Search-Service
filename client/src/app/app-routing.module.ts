@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SearchComponent } from './recipes/recipes-page/search/search.component';
 
 const routes: Routes = [
     {
@@ -29,6 +30,7 @@ const routes: Routes = [
         loadChildren: () =>
             import('./recipes/recipes.module').then((m) => m.RecipesModule),
     },
+
     {
         path: '**',
         redirectTo: '/',

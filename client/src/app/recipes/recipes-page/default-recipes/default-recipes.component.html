@@ -6,7 +6,7 @@
             tuiButton
             class="default__category"
             [appearance]="isActive(index)"
-            (click)="loadCategory(index, category.label )"
+            (click)="loadCategory(category.label )"
         >
             <img
                 loading="lazy"
@@ -16,26 +16,5 @@
             />
             {{category.label}}
         </button>
-    </div>
-    <h6
-        *ngIf="categoryRecipes$ | async as categoryRecipes "
-        class="tui-text_h6"
-    >
-        {{categoryRecipes[0].category}}
-    </h6>
-    <div *ngIf="categoryRecipes$ | async as categoryRecipes ">
-        <tui-carousel
-            class="carousel__wrapper"
-            [itemsCount]="4"
-            [duration]="3000"
-            [(index)]="index"
-        >
-            <ng-container *ngFor="let recipe of categoryRecipes">
-                <app-img-with-subtitle
-                    *tuiItem
-                    [recipe]="recipe"
-                ></app-img-with-subtitle>
-            </ng-container>
-        </tui-carousel>
     </div>
 </div>

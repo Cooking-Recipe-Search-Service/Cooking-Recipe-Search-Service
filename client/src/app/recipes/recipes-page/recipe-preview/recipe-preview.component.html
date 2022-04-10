@@ -1,16 +1,18 @@
 <tui-island class="recipe-preview">
     <div class="recipe-preview__calories tui-text_body-xs">
-        <p class="no-margin bold">{{recipe.energy_value_per_portion}} ккал</p>
+        <p class="no-margin bold">{{recipe.energy_value_per_portion.calories}} ккал</p>
     </div>
-    <img
-        alt="recipe photo"
-        class="recipe-preview__img tui-space_right-4"
-        [src]="recipe.img"
-    />
+    <a [routerLink]="['/recipes/recipe',recipe.id ]" >
+        <img
+                alt="recipe photo"
+                class="recipe-preview__img tui-space_right-4"
+                [src]="recipe.img"
+        />
+    </a> 
     <div class="recipe-preview__title">
         <div class="recipe-preview__tags">
             <ng-container *ngFor="let tag of recipe | recipeTags">
-                <a class="recipe-preview__tag tui-text-body-s-2">
+                <a class="recipe-preview__tag tui-text-body-xs">
                     {{tag.label}}
                 </a>
                 <div
@@ -18,8 +20,16 @@
                 ></div>
             </ng-container>
         </div>
-
-        <p class="tui-text_body-xl no-margin">{{recipe.name}}</p>
+        <tui-line-clamp
+        [content]="content"
+        [linesLimit]="2"
+        ></tui-line-clamp>
+        <ng-template #content>
+            <p class="tui-text_body-l no-margin ecipe-preview__hint
+            ">
+                {{recipe.name}}
+            </p>
+        </ng-template>
 
         <tui-hosted-dropdown
             class="tui-space_top-4"
@@ -63,6 +73,7 @@
                     tuiOption
                     size="s"
                     (click)="onClick()"
+                    class="recipe-preview__data-list-btn"
                 >
                     <app-ingredient
                         class="recipe-preview__ingredient"

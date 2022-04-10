@@ -4,15 +4,15 @@
         <button
             tuiIconButton
             icon="tuiIconMinus"
+            size="s"
             class="tui-space_right-3"
-            [size]="size"
             (click)="decrement()"
         ></button>
         <tui-island class="tui-space_right-3">{{value}}</tui-island>
         <button
             tuiIconButton
             icon="tuiIconPlus"
-            [size]="size"
+            size="s"
             (click)="increment()"
         ></button>
     </div>
@@ -20,5 +20,6 @@
 <div class="ingredients">
     <ng-container *ngFor="let ingredient of computedIngredients">
         <app-ingredient [ingredient]="ingredient"></app-ingredient>
+        <div class="ingredients__divider"></div>
     </ng-container>
 </div>

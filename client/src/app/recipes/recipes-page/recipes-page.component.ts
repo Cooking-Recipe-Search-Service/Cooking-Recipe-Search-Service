@@ -9,15 +9,6 @@ import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.s
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecipesPageComponent {
-    readonly searchForm = new FormGroup({
-        recipeSearch: new FormControl('', [Validators.minLength(3)]),
-        category: new FormControl(null),
-        kitchen: new FormControl(null),
-        preparationTime: new FormControl(null),
-        excludeIngredients: new FormControl([]),
-        includeIngredients: new FormControl([]),
-    });
-
     recipes$ = this.recipiesApi.getDefaultRecipes();
 
     constructor(private readonly recipiesApi: RecipesApiService) {}

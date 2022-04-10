@@ -17,6 +17,8 @@
     }
     &__data-list {
         width: 250px;
+        
+        
     }
     &__tags {
         color: var(--tui-primary);
@@ -41,5 +43,18 @@
     }
     &__ingredient {
         width: 100%;
+    }
+    &__hint {
+        font: var(--tui-font-text-m);
+    }
+    &-ingredient{
+        &__divider {
+            height: 1px;
+            width: 100%;
+            background-color: var(--tui-base-03);
+            &:last-child {
+                display: none;
+            }
+        }
     }
 }

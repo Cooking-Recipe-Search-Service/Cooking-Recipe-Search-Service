@@ -1,13 +1,14 @@
 <div class="recipes">
-    <app-search [form]="searchForm"></app-search>
-
-    <h4 class="tui-text_h4">Рецепты</h4>
+    
+    <h4 class="tui-text_h4">Рецепты по категориям</h4>
+    <app-default-recipes></app-default-recipes>
+    
+    
+<hr class="tui-space_vertical-5">
 
     <div *ngIf="recipes$ | async as recipes" class="recipes__preview">
         <ng-container *ngFor="let recipe of recipes">
             <app-recipe-preview [recipe]="recipe"></app-recipe-preview>
         </ng-container>
     </div>
-    <h6 class="tui-text_h6">Рецепты по категориям</h6>
-    <app-default-recipes></app-default-recipes>
 </div>
