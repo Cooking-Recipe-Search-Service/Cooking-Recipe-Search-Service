@@ -48,7 +48,7 @@
             "name": "Брауни",
             "category": "Выпечка",
             "id": "1",
-            "energy_value_per_portion":"365",
+            "energy_value_per_portion": "365",
             "cooking_time": 40,
             "portion_quantity": 6,
             "ingredients": [
@@ -88,7 +88,7 @@
             "img": "https://www.gastronom.ru/binfiles/images/00000190/00114884.jpg",
             "name": "Сырники из творога",
             "id": "2",
-            "energy_value_per_portion":"175",
+            "energy_value_per_portion": "175",
             "category": "Завтраки",
             "cooking_time": 30,
             "portion_quantity": 2,
@@ -125,7 +125,7 @@
             "name": "Спагетти карбонара с красным луком",
             "id": "2",
             "category": "Паста и пицца",
-            "energy_value_per_portion":"500",
+            "energy_value_per_portion": "500",
             "cooking_time": 20,
             "portion_quantity": 2,
             "ingredients": [

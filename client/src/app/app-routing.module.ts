@@ -9,13 +9,13 @@ const routes: Routes = [
                 (m) => m.InteractiveMapPageModule,
             ),
     },
-    // {
-    //     path: '/',
-    //     loadChildren: () =>
-    //         import('./interactive-map-page/interactive-map-page.module').then(
-    //             (m) => m.InteractiveMapPageModule,
-    //         ),
-    // },
+    {
+        path: 'calc-calories',
+        loadChildren: () =>
+            import('./calc-calories-page/calc-calories-page.module').then(
+                (m) => m.CalcCaloriesPageModule,
+            ),
+    },
 
     {
         path: 'home',

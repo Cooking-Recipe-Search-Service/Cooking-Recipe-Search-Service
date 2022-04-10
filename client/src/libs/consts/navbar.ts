@@ -6,7 +6,7 @@ export const NAVBAR_TABS = [
     },
     {
         label: 'Посчитать каллории',
-        routerLink: '/calc',
+        routerLink: '/calc-calories',
         icon: 'assets/icons/calc.svg',
     },
     {
