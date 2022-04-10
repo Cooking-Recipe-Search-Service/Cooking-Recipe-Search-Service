@@ -18,6 +18,27 @@ export class NavbarComponent {
             routerLink: '/recipes/search',
             icon: '',
         },
+        {
+            label: 'Салаты',
+            routerLink: '/recipes/salads',
+            icon: '',
+        },
+        {
+            label: 'Завтраки',
+            routerLink: '/recipes/breakfasts',
+            icon: '',
+        },
+        {
+            label: 'Сэндвичи',
+            routerLink: '/recipes/sandwiches',
+            icon: '',
+        },
+        {
+            label: 'Выпечка',
+            routerLink: '/recipes/bakery',
+            icon: '',
+        },
+
     ];
 
     tabs = [
@@ -72,5 +93,10 @@ export class NavbarComponent {
 
     onClick(): void {
         this.opened = false;
+    }
+
+    preventRouting():string {
+        if (!this.location.path().includes('/recipes')) return '/recipes' 
+        else return this.location.path();
     }
 }

@@ -10,14 +10,6 @@
             <div class="nav__logo-template"></div>
         </a>
     </div>
-    <!-- <tui-tabs [(activeItemIndex)]="activeItemIndex">
-        <ng-container *ngFor="let tab of tabs">
-            <button tuiTab [routerLink]="tab.routerLink">
-                <tui-svg class="tui-space_right-2" [src]="tab.icon"></tui-svg>
-                {{tab.label}}
-            </button>
-        </ng-container>
-    </tui-tabs> -->
 
     <tui-tabs class="tui-space_left-6" [(activeItemIndex)]="activeTab">
         <ng-container *ngFor="let tab of tabs">
@@ -46,7 +38,7 @@
                 <button
                     tuiTab
                     class="tui-space_right-2"
-                    [routerLink]="['/recipes']"
+                    [routerLink]="preventRouting()"
                     (tui-tab-activate)="stop($event)"
                 >
                     <tui-svg
