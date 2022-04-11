@@ -1,5 +1,6 @@
 package com.crss.crss.api;
 
+import com.crss.crss.dto.IngredientDto;
 import com.crss.crss.dto.IngredientSlimDto;
 import com.crss.crss.mapper.DtoConverter;
 import com.crss.crss.services.IngredientService;
@@ -25,8 +26,8 @@ public class IngredientController {
     }
 
     @GetMapping("/{id}")
-    public IngredientSlimDto getIngredient(@PathVariable Long id) {
-        return dtoConverter.simpleConvert(ingredientService.getIngredientById(id), IngredientSlimDto.class);
+    public IngredientDto getIngredient(@PathVariable Long id) {
+        return dtoConverter.getIngredientDto(ingredientService.getIngredientById(id));
     }
 
 }
