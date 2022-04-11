@@ -15,7 +15,6 @@ import lombok.ToString;
 @Entity
 @Table(name = "energy_value_per_portion")
 @Data
-@NoArgsConstructor
 public class EnergyValuePerPortionEntity extends EnergyValue {
 
     @Id
@@ -24,4 +23,22 @@ public class EnergyValuePerPortionEntity extends EnergyValue {
     @MapsId
     @ToString.Exclude
     private RecipeEntity recipe;
+
+    public void add(EnergyValuePerIngredientEntity energyValuePerIngredient) {
+        setCalories(getCalories() + energyValuePerIngredient.getCalories());
+        setCarbs(getCarbs() + energyValuePerIngredient.getCarbs());
+        setFats(getFats() + energyValuePerIngredient.getFats());
+        setProteins(getProteins() + energyValuePerIngredient.getProteins());
+    }
+
+    public void countForPortions(Integer portionQuantity) {
+        setCalories(getCalories() / portionQuantity);
+        setCarbs(getCarbs() / portionQuantity);
+        setFats(getFats() / portionQuantity);
+        setProteins(getProteins() / portionQuantity);
+    }
+
+    public EnergyValuePerPortionEntity(){
+        super();
+    }
 }

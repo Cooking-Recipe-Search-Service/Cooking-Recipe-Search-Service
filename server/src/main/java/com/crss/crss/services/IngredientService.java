@@ -1,9 +1,13 @@
 package com.crss.crss.services;
 
+import com.crss.crss.entities.EnergyValuePerIngredientEntity;
 import com.crss.crss.entities.IngredientEntity;
+import com.crss.crss.entities.RecipeInstructionEntity;
 import com.crss.crss.exceptions.CrssException;
+import com.crss.crss.repositories.EnergyValuePerIngredientRepository;
 import com.crss.crss.repositories.IngredientRepository;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class IngredientService {
 
     private final IngredientRepository ingredientRepository;
+    private final EnergyValuePerIngredientRepository energyValueRepository;
 
     public List<IngredientEntity> getAllIngredients() {
         return ingredientRepository.findAll();
@@ -23,5 +28,14 @@ public class IngredientService {
         return ingredientRepository.findById(id)
             .orElseThrow(() -> new CrssException(HttpStatus.NOT_FOUND, "Cannot find ingredient with id=" + id));
     }
+
+    public Optional<EnergyValuePerIngredientEntity> getEnergyValueById(Long id) {
+        return energyValueRepository.findById(id);
+    }
+
+    public List<EnergyValuePerIngredientEntity> getEnergyValuesByIds(List<Long> ids) {
+        return energyValueRepository.findAllById(ids);
+    }
+
 
 }
