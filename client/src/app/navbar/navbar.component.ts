@@ -38,7 +38,6 @@ export class NavbarComponent {
             routerLink: '/recipes/bakery',
             icon: '',
         },
-
     ];
 
     tabs = [
@@ -95,8 +94,9 @@ export class NavbarComponent {
         this.opened = false;
     }
 
-    preventRouting():string {
-        if (!this.location.path().includes('/recipes')) return '/recipes' 
-        else return this.location.path();
+    preventRouting(): string {
+        if (!this.location.path().includes('/recipes')) {
+            return '/recipes';
+        } else return this.location.path();
     }
 }

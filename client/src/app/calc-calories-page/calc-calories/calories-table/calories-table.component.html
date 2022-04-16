@@ -1,5 +1,5 @@
 <table tuiTable size="l" class="table" [columns]="columns">
-    <thead tuiThead>
+    <thead tuiThead class="head">
         <tr tuiThGroup>
             <th *tuiHead="'Ингредиент'" tuiTh [sorter]="null" [sticky]="true">
                 Ингредиент
@@ -22,59 +22,60 @@
         </tr>
     </thead>
 
-    <tbody tuiTbody [data]="addedIngredients">
-        <tr
-            *tuiRow="let ingredient of addedIngredients;let index = index"
-            tuiTr
-        >
-            <td *tuiCell="'Ингредиент'" tuiTd>
-                <!-- <tui-input
-                    *tuiLet="items$ | async as items"
-                    class="b-form"
-                    [formControl]="ingredientsArray[index]"
-                >
-                    Enter your name
-                    <ng-container *ngIf="items.length">
-                        <tui-data-list *tuiDataList>
-                            <button
-                                *ngFor="let item of items"
-                                tuiOption
-                                [value]="item"
-                                [disabled]="item.disabled"
-                                (click)="onClick(item)"
-                            >
-                                <span class="name">{{item}}</span>
-                            </button>
-                        </tui-data-list>
-                    </ng-container>
-                </tui-input>  -->
-            </td>
-            <td *tuiCell="'Колличество'" tuiTd>
-                <tui-input-number
-                    class="number"
-                    [ngModel]="ingredient.quantity"
-                    [ngModelOptions]="options"
-                    (ngModelChange)="onValueChange($event, index, ingredient)"
-                ></tui-input-number>
-            </td>
-            <td *tuiCell="'Единица измерения'" tuiTd>{{ingredient.mass}}</td>
-            <td *tuiCell="'Белки'" tuiTd>{{ingredient.protein}}</td>
-            <td *tuiCell="'Жиры'" tuiTd>{{ingredient.fats}}</td>
-            <td *tuiCell="'Углеводы'" tuiTd>{{ingredient.carbs}}</td>
-            <td *tuiCell="'Калории'" tuiTd>{{ingredient.calories}}</td>
-            <td *tuiCell="'actions'" tuiTd>
-                <button
-                    tuiIconButton
-                    appearance="flat"
-                    size="s"
-                    icon="tuiIconTrash"
-                    title="Remove"
-                    shape="rounded"
-                    class="remove"
-                    (click)="remove(index)"
-                ></button>
-            </td>
+    <tbody tuiTbody [data]="ingredientsData">
+        <tr *tuiRow="let ingredient of ingredientsData;let index = index" tuiTr>
+            <ng-container *tuiLet="items$ | async as items">
+                <td *tuiCell="'Ингредиент'" tuiTd>
+                    <tui-input
+                        class="b-form"
+                        [ngModel]="ingredient.name"
+                        (ngModelChange)="inputChanged.next($event)"
+                    >
+                        Название ингредиента
+                        <ng-container *ngIf="items && items.length">
+                            <tui-data-list *tuiDataList>
+                                <button
+                                    *ngFor="let item of items"
+                                    tuiOption
+                                    [value]="item.name"
+                                    (click)="updateIngredientName(index,item)"
+                                >
+                                    <span class="name">{{item.name}}</span>
+                                </button>
+                            </tui-data-list>
+                        </ng-container>
+                    </tui-input>
+                </td>
+                <td *tuiCell="'Колличество'" tuiTd>
+                
+                    <tui-input-number
+                    [tuiTextfieldCleaner]="true"
+                        [ngModel]="ingredient.quantity"
+                        [ngModelOptions]="options"
+                        (ngModelChange)="updateIngredientQuantity($event,ingredient,index )"
+                    ></tui-input-number>
+                </td>
+                <td *tuiCell="'Единица измерения'" tuiTd>
+                    {{ingredient.measurment_value}}
+                </td>
+                <td *tuiCell="'Белки'" tuiTd>{{ingredient.protein}}</td>
+                <td *tuiCell="'Жиры'" tuiTd>{{ingredient.fats}}</td>
+                <td *tuiCell="'Углеводы'" tuiTd>{{ingredient.carbs}}</td>
+                <td *tuiCell="'Калории'" tuiTd>{{ingredient.calories}}</td>
+                <td *tuiCell="'actions'" tuiTd>
+                    <button
+                        tuiIconButton
+                        appearance="flat"
+                        size="s"
+                        icon="tuiIconTrash"
+                        title="Remove"
+                        shape="rounded"
+                        class="remove"
+                        (click)="remove(index)"
+                    ></button>
+                </td>
+            </ng-container>
         </tr>
     </tbody>
 </table>
-<button tuiButton (click)="addIngredient()">Добавить поле</button>
+<button tuiButton class="tui-space_top-5" size="m" (click)="addIngredient()">Добавить поле</button>

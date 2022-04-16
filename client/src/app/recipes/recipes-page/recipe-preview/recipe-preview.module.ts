@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecipePreviewComponent } from './recipe-preview.component';
-import { TuiBadgeModule, TuiIslandModule, TuiLineClampModule } from '@taiga-ui/kit';
+import {
+    TuiBadgeModule,
+    TuiIslandModule,
+    TuiLineClampModule,
+} from '@taiga-ui/kit';
 import { ColorizePipeModule } from 'src/app/shared/modules/colorize-pipe/colorize-pipe.module';
 import { RecipeTagsPipeModule } from 'src/app/shared/modules/recipe-tags/recipe-tags-pipe.module';
 import {
@@ -30,7 +34,8 @@ import { RouterModule } from '@angular/router';
         IngredientModule,
         TuiGroupModule,
         DeclensionsPipeModule,
-        TuiLineClampModule,RouterModule
+        TuiLineClampModule,
+        RouterModule,
     ],
     exports: [RecipePreviewComponent],
 })

@@ -1,10 +1,8 @@
 <div class="recipes">
-    
     <h4 class="tui-text_h4">Рецепты по категориям</h4>
     <app-default-recipes></app-default-recipes>
-    
-    
-<hr class="tui-space_vertical-5">
+
+    <hr class="tui-space_vertical-5" />
 
     <div *ngIf="recipes$ | async as recipes" class="recipes__preview">
         <ng-container *ngFor="let recipe of recipes">

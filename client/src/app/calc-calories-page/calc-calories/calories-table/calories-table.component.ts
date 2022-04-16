@@ -1,15 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormArray, FormControl } from '@angular/forms';
-
-interface Item {
-    readonly ingredient: string;
-    readonly quantity: number;
-    readonly mass: string;
-    readonly protein: number;
-    readonly fats: number;
-    readonly carbs: number;
-    readonly calories: number;
-}
+import {  FormControl } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
+import {
+    debounceTime,
+    distinctUntilChanged,
+    filter,
+    map,
+    switchMap,
+} from 'rxjs/operators';
+import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
+import { MEASURMENT_MAPPER } from 'src/libs/consts';
+import { 
+     IngredientSearch } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-calories-table',
@@ -29,15 +31,13 @@ export class CaloriesTableComponent {
         'actions',
     ] as const;
 
-    readonly ingredientsArray = new FormArray([new FormControl('')]);
+    readonly options = { updateOn: 'blur' } as const;
 
-    // readonly control = new FormControl('');
-
-    addedIngredients = [
+    ingredientsData = [
         {
-            ingredient: '',
+            name: '',
             quantity: 0,
-            mass: 'шт',
+            measurment_value: 'шт',
             protein: 0,
             fats: 0,
             carbs: 0,
@@ -45,63 +45,105 @@ export class CaloriesTableComponent {
         },
     ];
 
-    readonly options = { updateOn: 'blur' } as const;
+    inputChanged = new BehaviorSubject<string>('');
 
-    // readonly items$ = this.ingredientsArray.valueChanges.pipe(
-    //     startWith(''),
-    //     switchMap(value =>
-    //         this.request(value).pipe(
-    //             map(response => {
-    //                 if (response.length === 1 && String(response[0]) === value) {
-    //                     this.onClick(response[0]);
+    readonly items$ = this.inputChanged.pipe(
+        distinctUntilChanged(),
+        debounceTime(1000),
+        filter((name) => !!name),
+        switchMap((value) =>
+            this.recipesService.getIngredient(value).pipe(
+                map((response: readonly IngredientSearch[]) => {
+                    console.log(value);
 
-    //                     return [];
-    //                 } else {
-    //                     return response;
-    //                 }
-    //             }),
-    //         ),
-    //     ),
-    // );
+                    if (
+                        response.length === 1 &&
+                        String(response[0]) === value
+                    ) {
+                        return [];
+                    } else {
+                        return response;
+                    }
+                }),
+            ),
+        ),
+    );
 
-    // onClick({lastName, firstName}: User) {
-    //     this.lastName = lastName;
-    //     this.firstName = firstName;
-    // }
+    private readonly measurmentMapper = MEASURMENT_MAPPER;
 
-    remove(index: number): void {
-        this.addedIngredients = [
-            ...this.addedIngredients.slice(0, index),
-            ...this.addedIngredients.slice(
+    constructor(private readonly recipesService: RecipesApiService) {}
+
+    updateIngredientName(index: number, item: IngredientSearch): void {
+        this.inputChanged.next('');
+        const quantity = this.measurmentMapper[item.measurment_value];
+        this.ingredientsData = [
+            ...this.ingredientsData.slice(0, index),
+            { ...item, quantity },
+            ...this.ingredientsData.slice(
                 index + 1,
-                this.addedIngredients.length,
+                this.ingredientsData.length,
             ),
         ];
     }
 
+
+    updateIngredientQuantity(
+        value: number,
+        current: IngredientSearch,
+        index: number,
+    ): void {
+        const lastQuantity =  this.ingredientsData[index].quantity
+        const multiplier = this.measurmentMapper[current.measurment_value];
+        console.log(lastQuantity)
+        const updated = {
+            ...current,
+            quantity: value,
+            protein:
+                ((current.protein ) / ((lastQuantity || 1) * multiplier )) *
+                value *
+                multiplier,
+            fats:
+                (current.fats || 0 / (lastQuantity|| 1 * multiplier )) * value * multiplier,
+            carbs:
+                (current.carbs || 0 / (lastQuantity|| 1 * multiplier )) * value * multiplier,
+            calories:
+                (current.calories || 0 / (lastQuantity|| 1 * multiplier)) *
+                value *
+                multiplier,
+        };
+        console.log(updated);
+
+        
+
+        this.ingredientsData = [
+            ...this.ingredientsData.slice(0, index),
+            { ...updated },
+            ...this.ingredientsData.slice(
+                index + 1,
+                this.ingredientsData.length,
+            ),
+        ];
+    }
+
+    remove(index: number): void {
+        this.ingredientsData = [
+            ...this.ingredientsData.slice(0, index - 1),
+            ...this.ingredientsData.slice(index, this.ingredientsData.length),
+        ];
+    }
+
     addIngredient(): void {
-        this.addedIngredients = [
-            ...this.addedIngredients,
+        this.ingredientsData = [
+            ...this.ingredientsData,
             {
-                ingredient: '',
+                name: '',
                 quantity: 0,
-                mass: 'шт',
+                measurment_value: 'шт',
                 protein: 0,
                 fats: 0,
                 carbs: 0,
                 calories: 0,
             },
-        ];
-        this.ingredientsArray.push(new FormControl(''));
-    }
-
-    onValueChange(value: number, index: number, current: Item): void {
-        const updated = { ...current, quantity: value };
-
-        this.addedIngredients = [
-            ...this.addedIngredients.slice(0, index - 1),
-            updated,
-            ...this.addedIngredients.slice(index, this.addedIngredients.length),
         ];
     }
 }

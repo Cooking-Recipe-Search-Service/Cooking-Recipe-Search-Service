@@ -1,9 +1,8 @@
 <div class="recipes">
     <h4 class="tui-text_h4">{{category}}</h4>
-     <div *ngIf="recipes$ | async as recipes" class="recipes__preview">
+    <div *ngIf="recipes$ | async as recipes" class="recipes__preview">
         <ng-container *ngFor="let recipe of recipes">
             <app-recipe-preview [recipe]="recipe"></app-recipe-preview>
         </ng-container>
     </div>
-
 </div>

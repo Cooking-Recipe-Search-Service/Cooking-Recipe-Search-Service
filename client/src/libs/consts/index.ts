@@ -4,3 +4,4 @@ export * from './icons-mapper';
 export * from './polygon-countries-cords';
 export * from './declensions';
 export * from './router-mapper';
+export * from './measurment-mapper';

@@ -45,18 +45,18 @@ export class DefaultRecipesComponent {
 
     routeMapper = ROUTER_MAPPER;
 
-    constructor(private readonly recipesService: RecipesApiService,
-        private readonly router: Router) {}
+    constructor(
+        private readonly recipesService: RecipesApiService,
+        private readonly router: Router,
+    ) {}
 
     isActive(index: number): string {
         return this.activeBtnArray[index] ? 'primary' : 'whiteblock';
     }
 
-    loadCategory(category: string){
-    
+    loadCategory(category: string) {
         this.router.navigate([`/recipes`, this.routeMapper[category]]);
     }
-
 
     // loadCategory(index: number, category: string): void {
     //     this.activeBtnArray = Array(this.categoriesCount).fill(false);

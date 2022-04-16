@@ -42,6 +42,41 @@
             "ingredients": ["Potato", "Onion", "Carot"]
         }
     ],
+    "ingredient_search": [
+        {
+            "name": "Яйцo куриное",
+            "fats": 5.6,
+            "carbs": 0.3,
+            "protein": 6.2,
+            "calories": 77,
+            "measurment_value": "шт"
+        },
+        {
+            "name": "Яйцo перепелиное",
+            "fats": 1,
+            "carbs": 0.03,
+            "protein": 1.17,
+            "calories": 14,
+            "measurment_value": "шт"
+        },
+        {
+            "name": "Мука",
+
+            "fats": 1.1,
+            "carbs": 70.6,
+            "protein": 12,
+            "calories": 340,
+            "measurment_value": "гр"
+        },
+        {
+            "name": "Сахар",
+            "fats": 0,
+            "carbs": 100,
+            "protein": 0,
+            "calories": 400,
+            "measurment_value": "гр"
+        }
+    ],
     "recipes_default": [
         {
             "img": "https://www.vkusnyblog.ru/wp-content/uploads/2021/06/bananovye-brauni.jpg",
@@ -54,7 +89,7 @@
                 "protein": 11,
                 "calories": 365
             },
-            
+
             "cooking_time": 40,
             "portion_quantity": 6,
             "ingredients": [
@@ -100,7 +135,7 @@
                 "protein": 11,
                 "calories": 175
             },
-            
+
             "category": "Завтраки",
             "cooking_time": 30,
             "portion_quantity": 2,
@@ -375,7 +410,8 @@
                     "name": "Оливковое масло",
                     "value": 10,
                     "measurment_value": "гр"
-                },{
+                },
+                {
                     "name": "Красный лук",
                     "value": 100,
                     "measurment_value": "гр"

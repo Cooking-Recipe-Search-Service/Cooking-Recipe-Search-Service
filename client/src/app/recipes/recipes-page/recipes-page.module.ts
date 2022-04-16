@@ -18,7 +18,7 @@ import { CategoryRecipesModule } from './category-recipes/category-recipes.modul
         RecipePreviewModule,
         FormsModule,
         ReactiveFormsModule,
-        CategoryRecipesModule
+        CategoryRecipesModule,
     ],
     exports: [RecipesPageComponent],
 })
