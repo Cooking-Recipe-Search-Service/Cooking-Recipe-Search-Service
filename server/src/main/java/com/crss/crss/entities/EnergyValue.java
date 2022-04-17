@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @MappedSuperclass
 public abstract class EnergyValue {
 
@@ -18,4 +17,11 @@ public abstract class EnergyValue {
     private Integer carbs;
     @Column(nullable = false)
     private Integer proteins;
+
+    public EnergyValue(){
+        calories = 0;
+        fats = 0;
+        carbs = 0;
+        proteins = 0;
+    }
 }
