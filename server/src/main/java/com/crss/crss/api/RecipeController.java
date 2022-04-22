@@ -1,6 +1,7 @@
 package com.crss.crss.api;
 
 import com.crss.crss.dto.RecipeDto;
+import com.crss.crss.dto.RecipeDtoIn;
 import com.crss.crss.dto.RecipeSlimDto;
 import com.crss.crss.entities.RecipeEntity;
 import com.crss.crss.exceptions.CrssException;
@@ -21,8 +22,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -45,6 +49,11 @@ public class RecipeController {
         return dtoConverter.getRecipeDto(recipeService.getRecipeById(id));
     }
 
+    @PostMapping
+    public RecipeDto createRecipe(@RequestBody RecipeDtoIn dto) {
+        return dtoConverter.getRecipeDto(recipeService.createRecipe(dto));
+    }
+
     @RequestMapping(method = {RequestMethod.GET}, path = {"/search"}, produces = {MediaType.APPLICATION_JSON_VALUE})
     @Parameter(in = ParameterIn.QUERY, name = "id", schema = @Schema(type = "int"))
     @Parameter(in = ParameterIn.QUERY, name = "name", schema = @Schema(type = "string"))
@@ -62,7 +71,6 @@ public class RecipeController {
             && !((BooleanBuilder) predicate).hasValue())) {
             throw new CrssException(HttpStatus.BAD_REQUEST, "Error");
         } else {
-            System.out.println(predicate);
             return dtoConverter.getRecipeSlimDtoList((List<RecipeEntity>) recipeRepository.findAll(predicate));
         }
     }

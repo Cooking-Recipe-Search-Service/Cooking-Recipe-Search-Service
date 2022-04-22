@@ -28,9 +28,10 @@ public class RecipeIngredient {
 
     private Integer value;
 
-    public RecipeIngredient(RecipeEntity recipe, IngredientEntity ingredient) {
+    public RecipeIngredient(RecipeEntity recipe, IngredientEntity ingredient,Integer value) {
         this.recipe = recipe;
         this.ingredient = ingredient;
+        this.value = value;
         this.id = new RecipeIngredientId(recipe.getId(), ingredient.getId());
     }
 }

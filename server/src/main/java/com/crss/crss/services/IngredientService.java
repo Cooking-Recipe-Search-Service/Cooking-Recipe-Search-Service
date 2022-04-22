@@ -1,5 +1,6 @@
 package com.crss.crss.services;
 
+import com.crss.crss.dto.IngredientDtoIn;
 import com.crss.crss.entities.EnergyValuePerIngredientEntity;
 import com.crss.crss.entities.IngredientEntity;
 import com.crss.crss.entities.RecipeInstructionEntity;
@@ -22,6 +23,13 @@ public class IngredientService {
 
     public List<IngredientEntity> getAllIngredients() {
         return ingredientRepository.findAll();
+    }
+
+
+    public IngredientEntity createIngredient(IngredientDtoIn dto) {
+        IngredientEntity ingredient = ingredientRepository.save(new IngredientEntity(dto));
+        energyValueRepository.save(new EnergyValuePerIngredientEntity(ingredient, dto.getEnergyValue()));
+        return ingredient;
     }
 
     public IngredientEntity getIngredientById(Long id) {
