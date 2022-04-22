@@ -1,5 +1,7 @@
 package com.crss.crss.entities;
 
+import com.crss.crss.dto.RecipeDtoIn.InstructionDto;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,10 +22,16 @@ public class RecipeInstructionEntity {
     @Id
     private Long id;
     @Column(columnDefinition = "TEXT")
-    private String instruction;
+    private String instruction = "";
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @MapsId
     @ToString.Exclude
     private RecipeEntity recipe;
 
+    public RecipeInstructionEntity(List<InstructionDto> instructions, RecipeEntity recipe) {
+        this.recipe = recipe;
+        for (InstructionDto instructionDto : instructions) {
+            instruction = instruction.concat(instructionDto.getItemNumber() + ";" + instructionDto.getInstruction() + ";");
+        }
+    }
 }

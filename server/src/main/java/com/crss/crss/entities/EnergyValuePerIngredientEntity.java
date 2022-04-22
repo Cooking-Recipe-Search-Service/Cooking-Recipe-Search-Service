@@ -1,5 +1,6 @@
 package com.crss.crss.entities;
 
+import com.crss.crss.dto.IngredientDtoIn.EnergyValueDto;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -24,4 +25,9 @@ public class EnergyValuePerIngredientEntity extends EnergyValue {
     @MapsId
     @ToString.Exclude
     private IngredientEntity ingredient;
+
+    public EnergyValuePerIngredientEntity(IngredientEntity ingredient, EnergyValueDto energyValueDto) {
+        super(energyValueDto);
+        this.ingredient = ingredient;
+    }
 }
