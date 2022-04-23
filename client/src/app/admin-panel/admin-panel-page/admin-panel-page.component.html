@@ -1,0 +1,25 @@
+<div class="page__nav">
+    <nav class="nav">
+        <tui-tabs class="nav__tabs" [activeItemIndex]="activeItemIndex">
+            <div *ngFor="let tab of tabs">
+                <a
+                    tuiTab
+                    routerLink="./"
+                    class="nav__link"
+                    [fragment]="tab.id"
+                    (click)="onClick(tab)"
+                >
+                    {{tab.name}}
+                </a>
+            </div>
+        </tui-tabs>
+    </nav>
+</div>
+
+<div class="admin-panel">
+    <h6 class="tui-text_h6">Добавить ингредиент</h6>
+    <app-admin-add-ingredient #ingredient></app-admin-add-ingredient>
+
+    <h6 class="tui-text_h6">Добавит рецепт</h6>
+    <app-admin-add-recipe #recipe></app-admin-add-recipe>
+</div>

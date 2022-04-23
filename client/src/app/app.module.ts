@@ -6,7 +6,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RecipesModule } from './recipes/recipes.module';
-import { TuiRootModule, TUI_SANITIZER } from '@taiga-ui/core';
+import {
+    TuiNotificationsModule,
+    TuiRootModule,
+    TUI_SANITIZER,
+} from '@taiga-ui/core';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { environment } from 'src/environments/environment';
 import { HOST_API } from 'src/libs/consts';
@@ -23,6 +27,7 @@ import { NavbarModule } from './navbar/navbar.module';
         TuiRootModule,
         HttpClientModule,
         NavbarModule,
+        TuiNotificationsModule,
     ],
     providers: [
         { provide: HOST_API, useValue: environment.hostApi },

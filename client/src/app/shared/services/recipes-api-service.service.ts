@@ -2,7 +2,11 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HOST_API } from 'src/libs/consts';
 import { Observable } from 'rxjs';
-import { IngredientSearch, SimpleInterface } from 'src/libs/interfaces';
+import {
+    IngredientBack,
+    IngredientSearch,
+    SimpleInterface,
+} from 'src/libs/interfaces';
 import { Recipe } from 'src/libs/interfaces/shared/recipe';
 
 @Injectable({
@@ -15,6 +19,13 @@ export class RecipesApiService {
         @Inject(HOST_API) private readonly baseUrl: string,
         private readonly http: HttpClient,
     ) {}
+
+    postIngredient(ingredient: IngredientBack): Observable<IngredientBack> {
+        return this.http.post<IngredientBack>(
+            `${this.baseUrlReal}/ingredients`,
+            ingredient,
+        );
+    }
 
     getIngredient(ingredient: string): Observable<readonly IngredientSearch[]> {
         return this.http.get<readonly IngredientSearch[]>(

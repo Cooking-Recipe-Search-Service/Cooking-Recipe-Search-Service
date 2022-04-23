@@ -1,0 +1,73 @@
+<form [formGroup]="ingredientForm">
+    <div class="row">
+        <tui-input
+            tuiTextfieldSize="l"
+            class="form tui-space_right-5"
+            [tuiTextfieldCleaner]="true"
+            [formControl]="name"
+        >
+            Название
+            <input tuiTextfield placeholder="Введите название ингредиента" />
+        </tui-input>
+        <tui-combo-box
+            class="b-form"
+            class="form"
+            [tuiTextfieldCleaner]="true"
+            [formControl]="measurementValueType"
+        >
+            Мера
+            <input tuiTextfield placeholder="Введите единицу измерения" />
+            <tui-data-list-wrapper
+                *tuiDataList
+                [items]="measurementValues | tuiFilterByInput"
+            ></tui-data-list-wrapper>
+        </tui-combo-box>
+    </div>
+    <div class="row tui-space_top-5">
+        <tui-input-number
+            tuiTextfieldSize="l"
+            class="form tui-space_right-5"
+            [tuiTextfieldCleaner]="true"
+            [formControl]="calories"
+        >
+            Калории
+            <input tuiTextfield placeholder="Всего калорий" />
+        </tui-input-number>
+        <tui-input-number
+            tuiTextfieldSize="l"
+            class="form tui-space_right-5"
+            [tuiTextfieldCleaner]="true"
+            [formControl]="proteins"
+        >
+            Белки
+            <input tuiTextfield placeholder="Количество белков" />
+        </tui-input-number>
+        <tui-input-number
+            tuiTextfieldSize="l"
+            class="form tui-space_right-5"
+            [tuiTextfieldCleaner]="true"
+            [formControl]="fats"
+        >
+            Жиры
+            <input tuiTextfield placeholder="Количество жиров" />
+        </tui-input-number>
+        <tui-input-number
+            tuiTextfieldSize="l"
+            class="form"
+            [tuiTextfieldCleaner]="true"
+            [formControl]="carbs"
+        >
+            Углеводы
+            <input tuiTextfield placeholder="Количество Углеводов" />
+        </tui-input-number>
+    </div>
+</form>
+<button
+    tuiButton
+    class="tui-space_top-5"
+    [disabled]="ingredientForm.invalid"
+    [showLoader]="(loading$ | async) || false"
+    (click)="addIngredient()"
+>
+    Создать ингредиент
+</button>

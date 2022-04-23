@@ -19,6 +19,11 @@ export class NavbarComponent {
             icon: 'assets/icons/calc.svg',
         },
         {
+            label: 'Admin panel',
+            routerLink: '/admin-panel',
+            icon: 'tuiIconLockLarge',
+        },
+        {
             label: 'О нас',
             routerLink: '',
             icon: 'tuiIconAlertCircleLarge',

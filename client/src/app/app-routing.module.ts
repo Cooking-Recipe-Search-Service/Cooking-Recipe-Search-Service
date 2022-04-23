@@ -29,6 +29,13 @@ const routes: Routes = [
         loadChildren: () =>
             import('./recipes/recipes.module').then((m) => m.RecipesModule),
     },
+    {
+        path: 'admin-panel',
+        loadChildren: () =>
+            import('./admin-panel/admin-panel.module').then(
+                (m) => m.AdminPanelModule,
+            ),
+    },
 
     {
         path: '**',

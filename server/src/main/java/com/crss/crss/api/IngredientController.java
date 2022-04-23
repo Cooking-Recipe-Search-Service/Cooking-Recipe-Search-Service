@@ -39,6 +39,7 @@ public class IngredientController {
     }
 
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:4200")
     public IngredientDto createIngredient(@RequestBody IngredientDtoIn dto) {
         return dtoConverter.getIngredientDto(ingredientService.createIngredient(dto));
     }
