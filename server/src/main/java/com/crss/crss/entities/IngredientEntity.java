@@ -1,5 +1,6 @@
 package com.crss.crss.entities;
 
+import com.crss.crss.dto.IngredientDtoIn;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -39,6 +40,11 @@ public class IngredientEntity {
     @ToString.Exclude
     @OneToMany(mappedBy = "ingredient", fetch = FetchType.LAZY)
     private List<RecipeIngredient> recipes = new ArrayList<>();
+
+    public IngredientEntity(IngredientDtoIn dto) {
+        this.name = dto.getName();
+        this.measurementValueType = dto.getMeasurementValueType();
+    }
 
     public enum MeasurementValueType {
         GRAM("г"),

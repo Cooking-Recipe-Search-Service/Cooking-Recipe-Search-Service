@@ -26,4 +26,8 @@ public class RecipeDescriptionEntity {
     @ToString.Exclude
     private RecipeEntity recipe;
 
+    public RecipeDescriptionEntity(String description, RecipeEntity recipe) {
+        this.description = description;
+        this.recipe = recipe;
+    }
 }

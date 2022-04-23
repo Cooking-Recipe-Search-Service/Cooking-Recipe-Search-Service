@@ -1,6 +1,5 @@
 package com.crss.crss.dto;
 
-import com.crss.crss.dto.IngredientDto.EnergyValueDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,19 +10,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RecipeDto {
+public class RecipeDtoIn {
 
-    private long id;
     private String name;
     private Integer cookingTime;
     private Integer portionQuantity;
-    private String countryName;
-    private String categoryName;
-    private List<IngredientForRecipeDto> ingredientsInfo;
+    private Long countryId;
+    private Long categoryId;
+    private List<IngredientsForRecipeDtoIn> ingredients = new ArrayList<>();
     private String description;
     private List<InstructionDto> instructions = new ArrayList<>();
-    private EnergyValueDto energyValue;
-    private String image;
 
     @Data
     @AllArgsConstructor
@@ -33,5 +29,15 @@ public class RecipeDto {
 
         private Integer itemNumber;
         private String instruction;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class IngredientsForRecipeDtoIn {
+
+        private Long id;
+        private Integer value;
     }
 }

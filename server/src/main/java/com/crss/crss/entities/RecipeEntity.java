@@ -1,5 +1,6 @@
 package com.crss.crss.entities;
 
+import com.crss.crss.dto.RecipeDtoIn;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -44,5 +45,10 @@ public class RecipeEntity {
     )
     private List<RecipeIngredient> ingredients = new ArrayList<>();
 
+    public RecipeEntity(RecipeDtoIn dto) {
+        this.cookingTime = dto.getCookingTime();
+        this.name = dto.getName();
+        this.portionQuantity = dto.getPortionQuantity();
+    }
 
 }

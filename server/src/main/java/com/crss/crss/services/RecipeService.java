@@ -1,5 +1,6 @@
 package com.crss.crss.services;
 
+import com.crss.crss.dto.RecipeDtoIn;
 import com.crss.crss.entities.EnergyValuePerIngredientEntity;
 import com.crss.crss.entities.EnergyValuePerPortionEntity;
 import com.crss.crss.entities.IngredientEntity;
@@ -34,9 +35,25 @@ public class RecipeService {
     private final EnergyValuePerPortionRepository energyValueRepository;
     private final InstructionRepository instructionRepository;
     private final IngredientService ingredientService;
+    private final CategoryService categoryService;
+    private final CountryService countryService;
+
 
     public List<RecipeEntity> getAllRecipes() {
         return recipeRepository.findAll();
+    }
+
+    public RecipeEntity createRecipe(RecipeDtoIn dto) {
+        RecipeEntity recipe = new RecipeEntity(dto);
+        recipe.setIngredients(dto.getIngredients().stream()
+            .map(ingredient -> new RecipeIngredient(recipe, ingredientService.getIngredientById(ingredient.getId()), ingredient.getValue()))
+            .collect(Collectors.toList()));
+        recipe.setCategory(categoryService.getCategoryById(dto.getCategoryId()));
+        recipe.setCountry(countryService.getCountryById(dto.getCountryId()));
+        RecipeEntity savedRecipe = recipeRepository.save(recipe);
+        descriptionRepository.save(new RecipeDescriptionEntity(dto.getDescription(), savedRecipe));
+        instructionRepository.save(new RecipeInstructionEntity(dto.getInstructions(), savedRecipe));
+        return savedRecipe;
     }
 
     public RecipeEntity getRecipeById(Long id) {
@@ -66,7 +83,7 @@ public class RecipeService {
         List<EnergyValuePerIngredientEntity> energyValuePerIngredients = ingredientService.getEnergyValuesByIds(
             recipe.getIngredients().stream().map(RecipeIngredient::getIngredient)
                 .map(IngredientEntity::getId).collect(Collectors.toList()));
-        for (EnergyValuePerIngredientEntity energyValuePerIngredientEntity : energyValuePerIngredients){
+        for (EnergyValuePerIngredientEntity energyValuePerIngredientEntity : energyValuePerIngredients) {
             energyValuePerPortion.add(energyValuePerIngredientEntity);
         }
         energyValuePerPortion.countForPortions(recipe.getPortionQuantity());
