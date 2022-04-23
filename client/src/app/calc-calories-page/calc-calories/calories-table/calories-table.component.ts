@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {  FormControl } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import {
     debounceTime,
@@ -10,8 +9,7 @@ import {
 } from 'rxjs/operators';
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
 import { MEASURMENT_MAPPER } from 'src/libs/consts';
-import { 
-     IngredientSearch } from 'src/libs/interfaces';
+import { IngredientSearch } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-calories-table',
@@ -20,6 +18,8 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CaloriesTableComponent {
+    private readonly measurmentMapper = MEASURMENT_MAPPER;
+
     readonly columns = [
         'Ингредиент',
         'Колличество',
@@ -54,8 +54,6 @@ export class CaloriesTableComponent {
         switchMap((value) =>
             this.recipesService.getIngredient(value).pipe(
                 map((response: readonly IngredientSearch[]) => {
-                    console.log(value);
-
                     if (
                         response.length === 1 &&
                         String(response[0]) === value
@@ -68,8 +66,6 @@ export class CaloriesTableComponent {
             ),
         ),
     );
-
-    private readonly measurmentMapper = MEASURMENT_MAPPER;
 
     constructor(private readonly recipesService: RecipesApiService) {}
 
@@ -86,34 +82,34 @@ export class CaloriesTableComponent {
         ];
     }
 
-
     updateIngredientQuantity(
         value: number,
         current: IngredientSearch,
         index: number,
     ): void {
-        const lastQuantity =  this.ingredientsData[index].quantity
+        const lastQuantity = this.ingredientsData[index].quantity;
         const multiplier = this.measurmentMapper[current.measurment_value];
-        console.log(lastQuantity)
+
         const updated = {
             ...current,
             quantity: value,
             protein:
-                ((current.protein ) / ((lastQuantity || 1) * multiplier )) *
+                (current.protein / ((lastQuantity || 1) * multiplier)) *
                 value *
                 multiplier,
             fats:
-                (current.fats || 0 / (lastQuantity|| 1 * multiplier )) * value * multiplier,
+                (current.fats || 0 / (lastQuantity || 1 * multiplier)) *
+                value *
+                multiplier,
             carbs:
-                (current.carbs || 0 / (lastQuantity|| 1 * multiplier )) * value * multiplier,
+                (current.carbs || 0 / (lastQuantity || 1 * multiplier)) *
+                value *
+                multiplier,
             calories:
-                (current.calories || 0 / (lastQuantity|| 1 * multiplier)) *
+                (current.calories || 0 / (lastQuantity || 1 * multiplier)) *
                 value *
                 multiplier,
         };
-        console.log(updated);
-
-        
 
         this.ingredientsData = [
             ...this.ingredientsData.slice(0, index),

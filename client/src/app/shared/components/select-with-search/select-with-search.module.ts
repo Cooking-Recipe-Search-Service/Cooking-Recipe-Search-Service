@@ -2,24 +2,27 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelectWithSearchComponent } from './select-with-search.component';
 import {
-    TuiComboBoxModule,
     TuiDataListWrapperModule,
     TuiFilterByInputPipeModule,
+    TuiMultiSelectModule,
 } from '@taiga-ui/kit';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiLetModule } from '@taiga-ui/cdk';
 
 @NgModule({
     declarations: [SelectWithSearchComponent],
     imports: [
         CommonModule,
-        TuiComboBoxModule,
         FormsModule,
         ReactiveFormsModule,
         TuiDataListWrapperModule,
-        TuiFilterByInputPipeModule,
         TuiTextfieldControllerModule,
+        TuiButtonModule,
+        TuiMultiSelectModule,
+        TuiLetModule,
+        TuiFilterByInputPipeModule,
     ],
     exports: [SelectWithSearchComponent],
 })

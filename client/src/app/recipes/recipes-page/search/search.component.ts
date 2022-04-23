@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { forkJoin } from 'rxjs';
+
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
+import { SimpleInterface } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-search',
@@ -25,13 +27,23 @@ export class SearchComponent {
 
     readonly defaultSearchValues$ = forkJoin({
         categories: this.recipesService.getCategories(),
-        kitchen: this.recipesService.getKitchen(),
-        time: this.recipesService.getTime(),
+        countries: this.recipesService.getCountries(),
+        time: this.recipesService.getPreparingTime(),
+        ingredients: this.recipesService.getIngredients(),
     });
 
-    readonly ingredients$ = this.recipesService.getIngredients();
+    includeIngredientsChanged!: readonly SimpleInterface[];
 
-    constructor(private readonly recipesService: RecipesApiService) {}
+    excludeIngredientsChanged!: readonly SimpleInterface[];
+
+    constructor(private readonly recipesService: RecipesApiService) {
+        this.searchForm.controls.includeIngredients.valueChanges.subscribe(
+            (value) => (this.includeIngredientsChanged = value),
+        );
+        this.searchForm.controls.excludeIngredients.valueChanges.subscribe(
+            (value) => (this.excludeIngredientsChanged = value),
+        );
+    }
 
     get category(): FormControl {
         return this.searchForm.controls.category as FormControl;
@@ -52,6 +64,14 @@ export class SearchComponent {
     get includeIngredients(): FormControl {
         return this.searchForm.controls.includeIngredients as FormControl;
     }
+
+    readonly ingredientMapper = (
+        deafultIngredients: readonly SimpleInterface[],
+        changedIngredients: readonly SimpleInterface[] | null,
+    ): readonly SimpleInterface[] =>
+        deafultIngredients.filter(
+            (x) => !(changedIngredients || []).includes(x),
+        );
 
     searchRecipe(): void {
         // const recipe = this.searchForm.controls.recipeSearch.value;

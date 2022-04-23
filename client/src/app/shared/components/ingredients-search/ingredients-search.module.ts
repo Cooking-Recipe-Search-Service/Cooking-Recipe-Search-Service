@@ -1,31 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IngredientsSearchComponent } from './ingredients-search.component';
-import { CustomListComponent } from './custom-list/custom-list.component';
-import {
-    TuiButtonModule,
-    TuiDataListModule,
-    TuiPrimitiveTextfieldModule,
-    TuiTextfieldControllerModule,
-} from '@taiga-ui/core';
-import { TuiFilterPipeModule, TuiLetModule } from '@taiga-ui/cdk';
+import { TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiLetModule } from '@taiga-ui/cdk';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TuiMultiSelectModule, TuiSelectModule } from '@taiga-ui/kit';
+import {
+    TuiDataListWrapperModule,
+    TuiFilterByInputPipeModule,
+    TuiMultiSelectModule,
+} from '@taiga-ui/kit';
 
 @NgModule({
-    declarations: [IngredientsSearchComponent, CustomListComponent],
+    declarations: [IngredientsSearchComponent],
     imports: [
         CommonModule,
-        TuiDataListModule,
-        TuiButtonModule,
-        TuiFilterPipeModule,
         FormsModule,
         ReactiveFormsModule,
-        TuiSelectModule,
-        TuiLetModule,
-        TuiMultiSelectModule,
+        TuiDataListWrapperModule,
         TuiTextfieldControllerModule,
-        TuiPrimitiveTextfieldModule,
+        TuiButtonModule,
+        TuiMultiSelectModule,
+        TuiLetModule,
+        TuiFilterByInputPipeModule,
     ],
     exports: [IngredientsSearchComponent],
 })

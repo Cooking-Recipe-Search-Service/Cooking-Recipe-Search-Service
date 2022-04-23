@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Ingredients } from 'src/libs/interfaces';
+import { TuiContextWithImplicit, TuiStringHandler } from '@taiga-ui/cdk';
+import { Subject } from 'rxjs';
+import { SimpleInterface } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-ingredients-search',
@@ -9,34 +11,17 @@ import { Ingredients } from 'src/libs/interfaces';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IngredientsSearchComponent {
-    @Input() ingredients: readonly Ingredients[] = [];
-
-    @Input() label = '';
-
     @Input() control!: FormControl;
 
-    // readonly identityMatcher: TuiIdentityMatcher<readonly string[]> = (
-    //     items1,
-    //     items2,
-    // ) =>
-    //     items1.length === items2.length &&
-    //     items1.every((item) => items2.indexOf(item) !== -1);
+    @Input() values: readonly SimpleInterface[] = [];
 
-    value = [];
+    private readonly search$ = new Subject<string>();
 
-    // readonly valueContent: TuiStringHandler<
-    //     TuiContextWithImplicit<readonly string[]>
-    // > = ({ $implicit }) => {
-    //     if (!$implicit.length) {
-    //         return 'All';
-    //     }
+    onSearch(search: string | null) {
+        this.search$.next(search || '');
+    }
 
-    //     const selected = this.ingredients.find(({ ingredients }) =>
-    //         this.identityMatcher($implicit, ingredients),
-    //     );
-
-    //     return selected
-    //         ? `${selected.category} only`
-    //         : `Selected: ${$implicit.length}`;
-    // };
+    readonly stringify: TuiStringHandler<
+        SimpleInterface | TuiContextWithImplicit<SimpleInterface>
+    > = (item) => ('name' in item ? item.name : item.$implicit.name);
 }

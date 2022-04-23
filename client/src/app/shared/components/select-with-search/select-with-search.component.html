@@ -6,11 +6,30 @@
 >
     {{label}}
 </tui-combo-box> -->
-<tui-combo-box tuiTextfieldSize="l" class="b-form" [formControl]="control">
+<!-- <tui-combo-box tuiTextfieldSize="l" class="b-form" [formControl]="control">
     {{label}}
     <input tuiTextfield placeholder="Type a name" />
     <tui-data-list-wrapper
         *tuiDataList
-        [items]="values | tuiFilterByInput"
+        [items]="values"
     ></tui-data-list-wrapper>
-</tui-combo-box>
+</tui-combo-box> -->
+
+<tui-multi-select
+    *tuiLet="values"
+    class="b-form"
+    [formControl]="control"
+    [tuiTextfieldLabelOutside]="true"
+    [tuiTextfieldCleaner]="true"
+    [stringify]="stringify"
+    [expandable]="false"
+    (searchChange)="onSearch($event)"
+>
+    {{label}}
+    <tui-data-list-wrapper
+        *tuiDataList
+        tuiMultiSelectGroup
+        [items]="values | tuiFilterByInputWith : stringify"
+        [itemContent]="stringify"
+    ></tui-data-list-wrapper>
+</tui-multi-select>

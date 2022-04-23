@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
+import { TuiContextWithImplicit, TuiStringHandler } from '@taiga-ui/cdk';
+import { Subject } from 'rxjs';
+import { SimpleInterface } from 'src/libs/interfaces';
 
 export interface AbstractTypedControl<T> extends AbstractControl {
     getValue(): T;
@@ -13,7 +16,17 @@ export interface AbstractTypedControl<T> extends AbstractControl {
 export class SelectWithSearchComponent {
     @Input() control!: FormControl;
 
-    @Input() values: readonly string[] = [];
+    @Input() values: readonly SimpleInterface[] | null = [];
 
     @Input() label = '';
+
+    private readonly search$ = new Subject<string>();
+
+    onSearch(search: string | null) {
+        this.search$.next(search || '');
+    }
+
+    readonly stringify: TuiStringHandler<
+        SimpleInterface | TuiContextWithImplicit<SimpleInterface>
+    > = (item) => ('name' in item ? item.name : item.$implicit.name);
 }

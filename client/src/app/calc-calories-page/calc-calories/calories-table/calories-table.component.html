@@ -47,9 +47,8 @@
                     </tui-input>
                 </td>
                 <td *tuiCell="'Колличество'" tuiTd>
-                
                     <tui-input-number
-                    [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldCleaner]="true"
                         [ngModel]="ingredient.quantity"
                         [ngModelOptions]="options"
                         (ngModelChange)="updateIngredientQuantity($event,ingredient,index )"
@@ -78,4 +77,6 @@
         </tr>
     </tbody>
 </table>
-<button tuiButton class="tui-space_top-5" size="m" (click)="addIngredient()">Добавить поле</button>
+<button tuiButton size="m" class="tui-space_top-5" (click)="addIngredient()">
+    Добавить поле
+</button>

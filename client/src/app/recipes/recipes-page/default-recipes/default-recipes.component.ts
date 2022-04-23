@@ -5,6 +5,7 @@ import { CATEGORIES_MAPPER, ROUTER_MAPPER } from 'src/libs/consts';
 import { Observable } from 'rxjs';
 import { Recipe } from 'src/libs/interfaces/shared/recipe';
 import { Router } from '@angular/router';
+import { SimpleInterface } from 'src/libs/interfaces';
 
 const CATEGORIES_COUNT = 12;
 @Component({
@@ -26,18 +27,18 @@ export class DefaultRecipesComponent {
 
     categories$ = this.recipesService.getCategories().pipe(
         map((categories) =>
-            (categories as string[]).sort(() => Math.random() - 0.5),
+            (categories as SimpleInterface[]).sort(() => Math.random() - 0.5),
         ),
-        map((categories: string[]) => {
+        map((categories: SimpleInterface[]) => {
             this.activeBtnArray[0] = true;
 
             this.categoryRecipes$ = this.recipesService
-                .getRecipeByCategory(categories[0])
+                .getRecipeByCategory(categories[0].name)
                 .pipe(shareReplay(1));
             return categories.map((category) => {
                 return {
-                    label: category,
-                    icon: CATEGORIES_MAPPER[category],
+                    label: category.name,
+                    icon: CATEGORIES_MAPPER[category.name],
                 };
             });
         }),

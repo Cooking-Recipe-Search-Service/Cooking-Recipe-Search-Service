@@ -2,13 +2,15 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HOST_API } from 'src/libs/consts';
 import { Observable } from 'rxjs';
-import { Ingredients, IngredientSearch } from 'src/libs/interfaces';
+import { IngredientSearch, SimpleInterface } from 'src/libs/interfaces';
 import { Recipe } from 'src/libs/interfaces/shared/recipe';
 
 @Injectable({
     providedIn: 'root',
 })
 export class RecipesApiService {
+    private baseUrlReal = 'http://localhost:8080/api';
+
     constructor(
         @Inject(HOST_API) private readonly baseUrl: string,
         private readonly http: HttpClient,
@@ -36,21 +38,27 @@ export class RecipesApiService {
         );
     }
 
-    getIngredients(): Observable<readonly Ingredients[]> {
-        return this.http.get<readonly Ingredients[]>(
-            `${this.baseUrl}/ingredients`,
+    getIngredients(): Observable<readonly SimpleInterface[]> {
+        return this.http.get<readonly SimpleInterface[]>(
+            `${this.baseUrlReal}/ingredients`,
         );
     }
 
-    getKitchen(): Observable<readonly string[]> {
-        return this.http.get<readonly string[]>(`${this.baseUrl}/kitchen`);
+    getCountries(): Observable<readonly SimpleInterface[]> {
+        return this.http.get<readonly SimpleInterface[]>(
+            `${this.baseUrlReal}/countries`,
+        );
     }
 
-    getCategories(): Observable<readonly string[]> {
-        return this.http.get<readonly string[]>(`${this.baseUrl}/categories`);
+    getCategories(): Observable<readonly SimpleInterface[]> {
+        return this.http.get<readonly SimpleInterface[]>(
+            `${this.baseUrl}/categories`,
+        );
     }
 
-    getTime(): Observable<readonly string[]> {
-        return this.http.get<readonly string[]>(`${this.baseUrl}/time`);
+    getPreparingTime(): Observable<readonly SimpleInterface[]> {
+        return this.http.get<readonly SimpleInterface[]>(
+            `${this.baseUrl}/time`,
+        );
     }
 }

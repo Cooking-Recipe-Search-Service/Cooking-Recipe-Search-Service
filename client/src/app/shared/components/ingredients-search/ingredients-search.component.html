@@ -1,9 +1,39 @@
-<tui-multi-select
-    tuiTextfieldSize="l"
-    class="control"
-    [tuiTextfieldLabelOutside]="true"
-    [formControl]="control"
->
-    {{label}}
-    <app-custom-list *tuiDataList [items]="ingredients"></app-custom-list>
-</tui-multi-select>
+<div class="ingredients">
+    <tui-multi-select
+        *tuiLet="values"
+        class="ingredients-width"
+        [formControl]="control"
+        [tuiTextfieldLabelOutside]="true"
+        [tuiTextfieldCleaner]="true"
+        [stringify]="stringify"
+        [expandable]="false"
+        (searchChange)="onSearch($event)"
+    >
+        + Добавить ингредиенты
+        <tui-data-list-wrapper
+            *tuiDataList
+            tuiMultiSelectGroup
+            [items]="values | tuiFilterByInputWith : stringify"
+            [itemContent]="stringify"
+        ></tui-data-list-wrapper>
+    </tui-multi-select>
+
+    <tui-multi-select
+        *tuiLet="values"
+        class="ingredients-width"
+        [formControl]="control"
+        [tuiTextfieldLabelOutside]="true"
+        [tuiTextfieldCleaner]="true"
+        [stringify]="stringify"
+        [expandable]="false"
+        (searchChange)="onSearch($event)"
+    >
+        - Исключить ингредиенты
+        <tui-data-list-wrapper
+            *tuiDataList
+            tuiMultiSelectGroup
+            [items]="values | tuiHideSelected"
+            [itemContent]="stringify"
+        ></tui-data-list-wrapper>
+    </tui-multi-select>
+</div>

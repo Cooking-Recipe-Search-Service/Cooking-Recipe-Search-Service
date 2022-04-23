@@ -27,7 +27,7 @@
                 <app-select-with-search
                     label="Кухня"
                     class="search__default-width tui-space_horizontal-5"
-                    [values]="defaultSearchValue.kitchen"
+                    [values]="defaultSearchValue.countries"
                     [control]="kitchen"
                 ></app-select-with-search>
                 <app-select-with-search
@@ -37,21 +37,20 @@
                     [control]="preparationTime"
                 ></app-select-with-search>
             </div>
+
             <div class="search__ingredients tui-space_top-5">
-                <app-ingredients-search
-                    *ngIf="ingredients$ | async as ingredients"
+                <app-select-with-search
                     label="+ Добавить ингредиенты"
-                    class="search__ingredients-width tui-space_right-2"
-                    [ingredients]="ingredients"
+                    class="search__ingredients-width"
+                    [values]="defaultSearchValue.ingredients | tuiMapper:ingredientMapper :excludeIngredientsChanged  "
                     [control]="includeIngredients"
-                ></app-ingredients-search>
-                <app-ingredients-search
-                    *ngIf="ingredients$ | async as ingredients"
+                ></app-select-with-search>
+                <app-select-with-search
                     label="- Исключить ингредиенты"
-                    class="search__ingredients-width tui-space_left-3"
-                    [ingredients]="ingredients"
+                    class="search__ingredients-width"
+                    [values]="defaultSearchValue.ingredients | tuiMapper: ingredientMapper : includeIngredientsChanged "
                     [control]="excludeIngredients"
-                ></app-ingredients-search>
+                ></app-select-with-search>
             </div>
         </div>
     </form>
