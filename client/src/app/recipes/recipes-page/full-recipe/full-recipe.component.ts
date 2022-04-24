@@ -14,7 +14,7 @@ export class FullRecipeComponent {
         map((response) => response.id),
         switchMap((recipeId) => this.recipesService.getRecipeById(recipeId)),
         map((recipe) => {
-            this.value = recipe.portion_quantity;
+            this.value = recipe.portionQuantity;
             return recipe;
         }),
     );

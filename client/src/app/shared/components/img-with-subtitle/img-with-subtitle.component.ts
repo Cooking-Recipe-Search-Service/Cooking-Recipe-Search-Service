@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Recipe } from 'src/libs/interfaces/shared/recipe';
+import { Recipe } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-img-with-subtitle',

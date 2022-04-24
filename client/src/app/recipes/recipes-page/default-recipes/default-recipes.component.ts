@@ -3,9 +3,9 @@ import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.s
 import { map, shareReplay } from 'rxjs/operators';
 import { CATEGORIES_MAPPER, ROUTER_MAPPER } from 'src/libs/consts';
 import { Observable } from 'rxjs';
-import { Recipe } from 'src/libs/interfaces/shared/recipe';
+
 import { Router } from '@angular/router';
-import { SimpleInterface } from 'src/libs/interfaces';
+import { Recipe, SimpleInterface } from 'src/libs/interfaces';
 
 const CATEGORIES_COUNT = 12;
 @Component({

@@ -1,5 +1,5 @@
-export interface IngredientBack {
-    readonly name: 'string';
+export interface IngredientPostRequest {
+    readonly name: string;
     readonly measurementValueType: string;
     readonly energyValue: EnergyValue;
 }

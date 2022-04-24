@@ -1,7 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { TAGS_MAPPER } from 'src/libs/consts';
-import { RecipeTag } from 'src/libs/interfaces';
-import { Recipe } from 'src/libs/interfaces/shared/recipe';
+import { Recipe, RecipeTag } from 'src/libs/interfaces';
 
 @Pipe({
     name: 'recipeTags',
@@ -11,11 +10,11 @@ export class RecipeTagsPipe implements PipeTransform {
         return [
             {
                 icon: TAGS_MAPPER.category,
-                label: recipe.category,
+                label: recipe.categoryId,
             },
             {
                 icon: TAGS_MAPPER.cooking_time,
-                label: this.convertTime(recipe.cooking_time),
+                label: this.convertTime(recipe.cookingTime),
             },
         ];
     }

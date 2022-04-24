@@ -9,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { forkJoin, Observable } from 'rxjs';
 
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
-import { RecipeBack, SimpleInterface } from 'src/libs/interfaces';
+import { Recipe, SimpleInterface } from 'src/libs/interfaces';
 
 import {
     contructCategory,
@@ -28,8 +28,8 @@ import {
 export class SearchComponent {
     @Input() form!: FormGroup;
 
-    @Output() searchedRecipes: EventEmitter<Observable<readonly RecipeBack[]>> =
-        new EventEmitter<Observable<readonly RecipeBack[]>>();
+    @Output() searchedRecipes: EventEmitter<Observable<readonly Recipe[]>> =
+        new EventEmitter<Observable<readonly Recipe[]>>();
 
     readonly searchForm = new FormGroup({
         recipeSearch: new FormControl('', [Validators.minLength(3)]),

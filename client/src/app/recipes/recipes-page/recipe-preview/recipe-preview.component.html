@@ -1,14 +1,12 @@
 <tui-island class="recipe-preview">
     <div class="recipe-preview__calories tui-text_body-xs">
-        <p class="no-margin bold">
-            {{recipe.energy_value_per_portion.calories}} ккал
-        </p>
+        <p class="no-margin bold">{{recipe.energyValue}} ккал</p>
     </div>
     <a [routerLink]="['/recipes/recipe',recipe.id ]">
         <img
             alt="recipe photo"
             class="recipe-preview__img tui-space_right-4"
-            [src]="recipe.img"
+            [src]="recipe.image"
         />
     </a>
     <div class="recipe-preview__title">
@@ -42,8 +40,8 @@
                     appearance="whiteblock"
                     class="tui-group__auto-width-item"
                 >
-                    {{recipe.ingredients.length}} {{ 'ингредиентов' |
-                    declensions: (recipe.ingredients.length) }}
+                    {{recipe.ingredientsInfo.length}} {{ 'ингредиентов' |
+                    declensions: (recipe.ingredientsInfo.length) }}
                 </button>
                 <button
                     tuiIconButton
@@ -67,7 +65,7 @@
         <ng-template #dropdown>
             <tui-data-list class="recipe-preview__data-list">
                 <button
-                    *ngFor="let ingredient of recipe.ingredients"
+                    *ngFor="let ingredient of recipe.ingredientsInfo"
                     tuiOption
                     size="s"
                     class="recipe-preview__data-list-btn"

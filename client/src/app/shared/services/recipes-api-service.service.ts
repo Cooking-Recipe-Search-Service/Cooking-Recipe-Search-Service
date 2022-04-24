@@ -3,12 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { HOST_API } from 'src/libs/consts';
 import { Observable } from 'rxjs';
 import {
-    IngredientBack,
+    IngredientPostRequest,
     IngredientSearch,
-    RecipeBack,
+    Recipe,
     SimpleInterface,
 } from 'src/libs/interfaces';
-import { Recipe } from 'src/libs/interfaces/shared/recipe';
 import { RecipePayload } from 'src/libs/interfaces/shared/recipe-payload';
 
 @Injectable({
@@ -22,8 +21,8 @@ export class RecipesApiService {
         private readonly http: HttpClient,
     ) {}
 
-    searchRecipe(query: string): Observable<readonly RecipeBack[]> {
-        return this.http.get<readonly RecipeBack[]>(
+    searchRecipe(query: string): Observable<readonly Recipe[]> {
+        return this.http.get<readonly Recipe[]>(
             `${this.baseUrlReal}/recipes/search?${query}`,
         );
     }
@@ -35,8 +34,10 @@ export class RecipesApiService {
         );
     }
 
-    postIngredient(ingredient: IngredientBack): Observable<IngredientBack> {
-        return this.http.post<IngredientBack>(
+    postIngredient(
+        ingredient: IngredientPostRequest,
+    ): Observable<IngredientPostRequest> {
+        return this.http.post<IngredientPostRequest>(
             `${this.baseUrlReal}/ingredients`,
             ingredient,
         );
@@ -49,9 +50,7 @@ export class RecipesApiService {
     }
 
     getDefaultRecipes(): Observable<readonly Recipe[]> {
-        return this.http.get<readonly Recipe[]>(
-            `${this.baseUrl}/recipes_default`,
-        );
+        return this.http.get<readonly Recipe[]>(`${this.baseUrlReal}/recipes`);
     }
 
     getRecipeById(id: number): Observable<Recipe> {

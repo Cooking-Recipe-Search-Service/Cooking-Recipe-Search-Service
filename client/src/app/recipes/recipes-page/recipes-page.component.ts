@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
-import { RecipeBack } from 'src/libs/interfaces';
+import { Recipe } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-recipes-page',
@@ -13,13 +13,11 @@ import { RecipeBack } from 'src/libs/interfaces';
 export class RecipesPageComponent {
     recipes$ = this.recipiesApi.getDefaultRecipes();
 
-    searchedRecipes$!: Observable<readonly RecipeBack[]>;
-    
+    searchedRecipes$!: Observable<readonly Recipe[]>;
+
     constructor(private readonly recipiesApi: RecipesApiService) {}
 
-    loadRecipes(recipes: Observable<readonly RecipeBack[]>): void {
+    loadRecipes(recipes: Observable<readonly Recipe[]>): void {
         this.searchedRecipes$ = recipes;
     }
-
-    
 }
