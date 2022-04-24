@@ -81,6 +81,12 @@ public class DtoConverter {
         return countryDtoList;
     }
 
+    public CountryDto getCountryDto(CountryEntity countryEntities) {
+        CountryDto countryDto = simpleConvert(countryEntities, CountryDto.class);
+        countryDto.setImage(countryService.getCountryImageBase64ById(countryDto.getName()));
+        return countryDto;
+    }
+
     private List<InstructionDto> convertInstruction(String instruction) {
         String[] instructions = instruction.split(";");
         List<InstructionDto> instructionDtos = new ArrayList<>();
