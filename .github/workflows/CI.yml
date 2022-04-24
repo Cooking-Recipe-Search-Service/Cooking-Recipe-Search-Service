@@ -46,7 +46,7 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
-          cd /home/crss/ && java -jar crss-1.1-SNAPSHOT.war &
+            cd /home/crss/ && java -jar crss-1.1-SNAPSHOT.war &
           host: ${{ secrets.SSH_HOST }}
           user: ${{ secrets.SSH_USER }}
           pass: ${{ secrets.SSH_PASSWORD }}
