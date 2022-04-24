@@ -19,3 +19,7 @@ file-system:
         ./server/src/main/resources/images/recipe/
       country:
         ./server/src/main/resources/images/country/
+crss:
+  web-config:
+    allowed-origins:
+      http://localhost:4200
