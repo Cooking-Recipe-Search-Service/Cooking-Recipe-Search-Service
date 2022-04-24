@@ -28,16 +28,18 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: server/target/crss-1.1-SNAPSHOT.war
-          remote: /home/crss/crss-1.1-SNAPSHOT.war
+          remote: /home/crss/crss/crss-1.1-SNAPSHOT.war
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
+          rmRemote: true
       - name: Run a script on remote server (start the application)
         if: always()
         uses: fifsky/ssh-action@master
         with:
           command: |
-            cd /home/crss/ && java -jar crss-1.1-SNAPSHOT.war &
+            killall -9 java
+            cd /home/crss/crss/ && java -jar crss-1.1-SNAPSHOT.war &
           host: ${{ secrets.SSH_HOST }}
           user: ${{ secrets.SSH_USER }}
           pass: ${{ secrets.SSH_PASSWORD }}
