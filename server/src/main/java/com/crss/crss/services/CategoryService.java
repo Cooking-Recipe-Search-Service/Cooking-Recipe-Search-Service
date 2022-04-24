@@ -20,7 +20,8 @@ public class CategoryService {
     }
 
     public CategoryEntity getCategoryById(Long id) {
-        return categoryRepository.findById(id).orElseThrow(() -> new CrssException(HttpStatus.NOT_FOUND, "Cannot find category with id=" + id));
+        return categoryRepository.findById(id)
+            .orElseThrow(() -> new CrssException(HttpStatus.NOT_FOUND, "Cannot find category with id=" + id));
     }
 
 }
