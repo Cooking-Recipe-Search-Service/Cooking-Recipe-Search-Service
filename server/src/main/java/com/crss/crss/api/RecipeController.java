@@ -8,6 +8,7 @@ import com.crss.crss.exceptions.CrssException;
 import com.crss.crss.mapper.DtoConverter;
 import com.crss.crss.repositories.RecipeRepository;
 import com.crss.crss.services.RecipeService;
+import com.crss.crss.services.UserService;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -37,9 +38,11 @@ public class RecipeController {
     private final DtoConverter dtoConverter;
     private final RecipeService recipeService;
     private final RecipeRepository recipeRepository;
+    private final UserService userService;
 
     @GetMapping
     public List<RecipeSlimDto> getRecipes() {
+        System.out.println(userService.getCurrentUser());
         return dtoConverter.getRecipeSlimDtoList(recipeService.getAllRecipes());
     }
 
