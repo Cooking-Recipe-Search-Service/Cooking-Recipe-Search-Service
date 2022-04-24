@@ -48,6 +48,8 @@ public class DtoConverter {
     public RecipeSlimDto getRecipeSlimDto(RecipeEntity recipe) {
         RecipeSlimDto recipeSlimDto = simpleConvert(recipe, RecipeSlimDto.class);
         recipeSlimDto.setIngredientsInfo(getIngredientForRecipeDtoByRecipe(recipe));
+        recipeSlimDto.setImage(recipeService.getRecipeImageBase64ById(recipe.getName()));
+        recipeSlimDto.setEnergyValue(simpleConvert(recipeService.getOrCreateEnergyValuePerPortionEntity(recipe), EnergyValueDto.class));
         return recipeSlimDto;
     }
 
