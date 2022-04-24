@@ -21,7 +21,6 @@ jobs:
 #          mvn clean package --file server/pom.xml -Dclient -Dskiptest
 
   deploy:
-    needs: build-java
     runs-on: ubuntu-latest
     steps:
       - name: Install SSH Key
