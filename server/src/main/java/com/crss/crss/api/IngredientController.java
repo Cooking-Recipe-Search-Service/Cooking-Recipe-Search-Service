@@ -3,6 +3,7 @@ package com.crss.crss.api;
 import com.crss.crss.dto.IngredientDto;
 import com.crss.crss.dto.IngredientDtoIn;
 import com.crss.crss.dto.IngredientSlimDto;
+import com.crss.crss.entities.IngredientEntity.MeasurementValueType;
 import com.crss.crss.mapper.DtoConverter;
 import com.crss.crss.services.IngredientService;
 import java.util.List;
@@ -36,6 +37,11 @@ public class IngredientController {
     @PostMapping
     public IngredientDto createIngredient(@RequestBody IngredientDtoIn dto) {
         return dtoConverter.getIngredientDto(ingredientService.createIngredient(dto));
+    }
+
+    @GetMapping("/types")
+    public MeasurementValueType[] getAllTypes() {
+        return MeasurementValueType.values();
     }
 
 }
