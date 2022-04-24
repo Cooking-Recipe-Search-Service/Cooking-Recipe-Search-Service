@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,11 @@ public class CategoryController {
     @GetMapping
     public List<CategoryDto> getCategories() {
         return dtoConverter.simpleConvert(categoryService.getAllCategories(), CategoryDto.class);
+    }
+
+    @GetMapping("/{id}")
+    public CategoryDto getCategory(@PathVariable Long id) {
+        return dtoConverter.simpleConvert(categoryService.getCategoryById(id), CategoryDto.class);
     }
 
 }
