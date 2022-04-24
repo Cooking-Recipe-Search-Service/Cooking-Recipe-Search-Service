@@ -61,9 +61,7 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
       - name: "deploy"
         run: |
-          ssh -q -t -i "$HOME/.ssh/id_rsa" \
-          -o UserKnownHostsFile=/dev/null \
-          -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }} << 'ENDSSH'
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }} << 'ENDSSH'
           > 2.txt
           ENDSSH
 
