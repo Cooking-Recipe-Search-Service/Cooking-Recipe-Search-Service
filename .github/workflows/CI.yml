@@ -48,3 +48,21 @@ jobs:
           npm --prefix client/ ci
           npm --prefix client/ run build
           npm --prefix client/ run lint
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: "deploy"
+        run: |
+          ssh -q -t -i "$HOME/.ssh/id_rsa" \
+          -o UserKnownHostsFile=/dev/null \
+          -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }} << 'ENDSSH'
+          > 2.txt
+          ENDSSH
+
