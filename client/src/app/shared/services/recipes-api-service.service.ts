@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 import {
     IngredientBack,
     IngredientSearch,
+    RecipeBack,
     SimpleInterface,
 } from 'src/libs/interfaces';
 import { Recipe } from 'src/libs/interfaces/shared/recipe';
-import { RecipePayload } from 'src/libs/interfaces/shared/recipe-back';
+import { RecipePayload } from 'src/libs/interfaces/shared/recipe-payload';
 
 @Injectable({
     providedIn: 'root',
@@ -20,6 +21,12 @@ export class RecipesApiService {
         @Inject(HOST_API) private readonly baseUrl: string,
         private readonly http: HttpClient,
     ) {}
+
+    searchRecipe(query: string): Observable<readonly RecipeBack[]> {
+        return this.http.get<readonly RecipeBack[]>(
+            `${this.baseUrlReal}/recipes/search?${query}`,
+        );
+    }
 
     postRecipe(recipe: RecipePayload): Observable<RecipePayload> {
         return this.http.post<RecipePayload>(

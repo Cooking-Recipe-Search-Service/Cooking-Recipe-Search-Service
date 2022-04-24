@@ -1,9 +1,23 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    Output,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
-import { SimpleInterface } from 'src/libs/interfaces';
+import { RecipeBack, SimpleInterface } from 'src/libs/interfaces';
+
+import {
+    contructCategory,
+    contructCookingTime,
+    contructCountry,
+    contructIngredients,
+    contructNameRecipe,
+} from './helpers/query-contrustor-funcs';
 
 @Component({
     selector: 'app-search',
@@ -14,7 +28,8 @@ import { SimpleInterface } from 'src/libs/interfaces';
 export class SearchComponent {
     @Input() form!: FormGroup;
 
-    searched = '';
+    @Output() searchedRecipes: EventEmitter<Observable<readonly RecipeBack[]>> =
+        new EventEmitter<Observable<readonly RecipeBack[]>>();
 
     readonly searchForm = new FormGroup({
         recipeSearch: new FormControl('', [Validators.minLength(3)]),
@@ -74,6 +89,32 @@ export class SearchComponent {
         );
 
     searchRecipe(): void {
-        // const recipe = this.searchForm.controls.recipeSearch.value;
+        const recipe = this.searchForm.value;
+        const fullString: string[] = [];
+        const categoriesPartQuery = contructCategory(recipe.category);
+        if (categoriesPartQuery) fullString.push(categoriesPartQuery);
+        const countryPartQuery = contructCountry(recipe.kitchen);
+        if (countryPartQuery) fullString.push(countryPartQuery);
+        const cookingTimePartQuery = contructCookingTime(
+            recipe.preparationTime,
+        );
+
+        if (cookingTimePartQuery) fullString.push(cookingTimePartQuery);
+
+        const namePartQuery = contructNameRecipe(recipe.recipeSearch);
+
+        if (namePartQuery) fullString.push(namePartQuery);
+
+        const ingredientsPartQuery = contructIngredients(
+            recipe.includeIngredients,
+            recipe.excludeIngredients,
+        );
+
+        fullString.push(ingredientsPartQuery);
+
+        const payload = fullString.join('&').slice(0, -1);
+
+        this.recipesService.searchRecipe(payload);
+        this.searchedRecipes.emit(this.recipesService.searchRecipe(payload));
     }
 }

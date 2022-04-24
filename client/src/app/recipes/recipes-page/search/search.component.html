@@ -41,7 +41,7 @@
             <div class="search__ingredients tui-space_top-5">
                 <app-select-with-search
                     label="+ Добавить ингредиенты"
-                    class="search__ingredients-width"
+                    class="search__ingredients-width tui-space_right-5"
                     [values]="defaultSearchValue.ingredients | tuiMapper:ingredientMapper :excludeIngredientsChanged  "
                     [control]="includeIngredients"
                 ></app-select-with-search>
