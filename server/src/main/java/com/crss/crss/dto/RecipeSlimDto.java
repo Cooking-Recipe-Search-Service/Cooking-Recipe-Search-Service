@@ -17,4 +17,5 @@ public class RecipeSlimDto {
     private String countryName;
     private String categoryName;
     private List<IngredientForRecipeDto> ingredientsInfo;
+    private String image;
 }
