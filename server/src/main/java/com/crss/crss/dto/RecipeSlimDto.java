@@ -1,5 +1,6 @@
 package com.crss.crss.dto;
 
+import com.crss.crss.dto.IngredientDto.EnergyValueDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 import lombok.Data;
@@ -18,4 +19,5 @@ public class RecipeSlimDto {
     private String categoryName;
     private List<IngredientForRecipeDto> ingredientsInfo;
     private String image;
+    private EnergyValueDto energyValue;
 }
