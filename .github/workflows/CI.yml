@@ -25,7 +25,13 @@ jobs:
       - name: Generate the package
         run: mvn -B package --file server/pom.xml -Dclient -Dskiptest
       - name: Deploy
-        run: scp -r server/target/crss-1.1-SNAPSHOT.war ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/crss/crss/crss-1.1-SNAPSHOT.war
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
+          cd /home/crss/crss
+          rm -rf crss-1.1-SNAPSHOT.war
+          rm -rf .crss-1.1-SNAPSHOT.war
+          ENDSSH
+          scp ./server/target/crss-1.1-SNAPSHOT.war ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/crss/crss/crss-1.1-SNAPSHOT.war
       - name: Run a script on remote server (start the application)
         if: always()
         uses: fifsky/ssh-action@master
