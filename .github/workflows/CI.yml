@@ -40,7 +40,7 @@ jobs:
           command: |
             killall -9 java
             cd /home/crss/crss/ && java -jar crss-1.1-SNAPSHOT.war &
-            rm -rf crss-1.1-SNAPSHOT.war
+            cd /home/crss/crss/ && rm -rf crss-1.1-SNAPSHOT.war
           host: ${{ secrets.SSH_HOST }}
           user: ${{ secrets.SSH_USER }}
           pass: ${{ secrets.SSH_PASSWORD }}
