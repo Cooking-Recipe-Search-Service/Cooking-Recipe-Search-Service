@@ -1,1 +1,173 @@
-<p>admin-add-recipe works!</p>
+<form [formGroup]="recipeForm">
+    <div class="row">
+        <tui-input
+            tuiTextfieldSize="l"
+            class="form"
+            [tuiTextfieldCleaner]="true"
+            [formControl]="name"
+        >
+            Название
+            <input tuiTextfield />
+        </tui-input>
+    </div>
+
+    <div class="row tui-space_top-5">
+        <tui-input-number
+            tuiTextfieldSize="l"
+            class="form tui-space_right-5"
+            [tuiTextfieldCleaner]="true"
+            [formControl]="cookingTime"
+            [postfix]="'мин'"
+        >
+            Время приготовления
+            <input tuiTextfield />
+        </tui-input-number>
+        <tui-input-number
+            tuiTextfieldSize="l"
+            class="form"
+            [tuiTextfieldCleaner]="true"
+            [formControl]="portionQuantity"
+        >
+            Количество порций
+            <input tuiTextfield />
+        </tui-input-number>
+    </div>
+    <div *tuiLet="countries$ | async as countries" class="row tui-space_top-5">
+        <div>
+            <!-- <tui-combo-box
+            [stringify]="stringify"
+           
+            class="form"
+            [tuiTextfieldCleaner]="true"
+            [formControl]="categoryId"
+        >
+            Страна (Кухня)
+            <input tuiTextfield />
+            <tui-data-list-wrapper
+                *tuiDataList
+                
+                [items]="countries |  tuiFilterByInputWith : stringify"
+                [itemContent]="stringify | tuiStringifyContent"
+            ></tui-data-list-wrapper>
+        </tui-combo-box>  -->
+        </div>
+        <tui-combo-box
+            class="form"
+            [stringify]="stringify"
+            [tuiTextfieldCleaner]="true"
+            [formControl]="countryId"
+        >
+            Страна (Кухня)
+            <input tuiTextfield />
+            <tui-data-list-wrapper
+                *tuiDataList
+                [items]="countries |  tuiFilterByInputWith : stringify"
+                [itemContent]="stringify | tuiStringifyContent"
+            ></tui-data-list-wrapper>
+        </tui-combo-box>
+    </div>
+
+    <tui-text-area
+        class="form text-area tui-space_top-5"
+        [formControl]="description"
+        [expandable]="true"
+        [tuiTextfieldCleaner]="true"
+    >
+        Описание
+    </tui-text-area>
+    <p class="tui-text_body-xl tui-space_top-5 space">Добавить ингредиенты</p>
+    <div *tuiLet="ingredients$ | async as ingredientsVal ">
+        <div
+            *ngFor="let ingredient of ingredients.controls; let index = index"
+            class="row tui-space_top-5"
+        >
+            <div class="form tui-space_right-5">
+                <tui-combo-box
+                    class="form"
+                    [stringify]="stringify"
+                    [tuiTextfieldCleaner]="true"
+                    [formControl]="getIngredientId(index)"
+                >
+                    Ингредиент
+                    <input tuiTextfield />
+                    <tui-data-list-wrapper
+                        *tuiDataList
+                        [items]="ingredientsVal |  tuiFilterByInputWith : stringify"
+                        [itemContent]="stringify | tuiStringifyContent"
+                    ></tui-data-list-wrapper>
+                </tui-combo-box>
+                <tui-error
+                    [formControl]="getIngredientId(index)"
+                    [error]="[] | tuiFieldError | async"
+                ></tui-error>
+            </div>
+
+            <div class="form tui-space_right-5">
+                <tui-input-number
+                    tuiTextfieldSize="l"
+                    class="form"
+                    [tuiTextfieldCleaner]="true"
+                    [formControl]="getIngredientValue(index)"
+                >
+                    Количество
+                    <input tuiTextfield />
+                </tui-input-number>
+                <tui-error
+                    [formControl]="getIngredientValue(index)"
+                    [error]="[] | tuiFieldError | async"
+                ></tui-error>
+            </div>
+
+            <button
+                tuiIconButton
+                icon="tuiIconRemoveLarge"
+                appearance="secondary"
+                [disabled]="index===0"
+                (click)="removeIngredient(index)"
+            ></button>
+        </div>
+    </div>
+    <button tuiButton class="tui-space_top-5 btn" (click)="addIngredient()">
+        Добавить Ингредиент
+    </button>
+
+    <p class="tui-text_body-xl">Шаги выполнения</p>
+    <div
+        *ngFor="let steps of instructions.controls; let index = index"
+        class="row tui-space_top-5 space"
+    >
+        <div class="step tui-text_h6 tui-space_right-5">{{index + 1}}</div>
+        <tui-text-area
+            class="form text-area tui-space_right-5"
+            [tuiTextfieldCleaner]="true"
+            [formControl]="getStep(index)"
+            [expandable]="true"
+        >
+            Шаг
+        </tui-text-area>
+
+        <button
+            tuiIconButton
+            icon="tuiIconRemoveLarge"
+            appearance="secondary"
+            [disabled]="index===0"
+            (click)="removeStep(index)"
+        ></button>
+    </div>
+    <tui-error
+        formArrayName="instructions"
+        class="space tui-space_top-5"
+        [error]="[] | tuiFieldError | async"
+    ></tui-error>
+    <button tuiButton class="tui-space_top-5 btn" (click)="addStep()">
+        Добавить шаг
+    </button>
+</form>
+<button
+    tuiButton
+    class="tui-space_top-5"
+    [disabled]="recipeForm.invalid"
+    (click)="addRecipe()"
+>
+    Добавить рецепт
+</button>

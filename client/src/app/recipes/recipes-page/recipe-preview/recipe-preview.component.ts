@@ -16,7 +16,8 @@ import { Recipe } from 'src/libs/interfaces/shared/recipe';
 export class RecipePreviewComponent {
     @Input() recipe!: Recipe;
 
-    @ViewChild(TuiHostedDropdownComponent) component?: TuiHostedDropdownComponent;
+    @ViewChild(TuiHostedDropdownComponent)
+    component?: TuiHostedDropdownComponent;
 
     open = false;
 

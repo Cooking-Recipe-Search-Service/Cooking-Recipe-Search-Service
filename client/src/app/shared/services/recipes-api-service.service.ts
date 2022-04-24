@@ -8,6 +8,7 @@ import {
     SimpleInterface,
 } from 'src/libs/interfaces';
 import { Recipe } from 'src/libs/interfaces/shared/recipe';
+import { RecipePayload } from 'src/libs/interfaces/shared/recipe-back';
 
 @Injectable({
     providedIn: 'root',
@@ -19,6 +20,13 @@ export class RecipesApiService {
         @Inject(HOST_API) private readonly baseUrl: string,
         private readonly http: HttpClient,
     ) {}
+
+    postRecipe(recipe: RecipePayload): Observable<RecipePayload> {
+        return this.http.post<RecipePayload>(
+            `${this.baseUrlReal}/recipes`,
+            recipe,
+        );
+    }
 
     postIngredient(ingredient: IngredientBack): Observable<IngredientBack> {
         return this.http.post<IngredientBack>(
