@@ -12,6 +12,13 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     database: mysql
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 106569485535-ot6naottkf831qac1o0mcq7q0fm4e2k6.apps.googleusercontent.com
+            client-secret: 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
 file-system:
   storage:
     images:
