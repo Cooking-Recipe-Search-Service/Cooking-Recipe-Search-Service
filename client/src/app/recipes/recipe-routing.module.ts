@@ -18,7 +18,6 @@ const routes: Routes = [
         path: ':category',
         component: CategoryRecipesComponent,
     },
-    
 ];
 
 @NgModule({

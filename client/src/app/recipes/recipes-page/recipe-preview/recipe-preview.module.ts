@@ -37,7 +37,7 @@ import { Base64ImageConvertModule } from 'src/app/shared/modules/base64-image-co
         DeclensionsPipeModule,
         TuiLineClampModule,
         RouterModule,
-        Base64ImageConvertModule
+        Base64ImageConvertModule,
     ],
     exports: [RecipePreviewComponent],
 })

@@ -8,9 +8,7 @@ import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.s
 import { map } from 'rxjs/operators';
 import { CATEGORIES_MAPPER, ROUTER_MAPPER } from 'src/libs/consts';
 
-
-
-import {  SimpleInterface } from 'src/libs/interfaces';
+import { SimpleInterface } from 'src/libs/interfaces';
 
 const CATEGORIES_COUNT = 12;
 @Component({
@@ -55,8 +53,7 @@ export class DefaultRecipesComponent {
         return this.activeBtnArray[index] ? 'primary' : 'whiteblock';
     }
 
-    loadCategory(category: string,index:number):void {
-        
+    loadCategory(category: string, index: number): void {
         this.activeBtnArray = Array(this.categoriesCount).fill(false);
         this.activeBtnArray[index] = true;
         this.clickedCategory.emit(category);
