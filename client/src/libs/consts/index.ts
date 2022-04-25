@@ -5,3 +5,4 @@ export * from './declensions';
 export * from './measurment-mapper';
 export * from './cooking-time-mapper';
 export * from './router-mapper';
+export * from './cooking-time';

@@ -10,7 +10,7 @@ export class RecipeTagsPipe implements PipeTransform {
         return [
             {
                 icon: TAGS_MAPPER.category,
-                label: recipe.categoryId,
+                label: recipe.categoryName,
             },
             {
                 icon: TAGS_MAPPER.cooking_time,

@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Inject,
+    Output,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TuiDestroyService } from '@taiga-ui/cdk';
 import { TuiNotification, TuiNotificationsService } from '@taiga-ui/core';
@@ -15,6 +21,8 @@ import { BACKEND_MEASURMENT_MAPPER } from 'src/libs/consts';
     providers: [TuiDestroyService],
 })
 export class AdminAddIngredientComponent {
+    @Output() ingredientChanged = new EventEmitter<string>();
+
     ingredientForm = new FormGroup({
         name: new FormControl('', Validators.required),
         measurementValueType: new FormControl('', Validators.required),
@@ -85,6 +93,8 @@ export class AdminAddIngredientComponent {
             .subscribe(
                 (_) => {
                     this.loading$.next(false);
+                    this.ingredientChanged.emit('done');
+                    this.ingredientForm.reset();
                     this.notificationsService
                         .show('', {
                             label: 'Ингредиент добавлен',

@@ -1,14 +1,14 @@
-// import { Ingredient } from './ingredient';
+import { Ingredient } from './ingredient';
+import { EnergyValue } from './ingredient-post-request';
 
-// export interface Recipe {
-//     readonly id: number;
-//     readonly img: string;
-//     readonly name: string;
-//     readonly cooking_time: number;
-//     readonly category: string;
-//     readonly recipe_description: string;
-//     readonly energy_value_per_portion: Record<string, number>;
-//     readonly ingredients: readonly Ingredient[];
-//     readonly portion_quantity: number;
-//     readonly steps: readonly string[];
-// }
+export interface Recipe {
+    readonly id: number;
+    readonly name: string;
+    readonly cookingTime: number;
+    readonly portionQuantity: number;
+    readonly countryName: string;
+    readonly categoryName: string;
+    readonly image?: string;
+    readonly ingredientsInfo: readonly Ingredient[];
+    readonly energyValue: EnergyValue;
+}

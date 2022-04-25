@@ -32,39 +32,42 @@
             <input tuiTextfield />
         </tui-input-number>
     </div>
-    <div *tuiLet="countries$ | async as countries" class="row tui-space_top-5">
-        <div>
-            <!-- <tui-combo-box
-            [stringify]="stringify"
-           
-            class="form"
-            [tuiTextfieldCleaner]="true"
-            [formControl]="categoryId"
+    <div class="row tui-space_top-5">
+        <div
+            *tuiLet="categories$ | async as categories"
+            class="form tui-space_right-5"
         >
-            Страна (Кухня)
-            <input tuiTextfield />
-            <tui-data-list-wrapper
-                *tuiDataList
-                
-                [items]="countries |  tuiFilterByInputWith : stringify"
-                [itemContent]="stringify | tuiStringifyContent"
-            ></tui-data-list-wrapper>
-        </tui-combo-box>  -->
+            <tui-combo-box
+                class="form"
+                [stringify]="stringify"
+                [tuiTextfieldCleaner]="true"
+                [formControl]="categoryId"
+            >
+                Категория
+                <input tuiTextfield />
+                <tui-data-list-wrapper
+                    *tuiDataList
+                    [items]="categories |  tuiFilterByInputWith : stringify"
+                    [itemContent]="stringify | tuiStringifyContent"
+                ></tui-data-list-wrapper>
+            </tui-combo-box>
         </div>
-        <tui-combo-box
-            class="form"
-            [stringify]="stringify"
-            [tuiTextfieldCleaner]="true"
-            [formControl]="countryId"
-        >
-            Страна (Кухня)
-            <input tuiTextfield />
-            <tui-data-list-wrapper
-                *tuiDataList
-                [items]="countries |  tuiFilterByInputWith : stringify"
-                [itemContent]="stringify | tuiStringifyContent"
-            ></tui-data-list-wrapper>
-        </tui-combo-box>
+        <div *tuiLet="countries$ | async as countries" class="form">
+            <tui-combo-box
+                class="form"
+                [stringify]="stringify"
+                [tuiTextfieldCleaner]="true"
+                [formControl]="countryId"
+            >
+                Страна (Кухня)
+                <input tuiTextfield />
+                <tui-data-list-wrapper
+                    *tuiDataList
+                    [items]="countries |  tuiFilterByInputWith : stringify"
+                    [itemContent]="stringify | tuiStringifyContent"
+                ></tui-data-list-wrapper>
+            </tui-combo-box>
+        </div>
     </div>
 
     <tui-text-area
@@ -166,6 +169,7 @@
 <button
     tuiButton
     class="tui-space_top-5"
+    [showLoader]="(loading$ | async) || false"
     [disabled]="recipeForm.invalid"
     (click)="addRecipe()"
 >

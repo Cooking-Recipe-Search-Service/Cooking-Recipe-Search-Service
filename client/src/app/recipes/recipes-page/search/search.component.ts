@@ -6,9 +6,10 @@ import {
     Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
+import { DEFAULT_COOKING_TIME } from 'src/libs/consts';
 import { Recipe, SimpleInterface } from 'src/libs/interfaces';
 
 import {
@@ -43,7 +44,7 @@ export class SearchComponent {
     readonly defaultSearchValues$ = forkJoin({
         categories: this.recipesService.getCategories(),
         countries: this.recipesService.getCountries(),
-        time: this.recipesService.getPreparingTime(),
+        time: of(DEFAULT_COOKING_TIME),
         ingredients: this.recipesService.getIngredients(),
     });
 

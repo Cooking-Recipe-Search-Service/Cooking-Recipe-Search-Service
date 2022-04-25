@@ -21,10 +21,16 @@ export class AdminPanelPageComponent {
         },
     ];
 
+    ingredient = '';
+
     constructor(private scroller: ViewportScroller) {}
 
     onClick(activeElement: { id: string; name: string }): void {
         this.activeItemIndex = this.tabs.indexOf(activeElement);
         this.scroller.scrollToAnchor(activeElement.id);
+    }
+
+    setIngredient(s: string) {
+        this.ingredient = s;
     }
 }

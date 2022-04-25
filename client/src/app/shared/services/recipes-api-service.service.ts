@@ -77,13 +77,7 @@ export class RecipesApiService {
 
     getCategories(): Observable<readonly SimpleInterface[]> {
         return this.http.get<readonly SimpleInterface[]>(
-            `${this.baseUrl}/categories`,
-        );
-    }
-
-    getPreparingTime(): Observable<readonly SimpleInterface[]> {
-        return this.http.get<readonly SimpleInterface[]>(
-            `${this.baseUrl}/time`,
+            `${this.baseUrlReal}/category`,
         );
     }
 }

@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { map, switchMap } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
 import { REVERSE_ROUTER_MAPPER } from 'src/libs/consts';
+import { Recipe } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-category-recipes',
@@ -11,20 +11,19 @@ import { REVERSE_ROUTER_MAPPER } from 'src/libs/consts';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryRecipesComponent {
+    @Input() set category(category: string) {
+        this.activeCategory = category;
+
+        this.recipes$ = this.recipesService.searchRecipe(
+            `category.name=${category}`,
+        );
+    }
+
+    activeCategory = '';
+
     routerMapper = REVERSE_ROUTER_MAPPER;
 
-    category = '';
+    recipes$!: Observable<readonly Recipe[]>;
 
-    readonly recipes$ = this.route.params.pipe(
-        map((response) => this.routerMapper[response.category]),
-        switchMap((category) => {
-            this.category = category;
-            return this.recipesService.getRecipeByCategory(category);
-        }),
-    );
-
-    constructor(
-        private readonly route: ActivatedRoute,
-        private readonly recipesService: RecipesApiService,
-    ) {}
+    constructor(private readonly recipesService: RecipesApiService) {}
 }

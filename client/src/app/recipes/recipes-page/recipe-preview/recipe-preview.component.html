@@ -1,6 +1,6 @@
 <tui-island class="recipe-preview">
     <div class="recipe-preview__calories tui-text_body-xs">
-        <p class="no-margin bold">{{recipe.energyValue}} ккал</p>
+        <p class="no-margin bold">{{recipe.energyValue.calories}} ккал</p>
     </div>
     <a [routerLink]="['/recipes/recipe',recipe.id ]">
         <img

@@ -11,6 +11,7 @@ export const CATEGORIES_MAPPER: Record<string, string> = {
     Супы: 'assets/images/soup.png',
     'Соусы и маринады': 'assets/images/sauce.png',
     Заготовки: 'assets/images/jam.png',
+    Ризотто: 'assets/images/risotto.png',
 };
 
 export const TAGS_MAPPER: Record<string, string> = {

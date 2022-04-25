@@ -13,11 +13,17 @@ import { Recipe } from 'src/libs/interfaces';
 export class RecipesPageComponent {
     recipes$ = this.recipiesApi.getDefaultRecipes();
 
+    category = '';
+
     searchedRecipes$!: Observable<readonly Recipe[]>;
 
     constructor(private readonly recipiesApi: RecipesApiService) {}
 
     loadRecipes(recipes: Observable<readonly Recipe[]>): void {
         this.searchedRecipes$ = recipes;
+    }
+
+    activeCategory(category: string): void {
+        this.category = category;
     }
 }

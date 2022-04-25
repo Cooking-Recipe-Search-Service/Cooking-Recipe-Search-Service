@@ -41,7 +41,7 @@ export function contructCookingTime(
                 if (time.length > 1) {
                     return (
                         accum +
-                        `cookingTime=gte(${time[0]})&cookingTime=and(lte(${time[0]}))&`
+                        `cookingTime=gte(${time[0]})&cookingTime=and(lte(${time[1]}))&`
                     );
                 }
                 return accum + `cookingTime=gte(${time[0]})&`;
@@ -64,26 +64,22 @@ export function contructIngredients(
     const ingredients: string[] = [];
     if (includeIngredients && includeIngredients.length) {
         ingredients.push(
-            includeIngredients
-                .reduce(
-                    (accum, current) =>
-                        accum + `ingredients.ingredient.name=${current.name}&`,
-                    '',
-                )
-                .slice(0, -1),
+            includeIngredients.reduce(
+                (accum, current) =>
+                    accum + `ingredients.ingredient.name=${current.name}&`,
+                '',
+            ),
         );
     }
 
     if (excludeIngredients && excludeIngredients.length) {
         ingredients.push(
-            excludeIngredients
-                .reduce(
-                    (accum, current) =>
-                        accum +
-                        `ingredients.ingredient.name=and(not(${current.name}))&`,
-                    '',
-                )
-                .slice(0, -1),
+            excludeIngredients.reduce(
+                (accum, current) =>
+                    accum +
+                    `ingredients.ingredient.name=and(not(${current.name}))&`,
+                '',
+            ),
         );
     }
 

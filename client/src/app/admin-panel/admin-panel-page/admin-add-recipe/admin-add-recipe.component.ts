@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Inject,
+    Input,
+} from '@angular/core';
 import {
     AbstractControl,
     FormArray,
@@ -13,9 +18,10 @@ import {
     TuiStringHandler,
     TuiValidationError,
 } from '@taiga-ui/cdk';
-import { TuiNotificationsService } from '@taiga-ui/core';
+import { TuiNotification, TuiNotificationsService } from '@taiga-ui/core';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { delay, takeUntil } from 'rxjs/operators';
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
 import { SimpleInterface } from 'src/libs/interfaces';
 
@@ -35,14 +41,22 @@ import { SimpleInterface } from 'src/libs/interfaces';
     ],
 })
 export class AdminAddRecipeComponent {
+    @Input() set ingredient(i: string) {
+        this.ingredients$ = this.recipesService
+            .getIngredients()
+            .pipe(delay(1000));
+    }
+
     private readonly search$ = new Subject<string>();
+
+    readonly loading$ = new BehaviorSubject<boolean>(false);
 
     recipeForm = new FormGroup({
         name: new FormControl('', Validators.required),
         cookingTime: new FormControl(null, Validators.required),
         portionQuantity: new FormControl(null, Validators.required),
         countryId: new FormControl(null, Validators.required),
-        // categoryId: new FormControl(null, Validators.required),
+        categoryId: new FormControl(null, Validators.required),
         description: new FormControl(),
         ingredients: new FormArray([
             new FormGroup({
@@ -56,8 +70,11 @@ export class AdminAddRecipeComponent {
     readonly countries$: Observable<readonly SimpleInterface[]> =
         this.recipesService.getCountries();
 
-    readonly ingredients$: Observable<readonly SimpleInterface[]> =
+    ingredients$: Observable<readonly SimpleInterface[]> =
         this.recipesService.getIngredients();
+
+    readonly categories$: Observable<readonly SimpleInterface[]> =
+        this.recipesService.getCategories();
 
     constructor(
         private readonly recipesService: RecipesApiService,
@@ -134,12 +151,13 @@ export class AdminAddRecipeComponent {
             this.recipeForm.value;
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const paylod = {
-            name,
+        const payload = {
+            name: name[0].toUpperCase() + name.slice(1),
             cookingTime,
             description,
             portionQuantity,
             countryId: this.recipeForm.value.countryId.id,
+            categoryId: this.recipeForm.value.countryId.id,
             instructions: this.recipeForm.value.instructions.map(
                 (instruction: string, ind: number) => ({
                     itemNumber: ind,
@@ -153,6 +171,29 @@ export class AdminAddRecipeComponent {
                 }),
             ),
         };
+        this.recipesService
+            .postRecipe(payload)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(
+                (_) => {
+                    this.loading$.next(false);
+                    this.notificationsService
+                        .show('', {
+                            label: 'Ингредиент добавлен',
+                            status: TuiNotification.Success,
+                        })
+                        .subscribe();
+                },
+                (error) => {
+                    this.loading$.next(false);
+                    this.notificationsService
+                        .show(error.message, {
+                            label: 'Ошибка',
+                            status: TuiNotification.Error,
+                        })
+                        .subscribe();
+                },
+            );
     }
 
     removeIngredient(index: number): void {

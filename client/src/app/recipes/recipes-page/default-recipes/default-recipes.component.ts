@@ -1,11 +1,16 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Output,
+} from '@angular/core';
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
-import { map, shareReplay } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { CATEGORIES_MAPPER, ROUTER_MAPPER } from 'src/libs/consts';
-import { Observable } from 'rxjs';
 
-import { Router } from '@angular/router';
-import { Recipe, SimpleInterface } from 'src/libs/interfaces';
+
+
+import {  SimpleInterface } from 'src/libs/interfaces';
 
 const CATEGORIES_COUNT = 12;
 @Component({
@@ -15,11 +20,11 @@ const CATEGORIES_COUNT = 12;
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DefaultRecipesComponent {
+    @Output() clickedCategory = new EventEmitter<string>();
+
     readonly categoriesCount = CATEGORIES_COUNT;
 
     activeBtnArray = Array(this.categoriesCount).fill(false);
-
-    categoryRecipes$: Observable<readonly Recipe[]> = new Observable();
 
     index = 0;
 
@@ -31,10 +36,8 @@ export class DefaultRecipesComponent {
         ),
         map((categories: SimpleInterface[]) => {
             this.activeBtnArray[0] = true;
+            this.clickedCategory.emit(categories[0].name);
 
-            this.categoryRecipes$ = this.recipesService
-                .getRecipeByCategory(categories[0].name)
-                .pipe(shareReplay(1));
             return categories.map((category) => {
                 return {
                     label: category.name,
@@ -46,26 +49,13 @@ export class DefaultRecipesComponent {
 
     routeMapper = ROUTER_MAPPER;
 
-    constructor(
-        private readonly recipesService: RecipesApiService,
-        private readonly router: Router,
-    ) {}
+    constructor(private readonly recipesService: RecipesApiService) {}
 
     isActive(index: number): string {
         return this.activeBtnArray[index] ? 'primary' : 'whiteblock';
     }
 
     loadCategory(category: string) {
-        this.router.navigate([`/recipes`, this.routeMapper[category]]);
+        this.clickedCategory.emit(category);
     }
-
-    // loadCategory(index: number, category: string): void {
-    //     this.activeBtnArray = Array(this.categoriesCount).fill(false);
-    //     this.activeBtnArray[index] = true;
-    //     this.categoryRecipes$ = this.categoryRecipes$.pipe(
-    //         switchMap((_) => this.recipesService.getRecipeByCategory(category)),
-    //         shareReplay(1),
-    //     );
-    //     index = 0;
-    // }
 }
