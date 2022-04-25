@@ -9,21 +9,21 @@ const routes: Routes = [
                 (m) => m.InteractiveMapPageModule,
             ),
     },
-    {
-        path: 'calc-calories',
-        loadChildren: () =>
-            import('./calc-calories-page/calc-calories-page.module').then(
-                (m) => m.CalcCaloriesPageModule,
-            ),
-    },
+    // {
+    //     path: 'calc-calories',
+    //     loadChildren: () =>
+    //         import('./calc-calories-page/calc-calories-page.module').then(
+    //             (m) => m.CalcCaloriesPageModule,
+    //         ),
+    // },
 
-    {
-        path: 'home',
-        loadChildren: () =>
-            import('./home-page/home-page.module').then(
-                (m) => m.HomePageModule,
-            ),
-    },
+    // {
+    //     path: 'home',
+    //     loadChildren: () =>
+    //         import('./home-page/home-page.module').then(
+    //             (m) => m.HomePageModule,
+    //         ),
+    // },
     {
         path: 'recipes',
         loadChildren: () =>

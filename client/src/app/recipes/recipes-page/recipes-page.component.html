@@ -6,6 +6,7 @@
         *ngIf="searchedRecipes$ | async as searchedRecipes"
         class="recipes__preview"
     >
+    <h4 class="tui-text_h4">Результаты поиска</h4>
         <ng-container *ngFor="let recipe of searchedRecipes">
             <app-recipe-preview [recipe]="recipe"></app-recipe-preview>
         </ng-container>
@@ -16,13 +17,6 @@
         (clickedCategory)="activeCategory($event)"
     ></app-default-recipes>
 
-    <app-category-recipes [category]="category"></app-category-recipes>
+    <app-category-recipes [category]="category" class="recipes__category"></app-category-recipes>
 
-    <!-- <hr class="tui-space_vertical-5" />
-
-    <div *ngIf="recipes$ | async as recipes" class="recipes__preview">
-        <ng-container *ngFor="let recipe of recipes">
-            <app-recipe-preview [recipe]="recipe"></app-recipe-preview>
-        </ng-container>
-    </div> -->
 </div>

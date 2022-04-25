@@ -9,14 +9,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class NavbarComponent {
     tabs = [
         {
-            label: 'Расширенный поиск',
-            routerLink: '/recipes/search',
-            icon: '',
-        },
-        {
             label: 'Рецепты',
             routerLink: '/recipes',
-            icon: 'assets/icons/calc.svg',
+            icon: 'assets/icons/recipes.svg',
         },
         {
             label: 'Admin panel',

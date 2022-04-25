@@ -18,6 +18,7 @@ import {
 import { IngredientModule } from 'src/app/shared/components/ingredient/ingredient.module';
 import { DeclensionsPipeModule } from 'src/app/shared/modules/declensions-pipe/declensions-pipe.module';
 import { RouterModule } from '@angular/router';
+import { Base64ImageConvertModule } from 'src/app/shared/modules/base64-image-convert/base64-image-convert.module';
 
 @NgModule({
     declarations: [RecipePreviewComponent],
@@ -36,6 +37,7 @@ import { RouterModule } from '@angular/router';
         DeclensionsPipeModule,
         TuiLineClampModule,
         RouterModule,
+        Base64ImageConvertModule
     ],
     exports: [RecipePreviewComponent],
 })

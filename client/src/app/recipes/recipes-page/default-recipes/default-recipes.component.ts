@@ -55,7 +55,10 @@ export class DefaultRecipesComponent {
         return this.activeBtnArray[index] ? 'primary' : 'whiteblock';
     }
 
-    loadCategory(category: string) {
+    loadCategory(category: string,index:number):void {
+        
+        this.activeBtnArray = Array(this.categoriesCount).fill(false);
+        this.activeBtnArray[index] = true;
         this.clickedCategory.emit(category);
     }
 }

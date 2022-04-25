@@ -6,7 +6,7 @@
         <img
             alt="recipe photo"
             class="recipe-preview__img tui-space_right-4"
-            [src]="recipe.image"
+            [src]="recipe.image | base64ImageConvert"
         />
     </a>
     <div class="recipe-preview__title">

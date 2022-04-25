@@ -8,7 +8,7 @@ export interface Recipe {
     readonly portionQuantity: number;
     readonly countryName: string;
     readonly categoryName: string;
-    readonly image?: string;
+    readonly image: string;
     readonly ingredientsInfo: readonly Ingredient[];
     readonly energyValue: EnergyValue;
 }
