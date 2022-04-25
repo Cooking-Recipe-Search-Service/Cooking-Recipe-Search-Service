@@ -16,7 +16,7 @@ file-system:
   storage:
     images:
       recipe:
-        ./server/src/main/resources/images/recipe/
+        images/recipe/
       country:
         ./server/src/main/resources/images/country/
 crss:

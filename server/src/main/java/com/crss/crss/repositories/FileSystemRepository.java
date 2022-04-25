@@ -1,11 +1,9 @@
 package com.crss.crss.repositories;
 
-import com.crss.crss.exceptions.CrssException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import com.crss.crss.Application;
+import java.io.InputStream;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -31,14 +29,14 @@ public class FileSystemRepository {
 
     private byte[] getImageBytes(String name, String resourcesDir) {
         String imagePath = resourcesDir + name + IMAGE_FORMAT;
-        if (!Files.exists(Paths.get(imagePath))) {
+        try {
+            InputStream inputAvatar = Application.class.getClassLoader().getResourceAsStream(imagePath);
+            byte[] targetArray = new byte[inputAvatar.available()];
+            inputAvatar.read(targetArray);
+            return targetArray;
+        } catch (Exception e) {
             log.warn("Can't find image with name=" + name + " and path=" + imagePath);
             return new byte[0];
-        }
-        try {
-            return Files.readAllBytes(Paths.get(imagePath));
-        } catch (Exception e) {
-            throw new CrssException(HttpStatus.INTERNAL_SERVER_ERROR, "Can't read image with name=" + name + " and path=" + imagePath);
         }
     }
 }
