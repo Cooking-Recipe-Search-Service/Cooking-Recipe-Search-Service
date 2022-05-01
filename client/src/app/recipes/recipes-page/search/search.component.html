@@ -1,17 +1,31 @@
 <div class="search">
     <form [formGroup]="searchForm" (ngSubmit)="searchRecipe()">
-        <div class="search__main-search">
-            <tui-input
-                tuiTextfieldExampleText="Салат цезарь"
-                formControlName="recipeSearch"
-                tuiTextfieldSize="l"
-                [tuiTextfieldLabelOutside]="true"
-                [tuiTextfieldCleaner]="true"
+        <div *tuiLet="recipes$$ | async as recipes" class="search__main-search">
+            <tui-hosted-dropdown
+                tuiDropdownLimitWidth="min"
+                [content]="dropdown"
+                [canOpen]="canOpen"
+                [(open)]="open"
             >
-                Введите название рецепта
-            </tui-input>
-
-            <button tuiButton size="l" (click)="searchRecipe()">Поиск</button>
+                <tui-input
+                    placeholder="Салат цезарь"
+                    [formControl]="name"
+                    (input)="onSearchChange(extractValueFromEvent($event))"
+                >
+                    Введите название рецепта
+                </tui-input>
+            </tui-hosted-dropdown>
+            <ng-template #dropdown>
+                <tui-data-list class="search__dropdown">
+                    <button
+                        *ngFor="let recipe of recipes"
+                        tuiOption
+                        (click)="onClick(recipe.name)"
+                    >
+                        {{recipe.name}}
+                    </button>
+                </tui-data-list>
+            </ng-template>
         </div>
         <div
             *ngIf="defaultSearchValues$ | async as defaultSearchValue"

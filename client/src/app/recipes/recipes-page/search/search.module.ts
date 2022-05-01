@@ -3,12 +3,18 @@ import { CommonModule } from '@angular/common';
 import { SearchComponent } from './search.component';
 import {
     TuiButtonModule,
+    TuiDataListModule,
     TuiHostedDropdownModule,
     TuiSvgModule,
     TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TuiInputModule } from '@taiga-ui/kit';
+import {
+    TuiComboBoxModule,
+    TuiDataListWrapperModule,
+    TuiFilterByInputPipeModule,
+    TuiInputModule,
+} from '@taiga-ui/kit';
 import { SelectWithSearchModule } from '../../../shared/components/select-with-search/select-with-search.module';
 import { IngredientsSearchModule } from '../../../shared/components/ingredients-search/ingredients-search.module';
 import { TuiLetModule, TuiMapperPipeModule } from '@taiga-ui/cdk';
@@ -28,6 +34,11 @@ import { TuiLetModule, TuiMapperPipeModule } from '@taiga-ui/cdk';
         TuiSvgModule,
         TuiLetModule,
         TuiMapperPipeModule,
+        TuiComboBoxModule,
+        TuiDataListWrapperModule,
+        TuiFilterByInputPipeModule,
+        TuiHostedDropdownModule,
+        TuiDataListModule,
     ],
     exports: [SearchComponent],
 })

@@ -6,10 +6,27 @@ import {
     Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { forkJoin, Observable, of } from 'rxjs';
+import { TuiDestroyService, tuiPure } from '@taiga-ui/cdk';
+import {
+    BehaviorSubject,
+    EMPTY,
+    forkJoin,
+    Observable,
+    of,
+    Subject,
+} from 'rxjs';
+import {
+    catchError,
+    debounceTime,
+    distinctUntilChanged,
+    filter,
+    switchMap,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
 import { DEFAULT_COOKING_TIME } from 'src/libs/consts';
+import { isNotPresentOrEmptyString } from 'src/libs/helpers';
 import { Recipe, SimpleInterface } from 'src/libs/interfaces';
 
 import {
@@ -25,6 +42,7 @@ import {
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [TuiDestroyService],
 })
 export class SearchComponent {
     @Input() form!: FormGroup;
@@ -33,7 +51,7 @@ export class SearchComponent {
         new EventEmitter<Observable<readonly Recipe[]>>();
 
     readonly searchForm = new FormGroup({
-        recipeSearch: new FormControl('', [Validators.minLength(3)]),
+        name: new FormControl(null, [Validators.minLength(3)]),
         category: new FormControl(null),
         kitchen: new FormControl(null),
         preparationTime: new FormControl(null),
@@ -48,35 +66,96 @@ export class SearchComponent {
         ingredients: this.recipesService.getIngredients(),
     });
 
+    open = false;
+
     includeIngredientsChanged!: readonly SimpleInterface[];
 
     excludeIngredientsChanged!: readonly SimpleInterface[];
 
-    constructor(private readonly recipesService: RecipesApiService) {
-        this.searchForm.controls.includeIngredients.valueChanges.subscribe(
-            (value) => (this.includeIngredientsChanged = value),
-        );
-        this.searchForm.controls.excludeIngredients.valueChanges.subscribe(
-            (value) => (this.excludeIngredientsChanged = value),
-        );
+    readonly recipes$$: BehaviorSubject<readonly Recipe[]> =
+        new BehaviorSubject<readonly Recipe[]>([]);
+
+    readonly search$: Subject<string> = new Subject();
+
+    constructor(
+        private readonly recipesService: RecipesApiService,
+        private readonly destroy$: TuiDestroyService,
+    ) {
+        this.searchForm.controls.includeIngredients.valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((value) => (this.includeIngredientsChanged = value));
+        this.searchForm.controls.excludeIngredients.valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((value) => (this.excludeIngredientsChanged = value));
+
+        this.search$
+            .pipe(
+                takeUntil(this.destroy$),
+                debounceTime(1000),
+                distinctUntilChanged(),
+                filter((value) => !isNotPresentOrEmptyString(value)),
+                switchMap((value: string) => {
+                    const query = contructNameRecipe(value) || '';
+                    return this.recipesService.searchRecipe(query).pipe(
+                        catchError((_) => {
+                            return EMPTY;
+                        }),
+                    );
+                }),
+            )
+            .subscribe((value) => {
+                this.open = true;
+                this.recipes$$.next(value);
+            });
     }
 
+    onSearchChange(searchQuery: string | null) {
+        if (searchQuery) this.search$.next(searchQuery);
+    }
+
+    get canOpen(): boolean {
+        return !!this.recipes$$.getValue().length;
+    }
+
+    extractValueFromEvent(event: Event): string {
+        return (event.target as HTMLInputElement)?.value;
+    }
+
+    onClick(name: string) {
+        this.name.patchValue(name);
+        this.open = false;
+    }
+
+    // readonly stringify: TuiStringHandler<
+    //     Recipe | TuiContextWithImplicit<Recipe>
+    // > = (item) => ('name' in item ? item.name : item.$implicit.name);
+
+    @tuiPure
+    get name(): FormControl {
+        return this.searchForm.controls.name as FormControl;
+    }
+
+    @tuiPure
     get category(): FormControl {
         return this.searchForm.controls.category as FormControl;
     }
 
+    @tuiPure
     get kitchen(): FormControl {
         return this.searchForm.controls.kitchen as FormControl;
     }
 
+    @tuiPure
     get preparationTime(): FormControl {
         return this.searchForm.controls.preparationTime as FormControl;
     }
 
+    @tuiPure
     get excludeIngredients(): FormControl {
         return this.searchForm.controls.excludeIngredients as FormControl;
     }
 
+    @tuiPure
     get includeIngredients(): FormControl {
         return this.searchForm.controls.includeIngredients as FormControl;
     }
@@ -102,7 +181,7 @@ export class SearchComponent {
 
         if (cookingTimePartQuery) fullString.push(cookingTimePartQuery);
 
-        const namePartQuery = contructNameRecipe(recipe.recipeSearch);
+        const namePartQuery = contructNameRecipe(recipe.name);
 
         if (namePartQuery) fullString.push(namePartQuery);
 
