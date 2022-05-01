@@ -1,71 +1,84 @@
 <div class="search">
     <form [formGroup]="searchForm" (ngSubmit)="searchRecipe()">
         <div *tuiLet="recipes$$ | async as recipes" class="search__main-search">
-            <tui-hosted-dropdown
-                tuiDropdownLimitWidth="min"
-                [content]="dropdown"
-                [canOpen]="canOpen"
-                [(open)]="open"
-            >
-                <tui-input
-                    placeholder="Салат цезарь"
-                    [formControl]="name"
-                    (input)="onSearchChange(extractValueFromEvent($event))"
+            <div class="search__default-width">
+                <tui-hosted-dropdown
+                    tuiDropdownLimitWidth="min"
+                    class="search__default-width"
+                    [content]="dropdown"
+                    [canOpen]="canOpen"
+                    [(open)]="open"
                 >
-                    Введите название рецепта
-                </tui-input>
-            </tui-hosted-dropdown>
-            <ng-template #dropdown>
-                <tui-data-list class="search__dropdown">
-                    <button
-                        *ngFor="let recipe of recipes"
-                        tuiOption
-                        (click)="onClick(recipe.name)"
+                    <tui-input
+                        placeholder="Салат цезарь"
+                        [formControl]="name"
+                        (input)="onSearchChange(extractValueFromEvent($event))"
                     >
-                        {{recipe.name}}
-                    </button>
-                </tui-data-list>
-            </ng-template>
-        </div>
-        <div
-            *ngIf="defaultSearchValues$ | async as defaultSearchValue"
-            class="search__extra-options tui-space_top-5"
-        >
-            <div class="search__default">
-                <app-select-with-search
-                    label="Категория"
-                    class="search__default-width"
-                    [values]="defaultSearchValue.categories"
-                    [control]="category"
-                ></app-select-with-search>
-                <app-select-with-search
-                    label="Кухня"
-                    class="search__default-width tui-space_horizontal-5"
-                    [values]="defaultSearchValue.countries"
-                    [control]="kitchen"
-                ></app-select-with-search>
-                <app-select-with-search
-                    label="Время приготовления"
-                    class="search__default-width"
-                    [values]="defaultSearchValue.time"
-                    [control]="preparationTime"
-                ></app-select-with-search>
+                        Введите название рецепта
+                    </tui-input>
+                </tui-hosted-dropdown>
+                <ng-template #dropdown>
+                    <tui-data-list class="search__dropdown">
+                        <button
+                            *ngFor="let recipe of recipes"
+                            tuiOption
+                            (click)="onClick(recipe.name)"
+                        >
+                            {{recipe.name}}
+                        </button>
+                    </tui-data-list>
+                </ng-template>
             </div>
+            <button
+                tuiButton
+                icon="tuiIconFilter"
+                (click)="isOpenedFilters = !isOpenedFilters"
+            >
+                Фильтры
+            </button>
+        </div>
+        <ng-container *ngIf="isOpenedFilters">
+            <div
+                *ngIf="defaultSearchValues$ | async as defaultSearchValue"
+                class="search__extra-options tui-space_top-5"
+            >
+                <div class="search__default">
+                    <app-select-with-search
+                        label="Категория"
+                        class="search__default-width"
+                        [values]="defaultSearchValue.categories"
+                        [control]="category"
+                    ></app-select-with-search>
+                    <app-select-with-search
+                        label="Кухня"
+                        class="search__default-width tui-space_horizontal-5"
+                        [values]="defaultSearchValue.countries"
+                        [control]="kitchen"
+                    ></app-select-with-search>
+                    <app-select-with-search
+                        label="Время приготовления"
+                        class="search__default-width"
+                        [values]="defaultSearchValue.time"
+                        [control]="preparationTime"
+                    ></app-select-with-search>
+                </div>
 
-            <div class="search__ingredients tui-space_top-5">
-                <app-select-with-search
-                    label="+ Добавить ингредиенты"
-                    class="search__ingredients-width tui-space_right-5"
-                    [values]="defaultSearchValue.ingredients | tuiMapper:ingredientMapper :excludeIngredientsChanged  "
-                    [control]="includeIngredients"
-                ></app-select-with-search>
-                <app-select-with-search
-                    label="- Исключить ингредиенты"
-                    class="search__ingredients-width"
-                    [values]="defaultSearchValue.ingredients | tuiMapper: ingredientMapper : includeIngredientsChanged "
-                    [control]="excludeIngredients"
-                ></app-select-with-search>
-            </div>
-        </div>
+                <div class="search__ingredients tui-space_top-5">
+                    <app-select-with-search
+                        label="+ Добавить ингредиенты"
+                        class="search__ingredients-width tui-space_right-5"
+                        [values]="defaultSearchValue.ingredients | tuiMapper:ingredientMapper :excludeIngredientsChanged  "
+                        [control]="includeIngredients"
+                    ></app-select-with-search>
+                    <app-select-with-search
+                        label="- Исключить ингредиенты"
+                        class="search__ingredients-width"
+                        [values]="defaultSearchValue.ingredients | tuiMapper: ingredientMapper : includeIngredientsChanged "
+                        [control]="excludeIngredients"
+                    ></app-select-with-search>
+                </div>
+            </div><button class="tui-space_right-5" tuiButton (click)="searchRecipe()"> Поиск</button>
+        </ng-container>
+        
     </form>
 </div>

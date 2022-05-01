@@ -77,6 +77,8 @@ export class SearchComponent {
 
     readonly search$: Subject<string> = new Subject();
 
+    isOpenedFilters = false;
+
     constructor(
         private readonly recipesService: RecipesApiService,
         private readonly destroy$: TuiDestroyService,
@@ -109,7 +111,7 @@ export class SearchComponent {
             });
     }
 
-    onSearchChange(searchQuery: string | null) {
+    onSearchChange(searchQuery: string | null): void {
         if (searchQuery) this.search$.next(searchQuery);
     }
 
@@ -121,14 +123,10 @@ export class SearchComponent {
         return (event.target as HTMLInputElement)?.value;
     }
 
-    onClick(name: string) {
+    onClick(name: string): void {
         this.name.patchValue(name);
         this.open = false;
     }
-
-    // readonly stringify: TuiStringHandler<
-    //     Recipe | TuiContextWithImplicit<Recipe>
-    // > = (item) => ('name' in item ? item.name : item.$implicit.name);
 
     @tuiPure
     get name(): FormControl {
