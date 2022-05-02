@@ -16,6 +16,8 @@ import { environment } from 'src/environments/environment';
 import { HOST_API } from 'src/libs/consts';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarModule } from './navbar/navbar.module';
+import { ProfilePageModule } from './profile-page/profile-page.module';
+import { SocialLoginModule } from 'angularx-social-login';
 
 @NgModule({
     declarations: [AppComponent],
@@ -23,11 +25,13 @@ import { NavbarModule } from './navbar/navbar.module';
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        RecipesModule,
+        RecipesModule.forRoot(),
         TuiRootModule,
         HttpClientModule,
         NavbarModule,
         TuiNotificationsModule,
+        ProfilePageModule.forRoot(),
+        SocialLoginModule,
     ],
     providers: [
         { provide: HOST_API, useValue: environment.hostApi },

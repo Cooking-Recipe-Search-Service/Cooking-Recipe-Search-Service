@@ -1,4 +1,9 @@
 <div class="recipes">
+    <div *ngIf="socialAuthServive.authState | async as socialUser">
+        <p>{{socialUser | json}}</p>
+
+        <button (click)="logout()">Logout</button>
+    </div>
     <h4 class="tui-text_h4">Поиск рецептов</h4>
     <app-search (searchedRecipes)="loadRecipes($event)"></app-search>
 

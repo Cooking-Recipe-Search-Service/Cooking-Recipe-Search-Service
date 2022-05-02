@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { SocialAuthService } from 'angularx-social-login';
 import { Observable } from 'rxjs';
 
 import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
@@ -17,7 +19,11 @@ export class RecipesPageComponent {
 
     searchedRecipes$!: Observable<readonly Recipe[]>;
 
-    constructor(private readonly recipiesApi: RecipesApiService) {}
+    constructor(
+        private readonly recipiesApi: RecipesApiService,
+        private router: Router,
+        public socialAuthServive: SocialAuthService,
+    ) {}
 
     loadRecipes(recipes: Observable<readonly Recipe[]>): void {
         this.searchedRecipes$ = recipes;
@@ -25,5 +31,11 @@ export class RecipesPageComponent {
 
     activeCategory(category: string): void {
         this.category = category;
+    }
+
+    logout(): void {
+        this.socialAuthServive
+            .signOut()
+            .then(() => this.router.navigate(['admin-panel']));
     }
 }

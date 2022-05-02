@@ -1,1 +1,3 @@
 .DS_Store
+environment.prod.secret.ts
+environment.secret.ts
