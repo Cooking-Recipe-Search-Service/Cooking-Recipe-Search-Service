@@ -4,26 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
     {
         path: '',
-        loadChildren: () =>
-            import('./interactive-map-page/interactive-map-page.module').then(
-                (m) => m.InteractiveMapPageModule,
-            ),
+        redirectTo:'recipes',
+        pathMatch:'full'
     },
-    // {
-    //     path: 'calc-calories',
-    //     loadChildren: () =>
-    //         import('./calc-calories-page/calc-calories-page.module').then(
-    //             (m) => m.CalcCaloriesPageModule,
-    //         ),
-    // },
-
-    // {
-    //     path: 'home',
-    //     loadChildren: () =>
-    //         import('./home-page/home-page.module').then(
-    //             (m) => m.HomePageModule,
-    //         ),
-    // },
     {
         path: 'recipes',
         loadChildren: () =>
@@ -35,6 +18,12 @@ const routes: Routes = [
             import('./admin-panel/admin-panel.module').then(
                 (m) => m.AdminPanelModule,
             ),
+    },
+    {
+        path:'profile',
+        loadChildren:()=> import('./profile-page/profile-page.module').then(
+            (m) => m.ProfilePageModule
+        )
     },
 
     {

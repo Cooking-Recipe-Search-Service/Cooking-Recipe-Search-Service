@@ -19,9 +19,9 @@ export class NavbarComponent {
             icon: 'tuiIconLockLarge',
         },
         {
-            label: 'О нас',
-            routerLink: '',
-            icon: 'tuiIconAlertCircleLarge',
+            label: 'Профиль',
+            routerLink: '/profile',
+            icon: 'tuiIconUser',
         },
     ];
 

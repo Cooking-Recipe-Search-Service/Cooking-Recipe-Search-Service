@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import type { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import { MainHomeScreenComponent } from './main-home-screen/main-home-screen.component';
+import { ProfileComponent } from './profile/profile.component';
+
 
 const routes: Routes = [
+
     {
         path: '',
-        component: MainHomeScreenComponent,
+        component: ProfileComponent,
     },
 ];
 
@@ -14,4 +16,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class InteractiveMapPageRoutingModule {}
+export class ProfilePageRoutingModule {}
