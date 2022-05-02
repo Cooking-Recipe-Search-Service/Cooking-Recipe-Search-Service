@@ -1,5 +1,6 @@
 import { Ingredient } from './ingredient';
 import { EnergyValue } from './ingredient-post-request';
+import { Instruction } from './instruction';
 
 export interface Recipe {
     readonly id: number;
@@ -11,4 +12,6 @@ export interface Recipe {
     readonly image: string;
     readonly ingredientsInfo: readonly Ingredient[];
     readonly energyValue: EnergyValue;
+    readonly instructions: readonly Instruction[];
+    readonly description: string;
 }

@@ -12,7 +12,6 @@
                     <tui-input
                         placeholder="Салат цезарь"
                         [formControl]="name"
-                      
                         (input)="onSearchChange(extractValueFromEvent($event))"
                     >
                         Введите название рецепта
@@ -33,7 +32,6 @@
             <button
                 tuiButton
                 icon="tuiIconFilter"
-                
                 (click)="isOpenedFilters = !isOpenedFilters"
             >
                 Фильтры

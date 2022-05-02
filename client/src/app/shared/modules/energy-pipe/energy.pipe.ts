@@ -1,11 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { EnergyValue } from 'src/libs/interfaces/frontend/energy-value';
+import { EnergyValue } from 'src/libs/interfaces';
+import { EnergyValueCard } from 'src/libs/interfaces/frontend/energy-value-card';
 
 @Pipe({
     name: 'energy',
 })
 export class EnergyPipe implements PipeTransform {
-    transform(energy: Record<string, number>): readonly EnergyValue[] {
+    transform(energy: EnergyValue): readonly EnergyValueCard[] {
         return [
             {
                 label: 'Калорийность',
@@ -13,7 +14,7 @@ export class EnergyPipe implements PipeTransform {
             },
             {
                 label: 'Белки',
-                value: ` ${energy.protein}гр`,
+                value: ` ${energy.proteins}гр`,
             },
             {
                 label: 'Жиры',

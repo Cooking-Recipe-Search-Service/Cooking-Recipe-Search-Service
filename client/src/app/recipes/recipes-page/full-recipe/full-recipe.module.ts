@@ -7,6 +7,7 @@ import { RecipeTagsPipeModule } from 'src/app/shared/modules/recipe-tags/recipe-
 import { ColorizePipeModule } from 'src/app/shared/modules/colorize-pipe/colorize-pipe.module';
 import { EnergyPipeModule } from 'src/app/shared/modules/energy-pipe/energy-pipe.module';
 import { IngredientsModule } from './ingredients/ingredients.module';
+import { Base64ImageConvertModule } from 'src/app/shared/modules/base64-image-convert/base64-image-convert.module';
 
 @NgModule({
     declarations: [FullRecipeComponent],
@@ -19,6 +20,7 @@ import { IngredientsModule } from './ingredients/ingredients.module';
         EnergyPipeModule,
         TuiLineClampModule,
         IngredientsModule,
+        Base64ImageConvertModule,
     ],
     exports: [FullRecipeComponent],
 })

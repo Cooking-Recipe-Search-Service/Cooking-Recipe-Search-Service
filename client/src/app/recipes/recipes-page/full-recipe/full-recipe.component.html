@@ -1,4 +1,4 @@
-<!-- <div *ngIf="recipe$ | async as recipe" class="recipe">
+<div *ngIf="recipe$ | async as recipe" class="recipe">
     <div class="recipe__main-title">
         <h6 class="tui-text_h6 recipe__name">{{recipe.name }}</h6>
         <div class="recipe__main-title-badges">
@@ -20,13 +20,11 @@
     <div class="recipe__main-photo">
         <img
             class="recipe__main-photo-img"
-            [src]="recipe.img"
+            [src]="recipe.image | base64ImageConvert"
             [alt]="recipe.name"
         />
         <div class="recipe__main-photo-title">
-            <ng-container
-                *ngFor="let value of recipe.energy_value_per_portion | energy"
-            >
+            <ng-container *ngFor="let value of recipe.energyValue | energy">
                 <div class="recipe__energy_value tui-space_right-4">
                     <p class="tui-text_body-m recipe__energy_value-bold">
                         {{value.label}}
@@ -46,22 +44,24 @@
         ></tui-line-clamp>
 
         <ng-template #content>
-            <div class="tui-text_body-s">{{recipe.recipe_description}}</div>
+            <div class="tui-text_body-s">{{recipe.description}}</div>
         </ng-template>
 
         <p class="tui-text_h6">Ингредиенты</p>
         <app-ingredients
             [value]="value"
-            [ingredients]="recipe.ingredients"
+            [ingredients]="recipe.ingredientsInfo"
         ></app-ingredients>
 
         <p class="tui-text_h6">Пошаговый рецепт</p>
         <div
-            *ngFor="let step of recipe.steps;let index = index"
+            *ngFor="let instruction of recipe.instructions;let index = index"
             class="tui-space_top-4"
         >
-            <div class="recipe__step-badge">{{ index+ 1}}</div>
-            <div class="recipe__step-title tui-text_body-m">{{step}}</div>
+            <div class="recipe__step-badge">{{ instruction.itemNumber}}</div>
+            <div class="recipe__step-title tui-text_body-m">
+                {{instruction.instruction}}
+            </div>
         </div>
     </div>
-</div> -->
+</div>

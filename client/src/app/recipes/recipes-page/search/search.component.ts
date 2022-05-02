@@ -5,7 +5,7 @@ import {
     Input,
     Output,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { TuiDestroyService, tuiPure } from '@taiga-ui/cdk';
 import {
     BehaviorSubject,
@@ -95,7 +95,10 @@ export class SearchComponent {
                 takeUntil(this.destroy$),
                 debounceTime(1000),
                 distinctUntilChanged(),
-                filter((value) => !isNotPresentOrEmptyString(value) && value.length >= 3),
+                filter(
+                    (value) =>
+                        !isNotPresentOrEmptyString(value) && value.length >= 3,
+                ),
                 switchMap((value: string) => {
                     const query = contructNameRecipe(value) || '';
                     return this.recipesService.searchRecipe(query).pipe(
@@ -107,7 +110,7 @@ export class SearchComponent {
             )
             .subscribe((value) => {
                 this.open = true;
-                this.searchedRecipes.next(of(value))
+                this.searchedRecipes.next(of(value));
                 this.recipes$$.next(value);
             });
     }
