@@ -12,6 +12,7 @@
                     <tui-input
                         placeholder="Салат цезарь"
                         [formControl]="name"
+                      
                         (input)="onSearchChange(extractValueFromEvent($event))"
                     >
                         Введите название рецепта
@@ -32,6 +33,7 @@
             <button
                 tuiButton
                 icon="tuiIconFilter"
+                
                 (click)="isOpenedFilters = !isOpenedFilters"
             >
                 Фильтры
@@ -77,8 +79,10 @@
                         [control]="excludeIngredients"
                     ></app-select-with-search>
                 </div>
-            </div><button class="tui-space_right-5" tuiButton (click)="searchRecipe()"> Поиск</button>
+            </div>
+            <button tuiButton class="tui-space_top-5" (click)="searchRecipe()">
+                Поиск
+            </button>
         </ng-container>
-        
     </form>
 </div>

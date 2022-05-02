@@ -1,20 +1,43 @@
 <div *ngIf="categories$ | async as categories ">
-    <div class="default__categories">
-        <button
-            *ngFor="let category of categories | slice:0:categoriesCount;let index = index"
-            size="l"
-            tuiButton
-            class="default__category"
-            [appearance]="isActive(index)"
-            (click)="loadCategory(category.label,index)"
+    <div
+        tuiCarouselButtons
+        class="default__categories"
+        (touchstart.passive.stop)="0"
+    >
+        <tui-carousel
+            #carousel
+            class="deafult__carousel-wrapper"
+            [itemsCount]="4"
+            [(index)]="index"
         >
-            <img
-                loading="lazy"
-                class="default__category-img tui-space_right-2"
-                [alt]="category.label"
-                [src]="category.icon"
-            />
-            {{category.label}}
-        </button>
+            <ng-container
+                *ngFor="let category of categories | slice:0:categoriesCount;let i = index"
+            >
+                <button
+                    *tuiItem
+                    size="l"
+                    tuiButton
+                    class="default__carousel"
+                    shape="square"
+                    [appearance]="isActive(i)"
+                    [class.item_active]="i === index + 1"
+                    (click)="loadCategory(category.label, i)"
+                >
+                    <img
+                        loading="lazy"
+                        class="default__category-img tui-space_right-2"
+                        [alt]="category.label"
+                        [src]="category.icon"
+                    />
+                    {{category.label}}
+                </button>
+            </ng-container>
+        </tui-carousel>
+        <button
+            tuiIconButton
+            icon="tuiIconChevronRightLarge"
+            title="Next"
+            (click)="navigate(1,categories.length)"
+        ></button>
     </div>
 </div>

@@ -22,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         TuiCarouselModule,
         FormsModule,
         ReactiveFormsModule,
+        TuiCarouselModule,
     ],
     exports: [DefaultRecipesComponent],
 })

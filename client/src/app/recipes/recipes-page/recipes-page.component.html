@@ -4,12 +4,15 @@
 
     <div
         *ngIf="searchedRecipes$ | async as searchedRecipes"
-        class="recipes__preview"
+        
     >
         <h4 class="tui-text_h4">Результаты поиска</h4>
-        <ng-container *ngFor="let recipe of searchedRecipes">
+        <div  class="recipes__preview">
+            <ng-container *ngFor="let recipe of searchedRecipes" class="recipes__preview">
             <app-recipe-preview [recipe]="recipe"></app-recipe-preview>
         </ng-container>
+        </div>
+        
     </div>
 
     <h4 class="tui-text_h4">Рецепты по категориям</h4>

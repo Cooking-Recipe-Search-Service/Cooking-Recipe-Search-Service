@@ -51,7 +51,7 @@ export class SearchComponent {
         new EventEmitter<Observable<readonly Recipe[]>>();
 
     readonly searchForm = new FormGroup({
-        name: new FormControl(null, [Validators.minLength(3)]),
+        name: new FormControl(null),
         category: new FormControl(null),
         kitchen: new FormControl(null),
         preparationTime: new FormControl(null),
@@ -95,7 +95,7 @@ export class SearchComponent {
                 takeUntil(this.destroy$),
                 debounceTime(1000),
                 distinctUntilChanged(),
-                filter((value) => !isNotPresentOrEmptyString(value)),
+                filter((value) => !isNotPresentOrEmptyString(value) && value.length >= 3),
                 switchMap((value: string) => {
                     const query = contructNameRecipe(value) || '';
                     return this.recipesService.searchRecipe(query).pipe(
@@ -107,6 +107,7 @@ export class SearchComponent {
             )
             .subscribe((value) => {
                 this.open = true;
+                this.searchedRecipes.next(of(value))
                 this.recipes$$.next(value);
             });
     }

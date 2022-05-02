@@ -58,4 +58,8 @@ export class DefaultRecipesComponent {
         this.activeBtnArray[index] = true;
         this.clickedCategory.emit(category);
     }
+
+    navigate(delta: number, len: number): void {
+        this.index = (this.index + delta) % (len - 4);
+    }
 }
