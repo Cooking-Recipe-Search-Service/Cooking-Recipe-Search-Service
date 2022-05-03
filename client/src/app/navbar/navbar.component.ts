@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TuiDestroyService } from '@taiga-ui/cdk';
-import {  SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from 'angularx-social-login';
 import { Observable } from 'rxjs';
 import { Profile } from 'src/libs/interfaces';
 import { LocalStorageService } from '../shared/services/local-storage/local-storage.service';
@@ -18,7 +18,7 @@ export class NavbarComponent {
 
     isOpenProfileCompanent = false;
 
-    user$: Observable<Profile | null> = this.socialAuthService.authState
+    user$: Observable<Profile | null> = this.socialAuthService.authState;
 
     constructor(
         private localStorage: LocalStorageService,
