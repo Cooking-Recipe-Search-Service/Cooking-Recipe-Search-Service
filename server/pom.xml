@@ -22,7 +22,7 @@
     <nodeJs.version>v16.3.0</nodeJs.version>
     <yarn.version>v1.10.1</yarn.version>
     <jgitflow.version>1.0-m5.1</jgitflow.version>
-    <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
+    <mysql-connector-java.version>5.1.47</mysql-connector-java.version>
     <liquibase-maven-plugin.version>3.5.2</liquibase-maven-plugin.version>
     <java.image>openjdk-17</java.image>
 
