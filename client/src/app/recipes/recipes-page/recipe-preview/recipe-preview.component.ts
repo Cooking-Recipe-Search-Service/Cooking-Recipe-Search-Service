@@ -6,9 +6,8 @@ import {
 } from '@angular/core';
 import { TuiDestroyService } from '@taiga-ui/cdk';
 import { TuiHostedDropdownComponent } from '@taiga-ui/core';
-import { SocialAuthService } from 'angularx-social-login';
 import { Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { LocalStorageService } from 'src/app/shared/services/local-storage/local-storage.service';
 import { NotificationService } from 'src/app/shared/services/notifications/notification.service';
 import { Profile, Recipe } from 'src/libs/interfaces';
 
@@ -22,16 +21,15 @@ import { Profile, Recipe } from 'src/libs/interfaces';
 export class RecipePreviewComponent {
     @Input() recipe!: Recipe;
 
-    @ViewChild(TuiHostedDropdownComponent) component?: TuiHostedDropdownComponent;
+    @ViewChild(TuiHostedDropdownComponent)
+    component?: TuiHostedDropdownComponent;
 
     open = false;
 
-    user$: Observable<Profile> = this.socialAuthService.authState.pipe(
-        takeUntil(this.destroy$),
-    );
+    user$: Observable<string | null> = this.localStirage.getUser();
 
     constructor(
-        private socialAuthService: SocialAuthService,
+        private localStirage: LocalStorageService,
         private readonly destroy$: TuiDestroyService,
         private readonly notificationService: NotificationService,
     ) {}
@@ -44,7 +42,7 @@ export class RecipePreviewComponent {
         }
     }
 
-    addToFavorits(recipe: Recipe, user: Profile | null) {
+    addToFavorits(recipe: Recipe, user: string | null) {
         if (!user) {
             this.notificationService.showNeedLoginNotification();
             return;

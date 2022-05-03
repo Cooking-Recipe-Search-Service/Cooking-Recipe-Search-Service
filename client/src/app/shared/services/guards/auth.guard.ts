@@ -5,7 +5,7 @@ import { SocialAuthService } from 'angularx-social-login';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Profile } from 'src/libs/interfaces';
-import { NotificationService } from '../services/notifications/notification.service';
+import { NotificationService } from '../notifications/notification.service';
 
 @Injectable({
     providedIn: 'root',
