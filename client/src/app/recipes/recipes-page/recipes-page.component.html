@@ -1,6 +1,6 @@
 <div class="recipes">
-    <div *ngIf="socialAuthServive.authState | async as socialUser">
-        <p>{{socialUser | json}}</p>
+    <div *ngIf="user$ | async as user">
+        <p>{{user | json}}</p>
 
         <button (click)="logout()">Logout</button>
     </div>

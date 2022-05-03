@@ -2,9 +2,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
-import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
-import { Recipe } from 'src/libs/interfaces';
+import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
+import { Profile, Recipe } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-recipes-page',
@@ -19,11 +20,15 @@ export class RecipesPageComponent {
 
     searchedRecipes$!: Observable<readonly Recipe[]>;
 
+    user$!: Observable<Profile>;
+
     constructor(
         private readonly recipiesApi: RecipesApiService,
         private router: Router,
         public socialAuthServive: SocialAuthService,
-    ) {}
+    ) {
+        this.user$ = socialAuthServive.authState.pipe(take(1));
+    }
 
     loadRecipes(recipes: Observable<readonly Recipe[]>): void {
         this.searchedRecipes$ = recipes;

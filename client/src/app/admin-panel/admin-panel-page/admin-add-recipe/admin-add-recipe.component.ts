@@ -22,7 +22,7 @@ import { TuiNotification, TuiNotificationsService } from '@taiga-ui/core';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { delay, takeUntil } from 'rxjs/operators';
-import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
+import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
 import { SimpleInterface } from 'src/libs/interfaces';
 
 @Component({

@@ -26,7 +26,6 @@ const routes: Routes = [
                 (m) => m.ProfilePageModule,
             ),
     },
-
     {
         path: '**',
         redirectTo: '/',

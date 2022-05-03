@@ -12,6 +12,7 @@ import {
     TuiButtonModule,
     TuiDataListModule,
     TuiGroupModule,
+    TuiHintModule,
     TuiHostedDropdownModule,
     TuiSvgModule,
 } from '@taiga-ui/core';
@@ -19,6 +20,7 @@ import { IngredientModule } from 'src/app/shared/components/ingredient/ingredien
 import { DeclensionsPipeModule } from 'src/app/shared/modules/declensions-pipe/declensions-pipe.module';
 import { RouterModule } from '@angular/router';
 import { Base64ImageConvertModule } from 'src/app/shared/modules/base64-image-convert/base64-image-convert.module';
+import { TuiLetModule } from '@taiga-ui/cdk';
 
 @NgModule({
     declarations: [RecipePreviewComponent],
@@ -38,6 +40,8 @@ import { Base64ImageConvertModule } from 'src/app/shared/modules/base64-image-co
         TuiLineClampModule,
         RouterModule,
         Base64ImageConvertModule,
+        TuiHintModule,
+        TuiLetModule,
     ],
     exports: [RecipePreviewComponent],
 })

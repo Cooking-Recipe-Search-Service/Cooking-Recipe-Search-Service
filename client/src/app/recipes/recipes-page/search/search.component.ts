@@ -24,7 +24,7 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 
-import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
+import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
 import { DEFAULT_COOKING_TIME } from 'src/libs/consts';
 import { isNotPresentOrEmptyString } from 'src/libs/helpers';
 import { Recipe, SimpleInterface } from 'src/libs/interfaces';

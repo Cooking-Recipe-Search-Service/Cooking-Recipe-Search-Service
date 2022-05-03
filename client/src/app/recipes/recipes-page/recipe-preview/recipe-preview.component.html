@@ -1,5 +1,4 @@
-<tui-island class="recipe-preview">
-    {{recipe.id}}
+<tui-island *tuiLet="user$ | async as user" class="recipe-preview">
     <div class="recipe-preview__calories tui-text_body-xs">
         <p class="no-margin bold">{{recipe.energyValue.calories}} ккал</p>
     </div>
@@ -27,57 +26,69 @@
                 {{recipe.name}}
             </p>
         </ng-template>
-
-        <tui-hosted-dropdown
-            class="tui-space_top-4"
-            [content]="dropdown"
-            [(open)]="open"
-        >
-            <div tuiGroup>
-                <button
-                    tuiButton
-                    type="button"
-                    size="s"
-                    appearance="whiteblock"
-                    class="tui-group__auto-width-item"
-                >
-                    {{recipe.ingredientsInfo.length}} {{ 'ингредиентов' |
-                    declensions: (recipe.ingredientsInfo.length) }}
-                </button>
-                <button
-                    tuiIconButton
-                    type="button"
-                    tuiHostedDropdownHost
-                    title="Menu"
-                    appearance="whiteblock"
-                    size="s"
-                    class="tui-group__auto-width-item"
-                    [iconRight]="icon"
-                ></button>
-                <ng-template #icon>
-                    <tui-svg
-                        src="tuiIconChevronDown"
-                        class="icon"
-                        [class.icon_rotated]="open"
-                    ></tui-svg>
-                </ng-template>
-            </div>
-        </tui-hosted-dropdown>
-        <ng-template #dropdown>
-            <tui-data-list class="recipe-preview__data-list">
-                <button
-                    *ngFor="let ingredient of recipe.ingredientsInfo"
-                    tuiOption
-                    size="s"
-                    class="recipe-preview__data-list-btn"
-                    (click)="onClick()"
-                >
-                    <app-ingredient
-                        class="recipe-preview__ingredient"
-                        [ingredient]="ingredient"
-                    ></app-ingredient>
-                </button>
-            </tui-data-list>
-        </ng-template>
+        <div class="">
+            <tui-hosted-dropdown
+                class="tui-space_top-3"
+                [content]="dropdown"
+                [(open)]="open"
+            >
+                <div tuiGroup>
+                    <button
+                        tuiButton
+                        type="button"
+                        size="s"
+                        appearance="whiteblock"
+                        class="tui-group__auto-width-item"
+                    >
+                        {{recipe.ingredientsInfo.length}} {{ 'ингредиентов' |
+                        declensions: (recipe.ingredientsInfo.length) }}
+                    </button>
+                    <button
+                        tuiIconButton
+                        type="button"
+                        tuiHostedDropdownHost
+                        title="Menu"
+                        appearance="whiteblock"
+                        size="s"
+                        class="tui-group__auto-width-item"
+                        [iconRight]="icon"
+                    ></button>
+                    <ng-template #icon>
+                        <tui-svg
+                            src="tuiIconChevronDown"
+                            class="icon"
+                            [class.icon_rotated]="open"
+                        ></tui-svg>
+                    </ng-template>
+                </div>
+            </tui-hosted-dropdown>
+            <ng-template #dropdown>
+                <tui-data-list class="recipe-preview__data-list">
+                    <button
+                        *ngFor="let ingredient of recipe.ingredientsInfo"
+                        tuiOption
+                        size="s"
+                        class="recipe-preview__data-list-btn"
+                        (click)="onClick()"
+                    >
+                        <app-ingredient
+                            class="recipe-preview__ingredient"
+                            [ingredient]="ingredient"
+                        ></app-ingredient>
+                    </button>
+                </tui-data-list>
+            </ng-template>
+            <button
+                tuiIconButton
+                type="button"
+                size="s"
+                icon="tuiIconHeart"
+                appearance="flat"
+                class="tui-space_top-3 tui-space_left-3"
+                [tuiHint]="favorits"
+                (click)="addToFavorits(recipe,user)"
+            ></button>
+        </div>
     </div>
 </tui-island>
+<ng-template #favorits>Добавить в избранное</ng-template>

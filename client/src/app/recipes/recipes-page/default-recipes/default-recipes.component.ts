@@ -4,7 +4,7 @@ import {
     EventEmitter,
     Output,
 } from '@angular/core';
-import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
+import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
 import { map } from 'rxjs/operators';
 import { CATEGORIES_MAPPER, ROUTER_MAPPER } from 'src/libs/consts';
 

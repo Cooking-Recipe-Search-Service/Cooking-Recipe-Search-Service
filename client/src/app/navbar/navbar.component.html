@@ -1,26 +1,93 @@
-<nav class="nav">
+<nav *tuiLet="user$ | async as user" class="nav">
     <div class="nav__logo">
         <!-- <img
-            height="60px"
-            loading="lazy"
-            alt="IT's TINKOFF"
-            src="assets/images/logo.png"
-        /> -->
+                height="60px"
+                loading="lazy"
+                alt="IT's TINKOFF"
+                src="assets/images/logo.png"
+            /> -->
         <a href="" routerLink="/">
             <div class="nav__logo-template"></div>
         </a>
     </div>
 
     <tui-tabs class="tui-space_left-6" [(activeItemIndex)]="activeTab">
-        <ng-container *ngFor="let tab of tabs">
-            <button tuiTab routerLinkActive [routerLink]="tab.routerLink">
-                <tui-svg
-                    *ngIf="tab.icon"
-                    class="tui-space_right-2"
-                    [src]="tab.icon"
-                ></tui-svg>
-                {{tab.label}}
+        <button tuiTab routerLinkActive routerLink="/recipes">
+            <tui-svg
+                src="assets/icons/recipes.svg"
+                class="tui-space_right-2"
+            ></tui-svg>
+            Рецепты
+        </button>
+
+        <button
+            *ngIf="!user;else profileInfo"
+            tuiTab
+            routerLinkActive
+            routerLink="/profile"
+        >
+            <tui-svg src="tuiIconUser" class="tui-space_right-2"></tui-svg>
+            Профиль
+        </button>
+        <ng-template #profileInfo>
+            <button
+                tuiTab
+                routerLinkActive
+                routerLink="/profile"
+                tuiHintMode="onDark"
+                [tuiHint]="profile "
+            >
+                <tui-svg src="tuiIconUser" class="tui-space_right-2"></tui-svg>
+                Профиль
             </button>
-        </ng-container>
+        </ng-template>
+
+        <button tuiTab routerLinkActive routerLink="/admin-panel">
+            <tui-svg src="tuiIconLockLarge" class="tui-space_right-2"></tui-svg>
+            Admin panel
+        </button>
     </tui-tabs>
+    <ng-template #profile>
+        <div *ngIf="user">
+            <a routerLink="/profile" class="profile">
+                <div class="tui-space_right-3">
+                    <img
+                        alt="user photo"
+                        class="profile__img"
+                        [src]="user.photoUrl"
+                    />
+                </div>
+                <div>
+                    <p class="tui-text_body-m no-margin profile__name">
+                        {{user.name}}
+                    </p>
+                    <p class="tui-text_body-s no-margin profile__email">
+                        {{user.email}}
+                    </p>
+                    <p class="tui-text_body-s no-margin profile__color">
+                        Личные данные
+                    </p>
+                </div>
+            </a>
+        </div>
+        <hr class="tui-space_top-3" />
+        <div
+            routerLink="profile/favorits"
+            class="profile__link-block tui-text_body-m tui-space_top-3"
+        >
+            <tui-svg src="tuiIconHeart"></tui-svg>
+
+            Избранное
+        </div>
+        <hr class="tui-space_top-3" />
+        <button
+            tuiButton
+            size="s"
+            appearance="icon"
+            class="profile__btn"
+            (click)="logout()"
+        >
+            Выйти
+        </button>
+    </ng-template>
 </nav>

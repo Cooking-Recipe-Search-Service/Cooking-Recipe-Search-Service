@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarModule } from './navbar/navbar.module';
 import { ProfilePageModule } from './profile-page/profile-page.module';
 import { SocialLoginModule } from 'angularx-social-login';
+import { NotificationServiceModule } from './shared/services/notifications/notification-service.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -32,6 +33,7 @@ import { SocialLoginModule } from 'angularx-social-login';
         TuiNotificationsModule,
         ProfilePageModule.forRoot(),
         SocialLoginModule,
+        NotificationServiceModule,
     ],
     providers: [
         { provide: HOST_API, useValue: environment.hostApi },

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from 'angularx-social-login';
 
 @Component({
     selector: 'app-profile',
@@ -13,10 +13,4 @@ export class ProfileComponent {
         private router: Router,
         private socialAuthService: SocialAuthService,
     ) {}
-
-    loginWithGoogle(): void {
-        this.socialAuthService
-            .signIn(GoogleLoginProvider.PROVIDER_ID)
-            .then(() => this.router.navigate(['recipes']));
-    }
 }

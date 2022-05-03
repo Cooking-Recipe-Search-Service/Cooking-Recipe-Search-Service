@@ -10,7 +10,7 @@ import { TuiDestroyService } from '@taiga-ui/cdk';
 import { TuiNotification, TuiNotificationsService } from '@taiga-ui/core';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { RecipesApiService } from 'src/app/shared/services/recipes-api-service.service';
+import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
 import { BACKEND_MEASURMENT_MAPPER } from 'src/libs/consts';
 
 @Component({
