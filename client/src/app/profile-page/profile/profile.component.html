@@ -1,1 +1,28 @@
-<div class="profile"></div>
+<div class="profile">
+    <div class="profile__main-block">
+        <tui-tabs [(activeItemIndex)]="activeItemIndex">
+            <button tuiTab>
+                <tui-svg
+                    src="tuiIconAlertCircleLarge"
+                    class="tui-space_right-2"
+                ></tui-svg>
+                Главная
+            </button>
+            <button tuiTab>
+                <tui-svg src="tuiIconHeart" class="tui-space_right-2"></tui-svg>
+                Избранное
+            </button>
+            <button tuiTab>
+                <tui-svg src="tuiIconUser" class="tui-space_right-2"></tui-svg>
+                Профиль
+            </button>
+        </tui-tabs>
+
+        <ng-container [ngSwitch]="activeItemIndex">
+            <div *ngSwitchCase="0" class="main-block tui-space_top-5">
+                <app-profile-info-card></app-profile-info-card>
+                <app-favorits-preview-card></app-favorits-preview-card>
+            </div>
+        </ng-container>
+    </div>
+</div>

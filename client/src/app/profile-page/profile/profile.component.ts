@@ -9,6 +9,8 @@ import { SocialAuthService } from 'angularx-social-login';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent {
+    activeItemIndex = 0;
+
     constructor(
         private router: Router,
         private socialAuthService: SocialAuthService,

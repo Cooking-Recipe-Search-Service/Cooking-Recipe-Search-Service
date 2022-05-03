@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import {
     IngredientPostRequest,
     IngredientSearch,
+    Profile,
     Recipe,
     SimpleInterface,
 } from 'src/libs/interfaces';
@@ -20,6 +21,10 @@ export class RecipesApiService {
         @Inject(HOST_API) private readonly baseUrl: string,
         private readonly http: HttpClient,
     ) {}
+
+    getUser(): Observable<Profile> {
+        return this.http.get<Profile>(`${this.baseUrl}/user`);
+    }
 
     searchRecipe(query: string): Observable<readonly Recipe[]> {
         return this.http.get<readonly Recipe[]>(

@@ -1,0 +1,26 @@
+<tui-island *ngIf="user$ | async as user" [hoverable]="true">
+    <div class="user">
+        <div class="tui-space_right-3">
+            <img alt="user photo" class="user__img" [src]="user.photoUrl" />
+        </div>
+        <div>
+            <p class="no-margin user__name bold">{{user.name}}</p>
+        </div>
+    </div>
+    <div class="user__logout">
+        <div class="flex">
+            <p class="tui-text_body-s no-margin bold">Почта:</p>
+            <p class="tui-text_body-s no-margin user__email">{{user.email}}</p>
+        </div>
+
+        <button
+            tuiButton
+            size="s"
+            appearance="icon"
+            class="user__btn"
+            (click)="logout()"
+        >
+            Выйти
+        </button>
+    </div>
+</tui-island>
