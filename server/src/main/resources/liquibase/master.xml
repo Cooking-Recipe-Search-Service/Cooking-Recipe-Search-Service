@@ -7,6 +7,8 @@
 
     <include file="changelog/InitDatabase.sql" relativeToChangelogFile="true"/>
     <include file="changelog/CRSS-8.sql" relativeToChangelogFile="true"/>
+    <include file="changelog/CRSS-22.sql" relativeToChangelogFile="true"/>
+
 
 
 </databaseChangeLog>
