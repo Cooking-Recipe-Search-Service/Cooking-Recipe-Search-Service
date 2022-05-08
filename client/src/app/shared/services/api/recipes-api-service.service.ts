@@ -22,6 +22,10 @@ export class RecipesApiService {
         private readonly http: HttpClient,
     ) {}
 
+    getFavorits():Observable<readonly Recipe[]>{
+        return this.http.get<readonly Recipe[]>(`${this.baseUrl}/favorits`);
+    }
+
     getUser(): Observable<Profile> {
         return this.http.get<Profile>(`${this.baseUrl}/user`);
     }
