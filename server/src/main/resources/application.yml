@@ -23,3 +23,6 @@ crss:
   web-config:
     allowed-origins:
       http://localhost:4200
+  app:
+    jwtSecret: crssSecretKey
+    jwtExpirationMs: 86400000
