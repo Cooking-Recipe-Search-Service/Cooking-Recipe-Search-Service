@@ -60,5 +60,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/", "/*.js", "/*.css", "/h2-console/**", "/health", "/actuator/*", "/socket");
         web.ignoring().antMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/swagger-resources", "/swagger-resources/**");
+        web.ignoring().antMatchers("/api/recipes/**", "/api/countries/**", "/api/category/**", "/api/ingredients/**");
     }
 }
