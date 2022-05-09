@@ -39,8 +39,8 @@ public class RecipeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private CategoryEntity category;
     @ToString.Exclude
-    @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<EnvironmentEntity> environments = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    private List<UserEntity> lovers = new ArrayList<>();
 
     @OneToMany(
         mappedBy = "recipe",
@@ -55,4 +55,13 @@ public class RecipeEntity {
         this.portionQuantity = dto.getPortionQuantity();
     }
 
+    public void addLover(UserEntity lover) {
+        if (!lovers.contains(lover)) {
+            lovers.add(lover);
+        }
+    }
+
+    public void deleteLover(UserEntity lover) {
+        lovers.remove(lover);
+    }
 }
