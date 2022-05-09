@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.GenerationType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @Entity
@@ -36,7 +38,9 @@ public class RecipeEntity {
     private CountryEntity country;
     @ManyToOne(fetch = FetchType.LAZY)
     private CategoryEntity category;
-
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<EnvironmentEntity> environments = new ArrayList<>();
 
     @OneToMany(
         mappedBy = "recipe",

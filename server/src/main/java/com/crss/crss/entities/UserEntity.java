@@ -22,6 +22,8 @@ public class UserEntity {
     private String email;
     private String password;
     private UserRole role;
+    @ManyToMany
+    private RecipeEntity recipeEntity;
 
     public UserEntity(SignupRequest signupRequest, String password) {
         this.username = signupRequest.getUsername();
