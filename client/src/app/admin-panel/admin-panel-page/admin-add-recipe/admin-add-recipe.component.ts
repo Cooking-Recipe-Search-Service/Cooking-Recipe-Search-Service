@@ -145,7 +145,7 @@ export class AdminAddRecipeComponent {
         this.instructions.removeAt(index);
     }
 
-    addRecipe() {
+    addRecipe():void {
         markControlAsTouchedAndValidate(this.recipeForm);
         const { name, cookingTime, description, portionQuantity } =
             this.recipeForm.value;

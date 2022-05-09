@@ -27,6 +27,20 @@ const routes: Routes = [
             ),
     },
     {
+        path: 'login',
+        loadChildren: () =>
+            import('./login-page/login-page.module').then(
+                (m) => m.LoginPageModule,
+            ),
+    },
+    {
+        path: 'registration',
+        loadChildren: () =>
+            import('./registration-page/registration-page.module').then(
+                (m) => m.RegistrationPageModule,
+            ),
+    },
+    {
         path: '**',
         redirectTo: '/',
     },

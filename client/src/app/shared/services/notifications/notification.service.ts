@@ -17,6 +17,39 @@ export class NotificationService {
         @Inject(Injector) private readonly injector: Injector,
     ) {}
 
+    showErrorMessage(): void {
+        this.notificationsService
+            .show(`Что-то пошло не так!`, {
+                label: ``,
+                status: TuiNotification.Error,
+                hasIcon: false,
+                autoClose: 3000,
+            })
+            .subscribe();
+    }
+
+    showLoginSuccess(name: string): void {
+        this.notificationsService
+            .show(`Добро пожаловать, ${name}`, {
+                label: ``,
+                status: TuiNotification.Info,
+                hasIcon: false,
+                autoClose: 3000,
+            })
+            .subscribe();
+    }
+
+    showRegisterSuccess(): void {
+        this.notificationsService
+            .show('Регистрация прошла успешно', {
+                label: ``,
+                status: TuiNotification.Success,
+                hasIcon: false,
+                autoClose: 3000,
+            })
+            .subscribe();
+    }
+
     showNeedLoginNotification(): void {
         this.notificationsService
             .show<undefined>(

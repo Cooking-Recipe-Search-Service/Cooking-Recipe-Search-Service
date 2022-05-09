@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { SocialAuthService } from 'angularx-social-login';
 
 @Component({
     selector: 'app-profile',
@@ -11,8 +10,9 @@ import { SocialAuthService } from 'angularx-social-login';
 export class ProfileComponent {
     activeItemIndex = 0;
 
-    constructor(
-        private router: Router,
-        private socialAuthService: SocialAuthService,
-    ) {}
+    constructor(private router: Router) {}
+
+    navigate():void {
+        this.activeItemIndex = 1;
+    }
 }

@@ -1,0 +1,22 @@
+<div class="login">
+    <h6 class="tui-text_h6">Вход</h6>
+
+    <form [formGroup]="loginForm">
+        <tui-input formControlName="username" class="tui-space_top-5">
+            Имя Пользователя
+            <input tuiTextfield type="email" />
+        </tui-input>
+        <tui-input-password formControlName="password" class="tui-space_top-5">
+            Пароль
+            <input tuiTextfield />
+        </tui-input-password>
+    </form>
+    <div class="login__btns">
+        <button tuiButton class="tui-space_top-5" (click)="login()">
+            Войти
+        </button>
+        <button tuiButton routerLink="/registration" appearance="icon">
+            Регистрация
+        </button>
+    </div>
+</div>

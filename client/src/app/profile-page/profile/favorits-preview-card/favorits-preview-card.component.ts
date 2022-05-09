@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Output,
+} from '@angular/core';
+import { AuthService } from 'src/app/shared/services/api/auth.service';
 
 @Component({
     selector: 'app-favorits-preview-card',
@@ -8,10 +13,13 @@ import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-servi
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FavoritsPreviewCardComponent {
+    @Output() navigate: EventEmitter<null> = new EventEmitter();
 
-  recipes$ = this.recipiesApi.getFavorits()
+    recipes$ = this.authService.getFavorits();
 
-  constructor(private readonly recipiesApi: RecipesApiService){}
+    constructor(private readonly authService: AuthService) {}
 
-  
+    nanigateToFavorits():void {
+        this.navigate.emit();
+    }
 }

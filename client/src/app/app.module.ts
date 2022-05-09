@@ -13,12 +13,12 @@ import {
 } from '@taiga-ui/core';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { environment } from 'src/environments/environment';
-import { HOST_API } from 'src/libs/consts';
+import { HOST_API, TOKEN_TYPE } from 'src/libs/consts';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarModule } from './navbar/navbar.module';
 import { ProfilePageModule } from './profile-page/profile-page.module';
-import { SocialLoginModule } from 'angularx-social-login';
 import { NotificationServiceModule } from './shared/services/notifications/notification-service.module';
+import { RegistrationFormModule } from './registration-page/registration-form/registration-form.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -26,17 +26,18 @@ import { NotificationServiceModule } from './shared/services/notifications/notif
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        RecipesModule.forRoot(),
+        RecipesModule,
         TuiRootModule,
         HttpClientModule,
         NavbarModule,
         TuiNotificationsModule,
-        ProfilePageModule.forRoot(),
-        SocialLoginModule,
+        ProfilePageModule,
         NotificationServiceModule,
+        RegistrationFormModule,
     ],
     providers: [
         { provide: HOST_API, useValue: environment.hostApi },
+        { provide: TOKEN_TYPE, useValue: 'Bearer' },
         {
             provide: TUI_SANITIZER,
             useClass: NgDompurifySanitizer,

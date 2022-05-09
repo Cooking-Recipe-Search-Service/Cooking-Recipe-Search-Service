@@ -6,7 +6,7 @@ import { Base64ImageConvertModule } from 'src/app/shared/modules/base64-image-co
 
 @NgModule({
     declarations: [FavoritsPreviewCardComponent],
-    imports: [CommonModule, TuiIslandModule,Base64ImageConvertModule],
+    imports: [CommonModule, TuiIslandModule, Base64ImageConvertModule],
     exports: [FavoritsPreviewCardComponent],
 })
 export class FavoritsPreviewCardModule {}

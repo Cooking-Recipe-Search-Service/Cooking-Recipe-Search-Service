@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { TuiDestroyService } from '@taiga-ui/cdk';
-import { SocialAuthService } from 'angularx-social-login';
 import { Observable } from 'rxjs';
+import { filter, switchMap } from 'rxjs/operators';
 import { Profile } from 'src/libs/interfaces';
 import { LocalStorageService } from '../shared/services/local-storage/local-storage.service';
 
@@ -18,18 +17,21 @@ export class NavbarComponent {
 
     isOpenProfileCompanent = false;
 
-    user$: Observable<Profile | null> = this.socialAuthService.authState;
+    token$: Observable<string | null> = this.localStorage.getToken();
+
+    user$: Observable<Profile | null> = this.token$.pipe(
+        filter((token) => token !== null),
+        switchMap((token) => this.authService.getUser(token)),
+    );
 
     constructor(
         private localStorage: LocalStorageService,
-        private socialAuthService: SocialAuthService,
-        private router: Router,
-        private readonly destroy$: TuiDestroyService,
-    ) {}
+        private readonly authService: AuthService,
+    ) {
+        // this.token$ = this.localStorage.getToken();
+    }
 
-    logout(): void {
-        this.socialAuthService
-            .signOut()
-            .then(() => this.router.navigate(['recipes']));
+    logout() {
+        //
     }
 }

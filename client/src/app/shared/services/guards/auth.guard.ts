@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 
-import { SocialAuthService } from 'angularx-social-login';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { Profile } from 'src/libs/interfaces';
-import { NotificationService } from '../notifications/notification.service';
+import { LocalStorageService } from '../local-storage/local-storage.service';
 
 @Injectable({
     providedIn: 'root',
@@ -13,16 +11,15 @@ import { NotificationService } from '../notifications/notification.service';
 export class AuthGuard implements CanActivate {
     constructor(
         private router: Router,
-        private socialAuthService: SocialAuthService,
-        private readonly notificationService: NotificationService,
+        private localStorage: LocalStorageService,
     ) {}
 
     canActivate(): Observable<boolean> {
-        return this.socialAuthService.authState.pipe(
-            map((socialUser: Profile) => !!socialUser),
-            tap((isLoggedIn: boolean) => {
-                if (!isLoggedIn) {
-                    this.notificationService.showNeedLoginNotification();
+        return this.localStorage.getToken().pipe(
+            map((token: string | null) => !!token),
+            tap((token: boolean) => {
+                if (token === null) {
+                    this.router.navigate(['/login']);
                 }
             }),
         );

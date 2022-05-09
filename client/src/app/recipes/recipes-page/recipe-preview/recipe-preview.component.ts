@@ -25,7 +25,7 @@ export class RecipePreviewComponent {
 
     open = false;
 
-    user$: Observable<string | null> = this.localStirage.getUser();
+    user$: Observable<string | null> = this.localStirage.getToken();
 
     constructor(
         private localStirage: LocalStorageService,
@@ -33,7 +33,7 @@ export class RecipePreviewComponent {
         private readonly notificationService: NotificationService,
     ) {}
 
-    onClick() {
+    onClick():void {
         this.open = false;
 
         if (this.component && this.component.nativeFocusableElement) {
@@ -41,7 +41,7 @@ export class RecipePreviewComponent {
         }
     }
 
-    addToFavorits(recipe: Recipe, user: string | null) {
+    addToFavorits(recipe: Recipe, user: string | null):void {
         if (!user) {
             this.notificationService.showNeedLoginNotification();
             return;
