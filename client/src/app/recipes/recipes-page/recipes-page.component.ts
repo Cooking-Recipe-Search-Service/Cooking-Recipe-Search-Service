@@ -20,8 +20,7 @@ export class RecipesPageComponent {
 
     searchedRecipes$!: Observable<readonly Recipe[]>;
 
-
-    user$: Observable<Profile | null> =  this.authService.getUser()
+    user$: Observable<Profile | null> = this.authService.getUser();
 
     constructor(
         private readonly recipiesApi: RecipesApiService,

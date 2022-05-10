@@ -13,8 +13,6 @@ import { Profile } from 'src/libs/interfaces';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileInfoCardComponent {
-    
-
     user$: Observable<Profile | null> = this.authService.getUser();
 
     constructor(

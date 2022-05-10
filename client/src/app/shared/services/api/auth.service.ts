@@ -17,9 +17,7 @@ import { LocalStorageService } from '../local-storage/local-storage.service';
 export class AuthService {
     private baseUrlReal = 'http://localhost:8080/api';
 
-    private headers = {
-       
-    };
+    private headers = {};
 
     constructor(
         @Inject(HOST_API) private readonly baseUrl: string,
@@ -36,11 +34,15 @@ export class AuthService {
     }
 
     getFavorits(): Observable<readonly Recipe[]> {
-        return this.http.get<readonly Recipe[]>(`${this.baseUrl}/favorits`,{ headers: this.headers });
+        return this.http.get<readonly Recipe[]>(`${this.baseUrl}/favorits`, {
+            headers: this.headers,
+        });
     }
 
     getUser(): Observable<Profile> {
-        return this.http.get<Profile>(`${this.baseUrlReal}/user/current`, { headers: this.headers });
+        return this.http.get<Profile>(`${this.baseUrlReal}/user/current`, {
+            headers: this.headers,
+        });
     }
 
     registerUser(user: RegistrationProfile): Observable<RegistrationProfile> {

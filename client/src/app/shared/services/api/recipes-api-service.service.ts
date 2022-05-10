@@ -10,26 +10,20 @@ import {
 } from 'src/libs/interfaces';
 import { RecipePayload } from 'src/libs/interfaces/shared/recipe-payload';
 
-
 @Injectable({
     providedIn: 'root',
 })
 export class RecipesApiService {
     private baseUrlReal = 'http://localhost:8080/api';
 
-
-
-
     constructor(
         @Inject(HOST_API) private readonly baseUrl: string,
         private readonly http: HttpClient,
-    ) {
-
-    }
+    ) {}
 
     searchRecipe(query: string): Observable<readonly Recipe[]> {
         return this.http.get<readonly Recipe[]>(
-            `${this.baseUrlReal}/recipes/search?${query}`
+            `${this.baseUrlReal}/recipes/search?${query}`,
         );
     }
 
@@ -51,7 +45,7 @@ export class RecipesApiService {
 
     getIngredient(ingredient: string): Observable<readonly IngredientSearch[]> {
         return this.http.get<readonly IngredientSearch[]>(
-            `${this.baseUrl}/ingredient_search?name_like=${ingredient}`
+            `${this.baseUrl}/ingredient_search?name_like=${ingredient}`,
         );
     }
 
