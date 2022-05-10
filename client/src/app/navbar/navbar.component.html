@@ -25,6 +25,7 @@
             tuiTab
             routerLinkActive
             routerLink="/profile"
+            [tuiHint]="tooltip"
         >
             <tui-svg src="tuiIconUser" class="tui-space_right-2"></tui-svg>
             Профиль
@@ -89,5 +90,8 @@
         >
             Выйти
         </button>
+    </ng-template>
+    <ng-template #tooltip>
+        Войти
     </ng-template>
 </nav>
