@@ -29,7 +29,7 @@ tui-wrapper[data-appearance='flat-custom'] {
     color: #098666;
  
     &[data-state='hovered'] {
-        background: #e8fffa;
+        background: none;
     }
  
     &[data-state='pressed'] {
@@ -38,5 +38,17 @@ tui-wrapper[data-appearance='flat-custom'] {
  
     &[data-state='disabled'] {
         background: #eaecee;
+    }
+}
+
+tui-wrapper[data-appearance='textfield'] {
+    &._focused {
+       
+
+
+        &:after {
+            color:#098666;
+            border-width: 2px;
+        }
     }
 }

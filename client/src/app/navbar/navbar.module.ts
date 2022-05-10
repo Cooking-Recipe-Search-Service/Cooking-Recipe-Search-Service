@@ -16,6 +16,7 @@ import { TuiLetModule } from '@taiga-ui/cdk';
         TuiHintModule,
         TuiLetModule,
         TuiButtonModule,
+        TuiSvgModule
     ],
     exports: [NavbarComponent],
 })
