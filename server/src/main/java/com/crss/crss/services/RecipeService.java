@@ -8,6 +8,7 @@ import com.crss.crss.entities.RecipeDescriptionEntity;
 import com.crss.crss.entities.RecipeEntity;
 import com.crss.crss.entities.RecipeIngredient;
 import com.crss.crss.entities.RecipeInstructionEntity;
+import com.crss.crss.entities.UserEntity;
 import com.crss.crss.exceptions.CrssException;
 import com.crss.crss.repositories.DescriptionRepository;
 import com.crss.crss.repositories.EnergyValuePerIngredientRepository;
@@ -89,6 +90,18 @@ public class RecipeService {
         energyValuePerPortion.countForPortions(recipe.getPortionQuantity());
         energyValuePerPortion.setRecipe(recipe);
         return energyValueRepository.save(energyValuePerPortion);
+    }
+
+    public RecipeEntity addUserToLovers(Long recipeId, UserEntity userEntity){
+        RecipeEntity recipeEntity = getRecipeById(recipeId);
+        recipeEntity.addLover(userEntity);
+        return recipeRepository.save(recipeEntity);
+    }
+
+    public RecipeEntity deleteUserToLovers (Long recipeId, UserEntity userEntity){
+        RecipeEntity recipeEntity = getRecipeById(recipeId);
+        recipeEntity.deleteLover(userEntity);
+        return recipeRepository.save(recipeEntity);
     }
 
 }
