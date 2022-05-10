@@ -1,5 +1,5 @@
-<div class="login">
-    <h6 class="tui-text_h6">Вход</h6>
+<tui-island class="login">
+    <div class="form"><h6 class="tui-text_h6 no-margin">Вход</h6>
 
     <form [formGroup]="loginForm">
         <tui-input formControlName="username" class="tui-space_top-5">
@@ -12,11 +12,13 @@
         </tui-input-password>
     </form>
     <div class="login__btns">
-        <button tuiButton class="tui-space_top-5" (click)="login()">
+        <button tuiButton class="tui-space_top-5" (click)="login()" appearance="custom">
             Войти
         </button>
         <button tuiButton routerLink="/registration" appearance="icon">
             Регистрация
         </button>
-    </div>
-</div>
+    </div></div>
+    <tui-svg src="assets/green/login2.svg" class="svg"></tui-svg>
+    
+</tui-island >

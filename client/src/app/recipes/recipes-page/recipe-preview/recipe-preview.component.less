@@ -12,30 +12,29 @@
         padding: 8px;
         color: white;
         left: 24px;
-        background-color: var(--tui-primary);
+        background-color: #098666;
         border-radius: 8px;
     }
     &__data-list {
         width: 250px;
     }
     &__tags {
-        color: var(--tui-primary);
+        color: #098666;
         display: flex;
-        // grid-template-columns: 81fr 0.5fr 30fr;
 
         align-items: center;
     }
     &__tag {
         margin: 0;
         &:hover {
-            color: var(--tui-link-hover);
+            color: #098666;
             cursor: pointer;
         }
     }
     &__divider {
         height: 5px;
         width: 5px;
-        background-color: var(--tui-primary);
+        background-color: #098666;
         border-radius: 100%;
         &:last-child {
             display: none;
@@ -51,10 +50,13 @@
         &__divider {
             height: 1px;
             width: 100%;
-            background-color: var(--tui-base-03);
+            background-color: #098666;
             &:last-child {
                 display: none;
             }
         }
     }
+}
+::ng-deep tui-hint-box{
+    background-color: #098666 !important;
 }

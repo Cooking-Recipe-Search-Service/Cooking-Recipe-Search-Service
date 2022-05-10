@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
     constructor(
         private router: Router,
         private localStorage: LocalStorageService,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
     ) {}
 
     canActivate(): Observable<boolean> {

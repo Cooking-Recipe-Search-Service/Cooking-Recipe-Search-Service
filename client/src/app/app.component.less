@@ -7,3 +7,36 @@
 
     .shadow(4);
 }
+tui-wrapper[data-appearance='custom'] {
+    background: #098666;
+    color: #fff;
+ 
+    &[data-state='hovered'] {
+        background: #098666;
+    }
+ 
+    &[data-state='pressed'] {
+        background: #098666;
+    }
+ 
+    &[data-state='disabled'] {
+        background: #eaecee;
+    }
+}
+
+tui-wrapper[data-appearance='flat-custom'] {
+    background: none;
+    color: #098666;
+ 
+    &[data-state='hovered'] {
+        background: #e8fffa;
+    }
+ 
+    &[data-state='pressed'] {
+        background: none;
+    }
+ 
+    &[data-state='disabled'] {
+        background: #eaecee;
+    }
+}

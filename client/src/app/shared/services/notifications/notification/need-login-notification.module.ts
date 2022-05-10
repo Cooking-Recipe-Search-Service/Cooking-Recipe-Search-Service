@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [NeedLoginNotificationComponent],
-    imports: [CommonModule, TuiButtonModule,RouterModule],
+    imports: [CommonModule, TuiButtonModule, RouterModule],
     exports: [NeedLoginNotificationComponent],
 })
 export class NeedLoginNotificationModule {}
