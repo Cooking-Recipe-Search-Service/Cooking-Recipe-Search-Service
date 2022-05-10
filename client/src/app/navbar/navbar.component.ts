@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TuiDestroyService } from '@taiga-ui/cdk';
 import { Observable } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
 import { Profile } from 'src/libs/interfaces';
 import { AuthService } from '../shared/services/api/auth.service';
 import { LocalStorageService } from '../shared/services/local-storage/local-storage.service';
@@ -18,12 +17,7 @@ export class NavbarComponent {
 
     isOpenProfileCompanent = false;
 
-    token$: Observable<string | null> = this.localStorage.getToken();
-
-    user$: Observable<Profile | null> = this.token$.pipe(
-        filter((token) => token !== null),
-        switchMap((token) => this.authService.getUser(token)),
-    );
+    user$: Observable<Profile | null> = this.authService.getUser();
 
     constructor(
         private localStorage: LocalStorageService,

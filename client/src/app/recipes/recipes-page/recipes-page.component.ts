@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/services/api/auth.service';
 
 import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
@@ -21,12 +20,8 @@ export class RecipesPageComponent {
 
     searchedRecipes$!: Observable<readonly Recipe[]>;
 
-    token$: Observable<string | null> = this.localStorage.getToken();
 
-    user$: Observable<Profile | null> = this.token$.pipe(
-        filter((token) => token !== null),
-        switchMap((token) => this.authService.getUser(token)),
-    );
+    user$: Observable<Profile | null> =  this.authService.getUser()
 
     constructor(
         private readonly recipiesApi: RecipesApiService,

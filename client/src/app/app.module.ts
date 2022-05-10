@@ -42,6 +42,7 @@ import { RegistrationFormModule } from './registration-page/registration-form/re
             provide: TUI_SANITIZER,
             useClass: NgDompurifySanitizer,
         },
+
     ],
 
     bootstrap: [AppComponent],
