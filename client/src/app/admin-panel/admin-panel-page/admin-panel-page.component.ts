@@ -30,7 +30,7 @@ export class AdminPanelPageComponent {
         this.scroller.scrollToAnchor(activeElement.id);
     }
 
-    setIngredient(s: string):void {
+    setIngredient(s: string): void {
         this.ingredient = s;
     }
 }

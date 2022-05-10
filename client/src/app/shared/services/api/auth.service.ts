@@ -26,7 +26,7 @@ export class AuthService {
     }
 
     getUser(token: string | null): Observable<Profile> {
-        return this.http.get<Profile>(`${this.baseUrl}/user`, { headers: {} });
+        return this.http.get<Profile>(`${this.baseUrl}/user`, { headers: {Auth:`${token}`} });
     }
 
     registerUser(user: RegistrationProfile): Observable<RegistrationProfile> {

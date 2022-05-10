@@ -3,6 +3,7 @@ import { TuiDestroyService } from '@taiga-ui/cdk';
 import { Observable } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 import { Profile } from 'src/libs/interfaces';
+import { AuthService } from '../shared/services/api/auth.service';
 import { LocalStorageService } from '../shared/services/local-storage/local-storage.service';
 
 @Component({

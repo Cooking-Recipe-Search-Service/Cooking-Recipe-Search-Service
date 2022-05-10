@@ -33,7 +33,7 @@ export class RecipePreviewComponent {
         private readonly notificationService: NotificationService,
     ) {}
 
-    onClick():void {
+    onClick(): void {
         this.open = false;
 
         if (this.component && this.component.nativeFocusableElement) {
@@ -41,7 +41,7 @@ export class RecipePreviewComponent {
         }
     }
 
-    addToFavorits(recipe: Recipe, user: string | null):void {
+    addToFavorits(recipe: Recipe, user: string | null): void {
         if (!user) {
             this.notificationService.showNeedLoginNotification();
             return;

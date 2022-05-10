@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Recipe } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-favorits-page',
@@ -6,4 +8,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrls: ['./favorits-page.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FavoritsPageComponent {}
+export class FavoritsPageComponent {
+    @Input() recipes$!: Observable<readonly Recipe[]>;
+}

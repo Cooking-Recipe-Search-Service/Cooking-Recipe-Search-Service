@@ -1,4 +1,4 @@
-<tui-island *ngIf="user$ | async as user" [hoverable]="true">
+<tui-island *ngIf="user$ | async as user" class="island" [hoverable]="true">
     <div class="user">
         <div class="tui-space_right-3">
             <img alt="user photo" class="user__img" [src]="user.photoUrl" />

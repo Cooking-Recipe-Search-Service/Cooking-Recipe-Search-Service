@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/api/auth.service';
 
 @Component({
     selector: 'app-profile',
@@ -10,9 +11,14 @@ import { Router } from '@angular/router';
 export class ProfileComponent {
     activeItemIndex = 0;
 
-    constructor(private router: Router) {}
+    recipes$ = this.authService.getFavorits();
 
-    navigate():void {
-        this.activeItemIndex = 1;
+    constructor(
+        private router: Router,
+        private readonly authService: AuthService,
+    ) {}
+
+    navigate(index: number): void {
+        this.activeItemIndex = index;
     }
 }
