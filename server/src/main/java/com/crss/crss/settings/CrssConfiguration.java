@@ -23,8 +23,9 @@ public class CrssConfiguration {
     public CorsFilter corsFilter() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config = new CorsConfiguration();
+        config.setMaxAge(3600L);
         config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:4200",
-            "http://localhost:8080", "http://193.168.227.84:8080")); // Provide list of origins if you want multiple origins
+            "http://localhost:8080", "http://193.168.227.84:8080","http://193.168.227.84")); // Provide list of origins if you want multiple origins
         config.setAllowedHeaders(Collections.singletonList("*"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
         config.setAllowCredentials(true);
