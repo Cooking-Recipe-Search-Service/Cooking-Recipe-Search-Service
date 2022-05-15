@@ -40,6 +40,7 @@ export class LoginComponent {
             .pipe(
                 map((response: LoginProfileResponse) => {
                     this.localStorage.setToken(response.token);
+                    this.localStorage.setUser(user);
                     this.notificationService.showLoginSuccess(
                         response.username,
                     );

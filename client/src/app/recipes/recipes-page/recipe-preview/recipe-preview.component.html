@@ -84,12 +84,12 @@
                 size="s"
                 icon="tuiIconHeart"
                 appearance="flat-custom"
+                tuiHintMode="onDark"
                 class="tui-space_top-3 tui-space_left-3"
                 [tuiHint]="favorits"
                 (click)="addToFavorits(recipe,user)"
-            > </button>
+            ></button>
         </div>
     </div>
-    <ng-template #favorits >Добавить в избранное</ng-template>
+    <ng-template #favorits>Добавить в избранное</ng-template>
 </tui-island>
-

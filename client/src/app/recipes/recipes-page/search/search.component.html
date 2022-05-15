@@ -22,7 +22,6 @@
                         <button
                             *ngFor="let recipe of recipes"
                             tuiOption
-                            
                             (click)="onClick(recipe.name)"
                         >
                             {{recipe.name}}
@@ -36,7 +35,6 @@
                 appearance="custom"
                 (click)="isOpenedFilters = !isOpenedFilters"
             >
-            
                 Фильтры
             </button>
         </div>
@@ -81,8 +79,12 @@
                     ></app-select-with-search>
                 </div>
             </div>
-            <button tuiButton class="tui-space_top-5" appearance="custom" (click)="searchRecipe()">
-                
+            <button
+                tuiButton
+                appearance="custom"
+                class="tui-space_top-5"
+                (click)="searchRecipe()"
+            >
                 Поиск
             </button>
         </ng-container>

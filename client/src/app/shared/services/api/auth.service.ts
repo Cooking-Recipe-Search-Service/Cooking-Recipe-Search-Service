@@ -5,8 +5,7 @@ import { HOST_API, TOKEN_TYPE } from 'src/libs/consts';
 import {
     LoginProfile,
     LoginProfileResponse,
-    Profile,
-    Recipe,
+    ProfileWithRecipes,
     RegistrationProfile,
 } from 'src/libs/interfaces';
 import { LocalStorageService } from '../local-storage/local-storage.service';
@@ -33,16 +32,13 @@ export class AuthService {
         });
     }
 
-    getFavorits(): Observable<readonly Recipe[]> {
-        return this.http.get<readonly Recipe[]>(`${this.baseUrl}/favorits`, {
-            headers: this.headers,
-        });
-    }
-
-    getUser(): Observable<Profile> {
-        return this.http.get<Profile>(`${this.baseUrlReal}/user/current`, {
-            headers: this.headers,
-        });
+    getUser(): Observable<ProfileWithRecipes> {
+        return this.http.get<ProfileWithRecipes>(
+            `${this.baseUrlReal}/user/current`,
+            {
+                headers: this.headers,
+            },
+        );
     }
 
     registerUser(user: RegistrationProfile): Observable<RegistrationProfile> {

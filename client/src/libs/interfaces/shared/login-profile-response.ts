@@ -3,4 +3,5 @@ export interface LoginProfileResponse {
     readonly password: string;
     readonly token: string;
     readonly type: string;
+    readonly email: string;
 }

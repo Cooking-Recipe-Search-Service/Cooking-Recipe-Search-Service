@@ -1,24 +1,33 @@
 <tui-island class="login">
-    <div class="form"><h6 class="tui-text_h6 no-margin">Вход</h6>
+    <div class="form">
+        <h6 class="tui-text_h6 no-margin">Вход</h6>
 
-    <form [formGroup]="loginForm">
-        <tui-input formControlName="username" class="tui-space_top-5">
-            Имя Пользователя
-            <input tuiTextfield type="email" />
-        </tui-input>
-        <tui-input-password formControlName="password" class="tui-space_top-5">
-            Пароль
-            <input tuiTextfield />
-        </tui-input-password>
-    </form>
-    <div class="login__btns">
-        <button tuiButton class="tui-space_top-5" (click)="login()" appearance="custom">
-            Войти
-        </button>
-        <button tuiButton routerLink="/registration" appearance="icon">
-            Регистрация
-        </button>
-    </div></div>
+        <form [formGroup]="loginForm">
+            <tui-input formControlName="username" class="tui-space_top-5">
+                Имя Пользователя
+                <input tuiTextfield type="email" />
+            </tui-input>
+            <tui-input-password
+                formControlName="password"
+                class="tui-space_top-5"
+            >
+                Пароль
+                <input tuiTextfield />
+            </tui-input-password>
+        </form>
+        <div class="login__btns">
+            <button
+                tuiButton
+                appearance="custom"
+                class="tui-space_top-5"
+                (click)="login()"
+            >
+                Войти
+            </button>
+            <button tuiButton routerLink="/registration" appearance="icon">
+                Регистрация
+            </button>
+        </div>
+    </div>
     <tui-svg src="assets/green/login2.svg" class="svg"></tui-svg>
-    
-</tui-island >
+</tui-island>

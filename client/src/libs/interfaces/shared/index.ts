@@ -10,3 +10,4 @@ export * from './roles';
 export * from './registration-profile';
 export * from './login-profile';
 export * from './login-profile-response';
+export * from './profile-with-recipes';

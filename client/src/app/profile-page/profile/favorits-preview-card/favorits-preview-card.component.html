@@ -1,14 +1,12 @@
-<tui-island [hoverable]="true">
-    <ng-container *ngIf="recipes$ | async as recipes">
-        <div (click)="nanigateToFavorits()">
-            <p class="favorits__title bold">Избранное</p>
+<tui-island class="favorits" [hoverable]="true">
+    <div (click)="nanigateToFavorits()">
+        <p class="favorits__title bold">Избранное</p>
 
-            <div *ngFor="let recipe of recipes" class="favorits__row-img">
-                <img
-                    class="favorits__img"
-                    [src]="recipe.image | base64ImageConvert"
-                />
-            </div>
+        <div *ngFor="let recipe of recipes" class="favorits__row-img">
+            <img
+                class="favorits__img"
+                [src]="recipe.image | base64ImageConvert"
+            />
         </div>
-    </ng-container>
+    </div>
 </tui-island>

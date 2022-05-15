@@ -5,7 +5,6 @@ import {
     Input,
     Output,
 } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Recipe } from 'src/libs/interfaces';
 @Component({
     selector: 'app-favorits-preview-card',
@@ -16,7 +15,7 @@ import { Recipe } from 'src/libs/interfaces';
 export class FavoritsPreviewCardComponent {
     @Output() navigate: EventEmitter<number> = new EventEmitter();
 
-    @Input() recipes$!: Observable<readonly Recipe[]>;
+    @Input() recipes!: readonly Recipe[];
 
     nanigateToFavorits(): void {
         this.navigate.emit(1);

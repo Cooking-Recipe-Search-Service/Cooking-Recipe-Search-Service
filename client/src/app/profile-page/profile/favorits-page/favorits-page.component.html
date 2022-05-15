@@ -1,5 +1,5 @@
 <h6 class="tui-text_h6">Ващи любимые рецепты</h6>
-<div *ngIf="recipes$ | async as recipes" class="recipes__block">
+<div class="recipes__block">
     <ng-container *ngFor="let recipe of recipes">
         <app-recipe-preview [recipe]="recipe"></app-recipe-preview>
     </ng-container>

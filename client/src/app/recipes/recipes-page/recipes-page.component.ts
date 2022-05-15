@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/services/api/auth.service';
 
 import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
 import { LocalStorageService } from 'src/app/shared/services/local-storage/local-storage.service';
-import { Profile, Recipe } from 'src/libs/interfaces';
+import { ProfileWithRecipes, Recipe } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-recipes-page',
@@ -14,13 +15,17 @@ import { Profile, Recipe } from 'src/libs/interfaces';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecipesPageComponent {
+    token$ = this.localStorage.getToken();
+
+    user$: Observable<ProfileWithRecipes | null> = this.token$.pipe(
+        switchMap((_) => this.authService.getUser()),
+    );
+
     recipes$ = this.recipiesApi.getDefaultRecipes();
 
     category = '';
 
     searchedRecipes$!: Observable<readonly Recipe[]>;
-
-    user$: Observable<Profile | null> = this.authService.getUser();
 
     constructor(
         private readonly recipiesApi: RecipesApiService,
