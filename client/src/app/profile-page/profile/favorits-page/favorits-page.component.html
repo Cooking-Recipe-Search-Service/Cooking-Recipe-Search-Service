@@ -1,13 +1,14 @@
 <ng-container *ngIf="recipes.length; else empty">
     <h6 class="tui-text_h6">Ващи любимые рецепты</h6>
-<div class="recipes__block">
-    <ng-container *ngFor="let recipe of recipes">
-        <app-recipe-preview [recipe]="recipe"></app-recipe-preview>
-    </ng-container>
-</div>
+    <div class="recipes__block">
+        <ng-container *ngFor="let recipe of recipes">
+            <app-recipe-preview [recipe]="recipe"></app-recipe-preview>
+        </ng-container>
+    </div>
 </ng-container>
 <ng-template #empty>
-    <p class="tui-text_h6">Тут пусто</p> 
-    <button tuiButton appearance="custom" size="s"  routerLink="/recipes">Найти рецепты</button>
+    <p class="tui-text_h6">Тут пусто</p>
+    <button tuiButton appearance="custom" size="s" routerLink="/recipes">
+        Найти рецепты
+    </button>
 </ng-template>
-

@@ -32,17 +32,21 @@ export class AuthInterceptor implements HttpInterceptor {
             catchError((error) => {
                 if (error instanceof HttpErrorResponse) {
                     if (error.status === 401) {
-
-                      this.localStorage.getUser().pipe(
-                        switchMap(user => {
-                          if( user){
-                            const {username,password} = user;
-                            return this.authService.loginUser({username,password})
-                          }
-                          return of(null);
-                        }),
-                        tap(user => this.localStorage.setToken(user?.token || null))
-                      )
+                        this.localStorage.getUser().pipe(
+                            switchMap((user) => {
+                                if (user) {
+                                    const { username, password } = user;
+                                    return this.authService.loginUser({
+                                        username,
+                                        password,
+                                    });
+                                }
+                                return of(null);
+                            }),
+                            tap((user) =>
+                                this.localStorage.setToken(user?.token || null),
+                            ),
+                        );
                     }
                     return EMPTY;
                 }

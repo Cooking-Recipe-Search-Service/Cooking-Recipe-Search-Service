@@ -1,17 +1,22 @@
 import { Inject, Injectable } from '@angular/core';
-import { filterByKey, StorageService, STORAGE_EVENT, toValue } from '@ng-web-apis/storage';
+import {
+    filterByKey,
+    StorageService,
+    STORAGE_EVENT,
+    toValue,
+} from '@ng-web-apis/storage';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Recipe } from 'src/libs/interfaces';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class LocalStorageRecipesService {
- 
-  favoritsRecipes$$: BehaviorSubject<Record<string, Recipe>> = new BehaviorSubject<
-        Record<string, Recipe>
-    >(this.getRecipesFromStorage());
+    favoritsRecipes$$: BehaviorSubject<Record<string, Recipe>> =
+        new BehaviorSubject<Record<string, Recipe>>(
+            this.getRecipesFromStorage(),
+        );
 
     constructor(
         @Inject(STORAGE_EVENT)
@@ -22,12 +27,14 @@ export class LocalStorageRecipesService {
             .pipe(
                 filterByKey('favorits'),
                 toValue(),
-                tap((value) => this.favoritsRecipes$$.next(JSON.parse(value || ''))),
+                tap((value) =>
+                    this.favoritsRecipes$$.next(JSON.parse(value || '')),
+                ),
             )
             .subscribe();
     }
 
-    removeRecipe(deletedCompany:Recipe): void {
+    removeRecipe(deletedCompany: Recipe): void {
         const companies = this.favoritsRecipes$$.getValue();
 
         delete companies[deletedCompany.id];
@@ -36,10 +43,10 @@ export class LocalStorageRecipesService {
         this.setRecipeInStorage(companies);
     }
 
-    addRecipe(recipe:Recipe): void {
+    addRecipe(recipe: Recipe): void {
         const newCompanies = {
             ...this.favoritsRecipes$$.getValue(),
-            [recipe.id]:recipe,
+            [recipe.id]: recipe,
         };
         this.favoritsRecipes$$.next(newCompanies);
 
@@ -56,16 +63,11 @@ export class LocalStorageRecipesService {
         );
     }
 
-    private setRecipeInStorage(company: Record<string,Recipe>) {
-        this.storageService.setItem(
-            'favorits',
-            JSON.stringify(company),
-        );
+    private setRecipeInStorage(company: Record<string, Recipe>) {
+        this.storageService.setItem('favorits', JSON.stringify(company));
     }
 
-    private getRecipesFromStorage(): Record<string,Recipe> {
-        return JSON.parse(
-            this.storageService.getItem('favorits') || '""',
-        );
+    private getRecipesFromStorage(): Record<string, Recipe> {
+        return JSON.parse(this.storageService.getItem('favorits') || '""');
     }
 }

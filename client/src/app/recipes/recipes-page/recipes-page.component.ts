@@ -45,7 +45,6 @@ export class RecipesPageComponent {
     }
 
     logout(): void {
-
         // this.socialAuthServive
         //     .signOut()
         //     .then(() => this.router.navigate(['admin-panel']));

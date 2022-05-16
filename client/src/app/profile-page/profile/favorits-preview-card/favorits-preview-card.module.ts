@@ -8,7 +8,13 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [FavoritsPreviewCardComponent],
-    imports: [CommonModule, TuiIslandModule, Base64ImageConvertModule, TuiButtonModule, RouterModule],
+    imports: [
+        CommonModule,
+        TuiIslandModule,
+        Base64ImageConvertModule,
+        TuiButtonModule,
+        RouterModule,
+    ],
     exports: [FavoritsPreviewCardComponent],
 })
 export class FavoritsPreviewCardModule {}

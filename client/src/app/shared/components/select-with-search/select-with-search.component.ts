@@ -22,7 +22,7 @@ export class SelectWithSearchComponent {
 
     private readonly search$ = new Subject<string>();
 
-    onSearch(search: string | null):void {
+    onSearch(search: string | null): void {
         this.search$.next(search || '');
     }
 

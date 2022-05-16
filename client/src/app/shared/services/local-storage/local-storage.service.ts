@@ -33,7 +33,7 @@ export class LocalStorageUserService {
             )
             .subscribe();
 
-            this.event$
+        this.event$
             .pipe(
                 filterByKey('user'),
                 toValue(),
@@ -43,13 +43,12 @@ export class LocalStorageUserService {
     }
 
     getToken(): Observable<string | null> {
-        return this.token$$.asObservable()
+        return this.token$$.asObservable();
     }
 
-    getUser():Observable< Profile | null> {
+    getUser(): Observable<Profile | null> {
         return this.user$$.asObservable();
     }
-
 
     setToken(token: string | null): void {
         this.token$$.next(token);
@@ -68,8 +67,8 @@ export class LocalStorageUserService {
         this.storageService.removeItem('user');
     }
 
-    private setRecipesToLocalStorage(recipes: number[]){
-        this.storageService.setItem('favorits', JSON.stringify(recipes))
+    private setRecipesToLocalStorage(recipes: number[]) {
+        this.storageService.setItem('favorits', JSON.stringify(recipes));
     }
 
     private setTokenToLocalStorage(token: string | null) {

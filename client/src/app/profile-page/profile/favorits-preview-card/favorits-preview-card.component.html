@@ -1,19 +1,20 @@
-<tui-island class="favorits" [hoverable]="true" >
+<tui-island class="favorits" [hoverable]="true">
     <ng-container *ngIf="recipes.length;else empty">
         <div (click)="nanigateToFavorits()">
-        <p class="favorits__title bold">Избранное</p>
+            <p class="favorits__title bold">Избранное</p>
 
-        <div *ngFor="let recipe of recipes" class="favorits__row-img">
-            <img
-                class="favorits__img"
-                [src]="recipe.image | base64ImageConvert"
-            />
+            <div *ngFor="let recipe of recipes" class="favorits__row-img">
+                <img
+                    class="favorits__img"
+                    [src]="recipe.image | base64ImageConvert"
+                />
+            </div>
         </div>
-    </div>
     </ng-container>
-    
 </tui-island>
 <ng-template #empty>
     <p>Кажется у вас нет любимых рецептов</p>
-    <button size="s" tuiButton routerLink="/recipes" appearance="custom">Найти рецепты</button>
+    <button size="s" tuiButton routerLink="/recipes" appearance="custom">
+        Найти рецепты
+    </button>
 </ng-template>

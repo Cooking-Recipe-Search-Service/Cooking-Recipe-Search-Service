@@ -13,12 +13,12 @@ import { Profile, Recipe } from 'src/libs/interfaces';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent {
-
     activeItemIndex = 0;
 
-    user$: Observable<Profile | null> = this.localStorageUser.getUser()
+    user$: Observable<Profile | null> = this.localStorageUser.getUser();
 
-    recipes$: Observable<readonly Recipe[]> = this.localStorageRecipes.getRecipes()
+    recipes$: Observable<readonly Recipe[]> =
+        this.localStorageRecipes.getRecipes();
 
     constructor(
         private router: Router,
