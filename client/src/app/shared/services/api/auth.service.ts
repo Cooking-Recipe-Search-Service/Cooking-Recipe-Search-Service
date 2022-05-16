@@ -8,7 +8,7 @@ import {
     ProfileWithRecipes,
     RegistrationProfile,
 } from 'src/libs/interfaces';
-import { LocalStorageService } from '../local-storage/local-storage.service';
+import { LocalStorageUserService } from '../local-storage/local-storage.service';
 
 @Injectable({
     providedIn: 'root',
@@ -21,7 +21,7 @@ export class AuthService {
     constructor(
         @Inject(HOST_API) private readonly baseUrl: string,
         private readonly http: HttpClient,
-        private readonly localStorage: LocalStorageService,
+        private readonly localStorage: LocalStorageUserService,
         @Inject(TOKEN_TYPE) private readonly tokenType: string,
     ) {
         this.localStorage.getToken().subscribe((token) => {

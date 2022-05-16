@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'src/app/shared/services/local-storage/local-storage.service';
-import { ProfileWithRecipes } from 'src/libs/interfaces';
+import { LocalStorageUserService } from 'src/app/shared/services/local-storage/local-storage.service';
+import { Profile, ProfileWithRecipes } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-profile-info-card',
@@ -10,15 +10,16 @@ import { ProfileWithRecipes } from 'src/libs/interfaces';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileInfoCardComponent {
-    @Input() user!: ProfileWithRecipes;
+    @Input() user!: Profile;
 
     constructor(
-        private readonly localStorage: LocalStorageService,
+        private readonly localStorage: LocalStorageUserService,
         private router: Router,
     ) {}
 
     logout(): void {
         this.localStorage.logoutUser();
+
         this.router.navigate(['/recipes']);
     }
 }

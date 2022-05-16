@@ -6,9 +6,9 @@ import {
     HttpInterceptor,
     HttpErrorResponse,
 } from '@angular/common/http';
-import { EMPTY, Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { LocalStorageService } from '../local-storage/local-storage.service';
+import { EMPTY, Observable, of, throwError } from 'rxjs';
+import { catchError, switchMap, tap } from 'rxjs/operators';
+import { LocalStorageUserService } from '../local-storage/local-storage.service';
 import { AuthService } from '../api/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -18,7 +18,7 @@ import { Location } from '@angular/common';
 })
 export class AuthInterceptor implements HttpInterceptor {
     constructor(
-        private localStorage: LocalStorageService,
+        private localStorage: LocalStorageUserService,
         private readonly authService: AuthService,
         private router: Router,
         private readonly location: Location,
@@ -32,16 +32,17 @@ export class AuthInterceptor implements HttpInterceptor {
             catchError((error) => {
                 if (error instanceof HttpErrorResponse) {
                     if (error.status === 401) {
-                        // console.log(1)
-                        const user = this.localStorage.getUser();
-                        if (user) {
-                            this.authService
-                                .loginUser(user)
-                                .subscribe((user) =>
-                                    this.localStorage.setToken(user.token),
-                                );
-                        }
-                        // redirect user to the logout page
+
+                      this.localStorage.getUser().pipe(
+                        switchMap(user => {
+                          if( user){
+                            const {username,password} = user;
+                            return this.authService.loginUser({username,password})
+                          }
+                          return of(null);
+                        }),
+                        tap(user => this.localStorage.setToken(user?.token || null))
+                      )
                     }
                     return EMPTY;
                 }

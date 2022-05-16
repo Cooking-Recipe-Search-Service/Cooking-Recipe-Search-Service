@@ -6,48 +6,57 @@ import {
     STORAGE_EVENT,
     toValue,
 } from '@ng-web-apis/storage';
+import { Profile } from 'src/libs/interfaces';
 import { tap } from 'rxjs/operators';
-import { LoginProfile } from 'src/libs/interfaces';
+
 @Injectable({
     providedIn: 'root',
 })
-export class LocalStorageService {
+export class LocalStorageUserService {
     token$$: BehaviorSubject<string | null> = new BehaviorSubject<
         string | null
     >(this.getTokenFromLocalStorage());
 
-    user$$: BehaviorSubject<LoginProfile | null> =
-        new BehaviorSubject<LoginProfile | null>(this.getUserFromStorage());
+    user$$: BehaviorSubject<Profile | null> =
+        new BehaviorSubject<Profile | null>(this.getUserFromStorage());
 
     constructor(
         @Inject(STORAGE_EVENT)
         private readonly event$: Observable<StorageEvent>,
-
         @Inject(StorageService) private readonly storageService: Storage,
     ) {
         this.event$
             .pipe(
                 filterByKey('token'),
                 toValue(),
-                tap((value) => this.token$$.next(JSON.parse(value || ''))),
+                tap((value) => this.token$$.next(JSON.parse(value || '""'))),
+            )
+            .subscribe();
+
+            this.event$
+            .pipe(
+                filterByKey('user'),
+                toValue(),
+                tap((value) => this.user$$.next(JSON.parse(value || '""'))),
             )
             .subscribe();
     }
 
     getToken(): Observable<string | null> {
-        return this.token$$.asObservable();
+        return this.token$$.asObservable()
     }
 
-    getUser(): LoginProfile | null {
-        return this.user$$.getValue();
+    getUser():Observable< Profile | null> {
+        return this.user$$.asObservable();
     }
 
-    setToken(token: string): void {
+
+    setToken(token: string | null): void {
         this.token$$.next(token);
         this.setTokenToLocalStorage(token);
     }
 
-    setUser(user: LoginProfile): void {
+    setUser(user: Profile): void {
         this.user$$.next(user);
         this.setUserToLocalStorage(user);
     }
@@ -59,11 +68,15 @@ export class LocalStorageService {
         this.storageService.removeItem('user');
     }
 
+    private setRecipesToLocalStorage(recipes: number[]){
+        this.storageService.setItem('favorits', JSON.stringify(recipes))
+    }
+
     private setTokenToLocalStorage(token: string | null) {
         this.storageService.setItem('token', JSON.stringify(token));
     }
 
-    private setUserToLocalStorage(user: LoginProfile) {
+    private setUserToLocalStorage(user: Profile) {
         this.storageService.setItem('user', JSON.stringify(user));
     }
 
@@ -71,7 +84,7 @@ export class LocalStorageService {
         return this.storageService.getItem('token') || '';
     }
 
-    private getUserFromStorage(): LoginProfile | null {
+    private getUserFromStorage(): Profile | null {
         return JSON.parse(this.storageService.getItem('user') || '""');
     }
 }

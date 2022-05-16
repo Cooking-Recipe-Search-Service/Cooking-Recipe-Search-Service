@@ -3,7 +3,7 @@ import { CanActivate, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { LocalStorageService } from '../local-storage/local-storage.service';
+import { LocalStorageUserService } from '../local-storage/local-storage.service';
 import { NotificationService } from '../notifications/notification.service';
 
 @Injectable({
@@ -12,7 +12,7 @@ import { NotificationService } from '../notifications/notification.service';
 export class AuthGuard implements CanActivate {
     constructor(
         private router: Router,
-        private localStorage: LocalStorageService,
+        private localStorage: LocalStorageUserService,
         private notificationService: NotificationService,
     ) {}
 
