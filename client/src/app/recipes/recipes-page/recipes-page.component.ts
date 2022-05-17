@@ -43,10 +43,4 @@ export class RecipesPageComponent {
     activeCategory(category: string): void {
         this.category = category;
     }
-
-    logout(): void {
-        // this.socialAuthServive
-        //     .signOut()
-        //     .then(() => this.router.navigate(['admin-panel']));
-    }
 }

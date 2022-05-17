@@ -76,15 +76,15 @@ export class AuthService {
         return this.http
             .post<LoginProfileResponse>(`${this.baseUrlReal}/auth/signin`, user)
             .pipe(
-                switchMap((user) => {
-                    this.localStorage.setToken(user.token),
+                switchMap((response) => {
+                    this.localStorage.setToken(response.token),
                         this.localStorage.setUser({
                             username: user.username,
                             password: user.password,
-                            email: user.email,
+                            email: response.email,
                             photoUrl: '',
                         });
-                    return combineLatest([of(user.token), this.getUser()]);
+                    return combineLatest([of(response.token), this.getUser()]);
                 }),
                 map(([userToken, user]) => {
                     this.localStorageRecipes.setRecipesToLocal(user.recipes);

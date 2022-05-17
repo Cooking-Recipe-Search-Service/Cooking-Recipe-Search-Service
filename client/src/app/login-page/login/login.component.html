@@ -2,9 +2,9 @@
     <div class="form">
         <h6 class="tui-text_h6 no-margin">Вход</h6>
 
-        <form [formGroup]="loginForm">
+        <form [formGroup]="loginForm" (keydown.enter)="login()">
             <tui-input formControlName="username" class="tui-space_top-5">
-                Имя Пользователя
+                Имя пользователя
                 <input tuiTextfield type="email" />
             </tui-input>
             <tui-input-password
