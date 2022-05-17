@@ -17,6 +17,28 @@ export class NotificationService {
         @Inject(Injector) private readonly injector: Injector,
     ) {}
 
+    showSuccessRemoveRecipe(): void {
+        this.notificationsService
+            .show('Рецепт удален', {
+                label: ``,
+                status: TuiNotification.Success,
+                hasIcon: false,
+                autoClose: 3000,
+            })
+            .subscribe();
+    }
+
+    showSuccesAddRecipe(): void {
+        this.notificationsService
+            .show('Рецепт добавлен', {
+                label: ``,
+                status: TuiNotification.Success,
+                hasIcon: false,
+                autoClose: 3000,
+            })
+            .subscribe();
+    }
+
     showErrorMessage(): void {
         this.notificationsService
             .show(`Что-то пошло не так!`, {

@@ -34,6 +34,22 @@ export class LocalStorageRecipesService {
             .subscribe();
     }
 
+    removeRecipes(): void {
+        this.storageService.removeItem('favorits');
+    }
+
+    setRecipesToLocal(recipes: readonly Recipe[]): void {
+        const recordRecipes = recipes.reduce(
+            (accum, current) => ({
+                ...accum,
+                [current.id]: current,
+            }),
+            {} as Record<string, Recipe>,
+        );
+        this.favoritsRecipes$$.next(recordRecipes);
+        this.setRecipeInStorage(recordRecipes);
+    }
+
     removeRecipe(deletedCompany: Recipe): void {
         const companies = this.favoritsRecipes$$.getValue();
 

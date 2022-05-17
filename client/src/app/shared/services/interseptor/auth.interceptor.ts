@@ -6,12 +6,11 @@ import {
     HttpInterceptor,
     HttpErrorResponse,
 } from '@angular/common/http';
-import { EMPTY, Observable, of, throwError } from 'rxjs';
-import { catchError, switchMap, tap } from 'rxjs/operators';
+import { EMPTY, Observable, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 import { LocalStorageUserService } from '../local-storage/local-storage.service';
 import { AuthService } from '../api/auth.service';
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { NotificationService } from '../notifications/notification.service';
 
 @Injectable({
     providedIn: 'root',
@@ -20,8 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(
         private localStorage: LocalStorageUserService,
         private readonly authService: AuthService,
-        private router: Router,
-        private readonly location: Location,
+        private readonly notificationService: NotificationService,
     ) {}
 
     intercept(
@@ -32,21 +30,27 @@ export class AuthInterceptor implements HttpInterceptor {
             catchError((error) => {
                 if (error instanceof HttpErrorResponse) {
                     if (error.status === 401) {
-                        this.localStorage.getUser().pipe(
-                            switchMap((user) => {
-                                if (user) {
-                                    const { username, password } = user;
-                                    return this.authService.loginUser({
-                                        username,
-                                        password,
-                                    });
-                                }
-                                return of(null);
-                            }),
-                            tap((user) =>
-                                this.localStorage.setToken(user?.token || null),
-                            ),
-                        );
+                        this.localStorage
+                            .getUser()
+                            .pipe(
+                                switchMap((user) => {
+                                    if (user) {
+                                        const { username, password } = user;
+                                        return this.authService.loginUser({
+                                            username,
+                                            password,
+                                        });
+                                    }
+                                    if (
+                                        request.url.match(/RecipeToFavorites/)
+                                    ) {
+                                        this.notificationService.showNeedLoginNotification();
+                                    }
+
+                                    return EMPTY;
+                                }),
+                            )
+                            .subscribe();
                     }
                     return EMPTY;
                 }

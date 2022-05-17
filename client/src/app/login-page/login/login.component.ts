@@ -4,9 +4,8 @@ import { Router } from '@angular/router';
 import { EMPTY } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/services/api/auth.service';
-import { LocalStorageUserService } from 'src/app/shared/services/local-storage/local-storage.service';
 import { NotificationService } from 'src/app/shared/services/notifications/notification.service';
-import { LoginProfileResponse } from 'src/libs/interfaces';
+import { ProfileWithRecipes } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-login',
@@ -28,7 +27,6 @@ export class LoginComponent {
 
     constructor(
         private readonly authService: AuthService,
-        private readonly localStorage: LocalStorageUserService,
         private readonly notificationService: NotificationService,
         private router: Router,
     ) {}
@@ -38,9 +36,7 @@ export class LoginComponent {
         this.authService
             .loginUser(user)
             .pipe(
-                map((response: LoginProfileResponse) => {
-                    this.localStorage.setToken(response.token);
-                    this.localStorage.setUser(user);
+                map((response: ProfileWithRecipes) => {
                     this.notificationService.showLoginSuccess(
                         response.username,
                     );

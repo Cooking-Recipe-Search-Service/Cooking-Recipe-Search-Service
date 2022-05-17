@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Profile } from 'src/libs/interfaces';
-import { AuthService } from '../shared/services/api/auth.service';
+import { LocalStorageRecipesService } from '../shared/services/local-storage/local-storage-recipes.service';
 import { LocalStorageUserService } from '../shared/services/local-storage/local-storage.service';
 
 @Component({
@@ -21,10 +21,11 @@ export class NavbarComponent {
 
     constructor(
         private localStorage: LocalStorageUserService,
-        private readonly authService: AuthService,
+        private readonly localStorageRecipes: LocalStorageRecipesService,
     ) {}
 
     logout(): void {
         this.localStorage.logoutUser();
+        this.localStorageRecipes.removeRecipes();
     }
 }
