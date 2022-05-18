@@ -54,7 +54,7 @@ export class RecipesApiService {
     }
 
     getRecipeById(id: number): Observable<Recipe> {
-        return this.http.get<Recipe>(`${this.baseUrlReal}/recipes/${id},`);
+        return this.http.get<Recipe>(`${this.baseUrlReal}/recipes/${id}`);
     }
 
     getRecipeByCategory(category: string): Observable<readonly Recipe[]> {
