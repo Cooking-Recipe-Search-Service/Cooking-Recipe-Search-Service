@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/services/api/auth.service';
 
 import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
 import { LocalStorageUserService } from 'src/app/shared/services/local-storage/local-storage.service';
-import { ProfileWithRecipes, Recipe } from 'src/libs/interfaces';
+import { Recipe } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-recipes-page',
@@ -15,12 +14,6 @@ import { ProfileWithRecipes, Recipe } from 'src/libs/interfaces';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecipesPageComponent {
-    token$ = this.localStorage.getToken();
-
-    user$: Observable<ProfileWithRecipes | null> = this.token$.pipe(
-        switchMap((_) => this.authService.getUser()),
-    );
-
     recipes$ = this.recipiesApi.getDefaultRecipes();
 
     category = '';

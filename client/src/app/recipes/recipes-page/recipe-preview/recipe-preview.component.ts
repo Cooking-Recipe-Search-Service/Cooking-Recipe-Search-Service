@@ -36,8 +36,6 @@ export class RecipePreviewComponent {
 
     isInStorage$: Observable<boolean> = of(true);
 
-    token$: Observable<string | null> = this.localStorage.getToken();
-
     constructor(
         private localStorage: LocalStorageUserService,
         private readonly destroy$: TuiDestroyService,

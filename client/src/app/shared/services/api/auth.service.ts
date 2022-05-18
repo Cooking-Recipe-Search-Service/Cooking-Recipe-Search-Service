@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { combineLatest, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { HOST_API, TOKEN_TYPE } from 'src/libs/consts';
 import {
@@ -79,16 +79,16 @@ export class AuthService {
                 switchMap((response) => {
                     this.localStorage.setToken(response.token),
                         this.localStorage.setUser({
-                            username: user.username,
+                            username: response.username,
                             password: user.password,
                             email: response.email,
                             photoUrl: '',
                         });
-                    return combineLatest([of(response.token), this.getUser()]);
+                    return this.getUser();
                 }),
-                map(([userToken, user]) => {
+                map((user) => {
                     this.localStorageRecipes.setRecipesToLocal(user.recipes);
-                    return { userToken, ...user };
+                    return user;
                 }),
             );
     }

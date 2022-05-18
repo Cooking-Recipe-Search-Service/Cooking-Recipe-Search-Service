@@ -12,8 +12,6 @@ import { Router } from '@angular/router';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
-    token$ = this.localStorage.getToken();
-
     user$: Observable<Profile | null> = this.localStorage.getUser();
 
     activeTab = 0;
@@ -24,12 +22,13 @@ export class NavbarComponent {
         private readonly localStorage: LocalStorageUserService,
         private readonly localStorageRecipes: LocalStorageRecipesService,
         private readonly location: Location,
-        private readonly router: Router
+        private readonly router: Router,
     ) {}
 
     logout(): void {
         this.localStorage.logoutUser();
         this.localStorageRecipes.removeRecipes();
-        if(this.location.path().match(/profile/)) this.router.navigate(['/recipes'])
+        if (this.location.path().match(/profile/))
+            this.router.navigate(['/recipes']);
     }
 }

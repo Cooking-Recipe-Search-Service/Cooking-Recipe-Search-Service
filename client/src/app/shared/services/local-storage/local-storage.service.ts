@@ -80,7 +80,8 @@ export class LocalStorageUserService {
     }
 
     private getTokenFromLocalStorage(): string {
-        return this.storageService.getItem('token') || '';
+        // console.log(this.storageService.getItem('token'))
+        return JSON.parse(this.storageService.getItem('token') || '""');
     }
 
     private getUserFromStorage(): Profile | null {

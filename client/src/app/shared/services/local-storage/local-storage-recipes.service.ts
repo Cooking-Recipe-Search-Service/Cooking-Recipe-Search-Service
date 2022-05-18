@@ -28,7 +28,7 @@ export class LocalStorageRecipesService {
                 filterByKey('favorits'),
                 toValue(),
                 tap((value) =>
-                    this.favoritsRecipes$$.next(JSON.parse(value || '')),
+                    this.favoritsRecipes$$.next(JSON.parse(value || '""')),
                 ),
             )
             .subscribe();
