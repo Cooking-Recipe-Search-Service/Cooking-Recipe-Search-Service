@@ -5,9 +5,9 @@
 
             <div *ngFor="let recipe of recipes" class="favorits__row-img">
                 <img
+                    alt="recipe photo"
                     class="favorits__img"
                     [src]="recipe.image | base64ImageConvert"
-                    alt="recipe photo"
                 />
             </div>
         </div>

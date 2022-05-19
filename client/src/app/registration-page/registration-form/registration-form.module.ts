@@ -5,10 +5,11 @@ import {
     TuiFieldErrorPipeModule,
     TuiInputModule,
     TuiInputPasswordModule,
+    TuiIslandModule,
 } from '@taiga-ui/kit';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TuiButtonModule, TuiErrorModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiErrorModule, TuiSvgModule } from '@taiga-ui/core';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -24,6 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
         HttpClientModule,
         TuiFieldErrorPipeModule,
         TuiErrorModule,
+        TuiSvgModule,
+        TuiIslandModule,
     ],
     exports: [RegistrationFormComponent],
 })

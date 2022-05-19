@@ -79,7 +79,7 @@
         Описание
     </tui-text-area>
     <p class="tui-text_body-xl tui-space_top-5 space">Добавить ингредиенты</p>
-    <div *tuiLet="ingredients$ | async as ingredientsVal ">
+    <div>
         <div
             *ngFor="let ingredient of ingredients.controls; let index = index"
             class="row tui-space_top-5"
@@ -95,7 +95,7 @@
                     <input tuiTextfield />
                     <tui-data-list-wrapper
                         *tuiDataList
-                        [items]="ingredientsVal |  tuiFilterByInputWith : stringify"
+                        [items]="ingredients$ | async |  tuiFilterByInputWith : stringify"
                         [itemContent]="stringify | tuiStringifyContent"
                     ></tui-data-list-wrapper>
                 </tui-combo-box>
@@ -170,7 +170,6 @@
     tuiButton
     class="tui-space_top-5"
     [showLoader]="(loading$ | async) || false"
-    [disabled]="recipeForm.invalid"
     (click)="addRecipe()"
 >
     Добавить рецепт

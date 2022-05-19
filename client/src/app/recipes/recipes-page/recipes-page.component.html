@@ -2,17 +2,23 @@
     <h4 class="tui-text_h4">Поиск рецептов</h4>
     <app-search (searchedRecipes)="loadRecipes($event)"></app-search>
 
-    <div *ngIf="searchedRecipes$ | async as searchedRecipes">
+    <ng-container *ngIf="searchedRecipes$ | async as searchedRecipes">
         <h4 class="tui-text_h4">Результаты поиска</h4>
-        <div class="recipes__preview">
-            <ng-container
-                *ngFor="let recipe of searchedRecipes"
-                class="recipes__preview"
-            >
-                <app-recipe-preview [recipe]="recipe"></app-recipe-preview>
-            </ng-container>
-        </div>
-    </div>
+        <ng-container *ngIf="searchedRecipes.length; else empty">
+            <p>Найдено рецептов:{{searchedRecipes.length}}</p>
+            <div class="recipes__preview">
+                <ng-container
+                    *ngFor="let recipe of searchedRecipes"
+                    class="recipes__preview"
+                >
+                    <app-recipe-preview [recipe]="recipe"></app-recipe-preview>
+                </ng-container>
+            </div>
+        </ng-container>
+        <ng-template #empty>
+            <p class="tui-text_body-l">Мы старались, но ничего не нашли</p>
+        </ng-template>
+    </ng-container>
 
     <h4 class="tui-text_h4">Рецепты по категориям</h4>
     <app-default-recipes
