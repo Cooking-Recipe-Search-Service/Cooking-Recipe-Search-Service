@@ -17,8 +17,6 @@ import { LocalStorageUserService } from '../local-storage/local-storage.service'
     providedIn: 'root',
 })
 export class AuthService {
-    private baseUrlReal = 'http://localhost:8080/api';
-
     private headers = {};
 
     constructor(
@@ -38,7 +36,7 @@ export class AuthService {
 
     removeFromFavorites(recipe: Recipe): Observable<ProfileWithRecipes> {
         return this.http.put<ProfileWithRecipes>(
-            `${this.baseUrlReal}/user/deleteRecipeToFavoritesByRecipeId/${recipe.id}`,
+            `${this.baseUrl}/user/deleteRecipeToFavoritesByRecipeId/${recipe.id}`,
             recipe,
             {
                 headers: this.headers,
@@ -48,7 +46,7 @@ export class AuthService {
 
     addToFavorites(recipe: Recipe): Observable<ProfileWithRecipes> {
         return this.http.put<ProfileWithRecipes>(
-            `${this.baseUrlReal}/user/addRecipeToFavoritesByRecipeId/${recipe.id}`,
+            `${this.baseUrl}/user/addRecipeToFavoritesByRecipeId/${recipe.id}`,
             recipe,
             {
                 headers: this.headers,
@@ -58,7 +56,7 @@ export class AuthService {
 
     getUser(): Observable<ProfileWithRecipes> {
         return this.http.get<ProfileWithRecipes>(
-            `${this.baseUrlReal}/user/current`,
+            `${this.baseUrl}/user/current`,
             {
                 headers: this.headers,
             },
@@ -67,14 +65,14 @@ export class AuthService {
 
     registerUser(user: RegistrationProfile): Observable<RegistrationProfile> {
         return this.http.post<RegistrationProfile>(
-            `${this.baseUrlReal}/auth/signup`,
+            `${this.baseUrl}/auth/signup`,
             user,
         );
     }
 
     loginUser(user: LoginProfile): Observable<ProfileWithRecipes> {
         return this.http
-            .post<LoginProfileResponse>(`${this.baseUrlReal}/auth/signin`, user)
+            .post<LoginProfileResponse>(`${this.baseUrl}/auth/signin`, user)
             .pipe(
                 switchMap((response) => {
                     this.localStorage.setToken(response.token),
