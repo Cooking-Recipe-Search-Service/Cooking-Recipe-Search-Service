@@ -1,17 +1,19 @@
-<tui-island *tuiLet="user$ | async as user" class="recipe-preview">
+<tui-island class="recipe-preview">
     <div class="recipe-preview__calories tui-text_body-xs">
-        <p class="no-margin bold">{{recipe.energyValue.calories}} ккал</p>
+        <p class="no-margin bold">
+            {{currentRecipe.energyValue.calories}} ккал
+        </p>
     </div>
-    <a [routerLink]="['/recipes/recipe',recipe.id ]">
+    <a [routerLink]="['/recipes/recipe',currentRecipe.id ]">
         <img
             alt="recipe photo"
             class="recipe-preview__img tui-space_right-4"
-            [src]="recipe.image | base64ImageConvert"
+            [src]="currentRecipe.image | base64ImageConvert"
         />
     </a>
     <div class="recipe-preview__title">
         <div class="recipe-preview__tags">
-            <ng-container *ngFor="let tag of recipe | recipeTags">
+            <ng-container *ngFor="let tag of currentRecipe | recipeTags">
                 <a class="recipe-preview__tag tui-text-body-xs">
                     {{tag.label}}
                 </a>
@@ -23,7 +25,7 @@
         <tui-line-clamp [content]="content" [linesLimit]="2"></tui-line-clamp>
         <ng-template #content>
             <p class="tui-text_body-l no-margin ecipe-preview__hint">
-                {{recipe.name}}
+                {{currentRecipe.name}}
             </p>
         </ng-template>
         <div class="">
@@ -40,8 +42,9 @@
                         appearance="whiteblock"
                         class="tui-group__auto-width-item"
                     >
-                        {{recipe.ingredientsInfo.length}} {{ 'ингредиентов' |
-                        declensions: (recipe.ingredientsInfo.length) }}
+                        {{currentRecipe.ingredientsInfo.length}} {{
+                        'ингредиентов' | declensions:
+                        (currentRecipe.ingredientsInfo.length) }}
                     </button>
                     <button
                         tuiIconButton
@@ -65,7 +68,7 @@
             <ng-template #dropdown>
                 <tui-data-list class="recipe-preview__data-list">
                     <button
-                        *ngFor="let ingredient of recipe.ingredientsInfo"
+                        *ngFor="let ingredient of currentRecipe.ingredientsInfo"
                         tuiOption
                         size="s"
                         class="recipe-preview__data-list-btn"
@@ -78,18 +81,34 @@
                     </button>
                 </tui-data-list>
             </ng-template>
+            <ng-template #removeBtn>
+                <button
+                    tuiIconButton
+                    type="button"
+                    size="s"
+                    icon="tuiIconHeartFilled"
+                    appearance="flat-custom"
+                    tuiHintMode="onDark"
+                    class="tui-space_top-3 tui-space_left-3"
+                    [tuiHint]="remove"
+                    (click)="removeFromFavorites(currentRecipe)"
+                ></button>
+            </ng-template>
+
             <button
+                *ngIf="isInStorage$ | async; else removeBtn"
                 tuiIconButton
                 type="button"
                 size="s"
                 icon="tuiIconHeart"
                 appearance="flat-custom"
+                tuiHintMode="onDark"
                 class="tui-space_top-3 tui-space_left-3"
                 [tuiHint]="favorits"
-                (click)="addToFavorits(recipe,user)"
-            > </button>
+                (click)="addToFavorites(currentRecipe  )"
+            ></button>
         </div>
     </div>
-    <ng-template #favorits >Добавить в избранное</ng-template>
+    <ng-template #favorits>Добавить в избранное</ng-template>
+    <ng-template #remove>Удалить из избранного</ng-template>
 </tui-island>
-

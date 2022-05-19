@@ -6,8 +6,10 @@ import {
 } from '@angular/core';
 import { TuiDestroyService } from '@taiga-ui/cdk';
 import { TuiHostedDropdownComponent } from '@taiga-ui/core';
-import { Observable } from 'rxjs';
-import { LocalStorageService } from 'src/app/shared/services/local-storage/local-storage.service';
+import { Observable, of } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/api/auth.service';
+import { LocalStorageRecipesService } from 'src/app/shared/services/local-storage/local-storage-recipes.service';
+import { LocalStorageUserService } from 'src/app/shared/services/local-storage/local-storage.service';
 import { NotificationService } from 'src/app/shared/services/notifications/notification.service';
 import { Recipe } from 'src/libs/interfaces';
 
@@ -19,19 +21,27 @@ import { Recipe } from 'src/libs/interfaces';
     providers: [TuiDestroyService],
 })
 export class RecipePreviewComponent {
-    @Input() recipe!: Recipe;
+    @Input() set recipe(recipe: Recipe) {
+        this.isInStorage$ = this.localStorageRecipes.isInStorage(
+            String(recipe.id),
+        );
+        this.currentRecipe = recipe;
+    }
 
-    @ViewChild(TuiHostedDropdownComponent)
-    component?: TuiHostedDropdownComponent;
+    @ViewChild(TuiHostedDropdownComponent) component?: TuiHostedDropdownComponent;
 
     open = false;
 
-    user$: Observable<string | null> = this.localStirage.getToken();
+    currentRecipe!: Recipe;
+
+    isInStorage$: Observable<boolean> = of(true);
 
     constructor(
-        private localStirage: LocalStorageService,
+        private localStorage: LocalStorageUserService,
         private readonly destroy$: TuiDestroyService,
         private readonly notificationService: NotificationService,
+        private readonly localStorageRecipes: LocalStorageRecipesService,
+        private readonly authService: AuthService,
     ) {}
 
     onClick(): void {
@@ -42,10 +52,23 @@ export class RecipePreviewComponent {
         }
     }
 
-    addToFavorits(recipe: Recipe, user: string | null): void {
-        if (!user) {
-            this.notificationService.showNeedLoginNotification();
-            return;
-        }
+    addToFavorites(recipe: Recipe): void {
+        this.authService.addToFavorites(recipe).subscribe(
+            (_) => {
+                this.notificationService.showSuccesAddRecipe();
+                this.localStorageRecipes.addRecipe(recipe);
+            },
+            (_) => this.notificationService.showErrorMessage(),
+        );
+    }
+
+    removeFromFavorites(recipe: Recipe): void {
+        this.authService.removeFromFavorites(recipe).subscribe(
+            (_) => {
+                this.notificationService.showSuccessRemoveRecipe();
+                this.localStorageRecipes.removeRecipe(recipe);
+            },
+            (_) => this.notificationService.showErrorMessage(),
+        );
     }
 }

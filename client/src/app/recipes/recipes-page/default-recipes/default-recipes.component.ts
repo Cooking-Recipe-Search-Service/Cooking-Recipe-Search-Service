@@ -5,17 +5,19 @@ import {
     Output,
 } from '@angular/core';
 import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
-import { filter, map } from 'rxjs/operators';
-import {
-    CATEGORIES_MAPPER_GREEN,
-    ROUTER_MAPPER,
-} from 'src/libs/consts';
+import { map } from 'rxjs/operators';
+import { CATEGORIES_MAPPER_GREEN, ROUTER_MAPPER } from 'src/libs/consts';
 
 import { SimpleInterface } from 'src/libs/interfaces';
 
 const CATEGORIES_COUNT = 12;
 
-const REMOVE_CATEGORIES = ['Бульоны', 'Заготовки', 'Ризотто','Соусы и маринады']
+const REMOVE_CATEGORIES = [
+    'Бульоны',
+    'Заготовки',
+    'Ризотто',
+    'Соусы и маринады',
+];
 @Component({
     selector: 'app-default-recipes',
     templateUrl: './default-recipes.component.html',
@@ -37,7 +39,11 @@ export class DefaultRecipesComponent {
         map((categories) =>
             (categories as SimpleInterface[]).sort(() => Math.random() - 0.5),
         ),
-        map((categories) => categories.filter(category => !REMOVE_CATEGORIES.includes(category.name)) ),
+        map((categories) =>
+            categories.filter(
+                (category) => !REMOVE_CATEGORIES.includes(category.name),
+            ),
+        ),
         map((categories: SimpleInterface[]) => {
             this.activeBtnArray[0] = true;
             this.clickedCategory.emit(categories[0].name);

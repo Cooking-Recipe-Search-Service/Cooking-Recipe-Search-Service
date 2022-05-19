@@ -13,7 +13,6 @@ import {
     forkJoin,
     Observable,
     of,
-    Subject,
 } from 'rxjs';
 import {
     catchError,
@@ -75,7 +74,7 @@ export class SearchComponent {
     readonly recipes$$: BehaviorSubject<readonly Recipe[]> =
         new BehaviorSubject<readonly Recipe[]>([]);
 
-    readonly search$: Subject<string> = new Subject();
+    readonly search$: BehaviorSubject<string> = new BehaviorSubject('');
 
     isOpenedFilters = false;
 
@@ -110,8 +109,11 @@ export class SearchComponent {
             )
             .subscribe((value) => {
                 this.open = true;
+
                 this.searchedRecipes.next(of(value));
-                this.recipes$$.next(value);
+                if (this.isOpenedFilters) {
+                    this.recipes$$.next(value);
+                }
             });
     }
 

@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/api/auth.service';
 
 import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
-import { LocalStorageService } from 'src/app/shared/services/local-storage/local-storage.service';
-import { Profile, Recipe } from 'src/libs/interfaces';
+import { LocalStorageUserService } from 'src/app/shared/services/local-storage/local-storage.service';
+import { Recipe } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-recipes-page',
@@ -20,12 +20,10 @@ export class RecipesPageComponent {
 
     searchedRecipes$!: Observable<readonly Recipe[]>;
 
-    user$: Observable<Profile | null> = this.authService.getUser();
-
     constructor(
         private readonly recipiesApi: RecipesApiService,
         private router: Router,
-        private localStorage: LocalStorageService,
+        private localStorage: LocalStorageUserService,
         private readonly authService: AuthService,
     ) {
         // this.token$ = localStorage.getUser();
@@ -37,11 +35,5 @@ export class RecipesPageComponent {
 
     activeCategory(category: string): void {
         this.category = category;
-    }
-
-    logout(): void {
-        // this.socialAuthServive
-        //     .signOut()
-        //     .then(() => this.router.navigate(['admin-panel']));
     }
 }

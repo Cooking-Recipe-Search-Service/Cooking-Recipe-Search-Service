@@ -1,32 +1,34 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TuiDestroyService } from '@taiga-ui/cdk';
 import { Observable } from 'rxjs';
 import { Profile } from 'src/libs/interfaces';
-import { AuthService } from '../shared/services/api/auth.service';
-import { LocalStorageService } from '../shared/services/local-storage/local-storage.service';
-
+import { LocalStorageRecipesService } from '../shared/services/local-storage/local-storage-recipes.service';
+import { LocalStorageUserService } from '../shared/services/local-storage/local-storage.service';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [TuiDestroyService],
 })
 export class NavbarComponent {
+    user$: Observable<Profile | null> = this.localStorage.getUser();
+
     activeTab = 0;
 
     isOpenProfileCompanent = false;
 
-    user$: Observable<Profile | null> = this.authService.getUser();
-
     constructor(
-        private localStorage: LocalStorageService,
-        private readonly authService: AuthService,
-    ) {
-        // this.token$ = this.localStorage.getToken();
-    }
+        private readonly localStorage: LocalStorageUserService,
+        private readonly localStorageRecipes: LocalStorageRecipesService,
+        private readonly location: Location,
+        private readonly router: Router,
+    ) {}
 
-    logout() {
-        //
+    logout(): void {
+        this.localStorage.logoutUser();
+        this.localStorageRecipes.removeRecipes();
+        if (this.location.path().match(/profile/))
+            this.router.navigate(['/recipes']);
     }
 }

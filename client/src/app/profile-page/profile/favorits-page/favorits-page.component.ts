@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Recipe } from 'src/libs/interfaces';
 
 @Component({
@@ -9,5 +8,5 @@ import { Recipe } from 'src/libs/interfaces';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FavoritsPageComponent {
-    @Input() recipes$!: Observable<readonly Recipe[]>;
+    @Input() recipes!: readonly Recipe[];
 }

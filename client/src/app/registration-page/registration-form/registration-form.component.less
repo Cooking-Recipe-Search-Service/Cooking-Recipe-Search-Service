@@ -1,9 +1,27 @@
 .registration {
     max-width: 880px;
     margin: 0 auto;
+
+    &__row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 60px;
+        padding: 30px;
+        align-items: center;
+    }
+
     &__btns {
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+}
+.svg {
+    width: fit-content;
+    margin-left: auto;
+}
+::ng-deep {
+    tui-hint-box {
+        background-color: #098666 !important;
     }
 }

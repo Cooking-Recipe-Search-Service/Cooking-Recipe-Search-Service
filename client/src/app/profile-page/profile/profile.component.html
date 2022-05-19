@@ -17,19 +17,26 @@
                 Профиль
             </button>
         </tui-tabs>
+        <ng-container *ngIf="user$ | async as user">
+            <ng-container [ngSwitch]="activeItemIndex">
+                <div *ngSwitchCase="0" class="main-block tui-space_top-5">
+                    <app-profile-info-card
+                        [user]="user"
+                    ></app-profile-info-card>
+                    <app-favorits-preview-card
+                        *ngIf="recipes$ | async as recipes"
+                        [recipes]="recipes"
+                        (navigate)="navigate($event)"
+                    ></app-favorits-preview-card>
+                </div>
 
-        <ng-container [ngSwitch]="activeItemIndex">
-            <div *ngSwitchCase="0" class="main-block tui-space_top-5">
-                <app-profile-info-card></app-profile-info-card>
-                <app-favorits-preview-card
-                    [recipes$]="recipes$"
-                    (navigate)="navigate($event)"
-                ></app-favorits-preview-card>
-            </div>
-
-            <div *ngSwitchCase="1" class="main-block tui-space_top-5">
-                <app-favorits-page [recipes$]="recipes$"></app-favorits-page>
-            </div>
+                <div *ngSwitchCase="1" class="main-block tui-space_top-5">
+                    <app-favorits-page
+                        *ngIf="recipes$ | async as recipes"
+                        [recipes]="recipes"
+                    ></app-favorits-page>
+                </div>
+            </ng-container>
         </ng-container>
     </div>
 </div>

@@ -21,7 +21,7 @@ import { RouterModule } from '@angular/router';
         TuiButtonModule,
         RouterModule,
         TuiIslandModule,
-        TuiSvgModule
+        TuiSvgModule,
     ],
     exports: [LoginComponent],
 })
