@@ -23,42 +23,47 @@
             ></tui-data-list-wrapper>
         </tui-combo-box>
     </div>
+    <p class="red tui-text_h6">Внимание!!! Белки, жиры и углеводы вводим в гр, на сервер отправляются в мг</p>
     <div class="row tui-space_top-5">
         <tui-input-number
             tuiTextfieldSize="l"
             class="form tui-space_right-5"
             [tuiTextfieldCleaner]="true"
             [formControl]="calories"
+            postfix="на 100гр"
         >
             Калории
-            <input tuiTextfield placeholder="Всего калорий" />
+            <input tuiTextfield  />
         </tui-input-number>
         <tui-input-number
             tuiTextfieldSize="l"
             class="form tui-space_right-5"
             [tuiTextfieldCleaner]="true"
             [formControl]="proteins"
+            postfix="гр"
         >
             Белки
-            <input tuiTextfield placeholder="Количество белков" />
+            <input tuiTextfield  />
         </tui-input-number>
         <tui-input-number
             tuiTextfieldSize="l"
             class="form tui-space_right-5"
             [tuiTextfieldCleaner]="true"
             [formControl]="fats"
+            postfix="гр"
         >
             Жиры
-            <input tuiTextfield placeholder="Количество жиров" />
+            <input tuiTextfield  />
         </tui-input-number>
         <tui-input-number
             tuiTextfieldSize="l"
             class="form"
             [tuiTextfieldCleaner]="true"
             [formControl]="carbs"
+            postfix="гр"
         >
             Углеводы
-            <input tuiTextfield placeholder="Количество Углеводов" />
+            <input tuiTextfield  />
         </tui-input-number>
     </div>
 </form>
