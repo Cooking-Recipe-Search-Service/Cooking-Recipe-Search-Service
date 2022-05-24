@@ -12,10 +12,10 @@
                 <tui-svg src="tuiIconHeart" class="tui-space_right-2"></tui-svg>
                 Избранное
             </button>
-            <button tuiTab>
+            <!-- <button tuiTab>
                 <tui-svg src="tuiIconUser" class="tui-space_right-2"></tui-svg>
                 Профиль
-            </button>
+            </button> -->
         </tui-tabs>
         <ng-container *ngIf="user$ | async as user">
             <ng-container [ngSwitch]="activeItemIndex">
