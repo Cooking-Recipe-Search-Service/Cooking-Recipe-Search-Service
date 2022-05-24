@@ -11,7 +11,6 @@ import com.crss.crss.entities.RecipeInstructionEntity;
 import com.crss.crss.entities.UserEntity;
 import com.crss.crss.exceptions.CrssException;
 import com.crss.crss.repositories.DescriptionRepository;
-import com.crss.crss.repositories.EnergyValuePerIngredientRepository;
 import com.crss.crss.repositories.EnergyValuePerPortionRepository;
 import com.crss.crss.repositories.FileSystemRepository;
 import com.crss.crss.repositories.InstructionRepository;
@@ -20,7 +19,6 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,6 +53,10 @@ public class RecipeService {
         descriptionRepository.save(new RecipeDescriptionEntity(dto.getDescription(), savedRecipe));
         instructionRepository.save(new RecipeInstructionEntity(dto.getInstructions(), savedRecipe));
         return savedRecipe;
+    }
+
+    public void deleteRecipeById(Long id) {
+        recipeRepository.deleteById(id);
     }
 
     public RecipeEntity getRecipeById(Long id) {
@@ -92,13 +94,13 @@ public class RecipeService {
         return energyValueRepository.save(energyValuePerPortion);
     }
 
-    public RecipeEntity addUserToLovers(Long recipeId, UserEntity userEntity){
+    public RecipeEntity addUserToLovers(Long recipeId, UserEntity userEntity) {
         RecipeEntity recipeEntity = getRecipeById(recipeId);
         recipeEntity.addLover(userEntity);
         return recipeRepository.save(recipeEntity);
     }
 
-    public RecipeEntity deleteUserToLovers (Long recipeId, UserEntity userEntity){
+    public RecipeEntity deleteUserToLovers(Long recipeId, UserEntity userEntity) {
         RecipeEntity recipeEntity = getRecipeById(recipeId);
         recipeEntity.deleteLover(userEntity);
         return recipeRepository.save(recipeEntity);
