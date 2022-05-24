@@ -6,7 +6,6 @@ import { LocalStorageUserService } from '../shared/services/local-storage/local-
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { shareReplay } from 'rxjs/operators';
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
@@ -27,16 +26,6 @@ export class NavbarComponent {
         private readonly router: Router,
         private readonly httpService: HttpClient
     ) {
-        const obs$ = this.httpService.get('http://localhost:8080/api/category').pipe(shareReplay());
-        const promise = fetch('http://localhost:8080/api/category');
- 
-        obs$.subscribe(() => console.log(1));
-        obs$.subscribe(() => console.log(2));
-        obs$.subscribe(() => console.log(3));
-        
-        promise.then(() => console.log(4));
-        promise.then(() => console.log(5));
-        promise.then(() => console.log(6));
     }
 
     logout(): void {
