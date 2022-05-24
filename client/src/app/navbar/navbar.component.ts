@@ -5,6 +5,7 @@ import { LocalStorageRecipesService } from '../shared/services/local-storage/loc
 import { LocalStorageUserService } from '../shared/services/local-storage/local-storage.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
@@ -23,7 +24,9 @@ export class NavbarComponent {
         private readonly localStorageRecipes: LocalStorageRecipesService,
         private readonly location: Location,
         private readonly router: Router,
-    ) {}
+        private readonly httpService: HttpClient
+    ) {
+    }
 
     logout(): void {
         this.localStorage.logoutUser();

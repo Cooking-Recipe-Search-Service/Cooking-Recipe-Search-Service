@@ -75,16 +75,26 @@ export class AuthService {
             .post<LoginProfileResponse>(`${this.baseUrl}/auth/signin`, user)
             .pipe(
                 switchMap((response) => {
-                    this.localStorage.setToken(response.token),
-                        this.localStorage.setUser({
-                            username: response.username,
-                            password: user.password,
-                            email: response.email,
-                            photoUrl: '',
-                        });
-                    return this.getUser();
+                    this.localStorage.setToken(response.token)
+                        // this.localStorage.setUser({
+                        //     username: response.username,
+                        //     password: user.password,
+                        //     email: response.email,
+                        //     photoUrl: '',
+                        //     role: res
+                        // });
+                    return this.getUser().pipe(
+                        map(user => ({...user,password: response.password}))
+                    );
                 }),
                 map((user) => {
+                    this.localStorage.setUser({
+                        username: user.username,
+                        password: user.password,
+                        email: user.email,
+                        photoUrl: '',
+                        role: user.role
+                    });
                     this.localStorageRecipes.setRecipesToLocal(user.recipes);
                     return user;
                 }),

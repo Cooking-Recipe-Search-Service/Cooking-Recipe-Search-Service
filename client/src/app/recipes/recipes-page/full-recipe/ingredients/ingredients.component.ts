@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { formatNumber } from '@taiga-ui/core';
 import { Ingredient } from 'src/libs/interfaces';
 
+const decimalLimit = 1
+const decimalSeparator ='.'
 @Component({
     selector: 'app-ingredients',
     templateUrl: './ingredients.component.html',
@@ -34,7 +37,7 @@ export class IngredientsComponent {
             ...this.computedIngredients.map((ingredient) => {
                 return {
                     ...ingredient,
-                    value: (ingredient.value / (this.value - 1)) * this.value,
+                    value: +formatNumber((ingredient.value / (this.value - 1)) * this.value, decimalLimit,decimalSeparator ),
                 };
             }),
         ];
