@@ -165,6 +165,14 @@
     <button tuiButton class="tui-space_top-5 btn" (click)="addStep()">
         Добавить шаг
     </button>
+    <h3 id="ingredient" class="tui-text_h3">Загруть фото</h3>
+    <tui-input-file
+    link="Choose an image"
+    accept="image/*"
+    class="container"
+    [formControl]="image"
+    
+></tui-input-file>
 </form>
 <button
     tuiButton

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminAddRecipeComponent } from './admin-add-recipe.component';
+import {TuiInputFileModule} from '@taiga-ui/kit';
 import {
     TuiComboBoxModule,
     TuiDataListWrapperModule,
@@ -40,6 +41,7 @@ import { TuiLetModule } from '@taiga-ui/cdk';
         TuiButtonModule,
         TuiErrorModule,
         TuiFieldErrorPipeModule,
+        TuiInputFileModule
     ],
     exports: [AdminAddRecipeComponent],
 })
