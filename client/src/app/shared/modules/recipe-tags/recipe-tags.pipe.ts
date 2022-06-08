@@ -22,6 +22,7 @@ export class RecipeTagsPipe implements PipeTransform {
     convertTime(time: number): string {
         const h = (time / 60) ^ 0;
         const m = time % 60;
-        return h === 0 ? `${m} мин` : `${h} ч ${m} мин`;
+        if (h === 0) return `${m}мин`;
+        return m === 0 ? `${h}ч` : `${h}ч ${m}мин`;
     }
 }

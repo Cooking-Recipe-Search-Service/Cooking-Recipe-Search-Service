@@ -6,7 +6,6 @@ import {
     TuiIslandModule,
     TuiLineClampModule,
 } from '@taiga-ui/kit';
-import { ColorizePipeModule } from 'src/app/shared/modules/colorize-pipe/colorize-pipe.module';
 import { RecipeTagsPipeModule } from 'src/app/shared/modules/recipe-tags/recipe-tags-pipe.module';
 import {
     TuiButtonModule,
@@ -28,7 +27,6 @@ import { TuiLetModule } from '@taiga-ui/cdk';
         CommonModule,
         TuiIslandModule,
         RecipeTagsPipeModule,
-        ColorizePipeModule,
         TuiBadgeModule,
         TuiSvgModule,
         TuiHostedDropdownModule,

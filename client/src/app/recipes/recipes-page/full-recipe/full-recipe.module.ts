@@ -4,7 +4,6 @@ import { FullRecipeComponent } from './full-recipe.component';
 import { TuiBadgeModule, TuiLineClampModule } from '@taiga-ui/kit';
 import { TuiSvgModule } from '@taiga-ui/core';
 import { RecipeTagsPipeModule } from 'src/app/shared/modules/recipe-tags/recipe-tags-pipe.module';
-import { ColorizePipeModule } from 'src/app/shared/modules/colorize-pipe/colorize-pipe.module';
 import { EnergyPipeModule } from 'src/app/shared/modules/energy-pipe/energy-pipe.module';
 import { IngredientsModule } from './ingredients/ingredients.module';
 import { Base64ImageConvertModule } from 'src/app/shared/modules/base64-image-convert/base64-image-convert.module';
@@ -16,7 +15,6 @@ import { Base64ImageConvertModule } from 'src/app/shared/modules/base64-image-co
         TuiBadgeModule,
         TuiSvgModule,
         RecipeTagsPipeModule,
-        ColorizePipeModule,
         EnergyPipeModule,
         TuiLineClampModule,
         IngredientsModule,

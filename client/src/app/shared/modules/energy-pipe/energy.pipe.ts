@@ -19,20 +19,23 @@ export class EnergyPipe implements PipeTransform {
             },
             {
                 label: 'Белки',
-                value: ` ${format(energy.proteins)}гр`,
+                value: ` ${this.format(energy.proteins)}гр`,
             },
             {
                 label: 'Жиры',
-                value: `${format(energy.fats )}гр`,
+                value: `${this.format(energy.fats )}гр`,
             },
             {
                 label: 'Углеводы',
-                value: ` ${format(energy.carbs)}гр`,
+                value: ` ${this.format(energy.carbs)}гр`,
             },
         ];
     }
+
+    format(value: number): string {
+        if( value <  1000) return '0';
+        return (+formatNumber(value / 1000 , decimalLimit, decimalSeparator)).toString();
+    }
+
 }
 
-function format(value: number): string {
-    return formatNumber(value / 1000 , decimalLimit, decimalSeparator)
-}
