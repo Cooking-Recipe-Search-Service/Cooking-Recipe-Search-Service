@@ -1,10 +1,21 @@
-<tui-island *ngIf="user$ | async as user" class="island" [hoverable]="true">
+<tui-island class="island" [hoverable]="true">
     <div class="user">
         <div class="tui-space_right-3">
-            <img alt="user photo" class="user__img" [src]="user.photoUrl" />
+            <img
+                *ngIf="user.photoUrl;else noPhoto"
+                alt="user photo"
+                class="user__img"
+                [src]="user.photoUrl"
+            />
+            <ng-template #noPhoto>
+                <tui-svg
+                    src="assets/green/profile.svg"
+                    class="user__img"
+                ></tui-svg>
+            </ng-template>
         </div>
         <div>
-            <p class="no-margin user__name bold">{{user.name}}</p>
+            <p class="no-margin user__name bold">{{user.username}}</p>
         </div>
     </div>
     <div class="user__logout">

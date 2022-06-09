@@ -14,7 +14,6 @@ import { RecipePayload } from 'src/libs/interfaces/shared/recipe-payload';
     providedIn: 'root',
 })
 export class RecipesApiService {
-    private baseUrlReal = 'http://localhost:8080/api';
 
     constructor(
         @Inject(HOST_API) private readonly baseUrl: string,
@@ -23,13 +22,13 @@ export class RecipesApiService {
 
     searchRecipe(query: string): Observable<readonly Recipe[]> {
         return this.http.get<readonly Recipe[]>(
-            `${this.baseUrlReal}/recipes/search?${query}`,
+            `${this.baseUrl}/recipes/search?${query}`,
         );
     }
 
     postRecipe(recipe: RecipePayload): Observable<RecipePayload> {
         return this.http.post<RecipePayload>(
-            `${this.baseUrlReal}/recipes`,
+            `${this.baseUrl}/recipes`,
             recipe,
         );
     }
@@ -38,7 +37,7 @@ export class RecipesApiService {
         ingredient: IngredientPostRequest,
     ): Observable<IngredientPostRequest> {
         return this.http.post<IngredientPostRequest>(
-            `${this.baseUrlReal}/ingredients`,
+            `${this.baseUrl}/ingredients`,
             ingredient,
         );
     }
@@ -50,11 +49,11 @@ export class RecipesApiService {
     }
 
     getDefaultRecipes(): Observable<readonly Recipe[]> {
-        return this.http.get<readonly Recipe[]>(`${this.baseUrlReal}/recipes`);
+        return this.http.get<readonly Recipe[]>(`${this.baseUrl}/recipes`);
     }
 
     getRecipeById(id: number): Observable<Recipe> {
-        return this.http.get<Recipe>(`${this.baseUrlReal}/recipes/${id},`);
+        return this.http.get<Recipe>(`${this.baseUrl}/recipes/${id}`);
     }
 
     getRecipeByCategory(category: string): Observable<readonly Recipe[]> {
@@ -65,19 +64,19 @@ export class RecipesApiService {
 
     getIngredients(): Observable<readonly SimpleInterface[]> {
         return this.http.get<readonly SimpleInterface[]>(
-            `${this.baseUrlReal}/ingredients`,
+            `${this.baseUrl}/ingredients`,
         );
     }
 
     getCountries(): Observable<readonly SimpleInterface[]> {
         return this.http.get<readonly SimpleInterface[]>(
-            `${this.baseUrlReal}/countries`,
+            `${this.baseUrl}/countries`,
         );
     }
 
     getCategories(): Observable<readonly SimpleInterface[]> {
         return this.http.get<readonly SimpleInterface[]>(
-            `${this.baseUrlReal}/category`,
+            `${this.baseUrl}/category`,
         );
     }
 }

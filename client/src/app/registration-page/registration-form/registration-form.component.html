@@ -1,35 +1,44 @@
 <div class="registration">
-    <h6 class="tui-text_h6">Регистрация</h6>
+    <tui-island class="registration__row">
+        <div>
+            <h6 class="tui-text_h6 no-margin">Регистрация</h6>
+            <form [formGroup]="registrationForm" (keydown.enter)="register()">
+                <tui-input formControlName="username" class="tui-space_top-5">
+                    Имя пользователя
+                    <input tuiTextfield type="email" />
+                </tui-input>
 
-    <form [formGroup]="registrationForm">
-        <tui-input formControlName="username" class="tui-space_top-5">
-            Имя пользователя
-            <input tuiTextfield type="email" />
-        </tui-input>
+                <tui-error
+                    formControlName="username"
+                    [error]="[] | tuiFieldError | async"
+                ></tui-error>
 
-        <tui-error
-            formControlName="username"
-            [error]="[] | tuiFieldError | async"
-        ></tui-error>
+                <tui-input formControlName="email" class="tui-space_top-5">
+                    Почта
+                    <input tuiTextfield type="email" />
+                </tui-input>
+                <tui-error
+                    formControlName="username"
+                    [error]="[] | tuiFieldError | async"
+                ></tui-error>
+                <tui-input-password
+                    formControlName="password"
+                    class="tui-space_top-5"
+                >
+                    Пароль
+                    <input tuiTextfield />
+                </tui-input-password>
+            </form>
+            <div class="registration__btns tui-space_top-5">
+                <button tuiButton appearance="custom" (click)="register()">
+                    Регистрация
+                </button>
 
-        <tui-input formControlName="email" class="tui-space_top-5">
-            Почта
-            <input tuiTextfield type="email" />
-        </tui-input>
-        <tui-error
-            formControlName="username"
-            [error]="[] | tuiFieldError | async"
-        ></tui-error>
-        <tui-input-password formControlName="password" class="tui-space_top-5">
-            Пароль
-            <input tuiTextfield />
-        </tui-input-password>
-    </form>
-    <div class="registration__btns tui-space_top-5">
-        <button tuiButton (click)="register()">Регистрация</button>
-
-        <button tuiButton routerLink="/login" appearance="icon">
-            Уже есть аккаунт? Войдите...
-        </button>
-    </div>
+                <button tuiButton routerLink="/login" appearance="icon">
+                    Уже есть аккаунт? Войдите...
+                </button>
+            </div>
+        </div>
+        <tui-svg src="assets/green/register.svg" class="svg"></tui-svg>
+    </tui-island>
 </div>

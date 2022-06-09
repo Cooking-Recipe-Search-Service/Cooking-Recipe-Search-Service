@@ -20,6 +20,7 @@ import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,6 +52,11 @@ public class RecipeController {
     @PostMapping
     public RecipeDto createRecipe(@RequestBody RecipeDtoIn dto) {
         return dtoConverter.getRecipeDto(recipeService.createRecipe(dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteRecipe(@PathVariable Long id) {
+        recipeService.deleteRecipeById(id);
     }
 
     @RequestMapping(method = {RequestMethod.GET}, path = {"/search"}, produces = {MediaType.APPLICATION_JSON_VALUE})

@@ -1,11 +1,10 @@
-<nav *tuiLet="user$ | async as user" class="nav">
-        <img
-                height="60px"
-                loading="lazy"
-                alt="IT's TINKOFF"
-                src="assets/images/cook.png"
-            />
-
+<nav class="nav">
+    <img
+        height="75px"
+        loading="lazy"
+        alt="IT's TINKOFF"
+        src="assets/green/logo.png"
+    />
     <tui-tabs class="tui-space_left-6" [(activeItemIndex)]="activeTab">
         <button tuiTab routerLinkActive routerLink="/recipes">
             <tui-svg
@@ -16,46 +15,57 @@
         </button>
 
         <button
-            *ngIf="!user;else profileInfo"
+            *ngIf="user$ | async;else logIn"
             tuiTab
             routerLinkActive
             routerLink="/profile"
-            [tuiHint]="tooltip"
+            tuiHintMode="onDark"
+            [tuiHint]="profile"
         >
             <tui-svg src="tuiIconUser" class="tui-space_right-2"></tui-svg>
             Профиль
         </button>
-        <ng-template #profileInfo>
+
+        <ng-template #logIn>
             <button
                 tuiTab
                 routerLinkActive
-                routerLink="/profile"
                 tuiHintMode="onDark"
-                [tuiHint]="profile "
+                routerLink="/profile"
+                [tuiHint]="tooltip"
             >
                 <tui-svg src="tuiIconUser" class="tui-space_right-2"></tui-svg>
                 Профиль
             </button>
         </ng-template>
-
-        <button tuiTab routerLinkActive routerLink="/admin-panel">
+        <ng-container *ngIf="user$ | async as user" >
+            <button tuiTab routerLinkActive routerLink="/admin-panel" *ngIf="user.role === 'ROLE_ADMIN' ">
             <tui-svg src="tuiIconLockLarge" class="tui-space_right-2"></tui-svg>
             Admin panel
         </button>
+        </ng-container>
+        
     </tui-tabs>
     <ng-template #profile>
-        <div *ngIf="user">
+        <div *ngIf="user$ | async as user">
             <a routerLink="/profile" class="profile">
                 <div class="tui-space_right-3">
                     <img
+                        *ngIf="user.photoUrl;else noPhoto"
                         alt="user photo"
                         class="profile__img"
                         [src]="user.photoUrl"
                     />
+                    <ng-template #noPhoto>
+                        <tui-svg
+                            src="assets/green/profile.svg"
+                            class="profile__img"
+                        ></tui-svg>
+                    </ng-template>
                 </div>
                 <div>
                     <p class="tui-text_body-m no-margin profile__name">
-                        {{user.name}}
+                        {{user.username}}
                     </p>
                     <p class="tui-text_body-s no-margin profile__email">
                         {{user.email}}
@@ -68,7 +78,7 @@
         </div>
         <hr class="tui-space_top-3" />
         <div
-            routerLink="profile/favorits"
+            routerLink="profile"
             class="profile__link-block tui-text_body-m tui-space_top-3"
         >
             <tui-svg src="tuiIconHeart"></tui-svg>

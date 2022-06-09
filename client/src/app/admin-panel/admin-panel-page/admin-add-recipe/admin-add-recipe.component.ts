@@ -21,7 +21,7 @@ import {
 import { TuiNotification, TuiNotificationsService } from '@taiga-ui/core';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { delay, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
 import { SimpleInterface } from 'src/libs/interfaces';
 
@@ -42,9 +42,7 @@ import { SimpleInterface } from 'src/libs/interfaces';
 })
 export class AdminAddRecipeComponent {
     @Input() set ingredient(i: string) {
-        this.ingredients$ = this.recipesService
-            .getIngredients()
-            .pipe(delay(1000));
+        this.ingredients$ = this.recipesService.getIngredients();
     }
 
     private readonly search$ = new Subject<string>();
@@ -157,10 +155,10 @@ export class AdminAddRecipeComponent {
             description,
             portionQuantity,
             countryId: this.recipeForm.value.countryId.id,
-            categoryId: this.recipeForm.value.countryId.id,
+            categoryId: this.recipeForm.value.categoryId.id,
             instructions: this.recipeForm.value.instructions.map(
                 (instruction: string, ind: number) => ({
-                    itemNumber: ind,
+                    itemNumber: ind + 1,
                     instruction: instruction,
                 }),
             ),
@@ -177,9 +175,10 @@ export class AdminAddRecipeComponent {
             .subscribe(
                 (_) => {
                     this.loading$.next(false);
+                    this.recipeForm.reset();
                     this.notificationsService
                         .show('', {
-                            label: 'Ингредиент добавлен',
+                            label: 'Рецепт добавлен',
                             status: TuiNotification.Success,
                         })
                         .subscribe();

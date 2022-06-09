@@ -77,10 +77,10 @@ export class AdminAddIngredientComponent {
         name = name[0].toUpperCase() + name.slice(1);
 
         const energyValue = {
-            calories: this.calories.value,
-            carbs: this.carbs.value,
-            proteins: this.proteins.value,
-            fats: this.fats.value,
+            calories: this.calories.value ,
+            carbs: this.carbs.value * 1000,
+            proteins: this.proteins.value * 1000,
+            fats: this.fats.value * 1000,
         };
         const payload = {
             name,

@@ -11,7 +11,6 @@ import com.crss.crss.entities.RecipeInstructionEntity;
 import com.crss.crss.entities.UserEntity;
 import com.crss.crss.exceptions.CrssException;
 import com.crss.crss.repositories.DescriptionRepository;
-import com.crss.crss.repositories.EnergyValuePerIngredientRepository;
 import com.crss.crss.repositories.EnergyValuePerPortionRepository;
 import com.crss.crss.repositories.FileSystemRepository;
 import com.crss.crss.repositories.InstructionRepository;
@@ -22,7 +21,6 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,6 +64,10 @@ public class RecipeService {
         } else {
             return (List<RecipeEntity>) recipeRepository.findAll(predicate);
         }
+    }
+
+    public void deleteRecipeById(Long id) {
+        recipeRepository.deleteById(id);
     }
 
     public RecipeEntity getRecipeById(Long id) {

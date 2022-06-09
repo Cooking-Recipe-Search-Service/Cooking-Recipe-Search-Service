@@ -14,11 +14,14 @@ import {
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { environment } from 'src/environments/environment';
 import { HOST_API, TOKEN_TYPE } from 'src/libs/consts';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NavbarModule } from './navbar/navbar.module';
 import { ProfilePageModule } from './profile-page/profile-page.module';
 import { NotificationServiceModule } from './shared/services/notifications/notification-service.module';
 import { RegistrationFormModule } from './registration-page/registration-form/registration-form.module';
+import { AuthInterceptor } from './shared/services/interseptor/auth.interceptor';
+import { LoginPageModule } from './login-page/login-page.module';
+import { RegistrationPageModule } from './registration-page/registration-page.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -34,6 +37,8 @@ import { RegistrationFormModule } from './registration-page/registration-form/re
         ProfilePageModule,
         NotificationServiceModule,
         RegistrationFormModule,
+        LoginPageModule,
+        RegistrationPageModule,
     ],
     providers: [
         { provide: HOST_API, useValue: environment.hostApi },
@@ -41,6 +46,11 @@ import { RegistrationFormModule } from './registration-page/registration-form/re
         {
             provide: TUI_SANITIZER,
             useClass: NgDompurifySanitizer,
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true,
         },
     ],
 
