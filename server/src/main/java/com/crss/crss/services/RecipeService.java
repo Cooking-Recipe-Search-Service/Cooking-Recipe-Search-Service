@@ -16,6 +16,8 @@ import com.crss.crss.repositories.EnergyValuePerPortionRepository;
 import com.crss.crss.repositories.FileSystemRepository;
 import com.crss.crss.repositories.InstructionRepository;
 import com.crss.crss.repositories.RecipeRepository;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -57,6 +59,15 @@ public class RecipeService {
         return savedRecipe;
     }
 
+    public List<RecipeEntity> searchRecipe(Predicate predicate) {
+        if (predicate == null || (BooleanBuilder.class.isAssignableFrom(predicate.getClass())
+            && !((BooleanBuilder) predicate).hasValue())) {
+            throw new CrssException(HttpStatus.BAD_REQUEST, "Error predicate format");
+        } else {
+            return (List<RecipeEntity>) recipeRepository.findAll(predicate);
+        }
+    }
+
     public RecipeEntity getRecipeById(Long id) {
         return recipeRepository.findById(id).orElseThrow(() -> new CrssException(HttpStatus.NOT_FOUND, "Cannot find recipe with id=" + id));
     }
@@ -92,13 +103,13 @@ public class RecipeService {
         return energyValueRepository.save(energyValuePerPortion);
     }
 
-    public RecipeEntity addUserToLovers(Long recipeId, UserEntity userEntity){
+    public RecipeEntity addUserToLovers(Long recipeId, UserEntity userEntity) {
         RecipeEntity recipeEntity = getRecipeById(recipeId);
         recipeEntity.addLover(userEntity);
         return recipeRepository.save(recipeEntity);
     }
 
-    public RecipeEntity deleteUserToLovers (Long recipeId, UserEntity userEntity){
+    public RecipeEntity deleteUserToLovers(Long recipeId, UserEntity userEntity) {
         RecipeEntity recipeEntity = getRecipeById(recipeId);
         recipeEntity.deleteLover(userEntity);
         return recipeRepository.save(recipeEntity);

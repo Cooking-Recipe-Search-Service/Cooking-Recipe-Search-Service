@@ -66,12 +66,7 @@ public class RecipeController {
     @Parameter(in = ParameterIn.QUERY, name = "category.id", schema = @Schema(type = "int"))
     @Parameter(in = ParameterIn.QUERY, name = "category.name", schema = @Schema(type = "string"))
     public List<RecipeSlimDto> findAllByWebQuerydsl(@Parameter(hidden = true) @QuerydslPredicate(root = RecipeEntity.class) Predicate predicate) {
-        if (predicate == null || (BooleanBuilder.class.isAssignableFrom(predicate.getClass())
-            && !((BooleanBuilder) predicate).hasValue())) {
-            throw new CrssException(HttpStatus.BAD_REQUEST, "Error");
-        } else {
-            return dtoConverter.getRecipeSlimDtoList((List<RecipeEntity>) recipeRepository.findAll(predicate));
-        }
+        return dtoConverter.getRecipeSlimDtoList(recipeService.searchRecipe(predicate));
     }
 
 
