@@ -7,13 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TuiDestroyService, tuiPure } from '@taiga-ui/cdk';
-import {
-    BehaviorSubject,
-    EMPTY,
-    forkJoin,
-    Observable,
-    of,
-} from 'rxjs';
+import { BehaviorSubject, EMPTY, forkJoin, Observable, of } from 'rxjs';
 import {
     catchError,
     debounceTime,

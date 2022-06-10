@@ -18,7 +18,7 @@ describe('DeclensionsPipe', () => {
         '512',
         '999',
     ];
-    
+
     it('transforms to one: "ингредиентов" в "ингредиент"', () => {
         one.forEach((el) => {
             return expect(pipe.transform('ингредиентов', el)).toBe(
@@ -26,7 +26,6 @@ describe('DeclensionsPipe', () => {
             );
         });
     });
-
 
     it('transforms to two: "ингредиентов" в "ингредиента"', () => {
         two.forEach((el) => {
@@ -43,5 +42,4 @@ describe('DeclensionsPipe', () => {
             );
         });
     });
-
 });

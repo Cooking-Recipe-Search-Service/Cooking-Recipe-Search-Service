@@ -9,7 +9,6 @@ import { TuiHostedDropdownComponent } from '@taiga-ui/core';
 import { Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/api/auth.service';
 import { LocalStorageRecipesService } from 'src/app/shared/services/local-storage/local-storage-recipes.service';
-import { LocalStorageUserService } from 'src/app/shared/services/local-storage/local-storage.service';
 import { NotificationService } from 'src/app/shared/services/notifications/notification.service';
 import { Recipe } from 'src/libs/interfaces';
 
@@ -37,8 +36,6 @@ export class RecipePreviewComponent {
     isInStorage$: Observable<boolean> = of(true);
 
     constructor(
-        private localStorage: LocalStorageUserService,
-        private readonly destroy$: TuiDestroyService,
         private readonly notificationService: NotificationService,
         private readonly localStorageRecipes: LocalStorageRecipesService,
         private readonly authService: AuthService,

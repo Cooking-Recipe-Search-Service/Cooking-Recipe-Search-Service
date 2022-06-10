@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
 
 @Component({
@@ -12,7 +12,6 @@ import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-servi
 export class FullRecipeComponent {
     recipe$ = this.route.params.pipe(
         map((response) => response.id),
-        tap(console),
         switchMap((recipeId) => this.recipesService.getRecipeById(recipeId)),
         map((recipe) => {
             this.value = recipe.portionQuantity;

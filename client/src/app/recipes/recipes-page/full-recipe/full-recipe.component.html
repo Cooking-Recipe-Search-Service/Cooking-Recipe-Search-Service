@@ -1,6 +1,8 @@
 <div *ngIf="recipe$ | async as recipe" class="recipe">
     <div class="recipe__main-title">
-        <h6 class="tui-text_h6 recipe__name">{{recipe.name }}</h6>
+        <h6 data-testid="name" class="tui-text_h6 recipe__name">
+            {{recipe.name }}
+        </h6>
         <div class="recipe__main-title-badges">
             <ng-container
                 *ngFor="let tag of recipe | recipeTags;let index = index"
@@ -43,12 +45,14 @@
         ></tui-line-clamp>
 
         <ng-template #content>
-            <div class="tui-text_body-s">{{recipe.description}}</div>
+            <div data-testid="description" class="tui-text_body-s">
+                {{recipe.description}}
+            </div>
         </ng-template>
 
         <p class="tui-text_h6">Ингредиенты</p>
         <app-ingredients
-            [value]="value"
+            [portion]="value"
             [ingredients]="recipe.ingredientsInfo"
         ></app-ingredients>
 
@@ -57,8 +61,12 @@
             *ngFor="let instruction of recipe.instructions;let index = index"
             class="tui-space_top-4"
         >
-            <div class="recipe__step-badge">{{ instruction.itemNumber}}</div>
-            <div class="recipe__step-title tui-text_body-m">
+            <div class="recipe__step-badge step-{{index}}">
+                {{ instruction.itemNumber}}
+            </div>
+            <div
+                class="recipe__step-title tui-text_body-m instruction-{{index}}"
+            >
                 {{instruction.instruction}}
             </div>
         </div>

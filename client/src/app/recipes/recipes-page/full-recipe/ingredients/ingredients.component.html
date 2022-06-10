@@ -2,6 +2,7 @@
     <p class="tui-space_right-3">порция</p>
     <div class="ingredients-counter-btns">
         <button
+            data-testid="decrement"
             tuiIconButton
             icon="tuiIconMinus"
             size="s"
@@ -9,8 +10,9 @@
             class="tui-space_right-3"
             (click)="decrement()"
         ></button>
-        <tui-island class="tui-space_right-3">{{value}}</tui-island>
+        <tui-island class="tui-space_right-3">{{computedPortion}}</tui-island>
         <button
+            data-testid="increment"
             tuiIconButton
             icon="tuiIconPlus"
             size="s"

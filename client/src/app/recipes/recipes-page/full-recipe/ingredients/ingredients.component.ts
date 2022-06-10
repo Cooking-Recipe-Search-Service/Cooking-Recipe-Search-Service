@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { formatNumber } from '@taiga-ui/core';
 import { Ingredient } from 'src/libs/interfaces';
 
-const decimalLimit = 1
-const decimalSeparator ='.'
+const decimalLimit = 1;
+const decimalSeparator = '.';
 @Component({
     selector: 'app-ingredients',
     templateUrl: './ingredients.component.html',
@@ -11,33 +11,54 @@ const decimalSeparator ='.'
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IngredientsComponent {
-    @Input() value!: number;
+    @Input() set portion(portion: number) {
+        this.initialPortion = portion;
+        this.computedPortion = portion;
+    }
 
     @Input() set ingredients(ingredients: readonly Ingredient[]) {
+        this.initialIngredients = [...ingredients];
         this.computedIngredients = [...ingredients];
     }
+
+    initialPortion = 0;
+
+    computedPortion = 0;
+
+    initialIngredients: readonly Ingredient[] = [];
 
     computedIngredients: readonly Ingredient[] = [];
 
     decrement(): void {
-        this.value -= 1;
+        if (this.computedPortion === 1) return;
+        this.computedPortion -= 1;
         this.computedIngredients = [
-            ...this.computedIngredients.map((ingredient) => {
+            ...this.initialIngredients.map((ingredient) => {
                 return {
                     ...ingredient,
-                    value: (ingredient.value / (this.value + 1)) * this.value,
+                    value: +formatNumber(
+                        (ingredient.value / this.initialPortion) *
+                            this.computedPortion,
+                        decimalLimit,
+                        decimalSeparator,
+                    ),
                 };
             }),
         ];
     }
 
     increment(): void {
-        this.value += 1;
+        this.computedPortion += 1;
         this.computedIngredients = [
-            ...this.computedIngredients.map((ingredient) => {
+            ...this.initialIngredients.map((ingredient) => {
                 return {
                     ...ingredient,
-                    value: +formatNumber((ingredient.value / (this.value - 1)) * this.value, decimalLimit,decimalSeparator ),
+                    value: +formatNumber(
+                        (ingredient.value / this.initialPortion) *
+                            this.computedPortion,
+                        decimalLimit,
+                        decimalSeparator,
+                    ),
                 };
             }),
         ];

@@ -17,6 +17,7 @@
 
 <tui-multi-select
     *tuiLet="values"
+    data-testid="search"
     class="b-form"
     [formControl]="control"
     [tuiTextfieldLabelOutside]="true"
@@ -28,6 +29,7 @@
     {{label}}
     <tui-data-list-wrapper
         *tuiDataList
+        data-testid="list"
         tuiMultiSelectGroup
         [items]="values | tuiFilterByInputWith : stringify"
         [itemContent]="stringify"

@@ -1,11 +1,10 @@
-
 import { Pipe, PipeTransform } from '@angular/core';
 import { formatNumber } from '@taiga-ui/core';
 import { EnergyValue } from 'src/libs/interfaces';
 import { EnergyValueCard } from 'src/libs/interfaces/frontend/energy-value-card';
 
-const decimalLimit = 2
-const decimalSeparator = '.' 
+const decimalLimit = 2;
+const decimalSeparator = '.';
 
 @Pipe({
     name: 'energy',
@@ -23,7 +22,7 @@ export class EnergyPipe implements PipeTransform {
             },
             {
                 label: 'Жиры',
-                value: `${this.format(energy.fats )}гр`,
+                value: `${this.format(energy.fats)}гр`,
             },
             {
                 label: 'Углеводы',
@@ -33,9 +32,11 @@ export class EnergyPipe implements PipeTransform {
     }
 
     format(value: number): string {
-        if( value <  1000) return '0';
-        return (+formatNumber(value / 1000 , decimalLimit, decimalSeparator)).toString();
+        if (value < 1000) return '0';
+        return (+formatNumber(
+            value / 1000,
+            decimalLimit,
+            decimalSeparator,
+        )).toString();
     }
-
 }
-

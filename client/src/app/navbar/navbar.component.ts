@@ -24,9 +24,8 @@ export class NavbarComponent {
         private readonly localStorageRecipes: LocalStorageRecipesService,
         private readonly location: Location,
         private readonly router: Router,
-        private readonly httpService: HttpClient
-    ) {
-    }
+        private readonly httpService: HttpClient,
+    ) {}
 
     logout(): void {
         this.localStorage.logoutUser();

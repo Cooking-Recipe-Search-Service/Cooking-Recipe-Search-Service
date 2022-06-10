@@ -14,7 +14,6 @@ import { RecipePayload } from 'src/libs/interfaces/shared/recipe-payload';
     providedIn: 'root',
 })
 export class RecipesApiService {
-
     constructor(
         @Inject(HOST_API) private readonly baseUrl: string,
         private readonly http: HttpClient,
@@ -27,10 +26,7 @@ export class RecipesApiService {
     }
 
     postRecipe(recipe: RecipePayload): Observable<RecipePayload> {
-        return this.http.post<RecipePayload>(
-            `${this.baseUrl}/recipes`,
-            recipe,
-        );
+        return this.http.post<RecipePayload>(`${this.baseUrl}/recipes`, recipe);
     }
 
     postIngredient(
