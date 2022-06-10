@@ -13,7 +13,7 @@ import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-servi
 import { anything, mock, when } from 'ts-mockito';
 
 import { FullRecipeComponent } from './full-recipe.component';
-import { mockRecipe } from './full-recipe.mock';
+import { mockRecipe } from '../recipes-module-mocks.mock';
 import { IngredientsModule } from './ingredients/ingredients.module';
 
 describe('FullRecipeComponent', () => {

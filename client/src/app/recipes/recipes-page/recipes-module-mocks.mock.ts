@@ -1,4 +1,4 @@
-import { Recipe } from 'src/libs/interfaces';
+import { Recipe, SimpleInterface } from 'src/libs/interfaces';
 
 export const mockRecipe: Recipe = {
     id: 1,
@@ -113,3 +113,8 @@ export const mockRecipe: Recipe = {
         proteins: 22580,
     },
 };
+
+export const mockCategories: readonly SimpleInterface[] = [
+    { id: 0, name: 'one' },
+    { id: 1, name: 'two' },
+];

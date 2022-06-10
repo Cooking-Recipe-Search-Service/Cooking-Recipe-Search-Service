@@ -1,4 +1,4 @@
-import { EnergyValue } from 'src/libs/interfaces';
+import { EnergyValue, Ingredient } from 'src/libs/interfaces';
 const emptyEnergyValue: EnergyValue = {
     carbs: 0,
     calories: 0,
@@ -6,7 +6,7 @@ const emptyEnergyValue: EnergyValue = {
     proteins: 0,
 };
 
-export function mockIngredientsGenerator(value: number) {
+export function mockIngredientsGenerator(value: number): Ingredient {
     return {
         name: 'one',
         measurementValue: '',

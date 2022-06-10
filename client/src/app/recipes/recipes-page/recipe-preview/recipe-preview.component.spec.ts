@@ -28,7 +28,7 @@ import {
     expectText,
     findEl,
 } from 'src/app/shared/helpers/test-helpers';
-import { mockRecipe } from './mock';
+import { mockRecipe } from '../recipes-module-mocks.mock';
 
 describe('RecipePreviewComponent', () => {
     let component: RecipePreviewComponent;
