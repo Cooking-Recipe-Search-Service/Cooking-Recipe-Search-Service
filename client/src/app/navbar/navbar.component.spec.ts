@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { findEl } from '../shared/helpers/test-helpers';
-import { LocalStorageRecipesService } from '../shared/services/local-storage/local-storage-recipes.service';
-import { LocalStorageUserService } from '../shared/services/local-storage/local-storage.service';
+import { findEl } from '@app/shared/test-helpers';
+import { LocalStorageRecipesService } from '@app/shared/services';
+import { LocalStorageUserService } from '@app/shared/services';
 
 import { NavbarComponent } from './navbar.component';
-import { mockAdmin, mockUser } from './user-mock.mock';
+import { mockAdmin, mockUser } from '@app/shared/test-helpers';
 
 describe('NavbarComponent', () => {
     let fixture: ComponentFixture<NavbarComponent>;

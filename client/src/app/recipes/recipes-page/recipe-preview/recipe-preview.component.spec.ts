@@ -15,20 +15,20 @@ import {
     TuiLineClampModule,
 } from '@taiga-ui/kit';
 
-import { Base64ImageConvertModule } from 'src/app/shared/modules/base64-image-convert/base64-image-convert.module';
-import { DeclensionsPipeModule } from 'src/app/shared/modules/declensions-pipe/declensions-pipe.module';
-import { RecipeTagsPipeModule } from 'src/app/shared/modules/recipe-tags/recipe-tags-pipe.module';
+import { Base64ImageConvertModule } from '@app/shared/modules';
+import { DeclensionsPipeModule } from '@app/shared/modules';
+import { RecipeTagsPipeModule } from '@app/shared/modules';
 import { RecipePreviewComponent } from './recipe-preview.component';
-import { NotificationService } from 'src/app/shared/services/notifications/notification.service';
-import { LocalStorageRecipesService } from 'src/app/shared/services/local-storage/local-storage-recipes.service';
-import { AuthService } from 'src/app/shared/services/api/auth.service';
+import { NotificationService } from '@app/shared/services';
+import { LocalStorageRecipesService } from '@app/shared/services';
+import { AuthService } from '@app/shared/services';
 import { of, throwError } from 'rxjs';
 import {
     clickManyTimes,
     expectText,
     findEl,
-} from 'src/app/shared/helpers/test-helpers';
-import { mockRecipe } from '../recipes-module-mocks.mock';
+} from '@app/shared/test-helpers';
+import { mockRecipe } from '@app/shared/test-helpers';
 
 describe('RecipePreviewComponent', () => {
     let component: RecipePreviewComponent;

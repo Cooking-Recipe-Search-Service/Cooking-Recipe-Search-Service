@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { formatNumber } from '@taiga-ui/core';
-import { Ingredient } from 'src/libs/interfaces';
+import { Ingredient } from '@app/interfaces';
 
 const decimalLimit = 1;
 const decimalSeparator = '.';

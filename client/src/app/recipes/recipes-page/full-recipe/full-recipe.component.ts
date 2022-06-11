@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
-import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
+import { RecipesApiService } from '@app/shared/services';
 
 @Component({
     selector: 'app-full-recipe',

@@ -15,9 +15,9 @@ import {
     findEl,
     findElByClass,
     getTextByClass,
-} from 'src/app/shared/helpers/test-helpers';
-import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
-import { mockCategories } from '../recipes-module-mocks.mock';
+} from '@app/shared/test-helpers';
+import { RecipesApiService } from '@app/shared/services';
+import { mockCategories } from '@app/shared/test-helpers';
 
 import { DefaultRecipesComponent } from './default-recipes.component';
 

@@ -9,12 +9,12 @@ import {
     TuiIslandModule,
 } from '@taiga-ui/kit';
 import { of, throwError } from 'rxjs';
-import { clickManyTimes, findEl } from 'src/app/shared/helpers/test-helpers';
-import { AuthService } from 'src/app/shared/services/api/auth.service';
-import { NotificationService } from 'src/app/shared/services/notifications/notification.service';
+import { clickManyTimes, findEl } from '@app/shared/test-helpers';
+import { AuthService } from '@app/shared/services';
+import { NotificationService } from '@app/shared/services';
 
 import { LoginComponent } from './login.component';
-import { mockUser } from './mock-user.mock';
+import { mockUserWithResipes } from '@app/shared/test-helpers';
 
 describe('LoginComponent', () => {
     let component: LoginComponent;
@@ -78,7 +78,7 @@ describe('LoginComponent', () => {
     });
 
     it('should show succes notification if user login', () => {
-        fakeAuthService.loginUser.and.returnValue(of(mockUser));
+        fakeAuthService.loginUser.and.returnValue(of(mockUserWithResipes));
         const btn = findEl(fixture, 'login-btn');
         clickManyTimes(1, btn, fixture);
 
@@ -86,7 +86,7 @@ describe('LoginComponent', () => {
     });
 
     it('should navigate if user login', () => {
-        fakeAuthService.loginUser.and.returnValue(of(mockUser));
+        fakeAuthService.loginUser.and.returnValue(of(mockUserWithResipes));
         const btn = findEl(fixture, 'login-btn');
         clickManyTimes(1, btn, fixture);
 

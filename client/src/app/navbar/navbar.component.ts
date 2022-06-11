@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Profile } from 'src/libs/interfaces';
-import { LocalStorageRecipesService } from '../shared/services/local-storage/local-storage-recipes.service';
-import { LocalStorageUserService } from '../shared/services/local-storage/local-storage.service';
+import { Profile } from '@app/interfaces';
+import { LocalStorageRecipesService } from '@app/shared/services';
+import { LocalStorageUserService } from '@app/shared/services';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 @Component({

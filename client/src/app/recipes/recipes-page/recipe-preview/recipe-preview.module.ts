@@ -6,7 +6,7 @@ import {
     TuiIslandModule,
     TuiLineClampModule,
 } from '@taiga-ui/kit';
-import { RecipeTagsPipeModule } from 'src/app/shared/modules/recipe-tags/recipe-tags-pipe.module';
+import { RecipeTagsPipeModule } from '@app/shared/modules';
 import {
     TuiButtonModule,
     TuiDataListModule,
@@ -15,10 +15,10 @@ import {
     TuiHostedDropdownModule,
     TuiSvgModule,
 } from '@taiga-ui/core';
-import { IngredientModule } from 'src/app/shared/components/ingredient/ingredient.module';
-import { DeclensionsPipeModule } from 'src/app/shared/modules/declensions-pipe/declensions-pipe.module';
+import { IngredientModule } from '@app/shared/components';
+import { DeclensionsPipeModule } from '@app/shared/modules';
 import { RouterModule } from '@angular/router';
-import { Base64ImageConvertModule } from 'src/app/shared/modules/base64-image-convert/base64-image-convert.module';
+import { Base64ImageConvertModule } from '@app/shared/modules';
 import { TuiLetModule } from '@taiga-ui/cdk';
 
 @NgModule({

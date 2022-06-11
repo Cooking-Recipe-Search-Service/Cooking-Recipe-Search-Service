@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
-import { Recipe } from 'src/libs/interfaces';
+import { RecipesApiService } from '@app/shared/services';
+import { Recipe } from '@app/interfaces';
 
 @Component({
     selector: 'app-recipes-page',

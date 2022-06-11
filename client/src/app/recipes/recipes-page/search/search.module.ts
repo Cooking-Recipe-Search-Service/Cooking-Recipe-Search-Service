@@ -15,7 +15,7 @@ import {
     TuiFilterByInputPipeModule,
     TuiInputModule,
 } from '@taiga-ui/kit';
-import { SelectWithSearchModule } from '../../../shared/components/select-with-search/select-with-search.module';
+import { SelectWithSearchModule } from '@app/shared/components';
 import { TuiLetModule, TuiMapperPipeModule } from '@taiga-ui/cdk';
 
 @NgModule({

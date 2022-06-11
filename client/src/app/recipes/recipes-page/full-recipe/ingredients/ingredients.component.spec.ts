@@ -3,11 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiButtonModule } from '@taiga-ui/core/components';
 import { TuiInputModule, TuiIslandModule } from '@taiga-ui/kit';
-import { IngredientModule } from 'src/app/shared/components/ingredient/ingredient.module';
-import { clickManyTimes, findEl } from 'src/app/shared/helpers/test-helpers';
+import { IngredientModule } from '@app/shared/components';
+import { clickManyTimes, findEl } from '@app/shared/test-helpers';
 
 import { IngredientsComponent } from './ingredients.component';
-import { mockIngredientsGenerator } from './mock-ingredients';
+import { mockIngredientsGenerator } from '@app/shared/test-helpers';
 
 describe('IngredientsComponent', () => {
     let component: IngredientsComponent;

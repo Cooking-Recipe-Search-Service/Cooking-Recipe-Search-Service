@@ -1,12 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { mockUser } from '../profile/profile-info-card/user-mock';
-import { LocalStorageRecipesService } from 'src/app/shared/services/local-storage/local-storage-recipes.service';
-import { LocalStorageUserService } from 'src/app/shared/services/local-storage/local-storage.service';
-
+import { mockUser } from '@app/shared/test-helpers';
+import { LocalStorageRecipesService } from '@app/shared/services';
+import { LocalStorageUserService } from '@app/shared/services';
 import { ProfileComponent } from './profile.component';
-import { clickManyTimes, findEl } from 'src/app/shared/helpers/test-helpers';
-import { mockRecipe } from 'src/app/recipes/recipes-page/recipes-module-mocks.mock';
+import { clickManyTimes, findEl } from '@app/shared/test-helpers';
+import { mockRecipe } from '@app/shared/test-helpers';
 
 describe('ProfileComponent', () => {
     let component: ProfileComponent;

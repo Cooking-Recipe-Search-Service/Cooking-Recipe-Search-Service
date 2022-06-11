@@ -11,10 +11,10 @@ import {
     TuiIslandModule,
 } from '@taiga-ui/kit';
 import { of } from 'rxjs';
-import { mockUser } from 'src/app/login-page/login/mock-user.mock';
-import { clickManyTimes, findEl } from 'src/app/shared/helpers/test-helpers';
-import { AuthService } from 'src/app/shared/services/api/auth.service';
-import { NotificationService } from 'src/app/shared/services/notifications/notification.service';
+import { mockUserWithResipes } from '@app/shared/test-helpers';
+import { clickManyTimes, findEl } from '@app/shared/test-helpers';
+import { AuthService } from '@app/shared/services';
+import { NotificationService } from '@app/shared/services';
 
 import { RegistrationFormComponent } from './registration-form.component';
 
@@ -84,7 +84,7 @@ describe('RegistrationFormComponent', () => {
     });
 
     it('should show notification in registration success ', () => {
-        fakeAuthService.registerUser.and.returnValue(of(mockUser));
+        fakeAuthService.registerUser.and.returnValue(of(mockUserWithResipes));
         const btn = findEl(fixture, 'register-btn');
         clickManyTimes(1, btn, fixture);
 
@@ -92,7 +92,7 @@ describe('RegistrationFormComponent', () => {
     });
 
     it('should navigate in registration success ', () => {
-        fakeAuthService.registerUser.and.returnValue(of(mockUser));
+        fakeAuthService.registerUser.and.returnValue(of(mockUserWithResipes));
         const btn = findEl(fixture, 'register-btn');
         clickManyTimes(1, btn, fixture);
 

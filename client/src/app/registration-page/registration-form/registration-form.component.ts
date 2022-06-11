@@ -3,10 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
 import { EMPTY } from 'rxjs';
-import { AuthService } from 'src/app/shared/services/api/auth.service';
-import { NotificationService } from 'src/app/shared/services/notifications/notification.service';
-import { EMAIL_EXIST, USERNAME_EXIST } from 'src/libs/consts';
-import { RegistrationProfile } from 'src/libs/interfaces';
+import { AuthService } from '@app/shared/services';
+import { NotificationService } from '@app/shared/services';
+import { EMAIL_EXIST, USERNAME_EXIST } from '@app/consts';
+import { RegistrationProfile } from '@app/interfaces';
 import { length } from './validators';
 
 @Component({

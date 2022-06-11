@@ -4,11 +4,11 @@ import {
     EventEmitter,
     Output,
 } from '@angular/core';
-import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
+import { RecipesApiService } from '@app/shared/services';
 import { map } from 'rxjs/operators';
-import { CATEGORIES_MAPPER_GREEN, ROUTER_MAPPER } from 'src/libs/consts';
+import { CATEGORIES_MAPPER_GREEN, ROUTER_MAPPER } from '@app/consts';
 
-import { SimpleInterface } from 'src/libs/interfaces';
+import { SimpleInterface } from '@app/interfaces';
 
 const CATEGORIES_COUNT = 12;
 

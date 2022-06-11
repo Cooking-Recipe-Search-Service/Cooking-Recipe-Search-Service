@@ -5,15 +5,15 @@ import { of } from 'rxjs';
 import {
     expectText,
     expectTextByClass,
-} from 'src/app/shared/helpers/test-helpers';
-import { Base64ImageConvertModule } from 'src/app/shared/modules/base64-image-convert/base64-image-convert.module';
-import { EnergyPipeModule } from 'src/app/shared/modules/energy-pipe/energy-pipe.module';
-import { RecipeTagsPipeModule } from 'src/app/shared/modules/recipe-tags/recipe-tags-pipe.module';
-import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
+} from '@app/shared/test-helpers';
+import { Base64ImageConvertModule } from '@app/shared/modules';
+import { EnergyPipeModule } from '@app/shared/modules';
+import { RecipeTagsPipeModule } from '@app/shared/modules';
+import { RecipesApiService } from '@app/shared/services';
 import { anything, mock, when } from 'ts-mockito';
 
 import { FullRecipeComponent } from './full-recipe.component';
-import { mockRecipe } from '../recipes-module-mocks.mock';
+import { mockRecipe } from '@app/shared/test-helpers';
 import { IngredientsModule } from './ingredients/ingredients.module';
 
 describe('FullRecipeComponent', () => {

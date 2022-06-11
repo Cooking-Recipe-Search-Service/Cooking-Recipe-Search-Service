@@ -7,12 +7,12 @@ import {
     clickManyTimes,
     expectText,
     findEl,
-} from 'src/app/shared/helpers/test-helpers';
-import { LocalStorageRecipesService } from 'src/app/shared/services/local-storage/local-storage-recipes.service';
-import { LocalStorageUserService } from 'src/app/shared/services/local-storage/local-storage.service';
+} from '@app/shared/test-helpers';
+import { LocalStorageRecipesService } from '@app/shared/services';
+import { LocalStorageUserService } from '@app/shared/services';
 
 import { ProfileInfoCardComponent } from './profile-info-card.component';
-import { mockUser } from './user-mock';
+import { mockUser } from '@app/shared/test-helpers';
 
 describe('ProfileInfoCardComponent', () => {
     let component: ProfileInfoCardComponent;

@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FullRecipeComponent } from './full-recipe.component';
 import { TuiBadgeModule, TuiLineClampModule } from '@taiga-ui/kit';
 import { TuiSvgModule } from '@taiga-ui/core';
-import { RecipeTagsPipeModule } from 'src/app/shared/modules/recipe-tags/recipe-tags-pipe.module';
-import { EnergyPipeModule } from 'src/app/shared/modules/energy-pipe/energy-pipe.module';
+import { RecipeTagsPipeModule } from '@app/shared/modules';
+import { EnergyPipeModule } from '@app/shared/modules';
 import { IngredientsModule } from './ingredients/ingredients.module';
-import { Base64ImageConvertModule } from 'src/app/shared/modules/base64-image-convert/base64-image-convert.module';
+import { Base64ImageConvertModule } from '@app/shared/modules';
 
 @NgModule({
     declarations: [FullRecipeComponent],

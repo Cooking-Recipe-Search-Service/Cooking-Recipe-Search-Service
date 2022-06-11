@@ -17,10 +17,9 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 
-import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
-import { DEFAULT_COOKING_TIME } from 'src/libs/consts';
-import { isNotPresentOrEmptyString } from 'src/libs/helpers';
-import { Recipe, SimpleInterface } from 'src/libs/interfaces';
+import { RecipesApiService } from '@app/shared/services';
+import { DEFAULT_COOKING_TIME } from '@app/consts';
+import { Recipe, SimpleInterface } from '@app/interfaces';
 
 import {
     contructCategory,
@@ -29,6 +28,7 @@ import {
     contructIngredients,
     contructNameRecipe,
 } from './helpers/query-contrustor-funcs';
+import { isNotPresentOrEmptyString } from '@app/helpers';
 
 @Component({
     selector: 'app-search',

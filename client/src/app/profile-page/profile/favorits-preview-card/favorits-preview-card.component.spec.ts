@@ -4,9 +4,9 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TuiButtonModule } from '@taiga-ui/core';
 import { TuiIslandModule } from '@taiga-ui/kit';
 import { take } from 'rxjs/operators';
-import { mockRecipe } from 'src/app/recipes/recipes-page/recipes-module-mocks.mock';
-import { clickManyTimes, findEl } from 'src/app/shared/helpers/test-helpers';
-import { Base64ImageConvertModule } from 'src/app/shared/modules/base64-image-convert/base64-image-convert.module';
+import { mockRecipe } from '@app/shared/test-helpers';
+import { clickManyTimes, findEl } from '@app/shared/test-helpers';
+import { Base64ImageConvertModule } from '@app/shared/modules';
 
 import { FavoritsPreviewCardComponent } from './favorits-preview-card.component';
 

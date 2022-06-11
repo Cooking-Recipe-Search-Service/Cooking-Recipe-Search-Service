@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TuiButtonModule } from '@taiga-ui/core';
-import { mockRecipe } from 'src/app/recipes/recipes-page/recipes-module-mocks.mock';
-import { findEl } from 'src/app/shared/helpers/test-helpers';
+import { mockRecipe } from '@app/shared/test-helpers';
+import { findEl } from '@app/shared/test-helpers';
 
 import { FavoritsPageComponent } from './favorits-page.component';
 
