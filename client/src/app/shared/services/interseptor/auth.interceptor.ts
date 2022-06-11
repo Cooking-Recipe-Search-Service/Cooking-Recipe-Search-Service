@@ -52,7 +52,7 @@ export class AuthInterceptor implements HttpInterceptor {
                             )
                             .subscribe();
                     }
-                    return EMPTY;
+                    return throwError(error);
                 }
                 return throwError(error);
             }),

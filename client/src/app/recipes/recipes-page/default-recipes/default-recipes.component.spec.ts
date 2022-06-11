@@ -76,7 +76,12 @@ describe('DefaultRecipesComponent', () => {
         clickManyTimes(1, btn, fixture);
 
         expect(component.loadCategory).toHaveBeenCalled();
-        // expect(component.isActive(1)).toBe('custom');
+    });
+
+    it('should change active category on click', () => {
+        const btn = findElByClass(fixture, '.category-1');
+        clickManyTimes(1, btn, fixture);
+        expect(component.isActive(1)).toBe('custom');
     });
 
     it('emit category', () => {
