@@ -3,11 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TuiButtonModule, TuiSvgModule } from '@taiga-ui/core';
 import { TuiIslandModule } from '@taiga-ui/kit';
-import {
-    clickManyTimes,
-    expectText,
-    findEl,
-} from '@app/shared/test-helpers';
+import { clickManyTimes, expectText, findEl } from '@app/shared/test-helpers';
 import { LocalStorageRecipesService } from '@app/shared/services';
 import { LocalStorageUserService } from '@app/shared/services';
 

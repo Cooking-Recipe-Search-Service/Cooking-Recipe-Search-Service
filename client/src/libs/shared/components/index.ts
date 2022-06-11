@@ -1,2 +1,2 @@
-export * from './ingredient'
-export * from './select-with-search'
+export * from './ingredient';
+export * from './select-with-search';

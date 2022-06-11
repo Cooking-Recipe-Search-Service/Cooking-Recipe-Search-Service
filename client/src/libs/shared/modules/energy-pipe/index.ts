@@ -1,1 +1,1 @@
-export * from './energy-pipe.module'
+export * from './energy-pipe.module';

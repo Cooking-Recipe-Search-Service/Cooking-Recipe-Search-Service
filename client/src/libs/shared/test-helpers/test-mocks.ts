@@ -1,4 +1,9 @@
-import { Profile, ProfileWithRecipes, Recipe, SimpleInterface } from '@app/interfaces';
+import {
+    Profile,
+    ProfileWithRecipes,
+    Recipe,
+    SimpleInterface,
+} from '@app/interfaces';
 import { EnergyValue, Ingredient } from '@app/interfaces';
 
 const emptyEnergyValue: EnergyValue = {

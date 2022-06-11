@@ -1,2 +1,2 @@
-export * from './local-storage.service'
-export * from './local-storage-recipes.service'
+export * from './local-storage.service';
+export * from './local-storage-recipes.service';

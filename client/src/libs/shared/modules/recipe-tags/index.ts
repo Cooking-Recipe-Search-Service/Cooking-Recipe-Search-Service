@@ -1,1 +1,1 @@
-export * from './recipe-tags-pipe.module'
+export * from './recipe-tags-pipe.module';

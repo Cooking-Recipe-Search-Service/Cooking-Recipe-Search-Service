@@ -2,10 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { TuiLineClampModule } from '@taiga-ui/kit';
 import { of } from 'rxjs';
-import {
-    expectText,
-    expectTextByClass,
-} from '@app/shared/test-helpers';
+import { expectText, expectTextByClass } from '@app/shared/test-helpers';
 import { Base64ImageConvertModule } from '@app/shared/modules';
 import { EnergyPipeModule } from '@app/shared/modules';
 import { RecipeTagsPipeModule } from '@app/shared/modules';

@@ -1,1 +1,1 @@
-export * from './declensions-pipe.module'
+export * from './declensions-pipe.module';

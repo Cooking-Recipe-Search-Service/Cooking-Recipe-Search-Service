@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TuiInputModule, TuiIslandModule } from '@taiga-ui/kit';
 import { TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { IngredientsComponent } from './ingredients.component';
-import {IngredientModule} from '@app/shared/components';
+import { IngredientModule } from '@app/shared/components';
 @NgModule({
     declarations: [IngredientsComponent],
     imports: [

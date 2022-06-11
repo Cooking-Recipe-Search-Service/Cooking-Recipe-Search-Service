@@ -19,7 +19,7 @@ import { NavbarModule } from './navbar/navbar.module';
 import { ProfilePageModule } from './profile-page/profile-page.module';
 import { NotificationServiceModule } from '@app/shared/services';
 import { RegistrationFormModule } from './registration-page/registration-form/registration-form.module';
-import { AuthInterceptor } from "@app/shared/services";
+import { AuthInterceptor } from '@app/shared/services';
 import { LoginPageModule } from './login-page/login-page.module';
 import { RegistrationPageModule } from './registration-page/registration-page.module';
 

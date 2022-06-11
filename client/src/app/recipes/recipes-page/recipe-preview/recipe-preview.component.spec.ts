@@ -23,11 +23,7 @@ import { NotificationService } from '@app/shared/services';
 import { LocalStorageRecipesService } from '@app/shared/services';
 import { AuthService } from '@app/shared/services';
 import { of, throwError } from 'rxjs';
-import {
-    clickManyTimes,
-    expectText,
-    findEl,
-} from '@app/shared/test-helpers';
+import { clickManyTimes, expectText, findEl } from '@app/shared/test-helpers';
 import { mockRecipe } from '@app/shared/test-helpers';
 
 describe('RecipePreviewComponent', () => {

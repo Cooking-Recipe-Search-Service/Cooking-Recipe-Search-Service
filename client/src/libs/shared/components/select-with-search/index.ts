@@ -1,1 +1,1 @@
-export * from './select-with-search.module'
+export * from './select-with-search.module';

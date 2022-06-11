@@ -19,12 +19,12 @@
         "lib": ["es2018", "dom"],
         "paths": {
             "@app/consts": ["src/libs/consts"],
-            "@app/interfaces":["src/libs/interfaces"],
-            "@app/helpers":["src/libs/helpers"],
-            "@app/shared/components" : ["src/libs/shared/components"],
-            "@app/shared/test-helpers" : ["src/libs/shared/test-helpers"],
-            "@app/shared/modules" :["src/libs/shared/modules"],
-            "@app/shared/services" : ["src/libs/shared/services"],
+            "@app/interfaces": ["src/libs/interfaces"],
+            "@app/helpers": ["src/libs/helpers"],
+            "@app/shared/components": ["src/libs/shared/components"],
+            "@app/shared/test-helpers": ["src/libs/shared/test-helpers"],
+            "@app/shared/modules": ["src/libs/shared/modules"],
+            "@app/shared/services": ["src/libs/shared/services"]
         }
     },
     "angularCompilerOptions": {
