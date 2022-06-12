@@ -71,9 +71,8 @@ public class RecipeController {
     @Parameter(in = ParameterIn.QUERY, name = "country.name", schema = @Schema(type = "string"))
     @Parameter(in = ParameterIn.QUERY, name = "category.id", schema = @Schema(type = "int"))
     @Parameter(in = ParameterIn.QUERY, name = "category.name", schema = @Schema(type = "string"))
-    public List<RecipeSlimDto> findAllByWebQuerydsl(@Parameter(hidden = true) @QuerydslPredicate(root = RecipeEntity.class) Predicate predicate) {
+    public List<RecipeSlimDto> findAllByWebQuerydsl(
+        @Parameter(hidden = true) @QuerydslPredicate(root = RecipeEntity.class) Predicate predicate) {
         return dtoConverter.getRecipeSlimDtoList(recipeService.searchRecipe(predicate));
     }
-
-
 }
