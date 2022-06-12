@@ -11,11 +11,7 @@ import {
     TuiIslandModule,
 } from '@taiga-ui/kit';
 import { of } from 'rxjs';
-import {
-    findElByClass,
-    getTextByClass,
-    mockUserWithResipes,
-} from '@app/shared/test-helpers';
+import { mockUserWithResipes } from '@app/shared/test-helpers';
 import { clickManyTimes, findEl } from '@app/shared/test-helpers';
 import { AuthService } from '@app/shared/services';
 import { NotificationService } from '@app/shared/services';

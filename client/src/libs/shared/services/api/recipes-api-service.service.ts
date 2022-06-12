@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HOST_API } from '@app/consts';
-import { EMPTY, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
     IngredientPostRequest,
     IngredientSearch,
@@ -9,7 +9,6 @@ import {
     SimpleInterface,
 } from '@app/interfaces';
 import { RecipePayload } from '@app/interfaces';
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
