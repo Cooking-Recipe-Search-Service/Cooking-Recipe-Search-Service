@@ -27,7 +27,8 @@ export class RecipePreviewComponent {
         this.currentRecipe = recipe;
     }
 
-    @ViewChild(TuiHostedDropdownComponent) component?: TuiHostedDropdownComponent;
+    @ViewChild(TuiHostedDropdownComponent)
+    component?: TuiHostedDropdownComponent;
 
     open = false;
 

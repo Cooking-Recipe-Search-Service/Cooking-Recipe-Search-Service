@@ -3,7 +3,7 @@
     <app-search (searchedRecipes)="loadRecipes($event)"></app-search>
 
     <ng-container *ngIf="searchedRecipes$ | async as searchedRecipes">
-        <h4 class="tui-text_h4">Результаты поиска</h4>
+        <h4 data-testid="recipes" class="tui-text_h4">Результаты поиска</h4>
         <ng-container *ngIf="searchedRecipes.length; else empty">
             <p>Найдено рецептов:{{searchedRecipes.length}}</p>
             <div class="recipes__preview">
@@ -16,7 +16,9 @@
             </div>
         </ng-container>
         <ng-template #empty>
-            <p class="tui-text_body-l">Мы старались, но ничего не нашли</p>
+            <p data-testid="empty" class="tui-text_body-l">
+                Мы старались, но ничего не нашли
+            </p>
         </ng-template>
     </ng-container>
 

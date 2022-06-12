@@ -29,6 +29,7 @@
 
         <ng-template #logIn>
             <button
+                data-testid="login"
                 tuiTab
                 routerLinkActive
                 tuiHintMode="onDark"
@@ -56,7 +57,7 @@
         </ng-container>
     </tui-tabs>
     <ng-template #profile>
-        <div *ngIf="user$ | async as user" data-testid="user">
+        <div *ngIf="user$ | async as user">
             <a routerLink="/profile" class="profile">
                 <div class="tui-space_right-3">
                     <img

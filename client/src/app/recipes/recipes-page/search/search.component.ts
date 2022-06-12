@@ -85,7 +85,6 @@ export class SearchComponent {
 
         this.search$
             .pipe(
-                takeUntil(this.destroy$),
                 debounceTime(1000),
                 distinctUntilChanged(),
                 filter(
@@ -100,13 +99,15 @@ export class SearchComponent {
                         }),
                     );
                 }),
+                takeUntil(this.destroy$),
             )
             .subscribe((value) => {
                 this.open = true;
 
-                this.searchedRecipes.next(of(value));
                 if (this.isOpenedFilters) {
                     this.recipes$$.next(value);
+                } else {
+                    this.searchedRecipes.next(of(value));
                 }
             });
     }
@@ -191,8 +192,12 @@ export class SearchComponent {
         fullString.push(ingredientsPartQuery);
 
         const payload = fullString.join('&').slice(0, -1);
-
-        this.recipesService.searchRecipe(payload);
-        this.searchedRecipes.emit(this.recipesService.searchRecipe(payload));
+        payload
+            ? this.searchedRecipes.emit(
+                  this.recipesService.searchRecipe(payload),
+              )
+            : this.searchedRecipes.emit(
+                  this.recipesService.getDefaultRecipes(),
+              );
     }
 }

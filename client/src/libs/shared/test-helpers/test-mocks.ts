@@ -157,6 +157,16 @@ export const mockCategories: readonly SimpleInterface[] = [
     { id: 1, name: 'two' },
 ];
 
+export const mockCountries: readonly SimpleInterface[] = [
+    { id: 0, name: '1' },
+    { id: 1, name: '2' },
+];
+
+export const mockIngredients: readonly SimpleInterface[] = [
+    { id: 0, name: '3' },
+    { id: 1, name: '4' },
+];
+
 export const mockUserWithResipes: ProfileWithRecipes = {
     username: 'name',
     email: 'email',

@@ -38,7 +38,7 @@ export class LocalStorageRecipesService {
         this.storageService.removeItem('favorits');
     }
 
-    setRecipesToLocal(recipes: readonly Recipe[]): void {
+    setRecipes(recipes: readonly Recipe[]): void {
         const recordRecipes = recipes.reduce(
             (accum, current) => ({
                 ...accum,
@@ -47,16 +47,16 @@ export class LocalStorageRecipesService {
             {} as Record<string, Recipe>,
         );
         this.favoritsRecipes$$.next(recordRecipes);
-        this.setRecipeInStorage(recordRecipes);
+        this.setRecipeToStorage(recordRecipes);
     }
 
     removeRecipe(deletedCompany: Recipe): void {
-        const companies = this.favoritsRecipes$$.getValue();
+        const recipes = this.favoritsRecipes$$.getValue();
 
-        delete companies[deletedCompany.id];
-        this.favoritsRecipes$$.next(companies);
+        delete recipes[deletedCompany.id];
+        this.favoritsRecipes$$.next(recipes);
 
-        this.setRecipeInStorage(companies);
+        this.setRecipeToStorage(recipes);
     }
 
     addRecipe(recipe: Recipe): void {
@@ -66,7 +66,7 @@ export class LocalStorageRecipesService {
         };
         this.favoritsRecipes$$.next(newCompanies);
 
-        this.setRecipeInStorage(newCompanies);
+        this.setRecipeToStorage(newCompanies);
     }
 
     isInStorage(id: string): Observable<boolean> {
@@ -79,7 +79,7 @@ export class LocalStorageRecipesService {
         );
     }
 
-    private setRecipeInStorage(company: Record<string, Recipe>) {
+    private setRecipeToStorage(company: Record<string, Recipe>) {
         this.storageService.setItem('favorits', JSON.stringify(company));
     }
 

@@ -98,7 +98,7 @@ export class AuthService {
                         photoUrl: '',
                         role: user.role,
                     });
-                    this.localStorageRecipes.setRecipesToLocal(user.recipes);
+                    this.localStorageRecipes.setRecipes(user.recipes);
                     return user;
                 }),
             );

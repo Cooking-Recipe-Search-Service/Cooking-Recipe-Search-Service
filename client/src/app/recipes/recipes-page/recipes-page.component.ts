@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RecipesApiService } from '@app/shared/services';
 import { Recipe } from '@app/interfaces';
 
 @Component({
@@ -10,15 +9,9 @@ import { Recipe } from '@app/interfaces';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecipesPageComponent {
-    recipes$ = this.recipiesApi.getDefaultRecipes();
-
     category = '';
 
     searchedRecipes$!: Observable<readonly Recipe[]>;
-
-    constructor(private readonly recipiesApi: RecipesApiService) {
-        // this.token$ = localStorage.getUser();
-    }
 
     loadRecipes(recipes: Observable<readonly Recipe[]>): void {
         this.searchedRecipes$ = recipes;

@@ -73,4 +73,20 @@ describe('NavbarComponent', () => {
         const adminPanelTab = findEl(fixture, 'admin-panel');
         expect(adminPanelTab).toBeTruthy();
     });
+
+    it('should show profile info  if user thier', () => {
+        fakeLocalStorageUserService.getUser.and.returnValue(of(mockUser));
+        fixture = TestBed.createComponent(NavbarComponent);
+        fixture.detectChanges();
+        const adminPanelTab = findEl(fixture, 'user-tab');
+        expect(adminPanelTab).toBeTruthy();
+    });
+
+    it('should show log in info  if not user thier', () => {
+        fakeLocalStorageUserService.getUser.and.returnValue(of(null));
+        fixture = TestBed.createComponent(NavbarComponent);
+        fixture.detectChanges();
+        const adminPanelTab = findEl(fixture, 'login');
+        expect(adminPanelTab).toBeTruthy();
+    });
 });
