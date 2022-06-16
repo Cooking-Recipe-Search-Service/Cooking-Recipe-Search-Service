@@ -16,6 +16,7 @@
 
         <button
             *ngIf="user$ | async;else logIn"
+            data-testid="user-tab"
             tuiTab
             routerLinkActive
             routerLink="/profile"
@@ -28,6 +29,7 @@
 
         <ng-template #logIn>
             <button
+                data-testid="login"
                 tuiTab
                 routerLinkActive
                 tuiHintMode="onDark"
@@ -38,13 +40,21 @@
                 Профиль
             </button>
         </ng-template>
-        <ng-container *ngIf="user$ | async as user" >
-            <button tuiTab routerLinkActive routerLink="/admin-panel" *ngIf="user.role === 'ROLE_ADMIN' ">
-            <tui-svg src="tuiIconLockLarge" class="tui-space_right-2"></tui-svg>
-            Admin panel
-        </button>
+        <ng-container *ngIf="user$ | async as user">
+            <button
+                *ngIf="user.role === 'ROLE_ADMIN' "
+                data-testid="admin-panel"
+                tuiTab
+                routerLinkActive
+                routerLink="/admin-panel"
+            >
+                <tui-svg
+                    src="tuiIconLockLarge"
+                    class="tui-space_right-2"
+                ></tui-svg>
+                Admin panel
+            </button>
         </ng-container>
-        
     </tui-tabs>
     <ng-template #profile>
         <div *ngIf="user$ | async as user">

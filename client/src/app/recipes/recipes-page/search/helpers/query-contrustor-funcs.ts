@@ -1,6 +1,6 @@
-import { COOKING_TIME_MAPPER } from 'src/libs/consts';
-import { isNotPresentOrEmptyString } from 'src/libs/helpers';
-import { SimpleInterface } from 'src/libs/interfaces';
+import { COOKING_TIME_MAPPER } from '@app/consts';
+import { isNotPresentOrEmptyString } from '@app/helpers';
+import { SimpleInterface } from '@app/interfaces';
 
 export function contructCategory(
     categories: readonly SimpleInterface[],

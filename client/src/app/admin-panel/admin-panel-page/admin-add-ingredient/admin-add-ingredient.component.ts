@@ -10,8 +10,8 @@ import { TuiDestroyService } from '@taiga-ui/cdk';
 import { TuiNotification, TuiNotificationsService } from '@taiga-ui/core';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
-import { BACKEND_MEASURMENT_MAPPER } from 'src/libs/consts';
+import { RecipesApiService } from '@app/shared/services';
+import { BACKEND_MEASURMENT_MAPPER } from '@app/consts';
 
 @Component({
     selector: 'app-admin-add-ingredient',
@@ -77,7 +77,7 @@ export class AdminAddIngredientComponent {
         name = name[0].toUpperCase() + name.slice(1);
 
         const energyValue = {
-            calories: this.calories.value ,
+            calories: this.calories.value,
             carbs: this.carbs.value * 1000,
             proteins: this.proteins.value * 1000,
             fats: this.fats.value * 1000,

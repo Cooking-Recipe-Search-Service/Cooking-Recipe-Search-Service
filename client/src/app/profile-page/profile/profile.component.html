@@ -1,25 +1,22 @@
 <div class="profile">
     <div class="profile__main-block">
         <tui-tabs [(activeItemIndex)]="activeItemIndex">
-            <button tuiTab>
-                <tui-svg
-                    src="tuiIconAlertCircleLarge"
-                    class="tui-space_right-2"
-                ></tui-svg>
-                Главная
+            <button tuiTab data-testid="main-btn" (click)="navigate(0)">
+                <tui-svg src="tuiIconUser" class="tui-space_right-2"></tui-svg>
+                Профиль
             </button>
-            <button tuiTab>
+            <button tuiTab data-testid="favorits-btn" (click)="navigate(1)">
                 <tui-svg src="tuiIconHeart" class="tui-space_right-2"></tui-svg>
                 Избранное
             </button>
-            <!-- <button tuiTab>
-                <tui-svg src="tuiIconUser" class="tui-space_right-2"></tui-svg>
-                Профиль
-            </button> -->
         </tui-tabs>
         <ng-container *ngIf="user$ | async as user">
             <ng-container [ngSwitch]="activeItemIndex">
-                <div *ngSwitchCase="0" class="main-block tui-space_top-5">
+                <div
+                    *ngSwitchCase="0"
+                    data-testid="preview"
+                    class="main-block tui-space_top-5"
+                >
                     <app-profile-info-card
                         [user]="user"
                     ></app-profile-info-card>
@@ -30,7 +27,11 @@
                     ></app-favorits-preview-card>
                 </div>
 
-                <div *ngSwitchCase="1" class="main-block tui-space_top-5">
+                <div
+                    *ngSwitchCase="1"
+                    data-testid="favorits"
+                    class="main-block tui-space_top-5"
+                >
                     <app-favorits-page
                         *ngIf="recipes$ | async as recipes"
                         [recipes]="recipes"

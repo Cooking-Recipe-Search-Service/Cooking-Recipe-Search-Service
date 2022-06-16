@@ -18,7 +18,7 @@
                     size="l"
                     tuiButton
                     shape="square"
-                    class="default__carousel"
+                    class="default__carousel category-{{i}}"
                     [appearance]="isActive(i)"
                     [class.item_active]="i === index + 1"
                     (click)="loadCategory(category.label, i)"
@@ -34,6 +34,7 @@
             </ng-container>
         </tui-carousel>
         <button
+            data-testid="navigate"
             tuiIconButton
             icon="tuiIconChevronRightLarge"
             title="Next"

@@ -1,4 +1,4 @@
-<tui-island class="island" [hoverable]="true">
+<tui-island class="island">
     <div class="user">
         <div class="tui-space_right-3">
             <img
@@ -15,16 +15,24 @@
             </ng-template>
         </div>
         <div>
-            <p class="no-margin user__name bold">{{user.username}}</p>
+            <p data-testid="username" class="no-margin user__name bold">
+                {{user.username}}
+            </p>
         </div>
     </div>
     <div class="user__logout">
         <div class="flex">
             <p class="tui-text_body-s no-margin bold">Почта:</p>
-            <p class="tui-text_body-s no-margin user__email">{{user.email}}</p>
+            <p
+                data-testid="email"
+                class="tui-text_body-s no-margin user__email"
+            >
+                {{user.email}}
+            </p>
         </div>
 
         <button
+            data-testid="logout-btn"
             tuiButton
             size="s"
             appearance="icon"

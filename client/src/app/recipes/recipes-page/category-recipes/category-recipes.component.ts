@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
-import { REVERSE_ROUTER_MAPPER } from 'src/libs/consts';
-import { Recipe } from 'src/libs/interfaces';
+import { RecipesApiService } from '@app/shared/services';
+import { REVERSE_ROUTER_MAPPER } from '@app/consts';
+import { Recipe } from '@app/interfaces';
 
 @Component({
     selector: 'app-category-recipes',

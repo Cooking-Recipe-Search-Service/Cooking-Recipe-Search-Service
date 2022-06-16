@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Recipe } from 'src/libs/interfaces';
+import { Recipe } from '@app/interfaces';
 
 @Component({
     selector: 'app-favorits-page',

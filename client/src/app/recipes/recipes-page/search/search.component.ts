@@ -7,13 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TuiDestroyService, tuiPure } from '@taiga-ui/cdk';
-import {
-    BehaviorSubject,
-    EMPTY,
-    forkJoin,
-    Observable,
-    of,
-} from 'rxjs';
+import { BehaviorSubject, EMPTY, forkJoin, Observable, of } from 'rxjs';
 import {
     catchError,
     debounceTime,
@@ -23,10 +17,9 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 
-import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
-import { DEFAULT_COOKING_TIME } from 'src/libs/consts';
-import { isNotPresentOrEmptyString } from 'src/libs/helpers';
-import { Recipe, SimpleInterface } from 'src/libs/interfaces';
+import { RecipesApiService } from '@app/shared/services';
+import { DEFAULT_COOKING_TIME } from '@app/consts';
+import { Recipe, SimpleInterface } from '@app/interfaces';
 
 import {
     contructCategory,
@@ -35,6 +28,7 @@ import {
     contructIngredients,
     contructNameRecipe,
 } from './helpers/query-contrustor-funcs';
+import { isNotPresentOrEmptyString } from '@app/helpers';
 
 @Component({
     selector: 'app-search',
@@ -76,7 +70,7 @@ export class SearchComponent {
 
     readonly search$: BehaviorSubject<string> = new BehaviorSubject('');
 
-    isOpenedFilters = false;
+    isOpenedFilters = true;
 
     constructor(
         private readonly recipesService: RecipesApiService,
@@ -91,7 +85,6 @@ export class SearchComponent {
 
         this.search$
             .pipe(
-                takeUntil(this.destroy$),
                 debounceTime(1000),
                 distinctUntilChanged(),
                 filter(
@@ -106,13 +99,15 @@ export class SearchComponent {
                         }),
                     );
                 }),
+                takeUntil(this.destroy$),
             )
             .subscribe((value) => {
                 this.open = true;
 
-                this.searchedRecipes.next(of(value));
                 if (this.isOpenedFilters) {
                     this.recipes$$.next(value);
+                } else {
+                    this.searchedRecipes.next(of(value));
                 }
             });
     }
@@ -197,8 +192,12 @@ export class SearchComponent {
         fullString.push(ingredientsPartQuery);
 
         const payload = fullString.join('&').slice(0, -1);
-
-        this.recipesService.searchRecipe(payload);
-        this.searchedRecipes.emit(this.recipesService.searchRecipe(payload));
+        payload
+            ? this.searchedRecipes.emit(
+                  this.recipesService.searchRecipe(payload),
+              )
+            : this.searchedRecipes.emit(
+                  this.recipesService.getDefaultRecipes(),
+              );
     }
 }

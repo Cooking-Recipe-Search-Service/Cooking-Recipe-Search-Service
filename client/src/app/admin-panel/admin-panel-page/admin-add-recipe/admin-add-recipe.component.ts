@@ -22,8 +22,8 @@ import { TuiNotification, TuiNotificationsService } from '@taiga-ui/core';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
-import { SimpleInterface } from 'src/libs/interfaces';
+import { RecipesApiService } from '@app/shared/services';
+import { SimpleInterface } from '@app/interfaces';
 
 @Component({
     selector: 'app-admin-add-recipe',
