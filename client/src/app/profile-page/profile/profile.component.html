@@ -2,20 +2,13 @@
     <div class="profile__main-block">
         <tui-tabs [(activeItemIndex)]="activeItemIndex">
             <button tuiTab data-testid="main-btn" (click)="navigate(0)">
-                <tui-svg
-                    src="tuiIconAlertCircleLarge"
-                    class="tui-space_right-2"
-                ></tui-svg>
-                Главная
+                <tui-svg src="tuiIconUser" class="tui-space_right-2"></tui-svg>
+                Профиль
             </button>
             <button tuiTab data-testid="favorits-btn" (click)="navigate(1)">
                 <tui-svg src="tuiIconHeart" class="tui-space_right-2"></tui-svg>
                 Избранное
             </button>
-            <!-- <button tuiTab>
-                <tui-svg src="tuiIconUser" class="tui-space_right-2"></tui-svg>
-                Профиль
-            </button> -->
         </tui-tabs>
         <ng-container *ngIf="user$ | async as user">
             <ng-container [ngSwitch]="activeItemIndex">

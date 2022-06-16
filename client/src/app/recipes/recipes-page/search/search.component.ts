@@ -70,7 +70,7 @@ export class SearchComponent {
 
     readonly search$: BehaviorSubject<string> = new BehaviorSubject('');
 
-    isOpenedFilters = false;
+    isOpenedFilters = true;
 
     constructor(
         private readonly recipesService: RecipesApiService,

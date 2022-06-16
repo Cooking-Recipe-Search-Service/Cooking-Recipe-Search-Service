@@ -3,11 +3,22 @@
     margin: 60px auto;
     &__main-search {
         display: grid;
-        grid-template-columns: 0.75fr 0.25fr;
+        grid-template-columns: 1fr;
         column-gap: 20px;
+        &-width {
+            width: 100%;
+        }
     }
 
-    &__default,
+    &__default {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &-width {
+            width: 280px;
+        }
+    }
+
     &__ingredients {
         display: flex;
         align-items: center;
@@ -17,6 +28,6 @@
         }
     }
     &__dropdown {
-        width: 645px;
+        width: 880px;
     }
 }

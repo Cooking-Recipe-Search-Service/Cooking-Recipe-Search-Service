@@ -76,13 +76,6 @@ export class AuthService {
             .pipe(
                 switchMap((response) => {
                     this.localStorage.setToken(response.token);
-                    // this.localStorage.setUser({
-                    //     username: response.username,
-                    //     password: user.password,
-                    //     email: response.email,
-                    //     photoUrl: '',
-                    //     role: res
-                    // });
                     return this.getUser().pipe(
                         map((user) => ({
                             ...user,

@@ -1,5 +1,5 @@
 <div class="ingredients-counter">
-    <p class="tui-space_right-3">порция</p>
+    <p class="tui-space_right-3">{{'порции' | declensions: computedPortion}}</p>
     <div class="ingredients-counter-btns">
         <button
             data-testid="decrement"
@@ -8,7 +8,7 @@
             size="s"
             appearance="custom"
             class="tui-space_right-3"
-            (click)="decrement()"
+            (click)="calcIngredients(-1)"
         ></button>
         <tui-island class="tui-space_right-3">{{computedPortion}}</tui-island>
         <button
@@ -17,12 +17,14 @@
             icon="tuiIconPlus"
             size="s"
             appearance="custom"
-            (click)="increment()"
+            (click)="calcIngredients(1)"
         ></button>
     </div>
 </div>
 <div class="ingredients">
-    <ng-container *ngFor="let ingredient of computedIngredients">
+    <ng-container
+        *ngFor="let ingredient of ingredients | calcPortions : computedPortion: initialPortion "
+    >
         <app-ingredient [ingredient]="ingredient"></app-ingredient>
         <div class="ingredients__divider"></div>
     </ng-container>

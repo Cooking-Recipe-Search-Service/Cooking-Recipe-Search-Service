@@ -4,6 +4,11 @@ import { TuiInputModule, TuiIslandModule } from '@taiga-ui/kit';
 import { TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { IngredientsComponent } from './ingredients.component';
 import { IngredientModule } from '@app/shared/components';
+import {
+    DeclensionsPipeModule,
+    CalculatePortionsModule,
+} from '@app/shared/modules';
+
 @NgModule({
     declarations: [IngredientsComponent],
     imports: [
@@ -13,6 +18,8 @@ import { IngredientModule } from '@app/shared/components';
         TuiButtonModule,
         TuiTextfieldControllerModule,
         IngredientModule,
+        DeclensionsPipeModule,
+        CalculatePortionsModule,
     ],
     exports: [IngredientsComponent],
 })

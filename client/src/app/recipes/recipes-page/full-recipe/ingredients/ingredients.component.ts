@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { formatNumber } from '@taiga-ui/core';
 import { Ingredient } from '@app/interfaces';
 
-const decimalLimit = 1;
-const decimalSeparator = '.';
 @Component({
     selector: 'app-ingredients',
     templateUrl: './ingredients.component.html',
@@ -16,51 +13,14 @@ export class IngredientsComponent {
         this.computedPortion = portion;
     }
 
-    @Input() set ingredients(ingredients: readonly Ingredient[]) {
-        this.initialIngredients = [...ingredients];
-        this.computedIngredients = [...ingredients];
-    }
+    @Input() ingredients: readonly Ingredient[] = [];
 
     initialPortion = 0;
 
     computedPortion = 0;
 
-    initialIngredients: readonly Ingredient[] = [];
-
-    computedIngredients: readonly Ingredient[] = [];
-
-    decrement(): void {
+    calcIngredients(delta: number): void {
         if (this.computedPortion === 1) return;
-        this.computedPortion -= 1;
-        this.computedIngredients = [
-            ...this.initialIngredients.map((ingredient) => {
-                return {
-                    ...ingredient,
-                    value: +formatNumber(
-                        (ingredient.value / this.initialPortion) *
-                            this.computedPortion,
-                        decimalLimit,
-                        decimalSeparator,
-                    ),
-                };
-            }),
-        ];
-    }
-
-    increment(): void {
-        this.computedPortion += 1;
-        this.computedIngredients = [
-            ...this.initialIngredients.map((ingredient) => {
-                return {
-                    ...ingredient,
-                    value: +formatNumber(
-                        (ingredient.value / this.initialPortion) *
-                            this.computedPortion,
-                        decimalLimit,
-                        decimalSeparator,
-                    ),
-                };
-            }),
-        ];
+        this.computedPortion += delta;
     }
 }

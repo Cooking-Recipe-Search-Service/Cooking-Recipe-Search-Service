@@ -1,10 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-    ComponentFixture,
-    fakeAsync,
-    TestBed,
-    tick,
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Recipe } from '@app/interfaces';
 import { SelectWithSearchModule } from '@app/shared/components';
@@ -99,32 +94,6 @@ describe('SearchComponent', () => {
         fixture.detectChanges();
     });
 
-    it('should open filters', () => {
-        const btn = findEl(fixture, 'filters-btn');
-        clickManyTimes(1, btn, fixture);
-
-        const filter = findEl(fixture, 'filters');
-        expect(filter).toBeTruthy();
-    });
-
-    it('should search 2', fakeAsync(() => {
-        const searchedRecipe$$ = new BehaviorSubject<readonly Recipe[]>([]);
-
-        component.searchedRecipes
-            .pipe(
-                switchMap((value) => value),
-                tap((value) => searchedRecipe$$.next(value)),
-            )
-            .subscribe();
-        const el = findEl(fixture, 'input').nativeElement;
-        el.value = 'search';
-        el.dispatchEvent(new Event('input'));
-        tick(1000);
-        fixture.detectChanges();
-        expect(recipesService.searchRecipe).toHaveBeenCalled();
-        expect(searchedRecipe$$.getValue().length).toBe(1);
-    }));
-
     it('should NOT search on empty string', () => {
         const searchedRecipe$$ = new BehaviorSubject<readonly Recipe[]>([]);
 
@@ -166,8 +135,6 @@ describe('SearchComponent', () => {
             excludeIngredients: [],
             includeIngredients: [],
         });
-        const btn = findEl(fixture, 'filters-btn');
-        clickManyTimes(1, btn, fixture);
 
         const searchedRecipe$$ = new BehaviorSubject<readonly Recipe[]>([]);
 
@@ -194,8 +161,6 @@ describe('SearchComponent', () => {
             excludeIngredients: [],
             includeIngredients: [],
         });
-        const btn = findEl(fixture, 'filters-btn');
-        clickManyTimes(1, btn, fixture);
 
         const searchBtn = findEl(fixture, 'search-btn');
         clickManyTimes(1, searchBtn, fixture);

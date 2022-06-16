@@ -118,7 +118,6 @@ describe('RecipePreviewComponent', () => {
             clickManyTimes(1, btn, fixture);
 
             expect(component.addToFavorites).toHaveBeenCalled();
-            // done()
         });
 
         it('when click on btn send request to server', () => {
