@@ -1,3 +1,6 @@
 export const DECLENSION_REGEX = /\D/gi;
 
-export const declensionTitles = [['ингредиент', 'ингредиента', 'ингредиентов']];
+export const declensionTitles = [
+    ['ингредиент', 'ингредиента', 'ингредиентов'],
+    ['порция', 'порции', 'порций'],
+];

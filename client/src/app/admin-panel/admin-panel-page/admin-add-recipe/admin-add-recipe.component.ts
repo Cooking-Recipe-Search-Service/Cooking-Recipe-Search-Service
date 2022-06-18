@@ -15,18 +15,16 @@ import {
     markControlAsTouchedAndValidate,
     TuiContextWithImplicit,
     TuiDestroyService,
-
     TuiStringHandler,
     TuiValidationError,
 } from '@taiga-ui/cdk';
 import { TuiNotification, TuiNotificationsService } from '@taiga-ui/core';
-import {  TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
+import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map,  takeUntil, } from 'rxjs/operators';
-import { RecipesApiService } from 'src/app/shared/services/api/recipes-api-service.service';
-import { SimpleInterface } from 'src/libs/interfaces';
-
-
+import { map, takeUntil } from 'rxjs/operators';
+import { RecipesApiService } from '@app/shared/services';
+import { ShortIngredient, SimpleInterface } from '@app/interfaces';
+import { FRONTEND_MEASURMENT_MAPPER } from '@app/consts';
 
 @Component({
     selector: 'app-admin-add-recipe',
@@ -63,18 +61,21 @@ export class AdminAddRecipeComponent {
             new FormGroup({
                 id: new FormControl(null, Validators.required),
                 value: new FormControl(null, Validators.required),
+                
             }),
         ]),
         instructions: new FormArray([new FormControl(null)], notEmptySteps),
-        image: new FormControl()
+        image: new FormControl(),
     });
+    
+    measurmentMapper = FRONTEND_MEASURMENT_MAPPER
 
-    base64Image = ''
+    base64Image = '';
 
     readonly countries$: Observable<readonly SimpleInterface[]> =
         this.recipesService.getCountries();
 
-    ingredients$: Observable<readonly SimpleInterface[]> =
+    ingredients$: Observable<readonly ShortIngredient[]> =
         this.recipesService.getIngredients();
 
     readonly categories$: Observable<readonly SimpleInterface[]> =
@@ -86,21 +87,25 @@ export class AdminAddRecipeComponent {
         private readonly notificationsService: TuiNotificationsService,
         private readonly destroy$: TuiDestroyService,
     ) {
-        this.image.valueChanges.pipe(
-            map(file => {
-                const reader = new FileReader();
-        reader.onloadend = () => {
-            const base64 = reader.result?.toString() || ''
-            const last = base64.lastIndexOf('base64,') + 7
+        this.image.valueChanges
+            .pipe(
+                map((file) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        const base64 = reader.result?.toString() || '';
+                        const last = base64.lastIndexOf('base64,') + 7;
 
-            this.base64Image = base64?.substring(last, base64.length)
+                        this.base64Image = base64?.substring(
+                            last,
+                            base64.length,
+                        );
 
-
-            // Logs data:<type>;base64,wL2dvYWwgbW9yZ...
-        }
-        reader.readAsDataURL(file)
-        })
-        ).subscribe()
+                        // Logs data:<type>;base64,wL2dvYWwgbW9yZ...
+                    };
+                    reader.readAsDataURL(file);
+                }),
+            )
+            .subscribe();
     }
 
     readonly stringify: TuiStringHandler<
@@ -153,6 +158,19 @@ export class AdminAddRecipeComponent {
             .value as FormControl;
     }
 
+    getIngredientMeasure(index:number,inregients:readonly ShortIngredient[]):string{
+        if (! this.ingredients.controls[index].value.id) return ''
+        const id = this.ingredients.controls[index].value.id.id
+        const ingredient = (inregients.filter(value => {
+            return value.id == id
+        }))[0]
+        if(ingredient) {
+            return FRONTEND_MEASURMENT_MAPPER[ingredient.measurementValue]
+        }
+        return ''
+
+    }
+
     onSearch(search: string | null): void {
         this.search$.next(search || '');
     }
@@ -165,13 +183,11 @@ export class AdminAddRecipeComponent {
         this.instructions.removeAt(index);
     }
 
-    get image():FormControl
-{
-return this.recipeForm.controls.image as FormControl;
-}
+    get image(): FormControl {
+        return this.recipeForm.controls.image as FormControl;
+    }
 
     addRecipe(): void {
-        console.log(this.base64Image)
         markControlAsTouchedAndValidate(this.recipeForm);
         const { name, cookingTime, description, portionQuantity } =
             this.recipeForm.value;
@@ -188,7 +204,7 @@ return this.recipeForm.controls.image as FormControl;
                     instruction: instruction,
                 }),
             ),
-            // image: this.base64Image,
+            image: this.base64Image,
             ingredients: this.recipeForm.value.ingredients.map(
                 (ingredient: { id: SimpleInterface; value: number }) => ({
                     id: ingredient.id.id,
@@ -222,11 +238,6 @@ return this.recipeForm.controls.image as FormControl;
             );
     }
 
-   
- 
-    
-    
-
     removeIngredient(index: number): void {
         this.ingredients.removeAt(index);
     }
@@ -251,4 +262,3 @@ function notEmptySteps(field: AbstractControl): Validators | null {
               ),
           };
 }
-

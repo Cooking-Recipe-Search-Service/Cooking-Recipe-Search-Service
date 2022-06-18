@@ -1,16 +1,18 @@
 <div class="search">
-    <form [formGroup]="searchForm" (ngSubmit)="searchRecipe()">
+    <form [formGroup]="searchForm">
         <div *tuiLet="recipes$$ | async as recipes" class="search__main-search">
-            <div class="search__default-width">
+            <div class="search__main-search-width">
                 <tui-hosted-dropdown
                     tuiDropdownLimitWidth="min"
-                    class="search__default-width"
+                    class="search__main-search-width"
                     [content]="dropdown"
                     [canOpen]="canOpen"
                     [(open)]="open"
                 >
                     <tui-input
+                        data-testid="input"
                         placeholder="Салат цезарь"
+                        class="search__main-search-width"
                         [formControl]="name"
                         (input)="onSearchChange(extractValueFromEvent($event))"
                     >
@@ -29,18 +31,20 @@
                     </tui-data-list>
                 </ng-template>
             </div>
-            <button
+            <!-- <button
+                data-testid="filters-btn"
                 tuiButton
                 icon="assets/icons/filter.svg"
                 appearance="custom"
                 (click)="isOpenedFilters = !isOpenedFilters"
             >
                 Фильтры
-            </button>
+            </button> -->
         </div>
         <ng-container *ngIf="isOpenedFilters">
             <div
                 *ngIf="defaultSearchValues$ | async as defaultSearchValue"
+                data-testid="filters"
                 class="search__extra-options tui-space_top-5"
             >
                 <div class="search__default">
@@ -80,6 +84,7 @@
                 </div>
             </div>
             <button
+                data-testid="search-btn"
                 tuiButton
                 appearance="custom"
                 class="tui-space_top-5"

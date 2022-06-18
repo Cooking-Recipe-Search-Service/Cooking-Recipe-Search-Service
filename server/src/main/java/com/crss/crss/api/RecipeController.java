@@ -20,6 +20,7 @@ import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,6 +54,11 @@ public class RecipeController {
         return dtoConverter.getRecipeDto(recipeService.createRecipe(dto));
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteRecipe(@PathVariable Long id) {
+        recipeService.deleteRecipeById(id);
+    }
+
     @RequestMapping(method = {RequestMethod.GET}, path = {"/search"}, produces = {MediaType.APPLICATION_JSON_VALUE})
     @Parameter(in = ParameterIn.QUERY, name = "id", schema = @Schema(type = "int"))
     @Parameter(in = ParameterIn.QUERY, name = "name", schema = @Schema(type = "string"))
@@ -65,14 +71,8 @@ public class RecipeController {
     @Parameter(in = ParameterIn.QUERY, name = "country.name", schema = @Schema(type = "string"))
     @Parameter(in = ParameterIn.QUERY, name = "category.id", schema = @Schema(type = "int"))
     @Parameter(in = ParameterIn.QUERY, name = "category.name", schema = @Schema(type = "string"))
-    public List<RecipeSlimDto> findAllByWebQuerydsl(@Parameter(hidden = true) @QuerydslPredicate(root = RecipeEntity.class) Predicate predicate) {
-        if (predicate == null || (BooleanBuilder.class.isAssignableFrom(predicate.getClass())
-            && !((BooleanBuilder) predicate).hasValue())) {
-            throw new CrssException(HttpStatus.BAD_REQUEST, "Error");
-        } else {
-            return dtoConverter.getRecipeSlimDtoList((List<RecipeEntity>) recipeRepository.findAll(predicate));
-        }
+    public List<RecipeSlimDto> findAllByWebQuerydsl(
+        @Parameter(hidden = true) @QuerydslPredicate(root = RecipeEntity.class) Predicate predicate) {
+        return dtoConverter.getRecipeSlimDtoList(recipeService.searchRecipe(predicate));
     }
-
-
 }

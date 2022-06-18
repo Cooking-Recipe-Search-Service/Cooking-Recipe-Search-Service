@@ -79,7 +79,7 @@
         Описание
     </tui-text-area>
     <p class="tui-text_body-xl tui-space_top-5 space">Добавить ингредиенты</p>
-    <div>
+    <div *ngIf="ingredients$ | async as backIngredients">
         <div
             *ngFor="let ingredient of ingredients.controls; let index = index"
             class="row tui-space_top-5"
@@ -95,7 +95,7 @@
                     <input tuiTextfield />
                     <tui-data-list-wrapper
                         *tuiDataList
-                        [items]="ingredients$ | async |  tuiFilterByInputWith : stringify"
+                        [items]="backIngredients |  tuiFilterByInputWith : stringify"
                         [itemContent]="stringify | tuiStringifyContent"
                     ></tui-data-list-wrapper>
                 </tui-combo-box>
@@ -111,6 +111,7 @@
                     class="form"
                     [tuiTextfieldCleaner]="true"
                     [formControl]="getIngredientValue(index)"
+                    [postfix]="getIngredientMeasure(index, backIngredients )"
                 >
                     Количество
                     <input tuiTextfield />
@@ -167,12 +168,11 @@
     </button>
     <h3 id="ingredient" class="tui-text_h3">Загруть фото</h3>
     <tui-input-file
-    link="Choose an image"
-    accept="image/*"
-    class="container"
-    [formControl]="image"
-    
-></tui-input-file>
+        link="Choose an image"
+        accept="image/*"
+        class="container"
+        [formControl]="image"
+    ></tui-input-file>
 </form>
 <button
     tuiButton

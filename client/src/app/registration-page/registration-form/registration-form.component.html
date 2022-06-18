@@ -9,6 +9,7 @@
                 </tui-input>
 
                 <tui-error
+                    data-testid="invalid-username"
                     formControlName="username"
                     [error]="[] | tuiFieldError | async"
                 ></tui-error>
@@ -18,7 +19,8 @@
                     <input tuiTextfield type="email" />
                 </tui-input>
                 <tui-error
-                    formControlName="username"
+                    data-testid="invalid-email"
+                    formControlName="email"
                     [error]="[] | tuiFieldError | async"
                 ></tui-error>
                 <tui-input-password
@@ -30,7 +32,13 @@
                 </tui-input-password>
             </form>
             <div class="registration__btns tui-space_top-5">
-                <button tuiButton appearance="custom" (click)="register()">
+                <button
+                    tuiButton
+                    data-testid="register-btn"
+                    appearance="custom"
+                    [disabled]="registrationForm.invalid"
+                    (click)="register()"
+                >
                     Регистрация
                 </button>
 

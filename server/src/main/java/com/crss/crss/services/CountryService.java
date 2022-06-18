@@ -28,7 +28,8 @@ public class CountryService {
     }
 
     public CountryEntity getCountryById(Long id) {
-        return countryRepository.findById(id).orElseThrow(() -> new CrssException(HttpStatus.NOT_FOUND, "Cannot find country with id=" + id));
+        return countryRepository.findById(id)
+            .orElseThrow(() -> new CrssException(HttpStatus.NOT_FOUND, "Cannot find country with id=" + id));
     }
 
 }

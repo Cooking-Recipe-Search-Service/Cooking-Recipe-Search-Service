@@ -11,16 +11,16 @@ import com.crss.crss.entities.RecipeInstructionEntity;
 import com.crss.crss.entities.UserEntity;
 import com.crss.crss.exceptions.CrssException;
 import com.crss.crss.repositories.DescriptionRepository;
-import com.crss.crss.repositories.EnergyValuePerIngredientRepository;
 import com.crss.crss.repositories.EnergyValuePerPortionRepository;
 import com.crss.crss.repositories.FileSystemRepository;
 import com.crss.crss.repositories.InstructionRepository;
 import com.crss.crss.repositories.RecipeRepository;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,7 +54,21 @@ public class RecipeService {
         RecipeEntity savedRecipe = recipeRepository.save(recipe);
         descriptionRepository.save(new RecipeDescriptionEntity(dto.getDescription(), savedRecipe));
         instructionRepository.save(new RecipeInstructionEntity(dto.getInstructions(), savedRecipe));
+        uploadRecipeImageBase64ByName(dto.getImage(), dto.getName());
         return savedRecipe;
+    }
+
+    public List<RecipeEntity> searchRecipe(Predicate predicate) {
+        if (predicate == null || (BooleanBuilder.class.isAssignableFrom(predicate.getClass())
+            && !((BooleanBuilder) predicate).hasValue())) {
+            throw new CrssException(HttpStatus.BAD_REQUEST, "Error predicate format");
+        } else {
+            return (List<RecipeEntity>) recipeRepository.findAll(predicate);
+        }
+    }
+
+    public void deleteRecipeById(Long id) {
+        recipeRepository.deleteById(id);
     }
 
     public RecipeEntity getRecipeById(Long id) {
@@ -65,6 +79,10 @@ public class RecipeService {
     public String getRecipeImageBase64ById(String name) {
         return Base64.getEncoder().encodeToString(fileSystemRepository
             .findRecipeImageInFileSystem(name));
+    }
+
+    public void uploadRecipeImageBase64ByName(String base64, String name) {
+        fileSystemRepository.uploadRecipeImage(name, Base64.getDecoder().decode(base64));
     }
 
     public Optional<RecipeDescriptionEntity> getRecipeDescriptionById(Long id) {
@@ -92,13 +110,13 @@ public class RecipeService {
         return energyValueRepository.save(energyValuePerPortion);
     }
 
-    public RecipeEntity addUserToLovers(Long recipeId, UserEntity userEntity){
+    public RecipeEntity addUserToLovers(Long recipeId, UserEntity userEntity) {
         RecipeEntity recipeEntity = getRecipeById(recipeId);
         recipeEntity.addLover(userEntity);
         return recipeRepository.save(recipeEntity);
     }
 
-    public RecipeEntity deleteUserToLovers (Long recipeId, UserEntity userEntity){
+    public RecipeEntity deleteUserToLovers(Long recipeId, UserEntity userEntity) {
         RecipeEntity recipeEntity = getRecipeById(recipeId);
         recipeEntity.deleteLover(userEntity);
         return recipeRepository.save(recipeEntity);

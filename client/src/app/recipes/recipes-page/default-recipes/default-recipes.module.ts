@@ -7,7 +7,6 @@ import {
     TuiLazyLoadingModule,
 } from '@taiga-ui/kit';
 import { TuiButtonModule, TuiSvgModule } from '@taiga-ui/core';
-import { ImgWithSubtitleModule } from 'src/app/shared/components/img-with-subtitle/img-with-subtitle.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -18,7 +17,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         TuiSvgModule,
         TuiLazyLoadingModule,
         TuiButtonModule,
-        ImgWithSubtitleModule,
         TuiCarouselModule,
         FormsModule,
         ReactiveFormsModule,

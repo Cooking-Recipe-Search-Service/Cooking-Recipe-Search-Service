@@ -17,14 +17,21 @@
         </form>
         <div class="login__btns">
             <button
+                data-testid="login-btn"
                 tuiButton
                 appearance="custom"
                 class="tui-space_top-5"
+                [disabled]="loginForm.invalid"
                 (click)="login()"
             >
                 Войти
             </button>
-            <button tuiButton routerLink="/registration" appearance="icon">
+            <button
+                tuiButton
+                routerLink="/registration"
+                appearance="icon"
+                class="tui-space_top-5"
+            >
                 Впервые с нами? Зарегистрируйтесь
             </button>
         </div>

@@ -1,6 +1,6 @@
 <tui-island class="recipe-preview">
     <div class="recipe-preview__calories tui-text_body-xs">
-        <p class="no-margin bold">
+        <p data-testid="callories" class="no-margin bold">
             {{currentRecipe.energyValue.calories}} ккал
         </p>
     </div>
@@ -24,7 +24,10 @@
         </div>
         <tui-line-clamp [content]="content" [linesLimit]="2"></tui-line-clamp>
         <ng-template #content>
-            <p class="tui-text_body-l no-margin ecipe-preview__hint">
+            <p
+                data-testid="name"
+                class="tui-text_body-l no-margin ecipe-preview__hint"
+            >
                 {{currentRecipe.name}}
             </p>
         </ng-template>
@@ -40,6 +43,7 @@
                         type="button"
                         size="s"
                         appearance="whiteblock"
+                        data-testid="ingredients"
                         class="tui-group__auto-width-item"
                     >
                         {{currentRecipe.ingredientsInfo.length}} {{
@@ -83,6 +87,7 @@
             </ng-template>
             <ng-template #removeBtn>
                 <button
+                    data-testid="is-storage-btn"
                     tuiIconButton
                     type="button"
                     size="s"
@@ -97,6 +102,7 @@
 
             <button
                 *ngIf="isInStorage$ | async; else removeBtn"
+                data-testid="not-storage-btn"
                 tuiIconButton
                 type="button"
                 size="s"
@@ -105,7 +111,7 @@
                 tuiHintMode="onDark"
                 class="tui-space_top-3 tui-space_left-3"
                 [tuiHint]="favorits"
-                (click)="addToFavorites(currentRecipe  )"
+                (click)="addToFavorites(currentRecipe)"
             ></button>
         </div>
     </div>

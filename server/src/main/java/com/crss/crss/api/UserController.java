@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping("/current")
     public UserDto getCurrentUser() {
-        return dtoConverter.simpleConvert(userService.getCurrentUser(), UserDto.class);
+        return dtoConverter.convertUser(userService.getCurrentUser());
     }
 
     @PutMapping("/addRecipeToFavoritesByRecipeId/{id}")

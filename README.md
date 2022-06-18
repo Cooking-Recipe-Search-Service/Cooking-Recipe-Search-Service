@@ -6,5 +6,6 @@ mvn clean spring-boot:run -Dclient
 mvn clean spring-boot:run
 ## Swagger
 http://localhost:8080/swagger-ui.html
+http://193.168.227.84:8080/swagger-ui.html
 ## Server
 http://193.168.227.84:8080/

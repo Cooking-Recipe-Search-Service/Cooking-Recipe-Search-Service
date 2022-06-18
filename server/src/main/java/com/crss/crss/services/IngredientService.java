@@ -32,6 +32,10 @@ public class IngredientService {
         return ingredient;
     }
 
+    public void deleteIngredientById(Long id) {
+        ingredientRepository.deleteById(id);
+    }
+
     public IngredientEntity getIngredientById(Long id) {
         return ingredientRepository.findById(id)
             .orElseThrow(() -> new CrssException(HttpStatus.NOT_FOUND, "Cannot find ingredient with id=" + id));

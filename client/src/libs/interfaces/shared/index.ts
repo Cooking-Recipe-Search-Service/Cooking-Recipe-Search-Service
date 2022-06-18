@@ -6,8 +6,8 @@ export * from './recipe';
 export * from './recipe-payload';
 export * from './instruction';
 export * from './profile';
-export * from './roles';
 export * from './registration-profile';
 export * from './login-profile';
 export * from './login-profile-response';
 export * from './profile-with-recipes';
+export * from './short-ingredient.model'

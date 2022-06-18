@@ -9,3 +9,9 @@ export const BACKEND_MEASURMENT_MAPPER = <Record<string, string>>{
     шт: 'PIECE',
     мл: 'MILLILITER',
 };
+
+export const FRONTEND_MEASURMENT_MAPPER = <Record<string, string>>{
+    GRAM: 'гр',
+    PIECE: 'шт',
+    MILLILITER: 'мл',
+};

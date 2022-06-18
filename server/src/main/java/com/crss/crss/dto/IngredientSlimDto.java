@@ -11,4 +11,5 @@ public class IngredientSlimDto {
 
     private Long id;
     private String name;
+    private String measurementValue;
 }

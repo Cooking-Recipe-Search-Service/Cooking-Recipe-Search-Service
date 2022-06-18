@@ -17,13 +17,10 @@ public interface RecipeRepository extends JpaRepository<RecipeEntity, Long>, Que
 
     @Override
     default void customize(QuerydslBindings bindings, QRecipeEntity root) {
-
         bindings.bind(root.country.id)
             .all(ExpressionProviderFactory::getPredicate);
         bindings.bind(root.country.name)
             .all(ExpressionProviderFactory::getPredicate);
-
-
         bindings.bind(root.name)
             .all(ExpressionProviderFactory::getPredicate);
         bindings.bind(root.id)
@@ -36,15 +33,11 @@ public interface RecipeRepository extends JpaRepository<RecipeEntity, Long>, Que
             .all(ExpressionProviderFactory::getPredicate);
         bindings.bind(root.category.name)
             .all(ExpressionProviderFactory::getPredicate);
-
         bindings.bind(root.ingredients.any().ingredient.name).as("ingredients.ingredient.name")
             .all(ExpressionProviderFactory::getPredicate);
         bindings.bind(root.ingredients.any().ingredient.id).as("ingredients.ingredient.id")
             .all(ExpressionProviderFactory::getPredicate);
         bindings.bind(root.ingredients.any().value).as("ingredients.value")
             .all(ExpressionProviderFactory::getPredicate);
-
-
-
     }
 }
