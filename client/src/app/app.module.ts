@@ -13,13 +13,13 @@ import {
 } from '@taiga-ui/core';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { environment } from 'src/environments/environment';
-import { HOST_API, TOKEN_TYPE } from 'src/libs/consts';
+import { HOST_API, TOKEN_TYPE } from '@app/consts';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NavbarModule } from './navbar/navbar.module';
 import { ProfilePageModule } from './profile-page/profile-page.module';
-import { NotificationServiceModule } from './shared/services/notifications/notification-service.module';
+import { NotificationServiceModule } from '@app/shared/services';
 import { RegistrationFormModule } from './registration-page/registration-form/registration-form.module';
-import { AuthInterceptor } from './shared/services/interseptor/auth.interceptor';
+import { AuthInterceptor } from '@app/shared/services';
 import { LoginPageModule } from './login-page/login-page.module';
 import { RegistrationPageModule } from './registration-page/registration-page.module';
 

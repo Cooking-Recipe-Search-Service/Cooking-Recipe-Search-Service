@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStorageRecipesService } from 'src/app/shared/services/local-storage/local-storage-recipes.service';
-import { LocalStorageUserService } from 'src/app/shared/services/local-storage/local-storage.service';
-import { Profile } from 'src/libs/interfaces';
+import { LocalStorageRecipesService } from '@app/shared/services';
+import { LocalStorageUserService } from '@app/shared/services';
+import { Profile } from '@app/interfaces';
 
 @Component({
     selector: 'app-profile-info-card',

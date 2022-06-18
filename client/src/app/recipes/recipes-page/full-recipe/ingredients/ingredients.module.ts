@@ -3,7 +3,12 @@ import { CommonModule } from '@angular/common';
 import { TuiInputModule, TuiIslandModule } from '@taiga-ui/kit';
 import { TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { IngredientsComponent } from './ingredients.component';
-import { IngredientModule } from '../../../../shared/components/ingredient/ingredient.module';
+import { IngredientModule } from '@app/shared/components';
+import {
+    DeclensionsPipeModule,
+    CalculatePortionsModule,
+} from '@app/shared/modules';
+
 @NgModule({
     declarations: [IngredientsComponent],
     imports: [
@@ -13,6 +18,8 @@ import { IngredientModule } from '../../../../shared/components/ingredient/ingre
         TuiButtonModule,
         TuiTextfieldControllerModule,
         IngredientModule,
+        DeclensionsPipeModule,
+        CalculatePortionsModule,
     ],
     exports: [IngredientsComponent],
 })

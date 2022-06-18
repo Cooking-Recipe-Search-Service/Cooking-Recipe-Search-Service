@@ -5,7 +5,7 @@ import {
     Input,
     Output,
 } from '@angular/core';
-import { Recipe } from 'src/libs/interfaces';
+import { Recipe } from '@app/interfaces';
 @Component({
     selector: 'app-favorits-preview-card',
     templateUrl: './favorits-preview-card.component.html',

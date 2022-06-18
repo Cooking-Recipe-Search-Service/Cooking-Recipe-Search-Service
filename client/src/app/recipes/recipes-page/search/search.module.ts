@@ -15,8 +15,7 @@ import {
     TuiFilterByInputPipeModule,
     TuiInputModule,
 } from '@taiga-ui/kit';
-import { SelectWithSearchModule } from '../../../shared/components/select-with-search/select-with-search.module';
-import { IngredientsSearchModule } from '../../../shared/components/ingredients-search/ingredients-search.module';
+import { SelectWithSearchModule } from '@app/shared/components';
 import { TuiLetModule, TuiMapperPipeModule } from '@taiga-ui/cdk';
 
 @NgModule({
@@ -30,7 +29,6 @@ import { TuiLetModule, TuiMapperPipeModule } from '@taiga-ui/cdk';
         ReactiveFormsModule,
         TuiHostedDropdownModule,
         SelectWithSearchModule,
-        IngredientsSearchModule,
         TuiSvgModule,
         TuiLetModule,
         TuiMapperPipeModule,

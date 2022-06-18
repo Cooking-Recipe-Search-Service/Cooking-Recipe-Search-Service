@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { formatNumber } from '@taiga-ui/core';
-import { Ingredient } from 'src/libs/interfaces';
+import { Ingredient } from '@app/interfaces';
 
-const decimalLimit = 1
-const decimalSeparator ='.'
 @Component({
     selector: 'app-ingredients',
     templateUrl: './ingredients.component.html',
@@ -11,35 +8,19 @@ const decimalSeparator ='.'
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IngredientsComponent {
-    @Input() value!: number;
-
-    @Input() set ingredients(ingredients: readonly Ingredient[]) {
-        this.computedIngredients = [...ingredients];
+    @Input() set portion(portion: number) {
+        this.initialPortion = portion;
+        this.computedPortion = portion;
     }
 
-    computedIngredients: readonly Ingredient[] = [];
+    @Input() ingredients: readonly Ingredient[] = [];
 
-    decrement(): void {
-        this.value -= 1;
-        this.computedIngredients = [
-            ...this.computedIngredients.map((ingredient) => {
-                return {
-                    ...ingredient,
-                    value: (ingredient.value / (this.value + 1)) * this.value,
-                };
-            }),
-        ];
-    }
+    initialPortion = 0;
 
-    increment(): void {
-        this.value += 1;
-        this.computedIngredients = [
-            ...this.computedIngredients.map((ingredient) => {
-                return {
-                    ...ingredient,
-                    value: +formatNumber((ingredient.value / (this.value - 1)) * this.value, decimalLimit,decimalSeparator ),
-                };
-            }),
-        ];
+    computedPortion = 0;
+
+    calcIngredients(delta: number): void {
+        if (this.computedPortion === 1) return;
+        this.computedPortion += delta;
     }
 }
