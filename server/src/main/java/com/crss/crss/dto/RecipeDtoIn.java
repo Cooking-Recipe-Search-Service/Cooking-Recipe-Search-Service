@@ -20,6 +20,7 @@ public class RecipeDtoIn {
     private List<IngredientsForRecipeDtoIn> ingredients = new ArrayList<>();
     private String description;
     private List<InstructionDto> instructions = new ArrayList<>();
+    private String image;
 
     @Data
     @AllArgsConstructor

@@ -7,10 +7,12 @@ import com.crss.crss.dto.IngredientForRecipeDto;
 import com.crss.crss.dto.RecipeDto;
 import com.crss.crss.dto.RecipeDto.InstructionDto;
 import com.crss.crss.dto.RecipeSlimDto;
+import com.crss.crss.dto.UserDto;
 import com.crss.crss.entities.CountryEntity;
 import com.crss.crss.entities.IngredientEntity;
 import com.crss.crss.entities.RecipeDescriptionEntity;
 import com.crss.crss.entities.RecipeEntity;
+import com.crss.crss.entities.UserEntity;
 import com.crss.crss.services.CountryService;
 import com.crss.crss.services.IngredientService;
 import com.crss.crss.services.RecipeService;
@@ -40,7 +42,11 @@ public class DtoConverter {
     public <T> List<T> simpleConvert(List<?> entitiesList, Class<T> clazz) {
         return entitiesList.stream().map(x -> simpleConvert(x, clazz)).collect(Collectors.toList());
     }
-
+    public UserDto convertUser(UserEntity user){
+        UserDto userDto = simpleConvert(user,UserDto.class);
+        userDto.setRecipes(getRecipeSlimDtoList(user.getRecipes()));
+        return userDto;
+    }
     public List<RecipeSlimDto> getRecipeSlimDtoList(List<RecipeEntity> recipeEntities) {
         return recipeEntities.stream().map(this::getRecipeSlimDto).collect(Collectors.toList());
     }

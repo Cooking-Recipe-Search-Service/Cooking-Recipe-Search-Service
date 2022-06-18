@@ -54,6 +54,7 @@ public class RecipeService {
         RecipeEntity savedRecipe = recipeRepository.save(recipe);
         descriptionRepository.save(new RecipeDescriptionEntity(dto.getDescription(), savedRecipe));
         instructionRepository.save(new RecipeInstructionEntity(dto.getInstructions(), savedRecipe));
+        uploadRecipeImageBase64ByName(dto.getImage(), dto.getName());
         return savedRecipe;
     }
 
@@ -78,6 +79,10 @@ public class RecipeService {
     public String getRecipeImageBase64ById(String name) {
         return Base64.getEncoder().encodeToString(fileSystemRepository
             .findRecipeImageInFileSystem(name));
+    }
+
+    public void uploadRecipeImageBase64ByName(String base64, String name) {
+        fileSystemRepository.uploadRecipeImage(name, Base64.getDecoder().decode(base64));
     }
 
     public Optional<RecipeDescriptionEntity> getRecipeDescriptionById(Long id) {
