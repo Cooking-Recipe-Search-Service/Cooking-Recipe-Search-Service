@@ -1,9 +1,12 @@
 package com.crss.crss.repositories;
 
 import com.crss.crss.Application;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -42,13 +45,14 @@ public class FileSystemRepository {
     }
 
     public void uploadRecipeImage(String name, byte[] image) {
-        String imagePath = RESOURCES_DIR_RECIPE + name + IMAGE_FORMAT;
         try {
-            FileOutputStream file = new FileOutputStream(imagePath);
-            file.write(image);
-            file.close();
+            File defaultFile = new File(
+                Application.class.getClassLoader().getResource(RESOURCES_DIR_RECIPE + "default" + IMAGE_FORMAT).getFile());
+            File outputFile = new File(defaultFile.getParentFile().getAbsolutePath() + "/" + name + IMAGE_FORMAT);
+            FileUtils.writeByteArrayToFile(outputFile, image);
         } catch (Exception e) {
-            log.warn("Can't upload image with name=" + name + " and path=" + imagePath);
+            System.out.println(e.getMessage());
+            log.warn("Can't upload image with name=" + name);
         }
     }
 }
