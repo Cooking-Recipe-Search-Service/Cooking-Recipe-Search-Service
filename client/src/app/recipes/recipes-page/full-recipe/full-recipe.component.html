@@ -1,6 +1,6 @@
 <div *ngIf="recipe$ | async as recipe" class="recipe">
     <div class="recipe__main-title">
-        <h4 data-testid="name" class="tui-text_h4 recipe__name">
+        <h4 data-testid="name" class="tui-text_h4 recipe__name no-margin">
             {{recipe.name }}
         </h4>
         <div class="recipe__main-title-badges">
@@ -37,20 +37,20 @@
     </div>
     <div class="recipe__container-extra-info">
         <ng-container *ngIf="recipe.description">
-            <p class="tui-text_h6">Описание</p>
+            <h5 class="tui-text_h5">Описание</h5>
 
-            <div data-testid="description" class="tui-text_body-s">
+            <div data-testid="description" class="tui-text_body-m">
                 {{recipe.description}}
             </div>
         </ng-container>
 
-        <p class="tui-text_h6">Ингредиенты</p>
+        <h5 class="tui-text_h5 recipe__ingredients-title">Ингредиенты</h5>
         <app-ingredients
             [portion]="value"
             [ingredients]="recipe.ingredientsInfo"
         ></app-ingredients>
 
-        <h6 class="tui-text_h6 tui-space_top-10">Пошаговый рецепт</h6>
+        <h5 class="tui-text_h5 tui-space_top-10">Пошаговый рецепт</h5>
         <div
             *ngFor="let instruction of recipe.instructions;let index = index"
             class="tui-space_top-8"
@@ -59,7 +59,7 @@
                 {{ instruction.itemNumber}}
             </div>
             <div
-                class="recipe__step-title tui-text_body-l instruction-{{index}}"
+                class="recipe__step-title tui-text_body-m instruction-{{index}}"
             >
                 {{instruction.instruction}}
             </div>
