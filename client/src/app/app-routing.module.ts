@@ -52,6 +52,7 @@ const routes: Routes = [
             scrollPositionRestoration: 'top', // or 'top'
             anchorScrolling: 'enabled',
             scrollOffset: [0, 200],
+            useHash:true
         }),
     ],
     exports: [RouterModule],
