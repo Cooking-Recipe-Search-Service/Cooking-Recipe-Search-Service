@@ -21,7 +21,7 @@ export class CalcPortionsPipe implements PipeTransform {
                     (ingredient.value / initialPortion) * portion,
                     decimalLimit,
                     decimalSeparator,
-                ),
+                ).replace(/\s/g, '')
             };
         });
     }
