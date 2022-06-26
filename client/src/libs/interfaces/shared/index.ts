@@ -10,4 +10,4 @@ export * from './registration-profile';
 export * from './login-profile';
 export * from './login-profile-response';
 export * from './profile-with-recipes';
-export * from './short-ingredient.model'
+export * from './short-ingredient.model';

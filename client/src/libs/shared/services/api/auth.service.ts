@@ -34,6 +34,12 @@ export class AuthService {
         });
     }
 
+    deleteRecipe(id: number) {
+        return this.http.delete(`${this.baseUrl}/recipes/${id}`, {
+            headers: this.headers,
+        });
+    }
+
     removeFromFavorites(recipe: Recipe): Observable<ProfileWithRecipes> {
         return this.http.put<ProfileWithRecipes>(
             `${this.baseUrl}/user/deleteRecipeToFavoritesByRecipeId/${recipe.id}`,

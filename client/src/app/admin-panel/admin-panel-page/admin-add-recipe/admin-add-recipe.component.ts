@@ -61,14 +61,13 @@ export class AdminAddRecipeComponent {
             new FormGroup({
                 id: new FormControl(null, Validators.required),
                 value: new FormControl(null, Validators.required),
-                
             }),
         ]),
         instructions: new FormArray([new FormControl(null)], notEmptySteps),
         image: new FormControl(),
     });
-    
-    measurmentMapper = FRONTEND_MEASURMENT_MAPPER
+
+    measurmentMapper = FRONTEND_MEASURMENT_MAPPER;
 
     base64Image = '';
 
@@ -158,17 +157,19 @@ export class AdminAddRecipeComponent {
             .value as FormControl;
     }
 
-    getIngredientMeasure(index:number,inregients:readonly ShortIngredient[]):string{
-        if (! this.ingredients.controls[index].value.id) return ''
-        const id = this.ingredients.controls[index].value.id.id
-        const ingredient = (inregients.filter(value => {
-            return value.id == id
-        }))[0]
-        if(ingredient) {
-            return FRONTEND_MEASURMENT_MAPPER[ingredient.measurementValue]
+    getIngredientMeasure(
+        index: number,
+        inregients: readonly ShortIngredient[],
+    ): string {
+        if (!this.ingredients.controls[index].value.id) return '';
+        const id = this.ingredients.controls[index].value.id.id;
+        const ingredient = inregients.filter((value) => {
+            return value.id == id;
+        })[0];
+        if (ingredient) {
+            return FRONTEND_MEASURMENT_MAPPER[ingredient.measurementValue];
         }
-        return ''
-
+        return '';
     }
 
     onSearch(search: string | null): void {

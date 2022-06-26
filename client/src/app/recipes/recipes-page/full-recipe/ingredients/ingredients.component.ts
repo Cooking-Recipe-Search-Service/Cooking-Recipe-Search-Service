@@ -20,7 +20,7 @@ export class IngredientsComponent {
     computedPortion = 0;
 
     calcIngredients(delta: number): void {
-        if (this.computedPortion === 1) return;
+        if (this.computedPortion === 1 && delta === -1) return;
         this.computedPortion += delta;
     }
 }

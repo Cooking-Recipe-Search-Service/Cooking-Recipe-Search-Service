@@ -6,7 +6,23 @@ import { Recipe, RecipeTag } from '@app/interfaces';
     name: 'recipeTags',
 })
 export class RecipeTagsPipe implements PipeTransform {
-    transform(recipe: Recipe): readonly RecipeTag[] {
+    transform(recipe: Recipe, flag = ''): readonly RecipeTag[] {
+        if (flag === 'full') {
+            return [
+                {
+                    icon: TAGS_MAPPER.category,
+                    label: recipe.categoryName,
+                },
+                {
+                    icon: TAGS_MAPPER.cooking_time,
+                    label: this.convertTime(recipe.cookingTime),
+                },
+                {
+                    icon: TAGS_MAPPER.country,
+                    label: recipe.countryName,
+                },
+            ];
+        }
         return [
             {
                 icon: TAGS_MAPPER.category,

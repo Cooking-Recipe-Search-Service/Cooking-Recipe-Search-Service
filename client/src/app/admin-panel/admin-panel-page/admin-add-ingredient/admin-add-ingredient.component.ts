@@ -10,8 +10,10 @@ import { TuiDestroyService } from '@taiga-ui/cdk';
 import { TuiNotification, TuiNotificationsService } from '@taiga-ui/core';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { RecipesApiService } from '@app/shared/services';
-import { BACKEND_MEASURMENT_MAPPER, FRONTEND_MEASURMENT_MAPPER } from '@app/consts';
+import { AuthService, RecipesApiService } from '@app/shared/services';
+import {
+    BACKEND_MEASURMENT_MAPPER,
+} from '@app/consts';
 
 @Component({
     selector: 'app-admin-add-ingredient',
@@ -33,8 +35,6 @@ export class AdminAddIngredientComponent {
         proteins: new FormControl(null, Validators.required),
     });
 
-    
-
     readonly loading$ = new BehaviorSubject<boolean>(false);
 
     readonly measurementValues = ['гр', 'мл', 'шт'];
@@ -44,6 +44,7 @@ export class AdminAddIngredientComponent {
         @Inject(TuiNotificationsService)
         private readonly notificationsService: TuiNotificationsService,
         private readonly destroy$: TuiDestroyService,
+        private auth: AuthService,
     ) {}
 
     get name(): FormControl {
@@ -114,5 +115,9 @@ export class AdminAddIngredientComponent {
                         .subscribe();
                 },
             );
+    }
+
+    delete() {
+        this.auth.deleteRecipe(20).subscribe();
     }
 }

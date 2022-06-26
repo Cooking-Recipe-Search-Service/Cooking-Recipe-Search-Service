@@ -33,6 +33,7 @@ export const CATEGORIES_MAPPER_GREEN: Record<string, string> = {
 export const TAGS_MAPPER: Record<string, string> = {
     category: 'assets/icons/category.svg',
     cooking_time: 'tuiIconTime',
+    country: 'tuiIconFlag',
 };
 
 export const COLORS_MAPPER: readonly string[] = [

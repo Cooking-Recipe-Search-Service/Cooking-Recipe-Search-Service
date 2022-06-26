@@ -7,6 +7,7 @@ import { RecipePreviewModule } from './recipe-preview/recipe-preview.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryRecipesModule } from './category-recipes/category-recipes.module';
 import { FullRecipeModule } from './full-recipe/full-recipe.module';
+import { TuiLoaderModule } from '@taiga-ui/core';
 
 @NgModule({
     declarations: [RecipesPageComponent],
@@ -19,6 +20,7 @@ import { FullRecipeModule } from './full-recipe/full-recipe.module';
         FormsModule,
         ReactiveFormsModule,
         CategoryRecipesModule,
+        TuiLoaderModule,
     ],
     exports: [RecipesPageComponent],
 })

@@ -1,8 +1,40 @@
 <div class="recipes">
     <h4 class="tui-text_h4">Поиск рецептов</h4>
     <app-search (searchedRecipes)="loadRecipes($event)"></app-search>
-
-    <ng-container *ngIf="searchedRecipes$ | async as searchedRecipes">
+    <ng-container *ngIf="show">
+        <h4 data-testid="recipes" class="tui-text_h4">Результаты поиска</h4>
+        <ng-container
+            *ngIf="searchedRecipes$ | async as searchedRecipes; else loading"
+        >
+            <ng-container *ngIf="searchedRecipes.length; else empty">
+                <p>Найдено рецептов:{{searchedRecipes.length}}</p>
+                <div class="recipes__preview">
+                    <ng-container
+                        *ngFor="let recipe of searchedRecipes"
+                        class="recipes__preview"
+                    >
+                        <app-recipe-preview
+                            [recipe]="recipe"
+                        ></app-recipe-preview>
+                    </ng-container>
+                </div>
+            </ng-container>
+            <ng-template #empty>
+                <p data-testid="empty" class="tui-text_body-l">
+                    Мы старались, но ничего не нашли
+                </p>
+            </ng-template>
+        </ng-container>
+        <ng-template #loading>
+            <tui-loader
+                size="xl"
+                class="inline-flex tui-space_right-2"
+                [showLoader]="true"
+                [inheritColor]="true"
+            ></tui-loader>
+        </ng-template>
+    </ng-container>
+    <!-- <ng-container *ngIf="searchedRecipes$ | async as searchedRecipes">
         <h4 data-testid="recipes" class="tui-text_h4">Результаты поиска</h4>
         <ng-container *ngIf="searchedRecipes.length; else empty">
             <p>Найдено рецептов:{{searchedRecipes.length}}</p>
@@ -20,7 +52,7 @@
                 Мы старались, но ничего не нашли
             </p>
         </ng-template>
-    </ng-container>
+    </ng-container> -->
 
     <h4 class="tui-text_h4">Рецепты по категориям</h4>
     <app-default-recipes

@@ -13,7 +13,10 @@ export class RecipesPageComponent {
 
     searchedRecipes$!: Observable<readonly Recipe[]>;
 
+    show = false;
+
     loadRecipes(recipes: Observable<readonly Recipe[]>): void {
+        this.show = true;
         this.searchedRecipes$ = recipes;
     }
 

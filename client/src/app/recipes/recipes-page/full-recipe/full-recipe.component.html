@@ -5,7 +5,7 @@
         </h4>
         <div class="recipe__main-title-badges">
             <ng-container
-                *ngFor="let tag of recipe | recipeTags;let index = index"
+                *ngFor="let tag of recipe | recipeTags: 'full';let index = index"
             >
                 <tui-badge
                     status="custom"
