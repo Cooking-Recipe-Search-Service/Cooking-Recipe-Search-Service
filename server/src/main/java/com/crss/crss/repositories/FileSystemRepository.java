@@ -2,9 +2,6 @@ package com.crss.crss.repositories;
 
 import com.crss.crss.Application;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,10 +31,7 @@ public class FileSystemRepository {
     private byte[] getImageBytes(String name, String resourcesDir) {
         String imagePath = resourcesDir + name + IMAGE_FORMAT;
         try {
-            InputStream inputAvatar = Application.class.getClassLoader().getResourceAsStream(imagePath);
-            byte[] targetArray = new byte[inputAvatar.available()];
-            inputAvatar.read(targetArray);
-            return targetArray;
+            return FileUtils.readFileToByteArray(new File(Application.class.getClassLoader().getResource(imagePath).getFile()));
         } catch (Exception e) {
             log.warn("Can't find image with name=" + name + " and path=" + imagePath);
             return new byte[0];
